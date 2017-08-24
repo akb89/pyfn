@@ -37,6 +37,14 @@ class Sentence():
         """Return PENN, NER, WSL and BNC labels."""
         return self._pnwb_labels
 
+    @property
+    def pnw_labels_by_indexes(self):
+        return self._pnw_labels_by_indexes
+
+    @property
+    def pnw_labels_by_layer_name(self):
+        return self._pnw_labels_by_layer_name
+
     @document.setter
     def document(self, document):
         self._document = document

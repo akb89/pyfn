@@ -70,7 +70,7 @@ def _has_fe_layer(annoset_tag):
     if not layer_tags:
         return False
     for layer_tag in layer_tags:
-        if layer_tag.get('name') == const.FE_TAG_NAME:
+        if layer_tag.get('name') == 'FE':
             return True
     return False
 
@@ -105,10 +105,10 @@ def _extract_pnw_labels(annoset_tags):
         if labels:
             all_labels.extend(labels)
         for layer_tag in layer_tags:
-            if layer_tag.get('name') == const.PENN_TAG_NAME\
-             or layer_tag.get('name') == const.NER_TAG_NAME\
-             or layer_tag.get('name') == const.WSL_TAG_NAME\
-             or layer_tag.get('name') == const.BNC_TAG_NAME:
+            if layer_tag.get('name') == 'PENN'\
+             or layer_tag.get('name') == 'NER'\
+             or layer_tag.get('name') == 'WSL'\
+             or layer_tag.get('name') == 'BNC':
                 labels = _extract_labels(layer_tag)
                 if labels:
                     all_labels.extend(labels)

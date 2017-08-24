@@ -6,46 +6,32 @@ __all__ = ['Target']
 class Target():
     """FrameNet target class."""
 
-    def __init__(self, string, lexunit, indexes=None, penn_tags=None,
-                 similarity=None):
+    def __init__(self, string, lexunit, indexes=None, pos_tags=None):
         """Constructor."""
         self._string = string
         self._lexunit = lexunit
         self._indexes = indexes
-        self._penn_tags = penn_tags
-        self._similarity = similarity
+        self._pos_tags = pos_tags
 
     @property
     def string(self):
-        """Return the string of the FrameNet target."""
+        """Return the string of the target."""
         return self._string
 
     @property
     def lexunit(self):
-        """Return the lexunit object.
-
-        The lexunit corresponds to the specified annotationset object.
-        """
+        """Return the lexunit corresponding to the target."""
         return self._lexunit
 
     @property
     def indexes(self):
-        """Return a list of indexes: startChar#endChar#rank."""
+        """Return a list of indexe tuples (start, end)."""
         return self._indexes
 
     @property
-    def penn_tags(self):
-        """Return a list of PENN tags for the given target."""
-        return self._penn_tags
-
-    @property
-    def similarity(self):
-        """Return the Similarity of the target to itself.
-
-        This is used to determine the max similarity score for each similarity
-        measure.
-        """
-        return self._similarity
+    def pos_tags(self):
+        """Return a list of PENN or BNC POS tags for the given target."""
+        return self._pos_tags
 
     @string.setter
     def string(self, string):
@@ -59,10 +45,6 @@ class Target():
     def indexes(self, indexes):
         self._indexes = indexes
 
-    @penn_tags.setter
-    def penn_tags(self, penn_tags):
-        self._penn_tags = penn_tags
-
-    @similarity.setter
-    def similarity(self, similarity):
-        self._similarity = similarity
+    @pos_tags.setter
+    def pos_tags(self, pos_tags):
+        self._pos_tags = pos_tags

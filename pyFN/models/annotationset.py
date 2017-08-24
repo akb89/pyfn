@@ -15,7 +15,7 @@ class AnnotationSet():
         self._fn_labels_by_layer_name = fn_utils.to_labels_by_layer_name(fn_labels)
         self._fn_labels_by_indexes = fn_utils.to_labels_by_indexes(fn_labels)
         self._sentence = sentence
-        self._target = fn_utils.to_target(fn_labels, lexunit)
+        self._target = fn_utils.to_target(sentence.pnw_labels_by_indexes, fn_labels, lexunit, sentence.text)
         self._valence_units = fn_utils.to_valence_units(self._fn_labels_by_indexes)
         self._valence_pattern = fn_utils.to_valence_pattern(self._valence_units)
 
