@@ -16,7 +16,7 @@ class AnnotationSet():
         self._fn_labels_by_indexes = fn_utils.to_labels_by_indexes(fn_labels)
         self._sentence = sentence
         self._target = fn_utils.to_target(fn_labels, lexunit)
-        self._valence_units = fn_utils.to_valence_units(self._labels_by_layer_name)
+        self._valence_units = fn_utils.to_valence_units(self._fn_labels_by_indexes)
         self._valence_pattern = fn_utils.to_valence_pattern(self._valence_units)
 
     @property
@@ -70,9 +70,9 @@ class AnnotationSet():
     def _id(self, _id):
         self.__id = _id
 
-    @labels.setter
-    def labels(self, labels):
-        self._labels = labels
+    @fn_labels.setter
+    def fn_labels(self, fn_labels):
+        self._fn_labels = fn_labels
 
     @sentence.setter
     def sentence(self, sentence):

@@ -1,0 +1,18 @@
+version: 1
+formatters:
+  brief:
+    format: '%(levelname)s - %(message)s'
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: brief
+loggers:
+  pyFN:
+    level: WARNING
+    handlers: [console]
+root:
+  level: WARNING
+  handlers: [console]

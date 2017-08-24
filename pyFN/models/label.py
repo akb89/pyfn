@@ -58,6 +58,14 @@ class Label():
         """Return the label layer."""
         return self._layer
 
+    @start.setter
+    def start(self, start):
+        self._start = start
+
+    @end.setter
+    def end(self, end):
+        self._end = end
+
     @fe_id.setter
     def fe_id(self, fe_id):
         self._fe_id = fe_id
@@ -73,3 +81,6 @@ class Label():
     @bg_color.setter
     def bg_color(self, bg_color):
         self._bg_color = bg_color
+
+    def __str__(self):
+        return '{}#{}#{}#{}'.format(self.name, self.start, self.end, self.layer.name)

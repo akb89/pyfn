@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="fullText.xsl"?>
+<fullTextAnnotation xsi:schemaLocation="../schema/fullText.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <corpus description="American National Corpus Texts" name="ANC" ID="195">
+            <document description="Goodwill fund-raising letter" name="110CYL072" ID="23801"/>
+        </corpus>
+    </header>
+    <sentence corpID="195" docID="23801" sentNo="1" paragNo="3" aPos="0" ID="4106520">
+        <text>That 's where you - and Goodwill - come in .</text>
+        <annotationSet cDate="12/03/2008 11:17:28 PST Wed" status="UNANN" ID="6557212">
+            <layer rank="1" name="PENN">
+                <label end="3" start="0" name="dt"/>
+                <label end="6" start="5" name="VBZ"/>
+                <label end="12" start="8" name="wrb"/>
+                <label end="16" start="14" name="PP"/>
+                <label end="18" start="18" name=":"/>
+                <label end="22" start="20" name="cc"/>
+                <label end="31" start="24" name="NP"/>
+                <label end="33" start="33" name=":"/>
+                <label end="38" start="35" name="VVN"/>
+                <label end="41" start="40" name="rp"/>
+                <label end="43" start="43" name="sent"/>
+            </layer>
+            <layer rank="1" name="NER">
+                <label end="31" start="24" name="organization"/>
+            </layer>
+            <layer rank="1" name="WSL">
+                <label end="3" start="0" name="NT"/>
+                <label end="6" start="5" name="NT"/>
+                <label end="16" start="14" name="NT"/>
+                <label end="18" start="18" name="NT"/>
+                <label end="22" start="20" name="NT"/>
+                <label end="31" start="24" name="NT"/>
+                <label end="33" start="33" name="NT"/>
+                <label end="41" start="40" name="NT"/>
+                <label end="43" start="43" name="NT"/>
+            </layer>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 12:47:03 PST Wed" luID="13318" luName="where.adv" frameID="199" frameName="Locative_relation" status="MANUAL" ID="6557242">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="12" start="8" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="1622" bgColor="FF0000" fgColor="FFFFFF" end="41" start="14" name="Figure"/>
+                <label cBy="AlK" feID="1621" bgColor="008000" fgColor="FFFFFF" end="12" start="8" name="Ground"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="41" start="14" name="Dep"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="41" start="14" name="Sfin"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Adv"/>
+        </annotationSet>
+    </sentence>
+    <sentence corpID="195" docID="23801" sentNo="3" paragNo="3" aPos="0" ID="4106522">
+        <text>Last year , Goodwill placed 511 people in jobs , more than double the number we placed in 1993 .</text>
+        <annotationSet cDate="12/03/2008 11:17:29 PST Wed" status="UNANN" ID="6557214">
+            <layer rank="1" name="PENN">
+                <label end="3" start="0" name="jj"/>
+                <label end="8" start="5" name="nn"/>
+                <label end="10" start="10" name=","/>
+                <label end="19" start="12" name="NP"/>
+                <label end="26" start="21" name="VVD"/>
+                <label end="30" start="28" name="cd"/>
+                <label end="37" start="32" name="nns"/>
+                <label end="40" start="39" name="in"/>
+                <label end="45" start="42" name="nns"/>
+                <label end="47" start="47" name=","/>
+                <label end="52" start="49" name="jjr"/>
+                <label end="57" start="54" name="in"/>
+                <label end="64" start="59" name="rb"/>
+                <label end="68" start="66" name="dt"/>
+                <label end="75" start="70" name="nn"/>
+                <label end="78" start="77" name="PP"/>
+                <label end="85" start="80" name="VVD"/>
+                <label end="88" start="87" name="in"/>
+                <label end="93" start="90" name="cd"/>
+                <label end="95" start="95" name="sent"/>
+            </layer>
+            <layer rank="1" name="NER">
+                <label end="19" start="12" name="organization"/>
+                <label end="93" start="90" name="date"/>
+            </layer>
+            <layer rank="1" name="WSL">
+                <label end="10" start="10" name="NT"/>
+                <label end="19" start="12" name="NT"/>
+                <label end="30" start="28" name="NT"/>
+                <label end="40" start="39" name="NT"/>
+                <label end="47" start="47" name="NT"/>
+                <label end="57" start="54" name="NT"/>
+                <label end="64" start="59" name="NT"/>
+                <label end="68" start="66" name="NT"/>
+                <label end="78" start="77" name="NT"/>
+                <label end="93" start="90" name="NT"/>
+                <label end="95" start="95" name="NT"/>
+            </layer>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 04:56:17 PST Wed" luID="13865" luName="last.a" frameID="81" frameName="Relative_time" status="MANUAL" ID="6557329">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="3" start="0" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="373" bgColor="00008B" fgColor="FFFFFF" end="8" start="5" name="Focal_occasion"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="8" start="5" name="Head"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="8" start="5" name="N"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Adj"/>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 04:56:27 PST Wed" luID="4074" luName="year.n" frameID="229" frameName="Calendric_unit" status="MANUAL" ID="6557330">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="8" start="5" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="1993" bgColor="FFA500" fgColor="FFFFFF" end="3" start="0" name="Relative_time"/>
+                <label cBy="AlK" feID="10331" bgColor="FF0000" fgColor="FFFFFF" end="8" start="5" name="Unit"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="3" start="0" name="Dep"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="3" start="0" name="AJP"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Noun"/>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 05:01:28 PST Wed" luID="5511" luName="people.n" frameID="304" frameName="People" status="MANUAL" ID="6557331">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="37" start="32" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="2618" bgColor="FF0000" fgColor="FFFFFF" end="37" start="32" name="Person"/>
+                <label cBy="AlK" feID="2620" bgColor="00BFFF" fgColor="FFFFFF" end="30" start="28" name="Descriptor"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="30" start="28" name="Quant"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="30" start="28" name="Num"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Noun"/>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 05:01:33 PST Wed" luID="5785" luName="job.n" frameID="282" frameName="Being_employed" status="MANUAL" ID="6557332">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="45" start="42" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="2796" itype="INI" bgColor="0000FF" fgColor="FFFFFF" name="Employee"/>
+                <label cBy="AlK" feID="2797" itype="INI" bgColor="FF0000" fgColor="FFFFFF" name="Employer"/>
+            </layer>
+            <layer rank="1" name="GF"/>
+            <layer rank="1" name="PT"/>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Noun"/>
+        </annotationSet>
+        <annotationSet cDate="12/03/2008 05:01:43 PST Wed" luID="10290" luName="more.a" frameID="1001" frameName="Increment" status="MANUAL" ID="6557333">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="52" start="49" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="5993" bgColor="FF0000" fgColor="FFFFFF" end="93" start="54" name="Class"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="93" start="54" name="Dep"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="93" start="54" name="Sub"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Adj"/>
+            <layer rank="2" name="FE">
+                <label cBy="AlK" feID="6124" bgColor="0000FF" fgColor="FFFFFF" end="93" start="49" name="Added_set"/>
+            </layer>
+        </annotationSet>
+        <annotationSet cDate="12/08/2008 11:55:51 PST Mon" luID="14080" luName="in.prep" frameID="1895" frameName="Temporal_collocation" status="MANUAL" ID="6557372">
+            <layer rank="1" name="Target">
+                <label cBy="AlK" end="88" start="87" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="AlK" feID="12063" bgColor="1E90FF" fgColor="FFFFFF" end="93" start="90" name="Landmark_period"/>
+                <label cBy="AlK" feID="12064" bgColor="FF00FF" fgColor="FFFFFF" end="85" start="77" name="Trajector_event"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="93" start="90" name="Obj"/>
+                <label end="85" start="77" name="Ext"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="93" start="90" name="NP"/>
+                <label end="85" start="77" name="Sfin"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Prep"/>
+        </annotationSet>
+        <annotationSet cDate="10/09/2014 01:26:47 PDT Thu" luID="16310" luName="number.n" frameID="218" frameName="Cardinal_numbers" status="MANUAL" ID="6675751">
+            <layer rank="1" name="Target">
+                <label cBy="WMcQ" end="75" start="70" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="WMcQ" feID="3622" bgColor="FF00FF" fgColor="FFFFFF" end="75" start="70" name="Number"/>
+                <label cBy="HPh" feID="3623" itype="DNI" bgColor="9400D3" fgColor="FFFFFF" name="Entity"/>
+                <label cBy="HPh" feID="7300" bgColor="008000" fgColor="FFFFFF" end="64" start="59" name="Multiplier"/>
+                <label cBy="HPh" feID="3624" bgColor="FF69B4" fgColor="FFFFFF" end="57" start="49" name="Precision"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="64" start="59" name="Dep"/>
+                <label end="57" start="49" name="Dep"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="64" start="59" name="A"/>
+                <label end="57" start="49" name="AVP"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Noun"/>
+        </annotationSet>
+    </sentence>
+</fullTextAnnotation>
