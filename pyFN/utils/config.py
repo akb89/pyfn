@@ -12,7 +12,7 @@ from pyFN.utils.immutables import ImmutableConfig
 
 __all__ = ['load']
 
-logger = logging.getLogger('pyFN.utils')
+logger = logging.getLogger(__name__)
 
 
 def load(config_file):

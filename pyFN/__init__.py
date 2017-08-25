@@ -12,7 +12,8 @@ import pyFN.utils.config as config_utils
 
 __all__ = ['unmarshall_fulltext_xml', 'unmarshall_lexunit_xml']
 
-logging.config.dictConfig(config_utils.load(os.path.abspath('pyFN/logging/logging.yml')))
+#logging.config.dictConfig(config_utils.load(os.path.abspath('pyFN/logging/logging.yml')))
+logging.config.dictConfig(config_utils.load(os.path.join(os.path.dirname(__file__), 'logging', 'logging.yml')))
 logger = logging.getLogger(__name__)
 
 
