@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 def extract_pos(luname):
     """Return the part of speech of the lexunit name."""
+    if luname is None:
+        return None
     return luname.split('.')[1]
 
 

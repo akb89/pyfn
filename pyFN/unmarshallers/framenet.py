@@ -1,28 +1,24 @@
 """Unmarshall FrameNet XML files."""
 
 import logging
-import xml.etree.ElementTree as element_tree
 
+import pyFN.utils.constants as const
 from pyFN.models.annotationset import AnnotationSet
-from pyFN.models.corpus import Corpus
-from pyFN.models.document import Document
 from pyFN.models.frame import Frame
 from pyFN.models.label import Label
 from pyFN.models.layer import Layer
 from pyFN.models.lexunit import LexUnit
 from pyFN.models.sentence import Sentence
 
-from pyFN.exceptions.xml import XMLProcessingError
-
-import pyFN.utils.constants as const
-
-__all__ = ['unmarshall_fulltext_xml', 'unmarshall_lexunit_xml']
+__all__ = ['extract_fn_annosets_from_sentence_tag']
 
 logger = logging.getLogger(__name__)
 
 
 def _create_label(label_tag, layer_tag):
-    layer = Layer(layer_tag.get('name'), int(layer_tag.get('rank')))
+    layer = Layer(layer_tag.get('name'))
+    if layer_tag.get('rank'):
+        layer.rank = int(layer_tag.get('rank'))
     label = Label(label_tag.get('name'), layer)
     if label_tag.get('start') is not None:
         label.start = int(label_tag.get('start'))
@@ -39,12 +35,26 @@ def _create_label(label_tag, layer_tag):
     return label
 
 
+def _extract_label_tags(layer_tag):
+    label_tags = layer_tag.findall('fn:label', const.FN_XML_NAMESPACE)
+    if label_tags:
+        return label_tags
+    labels_tags = layer_tag.findall('labels')
+    if not labels_tags:
+        return []
+    label_tags = []
+    for labels_tag in labels_tags:
+        tmp_label_tags = labels_tag.findall('label')
+        label_tags.extend(tmp_label_tags)
+    return label_tags
+
+
 def _extract_labels(layer_tags):
-    labels = []
     if not layer_tags:
-        return labels
+        return []
+    labels = []
     for layer_tag in layer_tags:
-        label_tags = layer_tag.findall('fn:label', const.FN_XML_NAMESPACE)
+        label_tags = _extract_label_tags(layer_tag)
         if not label_tags:
             continue
         for label_tag in label_tags:
@@ -55,18 +65,35 @@ def _extract_labels(layer_tags):
 def _extract_fn_annoset(annoset_tag, sentence, lexunit=None):
     _id = int(annoset_tag.get('ID'))
     logger.debug('Processing annotationSet #{}'.format(_id))
-    labels = _extract_labels(annoset_tag.findall('fn:layer',
-                                                 const.FN_XML_NAMESPACE))
+    labels = _extract_labels(_extract_layer_tags(annoset_tag))
     if lexunit is None:  # processing a fulltext file
-        frame = Frame(int(annoset_tag.get('frameID')),
-                      annoset_tag.get('frameName'))
-        lexunit = LexUnit(int(annoset_tag.get('luID')),
-                          annoset_tag.get('luName'), frame)
+        frame = Frame(annoset_tag.get('frameName'))
+        if annoset_tag.get('frameID'):
+            frame._id = int(annoset_tag.get('frameID'))
+        lexunit = LexUnit(frame)
+        if annoset_tag.get('luID'):
+            lexunit._id = int(annoset_tag.get('luID'))
+        if annoset_tag.get('luName'):
+            lexunit.name = annoset_tag.get('luName')
     return AnnotationSet(_id, labels, lexunit, sentence)
 
 
-def _has_fe_layer(annoset_tag):
+def _extract_layer_tags(annoset_tag):
     layer_tags = annoset_tag.findall('fn:layer', const.FN_XML_NAMESPACE)
+    if layer_tags:
+        return layer_tags
+    layers_tags = annoset_tag.findall('layers')
+    if not layers_tags:
+        return []
+    layer_tags = []
+    for layers_tag in layers_tags:
+        tmp_layer_tags = layers_tag.findall('layer')
+        layer_tags.extend(tmp_layer_tags)
+    return layer_tags
+
+
+def _has_fe_layer(annoset_tag):
+    layer_tags = _extract_layer_tags(annoset_tag)
     if not layer_tags:
         return False
     for layer_tag in layer_tags:
@@ -84,9 +111,16 @@ def _extract_fn_annosets(annoset_tags, sentence, lexunit=None):
             annoset_tag in annoset_tags if _is_fn_annoset(annoset_tag)]
 
 
-def _extract_sentence(sentence_tag, pnw_labels, document=None):
+def _extract_sentence_text(sentence_tag):
     text_tag = sentence_tag.find('fn:text', const.FN_XML_NAMESPACE)
-    sentence = Sentence(int(sentence_tag.get('ID')), text_tag.text, pnw_labels)
+    if text_tag is not None:
+        return text_tag.text
+    return sentence_tag.find('text').text
+
+
+def _extract_sentence(sentence_tag, pnw_labels, document=None):
+    sentence_text = _extract_sentence_text(sentence_tag)
+    sentence = Sentence(int(sentence_tag.get('ID')), sentence_text, pnw_labels)
     logger.debug('Processing sentence #{}: {}'.format(sentence._id, sentence.text))
     if document:
         sentence.document = document
@@ -98,7 +132,7 @@ def _extract_pnw_labels(annoset_tags):
     if not annoset_tags:
         return all_labels
     for annoset_tag in annoset_tags:
-        layer_tags = annoset_tag.findall('fn:layer', const.FN_XML_NAMESPACE)
+        layer_tags = _extract_layer_tags(annoset_tag)
         if not layer_tags:
             return all_labels
         labels = _extract_labels(layer_tags)
@@ -115,99 +149,28 @@ def _extract_pnw_labels(annoset_tags):
     return all_labels
 
 
-def _extract_fn_annosets_from_sentence_tags(sentence_tag, document=None,
-                                            lexunit=None):
-    """Return a List<AnnotationSet> extracted from a single <sentence> tag."""
+def _extract_annoset_tags(sentence_tag):
     annoset_tags = sentence_tag.findall('fn:annotationSet',
                                         const.FN_XML_NAMESPACE)
+    if annoset_tags:
+        return annoset_tags
+    annosets_tags = sentence_tag.findall('annotationSets')
+    if not annosets_tags:
+        return []
+    annoset_tags = []
+    for annosets_tag in annosets_tags:
+        tmp_annoset_tags = annosets_tag.findall('annotationSet')
+        annoset_tags.extend(tmp_annoset_tags)
+    return annoset_tags
+
+
+def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
+                                          lexunit=None):
+    """Return a List<AnnotationSet> extracted from a single <sentence> tag."""
+    annoset_tags = _extract_annoset_tags(sentence_tag)
     if not annoset_tags:
         return []
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
     pnw_labels = _extract_pnw_labels(annoset_tags)
     sentence = _extract_sentence(sentence_tag, pnw_labels, document=document)
     return _extract_fn_annosets(annoset_tags, sentence, lexunit=lexunit)
-
-
-def _extract_annosets_from_sentence_tags(sentence_tags, document=None,
-                                         lexunit=None):
-    annosets_list = []
-    if not sentence_tags:
-        return annosets_list
-    for sentence_tag in sentence_tags:
-        annosets = _extract_fn_annosets_from_sentence_tags(sentence_tag,
-                                                           document=document,
-                                                           lexunit=lexunit)
-        if annosets:
-            annosets_list.append(annosets)
-    return annosets_list
-
-
-def _extract_document(header_tag):
-    """Return a Document instance from a fulltext <header> tag."""
-    corpus_tag = header_tag.find('fn:corpus', const.FN_XML_NAMESPACE)
-    corpus = Corpus(int(corpus_tag.get('ID')), corpus_tag.get('name'))
-    document_tag = corpus_tag.find('fn:document', const.FN_XML_NAMESPACE)
-    if document_tag is None:
-        raise XMLProcessingError('Could not extract document from tag')
-    return Document(int(document_tag.get('ID')),
-                    '{}__{}'.format(corpus.name,
-                                    document_tag.get('description')),
-                    document_tag.get('description'),
-                    corpus)
-
-
-def unmarshall_lexunit_xml(xml_file_path):
-    """Unmarshall a FrameNet lu XML file from file path.
-
-    Return a list of list of AnnotationSet instances extracted from the
-    lu XML file. A single list of AnnotationSet instances corresponds
-    to all the AnnotationSets of a single Sentence.
-
-    Args
-    ----
-        param1 xml_files_path: full path to a FrameNet lu XML file.
-
-    """
-    logger.info('Unmarshalling FrameNet lu XML file: {}'.format(xml_file_path))
-    tree = element_tree.parse(xml_file_path)
-    root = tree.getroot()
-    frame = Frame(int(root.get('frameID')), root.get('frame'))
-    lexunit = LexUnit(int(root.get('ID')), root.get('name'), frame)
-    subcorpus_tags = root.findall('fn:subCorpus', const.FN_XML_NAMESPACE)
-    if not subcorpus_tags:
-        return []
-    full_annosets_list = []
-    for subcorpus_tag in subcorpus_tags:
-        sentence_tags = subcorpus_tag.findall('fn:sentence',
-                                              const.FN_XML_NAMESPACE)
-        annosets_list = _extract_annosets_from_sentence_tags(sentence_tags,
-                                                             lexunit=lexunit)
-        if annosets_list:
-            full_annosets_list.extend(annosets_list)
-    return full_annosets_list
-
-
-def unmarshall_fulltext_xml(xml_file_path):
-    """Unmarshall a FrameNet fulltext XML file from file path.
-
-    Return a list of list of AnnotationSet instances extracted from the
-    fulltext XML file. A single list of AnnotationSet instances corresponds
-    to all the AnnotationSets of a single Sentence.
-
-    Args
-    ----
-        param1 xml_files_path: full path to a FrameNet fulltext XML file.
-
-    """
-    logger.info('Unmarshalling FrameNet fulltext XML file: {}'.format(xml_file_path))
-    tree = element_tree.parse(xml_file_path)
-    root = tree.getroot()
-    try:
-        document = _extract_document(root.find('fn:header',
-                                               const.FN_XML_NAMESPACE))
-    except XMLProcessingError as err:
-        raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
-                                 .format(xml_file_path, str(err)))
-    sentence_tags = root.findall('fn:sentence', const.FN_XML_NAMESPACE)
-    return _extract_annosets_from_sentence_tags(sentence_tags,
-                                                document=document)

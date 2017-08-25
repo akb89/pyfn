@@ -6,7 +6,7 @@ __all__ = ['Layer']
 class Layer():
     """FrameNet Layer class."""
 
-    def __init__(self, name, rank):
+    def __init__(self, name, rank=None):
         """Constructor."""
         self._name = name
         self._rank = rank
@@ -20,3 +20,7 @@ class Layer():
     def rank(self):
         """Return the layer rank."""
         return self._rank
+
+    @rank.setter
+    def rank(self, rank):
+        self._rank = rank

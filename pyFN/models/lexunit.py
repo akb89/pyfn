@@ -8,12 +8,13 @@ __all__ = ['LexUnit']
 class LexUnit():
     """FrameNet LexUnit class."""
 
-    def __init__(self, _id, name, frame):
+    def __init__(self, frame, _id=None, name=None):
         """Constructor."""
         self.__id = _id
         self._name = name
-        self._pos = fn_utils.extract_pos(name)
+        self._pos = fn_utils.extract_pos(self._name)
         self._frame = frame
+
 
     @property
     def _id(self):
@@ -34,3 +35,11 @@ class LexUnit():
     def frame(self):
         """Return the frame object corresponding to the lexunit."""
         return self._frame
+
+    @_id.setter
+    def _id(self, _id):
+        self.__id = _id
+
+    @name.setter
+    def name(self, name):
+        self._name = name

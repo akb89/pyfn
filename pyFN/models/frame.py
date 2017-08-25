@@ -6,7 +6,7 @@ __all__ = ['Frame']
 class Frame():
     """FrameNet Frame class."""
 
-    def __init__(self, _id, name):
+    def __init__(self, name, _id=None):
         """Constructor."""
         self.__id = _id
         self._name = name
@@ -20,3 +20,7 @@ class Frame():
     def name(self):
         """Return the frame name."""
         return self._name
+
+    @_id.setter
+    def _id(self, _id):
+        self.__id = _id

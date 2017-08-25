@@ -11,8 +11,11 @@ handlers:
     formatter: brief
 loggers:
   pyFN:
-    level: WARNING
+    level: DEBUG
+    handlers: [console]
+  pyFN.unmarshallers:
+    level: DEBUG
     handlers: [console]
 root:
-  level: WARNING
+  level: DEBUG
   handlers: [console]
