@@ -22,8 +22,12 @@ def _create_label(label_tag, layer_tag):
     label = Label(label_tag.get('name'), layer)
     if label_tag.get('start') is not None:
         label.start = int(label_tag.get('start'))
+    else:
+        label.start = -1
     if label_tag.get('end') is not None:
         label.end = int(label_tag.get('end'))
+    else:
+        label.end = -1
     if label_tag.get('feID') is not None:
         label.fe_id = int(label_tag.get('feID'))
     if label_tag.get('itype') is not None:
@@ -75,6 +79,8 @@ def _extract_fn_annoset(annoset_tag, sentence, lexunit=None):
             lexunit._id = int(annoset_tag.get('luID'))
         if annoset_tag.get('luName'):
             lexunit.name = annoset_tag.get('luName')
+    test = AnnotationSet(_id, labels, lexunit, sentence)
+    #print('target = {}, frame = {}'.format(test.target.string, test.target.lexunit.frame.name))
     return AnnotationSet(_id, labels, lexunit, sentence)
 
 

@@ -25,7 +25,10 @@ def test_fulltext_annoset():
     assert len(annoset.valence_units) == 0
     assert annoset.valence_pattern == ''
 
-
+def test_fulltext_ini_fe():
+    annoset = fulltext_annosets_list[1][3]
+    assert annoset._id == 6557332
+    assert annoset.valence_pattern == 'Employee.INI Employer.INI'
 
 def test_fulltext_target():
     pass

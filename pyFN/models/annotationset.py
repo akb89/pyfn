@@ -16,8 +16,10 @@ class AnnotationSet():
         self._fn_labels_by_indexes = fn_utils.to_labels_by_indexes(fn_labels)
         self._sentence = sentence
         self._target = fn_utils.to_target(sentence.pnw_labels_by_indexes, fn_labels, lexunit, sentence.text)
-        self._valence_units = fn_utils.to_valence_units(self._fn_labels_by_indexes)
+        self._valence_units_by_indexes = fn_utils.to_valence_units_by_indexes(self._fn_labels_by_indexes)
+        self._valence_units = fn_utils.to_valence_units(self._valence_units_by_indexes)
         self._valence_pattern = fn_utils.to_valence_pattern(self._valence_units)
+        # TODO add cDate
 
     @property
     def _id(self):
@@ -55,6 +57,11 @@ class AnnotationSet():
     def target(self):
         """Return the target."""
         return self._target
+
+    @property
+    def valence_units_by_indexes(self):
+        """Return an index to valence units dict."""
+        return self._valence_units_by_indexes
 
     @property
     def valence_units(self):
