@@ -28,7 +28,10 @@ def to_labels_by_layer_name(labels):
 
 
 def to_labels_by_indexes(labels):
-    """Convert a list of labels to a dict of labels with start#end index tuples as keys."""
+    """Convert a list of labels to a dict of label.
+
+    Keys are start#end index tuples
+    """
     labels_by_indexes = defaultdict(list)
     for label in labels:
         labels_by_indexes[(label.start, label.end)].append(label)
@@ -36,36 +39,47 @@ def to_labels_by_indexes(labels):
 
 
 def _extract_flat_target_pnw_labels(target_indexes, pnw_labels_by_indexes):
-    target_pnw_labels = [labels for indexes, labels in pnw_labels_by_indexes.items() if indexes in target_indexes]
+    target_pnw_labels = [labels for indexes, labels
+                         in pnw_labels_by_indexes.items()
+                         if indexes in target_indexes]
     return [item for sublist in target_pnw_labels for item in sublist]
 
 
 def _extract_target_pos_tags(target_indexes, pnw_labels_by_indexes):
-    flat_target_pnw_labels = _extract_flat_target_pnw_labels(target_indexes, pnw_labels_by_indexes)
-    return [label for label in flat_target_pnw_labels if label.layer.name =='PENN' or label.layer.name == 'BNC']
+    flat_target_pnw_labels = _extract_flat_target_pnw_labels(
+        target_indexes, pnw_labels_by_indexes)
+    return [label for label in flat_target_pnw_labels
+            if label.layer.name =='PENN' or label.layer.name == 'BNC']
 
 
 def _extract_target_string(text, indexes):
     for (start, end) in indexes:
         if start == -1 or end == -1:
-            logger.debug('Target indexes are not specified in sentence: {}'.format(text))
+            logger.debug(
+                'Target indexes are not specified in sentence: {}'
+                .format(text))
             return ''
     return ' '.join([text[start: end+1] for (start, end) in indexes])
 
 
 def _extract_target_indexes(fn_labels):
-    return [(label.start, label.end) for label in fn_labels if label.layer.name == 'Target']
+    return [(label.start, label.end) for label in fn_labels
+            if label.layer.name == 'Target']
 
 
 def to_target(pnw_labels_by_indexes, fn_labels, lexunit, text):
     target_indexes = _extract_target_indexes(fn_labels)
     target_string = _extract_target_string(text, target_indexes)
-    target_pos_tags = _extract_target_pos_tags(target_indexes, pnw_labels_by_indexes)
+    target_pos_tags = _extract_target_pos_tags(target_indexes,
+                                               pnw_labels_by_indexes)
     return Target(target_string, lexunit, target_indexes, target_pos_tags)
 
 
 def _contains_unspecified_fe_pt_gf(index, labels):
-    """Return true iff at least one label is a FE/PT/GF and not all of them are specified."""
+    """Return true iff.
+
+    at least one label is a FE/PT/GF and not all of them are specified.
+    """
     if index[0] != -1 and index[1] != -1:
         contains_fe = False
         contains_pt = False
@@ -87,10 +101,14 @@ def _contains_unspecified_indexes(index, labels):
     if index[0] == -1 or index[1] == -1:  # if start or end is not specified
         for label in labels:
             if label.name == 'PT' or label.name == 'GF':
-                logger.warning('start/end indexes are not specified for PT/GF: {}'.format(label.name))
+                logger.warning(
+                    'start/end indexes are not specified for PT/GF: {}'
+                    .format(label.name))
                 return True
             if label.name == 'FE' and label.itype is None:
-                logger.warning('start/end indexes are not specified for FE {}'.format(label.name))
+                logger.warning(
+                    'start/end indexes are not specified for FE {}'
+                    .format(label.name))
                 return True
     return False
 
@@ -102,14 +120,18 @@ def to_valence_units_by_indexes(labels_by_indexes):
          _contains_unspecified_fe_pt_gf(index, labels):
             valence_units_by_indexes[index] = []
         else:
-            if index[0] == -1 or index[1] == -1:  # if start or end is not specified
+            if index[0] == -1 or index[1] == -1:  # if start or end is not
+            # specified
                 for label in labels:
                     valence_units_by_indexes[index].append('{}.{}'.format(
                         label.name, label.itype))
             else:
-                fe_labels = [label for label in labels if label.layer.name == 'FE']
-                pt_labels = [label for label in labels if label.layer.name == 'PT']
-                gf_labels = [label for label in labels if label.layer.name == 'GF']
+                fe_labels = [label for label in labels
+                             if label.layer.name == 'FE']
+                pt_labels = [label for label in labels
+                             if label.layer.name == 'PT']
+                gf_labels = [label for label in labels
+                             if label.layer.name == 'GF']
                 if not fe_labels and not pt_labels and not gf_labels:
                     # We are not dealing with FN FE.PT.GF layers
                     continue

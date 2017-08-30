@@ -82,5 +82,5 @@ class Label():
     def bg_color(self, bg_color):
         self._bg_color = bg_color
 
-    def __str__(self):
-        return '{}#{}#{}#{}'.format(self.name, self.start, self.end, self.layer.name)
+    # def __str__(self):
+    #     return '{}#{}#{}#{}'.format(self.name, self.start, self.end, self.layer.name)

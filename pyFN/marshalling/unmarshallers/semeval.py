@@ -3,7 +3,7 @@
 import logging
 import xml.etree.ElementTree as element_tree
 
-import pyFN.unmarshallers.framenet as fn_unmarshaller
+import pyFN.marshalling.unmarshallers.framenet as fn_unmarshaller
 
 __all__ = ['unmarshall_semeval07_xml']
 

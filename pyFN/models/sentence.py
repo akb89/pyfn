@@ -13,6 +13,8 @@ class Sentence():
         self.__id = _id
         self._document = document
         self._text = text
+        self._sentence_number = None
+        self._paraphraph_number = None  # TODO : add this and doc/corpID for lexunits
         self._pnwb_labels = pnwb_labels
         self._pnw_labels_by_layer_name = fn_utils.to_labels_by_layer_name(pnwb_labels)
         self._pnw_labels_by_indexes = fn_utils.to_labels_by_indexes(pnwb_labels)

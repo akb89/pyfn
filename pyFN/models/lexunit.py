@@ -12,7 +12,6 @@ class LexUnit():
         """Constructor."""
         self.__id = _id
         self._name = name
-        self._pos = fn_utils.extract_pos(self._name)
         self._frame = frame
 
 
@@ -29,7 +28,7 @@ class LexUnit():
     @property
     def pos(self):
         """Return the part of speech (POS) of the lexical unit."""
-        return self._pos
+        return fn_utils.extract_pos(self._name)
 
     @property
     def frame(self):

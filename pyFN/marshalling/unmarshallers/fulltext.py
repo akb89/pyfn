@@ -3,7 +3,7 @@
 import logging
 import xml.etree.ElementTree as element_tree
 import pyFN.utils.constants as const
-import pyFN.unmarshallers.framenet as fn_unmarshaller
+import pyFN.marshalling.unmarshallers.framenet as fn_unmarshaller
 from pyFN.models.corpus import Corpus
 from pyFN.models.document import Document
 from pyFN.exceptions.xml import XMLProcessingError

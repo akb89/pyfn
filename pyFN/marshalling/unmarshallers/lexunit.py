@@ -3,7 +3,7 @@
 import logging
 import xml.etree.ElementTree as element_tree
 import pyFN.utils.constants as const
-import pyFN.unmarshallers.framenet as fn_unmarshaller
+import pyFN.marshalling.unmarshallers.framenet as fn_unmarshaller
 from pyFN.models.frame import Frame
 from pyFN.models.lexunit import LexUnit
 
@@ -19,8 +19,8 @@ def _extract_sentence_tags():
 def unmarshall_lexunit_xml(xml_file_path):
     """Unmarshall a FrameNet lu XML file from file path.
 
-    Return a list of list of AnnotationSet instances extracted from the
-    lu XML file. A single list of AnnotationSet instances corresponds
+    Return a generator over a list of AnnotationSet instances extracted
+    from the lu XML file. A single list of AnnotationSet instances corresponds
     to all the AnnotationSets of a single Sentence.
 
     Args

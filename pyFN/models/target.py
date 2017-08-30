@@ -25,7 +25,7 @@ class Target():
 
     @property
     def indexes(self):
-        """Return a list of indexe tuples (start, end)."""
+        """Return a list of index tuples (start, end)."""
         return self._indexes
 
     @property
