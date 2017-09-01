@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.unmarshallers.lexunit as lexunit_unmarshaller
+import pyFN.marshalling.unmarshallers.lexunit as lexunit_unmarshaller
 
 
 LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources', 'lu.xml')
@@ -18,8 +18,9 @@ def test_annosets_counts():
 def test_lu_annoset():
     annoset = lu_annosets_list[1][0]
     assert annoset._id == 310929
-    assert len(annoset.valence_units) == 6
-    assert annoset.valence_pattern == 'Agent.NP.Ext Body_part.NP.Obj Agent.NP.Obj Path.PP.Dep Time.PP.Dep Agent.NP.Ext'
+    assert len(annoset.vustore.valence_units) == 6
+    assert annoset.valence_pattern.with_fe_name ==\
+     'Agent.NP.Ext Agent.NP.Ext Agent.NP.Obj Body_part.NP.Obj Path.PP.Dep Time.PP.Dep'
 
 
 def test_lu_target():

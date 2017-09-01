@@ -12,11 +12,7 @@ __all__ = ['unmarshall_lexunit_xml']
 logger = logging.getLogger(__name__)
 
 
-def _extract_sentence_tags():
-    pass
-
-
-def unmarshall_lexunit_xml(xml_file_path):
+def unmarshall_lexunit_xml(xml_file_path, fe_dict=None):
     """Unmarshall a FrameNet lu XML file from file path.
 
     Return a generator over a list of AnnotationSet instances extracted
@@ -39,6 +35,6 @@ def unmarshall_lexunit_xml(xml_file_path):
                                               const.FN_XML_NAMESPACE)
         for sentence_tag in sentence_tags:
             annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(
-                sentence_tag, lexunit=lexunit)
+                sentence_tag, lexunit=lexunit, fe_dict=fe_dict)
             if annosets:
                 yield annosets

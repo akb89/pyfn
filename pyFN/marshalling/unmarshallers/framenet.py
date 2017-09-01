@@ -66,7 +66,7 @@ def _extract_labels(layer_tags):
     return labels
 
 
-def _extract_fn_annoset(annoset_tag, sentence, lexunit=None):
+def _extract_fn_annoset(annoset_tag, sentence, lexunit=None, fe_dict=None):
     _id = int(annoset_tag.get('ID'))
     logger.debug('Processing annotationSet #{}'.format(_id))
     labels = _extract_labels(_extract_layer_tags(annoset_tag))
@@ -79,9 +79,7 @@ def _extract_fn_annoset(annoset_tag, sentence, lexunit=None):
             lexunit._id = int(annoset_tag.get('luID'))
         if annoset_tag.get('luName'):
             lexunit.name = annoset_tag.get('luName')
-    test = AnnotationSet(_id, labels, lexunit, sentence)
-    #print('target = {}, frame = {}'.format(test.target.string, test.target.lexunit.frame.name))
-    return AnnotationSet(_id, labels, lexunit, sentence)
+    return AnnotationSet(_id, labels, lexunit, sentence, fe_dict=fe_dict)
 
 
 def _extract_layer_tags(annoset_tag):
@@ -112,9 +110,10 @@ def _is_fn_annoset(annoset_tag):
     return _has_fe_layer(annoset_tag)
 
 
-def _extract_fn_annosets(annoset_tags, sentence, lexunit=None):
-    return [_extract_fn_annoset(annoset_tag, sentence, lexunit=lexunit) for
-            annoset_tag in annoset_tags if _is_fn_annoset(annoset_tag)]
+def _extract_fn_annosets(annoset_tags, sentence, lexunit=None, fe_dict=None):
+    return [_extract_fn_annoset(annoset_tag, sentence, lexunit=lexunit,
+            fe_dict=fe_dict) for annoset_tag in annoset_tags
+            if _is_fn_annoset(annoset_tag)]
 
 
 def _extract_sentence_text(sentence_tag):
@@ -171,7 +170,7 @@ def _extract_annoset_tags(sentence_tag):
 
 
 def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
-                                          lexunit=None):
+                                          lexunit=None, fe_dict=None):
     """Return a List<AnnotationSet> extracted from a single <sentence> tag."""
     annoset_tags = _extract_annoset_tags(sentence_tag)
     if not annoset_tags:
@@ -179,4 +178,5 @@ def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
     pnw_labels = _extract_pnw_labels(annoset_tags)
     sentence = _extract_sentence(sentence_tag, pnw_labels, document=document)
-    return _extract_fn_annosets(annoset_tags, sentence, lexunit=lexunit)
+    return _extract_fn_annosets(annoset_tags, sentence, lexunit=lexunit,
+                                fe_dict=fe_dict)

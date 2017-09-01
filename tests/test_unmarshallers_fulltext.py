@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.unmarshallers.fulltext as fulltext_unmarshaller
+import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
 
 FULLTEXT_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
@@ -21,14 +21,14 @@ def test_fulltext_annoset():
     assert annoset._id == 6557242
     assert annoset.sentence._id == 4106520
     assert annoset.sentence.text == 'That \'s where you - and Goodwill - come in .'
-    assert len(annoset.fn_labels) == 5
-    assert len(annoset.valence_units) == 0
-    assert annoset.valence_pattern == ''
+    assert len(annoset.fnlabelstore.labels) == 5
+    assert len(annoset.vustore.valence_units) == 0
+    assert annoset.valence_pattern.with_fe_name == ''
 
 def test_fulltext_ini_fe():
     annoset = fulltext_annosets_list[1][3]
     assert annoset._id == 6557332
-    assert annoset.valence_pattern == 'Employee.INI Employer.INI'
+    assert annoset.valence_pattern.with_fe_name == 'Employee.INI Employer.INI'
 
 def test_fulltext_target():
     pass

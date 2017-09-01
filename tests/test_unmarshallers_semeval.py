@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.unmarshallers.semeval as semeval_unmarshaller
+import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
 
 
 SEMEVAL_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources', 'semeval.xml')
@@ -15,8 +15,8 @@ def test_semeval_annoset():
     assert annoset._id == 0
     assert annoset.sentence._id == 0
     assert annoset.sentence.text == 'The boats may appear deceptively primitive , but many of them have their own electric generators and all the modern conveniences .'
-    assert len(annoset.fn_labels) == 3
+    assert len(annoset.fnlabelstore.labels) == 3
     assert annoset.target.lexunit.frame.name == 'Likelihood'
     assert annoset.target.string == 'may'
-    assert len(annoset.valence_units) == 0
-    assert annoset.valence_pattern == ''
+    assert len(annoset.vustore.valence_units) == 0
+    assert annoset.valence_pattern.with_fe_name == ''

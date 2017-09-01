@@ -1,6 +1,9 @@
 """(Enriched) FrameNet AnnotationSet object class."""
 
 import pyFN.utils.framenet as fn_utils
+from pyFN.models.labelstore import LabelStore
+from pyFN.models.valenceunitstore import ValenceUnitStore
+from pyFN.models.valencepattern import ValencePattern
 
 __all__ = ['AnnotationSet']
 
@@ -8,50 +11,23 @@ __all__ = ['AnnotationSet']
 class AnnotationSet():
     """FrameNet AnnotationSet class."""
 
-    def __init__(self, _id, fn_labels, lexunit, sentence):
+    def __init__(self, _id, fn_labels, lexunit, sentence, c_date=None,
+                 fe_dict=None):
         """Constructor."""
         self.__id = _id
-        self._fn_labels = fn_labels
-        self._fn_labels_by_layer_name = fn_utils.to_labels_by_layer_name(
-            fn_labels)
-        self._fn_labels_by_indexes = fn_utils.to_labels_by_indexes(fn_labels)
         self._sentence = sentence
         self._target = fn_utils.to_target(
-            sentence.pnw_labels_by_indexes, fn_labels, lexunit, sentence.text)
-        self._valence_units_by_indexes = fn_utils.to_valence_units_by_indexes(
-            self._fn_labels_by_indexes)
-        self._valence_units = fn_utils.to_valence_units(
-            self._valence_units_by_indexes)
-        self._valence_pattern = fn_utils.to_valence_pattern(
-            self._valence_units)
-        # TODO add cDate
+            sentence.pnw_labelstore.labels_by_indexes, fn_labels, lexunit,
+            sentence.text)
+        self._fnlabelstore = LabelStore(fn_labels)
+        self._vustore = ValenceUnitStore(self._fnlabelstore, fe_dict)
+        self._valence_pattern = ValencePattern(self._vustore.valence_units)
+        self._c_date = c_date
 
     @property
     def _id(self):
         """Return the ID of the annotationset."""
         return self.__id
-
-    @property
-    def fn_labels(self):
-        """Return a list of FrameNet labels."""
-        return self._fn_labels
-
-    @property
-    def fn_labels_by_layer_name(self):
-        """Return a dict of (FrameNet) labels, excluding PENN, NER and WSL labels.
-
-        Keys are layer names and values are lists of labels
-        """
-        return self._fn_labels_by_layer_name
-
-    @property
-    def fn_labels_by_indexes(self):
-        """Return a dict of labels.
-
-        Keys are tuples (label.startChar, label.endChar) and values are lists
-        of labels
-        """
-        return self._fn_labels_by_indexes
 
     @property
     def sentence(self):
@@ -64,27 +40,32 @@ class AnnotationSet():
         return self._target
 
     @property
-    def valence_units_by_indexes(self):
-        """Return an index to valence units dict."""
-        return self._valence_units_by_indexes
+    def fnlabelstore(self):
+        """Return a LabelStore object."""
+        return self._fnlabelstore
 
     @property
-    def valence_units(self):
-        """Return a list of valence units."""
-        return self._valence_units
+    def vustore(self):
+        """Return an ValenceUnitStore object."""
+        return self._vustore
 
     @property
     def valence_pattern(self):
-        """Return a valence pattern."""
+        """Return a ValencePattern object."""
         return self._valence_pattern
+
+    @property
+    def c_date(self):
+        """Return the annotationset created Date cDate."""
+        return self._c_date
 
     @_id.setter
     def _id(self, _id):
         self.__id = _id
 
-    @fn_labels.setter
-    def fn_labels(self, fn_labels):
-        self._fn_labels = fn_labels
+    @fnlabelstore.setter
+    def fnlabelstore(self, fn_labels):
+        self._fnlabelstore = LabelStore(fn_labels)
 
     @sentence.setter
     def sentence(self, sentence):

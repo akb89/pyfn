@@ -11,6 +11,7 @@ import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 import pyFN.marshalling.unmarshallers.lexunit as lexunit_unmarshaller
 import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
 import pyFN.utils.config as config_utils
+import pyFN.loading.loader as loader
 from pyFN.models.annotationset import AnnotationSet
 from pyFN.models.frame import Frame
 from pyFN.models.lexunit import LexUnit
@@ -27,13 +28,17 @@ logging.config.dictConfig(
 logger = logging.getLogger(__name__)
 
 
-def unmarshall_fulltext_xml(xml_filepath):
-    return fulltext_unmarshaller.unmarshall_fulltext_xml(xml_filepath)
+def unmarshall_fulltext_xml(xml_filepath, fe_dict=None):
+    return fulltext_unmarshaller.unmarshall_fulltext_xml(xml_filepath, fe_dict)
 
 
-def unmarshall_lexunit_xml(xml_filepath):
-    return lexunit_unmarshaller.unmarshall_lexunit_xml(xml_filepath)
+def unmarshall_lexunit_xml(xml_filepath, fe_dict=None):
+    return lexunit_unmarshaller.unmarshall_lexunit_xml(xml_filepath, fe_dict)
 
 
 def unmarshall_semeval07_xml(xml_filepath):
     return semeval_unmarshaller.unmarshall_semeval07_xml(xml_filepath)
+
+
+def load_fe_dict(frame_xml_dirpath):
+    return loader.load_fe_dict(frame_xml_dirpath)

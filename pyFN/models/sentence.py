@@ -1,6 +1,6 @@
 """FrameNet Sentence class."""
 
-import pyFN.utils.framenet as fn_utils
+from pyFN.models.labelstore import LabelStore
 
 __all__ = ['Sentence']
 
@@ -15,9 +15,7 @@ class Sentence():
         self._text = text
         self._sentence_number = None
         self._paraphraph_number = None  # TODO : add this and doc/corpID for lexunits
-        self._pnwb_labels = pnwb_labels
-        self._pnw_labels_by_layer_name = fn_utils.to_labels_by_layer_name(pnwb_labels)
-        self._pnw_labels_by_indexes = fn_utils.to_labels_by_indexes(pnwb_labels)
+        self._pnw_labelstore = LabelStore(pnwb_labels)
 
     @property
     def _id(self):
@@ -35,17 +33,9 @@ class Sentence():
         return self._document
 
     @property
-    def pnwb_labels(self):
-        """Return PENN, NER, WSL and BNC labels."""
-        return self._pnwb_labels
-
-    @property
-    def pnw_labels_by_indexes(self):
-        return self._pnw_labels_by_indexes
-
-    @property
-    def pnw_labels_by_layer_name(self):
-        return self._pnw_labels_by_layer_name
+    def pnw_labelstore(self):
+        """Return a LabelStore for PENN, NER, WSL and BNC labels."""
+        return self._pnw_labelstore
 
     @document.setter
     def document(self, document):

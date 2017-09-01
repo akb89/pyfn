@@ -27,7 +27,7 @@ def _extract_document(header_tag):
                     corpus)
 
 
-def unmarshall_fulltext_xml(xml_file_path):
+def unmarshall_fulltext_xml(xml_file_path, fe_dict=None):
     """Unmarshall a FrameNet fulltext XML file from file path.
 
     Return a generator on AnnotationSet instances extracted from the
@@ -51,6 +51,6 @@ def unmarshall_fulltext_xml(xml_file_path):
     sentence_tags = root.findall('fn:sentence', const.FN_XML_NAMESPACE)
     for sentence_tag in sentence_tags:
         annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(
-            sentence_tag, document=document)
+            sentence_tag, document=document, fe_dict=fe_dict)
         if annosets:
             yield annosets
