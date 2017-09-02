@@ -1,7 +1,7 @@
 """(Enriched) FrameNet AnnotationSet object class."""
 
-import pyFN.utils.framenet as fn_utils
 from pyFN.models.labelstore import LabelStore
+from pyFN.models.target import Target
 from pyFN.models.valenceunitstore import ValenceUnitStore
 from pyFN.models.valencepattern import ValencePattern
 
@@ -11,18 +11,29 @@ __all__ = ['AnnotationSet']
 class AnnotationSet():
     """FrameNet AnnotationSet class."""
 
-    def __init__(self, _id, fn_labels, lexunit, sentence, c_date=None,
-                 fe_dict=None):
+    def __init__(self, _id, sentence, target, fn_labelstore, vustore,
+                 valence_pattern, c_date=None):
         """Constructor."""
         self.__id = _id
         self._sentence = sentence
-        self._target = fn_utils.to_target(
-            sentence.pnw_labelstore.labels_by_indexes, fn_labels, lexunit,
-            sentence.text)
-        self._fnlabelstore = LabelStore(fn_labels)
-        self._vustore = ValenceUnitStore(self._fnlabelstore, fe_dict)
-        self._valence_pattern = ValencePattern(self._vustore.valence_units)
+        self._target = target
+        self._fn_labelstore = fn_labelstore
+        self._vustore = vustore
+        self._valence_pattern = valence_pattern
         self._c_date = c_date
+
+    @classmethod
+    def from_fn_data(cls, _id, fn_labels, lexunit, sentence, c_date=None,
+                     fe_dict=None):
+        target = Target.from_fn_data(fn_labels, sentence.text,
+                                     sentence.pnw_labelstore.labels_by_indexes,
+                                     lexunit)
+        fn_labelstore = LabelStore(fn_labels)
+        vustore = ValenceUnitStore.from_fn_data(
+            fn_labelstore.labels_by_indexes, fe_dict)
+        valence_pattern = ValencePattern(vustore.valence_units)
+        return AnnotationSet(_id, sentence, target, fn_labelstore, vustore,
+                             valence_pattern, c_date)
 
     @property
     def _id(self):
@@ -40,9 +51,9 @@ class AnnotationSet():
         return self._target
 
     @property
-    def fnlabelstore(self):
+    def fn_labelstore(self):
         """Return a LabelStore object."""
-        return self._fnlabelstore
+        return self._fn_labelstore
 
     @property
     def vustore(self):
@@ -63,9 +74,9 @@ class AnnotationSet():
     def _id(self, _id):
         self.__id = _id
 
-    @fnlabelstore.setter
-    def fnlabelstore(self, fn_labels):
-        self._fnlabelstore = LabelStore(fn_labels)
+    @fn_labelstore.setter
+    def fn_labelstore(self, fn_labels):
+        self._fn_labelstore = LabelStore(fn_labels)
 
     @sentence.setter
     def sentence(self, sentence):

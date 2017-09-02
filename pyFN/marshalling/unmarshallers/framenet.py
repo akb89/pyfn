@@ -79,7 +79,8 @@ def _extract_fn_annoset(annoset_tag, sentence, lexunit=None, fe_dict=None):
             lexunit._id = int(annoset_tag.get('luID'))
         if annoset_tag.get('luName'):
             lexunit.name = annoset_tag.get('luName')
-    return AnnotationSet(_id, labels, lexunit, sentence, fe_dict=fe_dict)
+    return AnnotationSet.from_fn_data(_id, labels, lexunit, sentence,
+                                      fe_dict=fe_dict)
 
 
 def _extract_layer_tags(annoset_tag):

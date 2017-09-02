@@ -15,7 +15,7 @@ def test_semeval_annoset():
     assert annoset._id == 0
     assert annoset.sentence._id == 0
     assert annoset.sentence.text == 'The boats may appear deceptively primitive , but many of them have their own electric generators and all the modern conveniences .'
-    assert len(annoset.fnlabelstore.labels) == 3
+    assert len(annoset.fn_labelstore.labels) == 3
     assert annoset.target.lexunit.frame.name == 'Likelihood'
     assert annoset.target.string == 'may'
     assert len(annoset.vustore.valence_units) == 0

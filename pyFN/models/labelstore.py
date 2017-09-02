@@ -9,6 +9,7 @@ class LabelStore():
     """Storing lists or dict of labels."""
 
     def __init__(self, labels):
+        """Constructor."""
         self._labels = labels
 
     @property

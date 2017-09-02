@@ -102,11 +102,17 @@ def _to_valence_units(valence_units_by_indexes):
 class ValenceUnitStore():
     """ValenceUnitStore."""
 
-    def __init__(self, fnlabelstore, fe_dict=None):
+    def __init__(self, valence_units, valence_units_by_indexes):
         """Constructor."""
-        self._valence_units_by_indexes = _to_valence_units_by_indexes(
-            fnlabelstore.labels_by_indexes, fe_dict)
-        self._valence_units = _to_valence_units(self._valence_units_by_indexes)
+        self._valence_units = valence_units
+        self._valence_units_by_indexes = valence_units_by_indexes
+
+    @classmethod
+    def from_fn_data(cls, fn_labels_by_indexes, fe_dict=None):
+        valence_units_by_indexes = _to_valence_units_by_indexes(
+            fn_labels_by_indexes, fe_dict)
+        valence_units = _to_valence_units(valence_units_by_indexes)
+        return ValenceUnitStore(valence_units, valence_units_by_indexes)
 
     @property
     def valence_units_by_indexes(self):
