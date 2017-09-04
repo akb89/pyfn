@@ -16,7 +16,11 @@ class ValencePattern():
 
     def __init__(self, valence_units):
         """Constructor."""
-        self._valence_units = _sorted_valence_units(valence_units)
+        self._valence_units = valence_units
+
+    @property
+    def valence_units(self):
+        return self._valence_units
 
     @property
     def with_fe_name(self):
@@ -27,7 +31,7 @@ class ValencePattern():
         valence_pattern = ''
         if not self._valence_units:
             return valence_pattern
-        for valence_unit in self._valence_units:
+        for valence_unit in _sorted_valence_units(self._valence_units):
             valence_pattern = '{} {}'.format(valence_pattern,
                                              valence_unit.with_fe_name)
         return valence_pattern.strip()
@@ -42,7 +46,7 @@ class ValencePattern():
         valence_pattern = ''
         if not self._valence_units:
             return valence_pattern
-        for valence_unit in self._valence_units:
+        for valence_unit in _sorted_valence_units(self._valence_units):
             valence_pattern = '{} {}'.format(valence_pattern,
                                              valence_unit.with_fe_cnc)
         return valence_pattern.strip()
@@ -56,7 +60,7 @@ class ValencePattern():
         valence_pattern = ''
         if not self._valence_units:
             return valence_pattern
-        for valence_unit in self._valence_units:
+        for valence_unit in _sorted_valence_units(self._valence_units):
             valence_pattern = '{} {}'.format(valence_pattern,
                                              valence_unit.with_fe_coretype)
         return valence_pattern.strip()

@@ -40,3 +40,7 @@ class Sentence():
     @document.setter
     def document(self, document):
         self._document = document
+
+    @text.setter
+    def text(self, text):
+        self._text = text

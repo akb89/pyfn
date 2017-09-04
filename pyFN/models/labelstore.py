@@ -43,3 +43,7 @@ class LabelStore():
         for label in self._labels:
             labels_by_layer_name[label.layer.name].append(label)
         return labels_by_layer_name
+
+    @labels.setter
+    def labels(self, labels):
+        self._labels = labels

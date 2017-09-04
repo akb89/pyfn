@@ -84,3 +84,10 @@ class Label():
 
     # def __str__(self):
     #     return '{}#{}#{}#{}'.format(self.name, self.start, self.end, self.layer.name)
+    def __str__(self):
+        if self.itype:
+            return '{}#{}#{}'.format(self.name, self.layer.name, self.itype)
+        return '{}#{}#{}#{}'.format(self.name, self.layer.name, self.start, self.end)
+
+    def __repr__(self):
+        return str(self)

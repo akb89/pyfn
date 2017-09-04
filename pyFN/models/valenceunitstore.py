@@ -112,7 +112,7 @@ class ValenceUnitStore():
         valence_units_by_indexes = _to_valence_units_by_indexes(
             fn_labels_by_indexes, fe_dict)
         valence_units = _to_valence_units(valence_units_by_indexes)
-        return ValenceUnitStore(valence_units, valence_units_by_indexes)
+        return cls(valence_units, valence_units_by_indexes)
 
     @property
     def valence_units_by_indexes(self):

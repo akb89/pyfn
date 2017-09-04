@@ -21,7 +21,7 @@ class AnnotationSet():
         self._vustore = vustore
         self._valence_pattern = valence_pattern
         self._c_date = c_date
-
+        
     @classmethod
     def from_fn_data(cls, _id, fn_labels, lexunit, sentence, c_date=None,
                      fe_dict=None):

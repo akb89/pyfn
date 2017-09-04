@@ -14,12 +14,15 @@ import pyFN.utils.config as config_utils
 import pyFN.loading.loader as loader
 from pyFN.models.annotationset import AnnotationSet
 from pyFN.models.frame import Frame
+from pyFN.models.labelstore import LabelStore
 from pyFN.models.lexunit import LexUnit
+from pyFN.models.sentence import Sentence
 from pyFN.models.target import Target
+from pyFN.models.valencepattern import ValencePattern
 
 __all__ = ['unmarshall_fulltext_xml', 'unmarshall_lexunit_xml',
-           'unmarshall_semeval07_xml', 'AnnotationSet', 'Frame', 'LexUnit',
-           'Target']
+           'unmarshall_semeval07_xml', 'AnnotationSet', 'Frame', 'LabelStore',
+           'LexUnit', 'Sentence', 'Target', 'ValencePattern']
 
 logging.config.dictConfig(
     config_utils.load(

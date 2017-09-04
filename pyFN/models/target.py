@@ -32,8 +32,8 @@ def _extract_target_string(text, indexes):
 
 
 def _extract_target_indexes(fn_labels):
-    return [(label.start, label.end) for label in fn_labels
-            if label.layer.name == 'Target']
+    return sorted([(label.start, label.end) for label in fn_labels
+                   if label.layer.name == 'Target'])
 
 
 class Target():
@@ -66,7 +66,7 @@ class Target():
     @property
     def indexes(self):
         """Return a list of index tuples (start, end)."""
-        return self._indexes
+        return sorted(self._indexes)
 
     @property
     def pos_tags(self):
