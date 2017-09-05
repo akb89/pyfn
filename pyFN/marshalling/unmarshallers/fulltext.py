@@ -16,13 +16,13 @@ logger = logging.getLogger(__name__)
 def _extract_document(header_tag):
     """Return a Document instance from a fulltext <header> tag."""
     corpus_tag = header_tag.find('fn:corpus', const.FN_XML_NAMESPACE)
-    corpus = Corpus(int(corpus_tag.get('ID')), corpus_tag.get('name'))
+    corpus = Corpus(int(corpus_tag.get('ID')), corpus_tag.get('name'),
+                    corpus_tag.get('description'))
     document_tag = corpus_tag.find('fn:document', const.FN_XML_NAMESPACE)
     if document_tag is None:
         raise XMLProcessingError('Could not extract document from tag')
     return Document(int(document_tag.get('ID')),
-                    '{}__{}'.format(corpus.name,
-                                    document_tag.get('description')),
+                    document_tag.get('name'),
                     document_tag.get('description'),
                     corpus)
 
@@ -39,7 +39,8 @@ def unmarshall_fulltext_xml(xml_file_path, fe_dict=None):
         param1 xml_files_path: full path to a FrameNet fulltext XML file.
 
     """
-    logger.info('Unmarshalling FrameNet fulltext XML file: {}'.format(xml_file_path))
+    logger.info('Unmarshalling FrameNet fulltext XML file: {}'.format(
+        xml_file_path))
     tree = element_tree.parse(xml_file_path)
     root = tree.getroot()
     try:
