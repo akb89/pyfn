@@ -24,3 +24,12 @@ class Layer():
     @rank.setter
     def rank(self, rank):
         self._rank = rank
+
+    def __hash__(self):
+        return hash((self._name, self._rank))
+
+    def __eq__(self, other):
+        return self._name == other.name and self._rank == other.rank
+
+    def __ne__(self, other):
+        return not self == other

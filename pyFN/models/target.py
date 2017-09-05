@@ -51,7 +51,7 @@ class Target():
         indexes = _extract_target_indexes(fn_labels)
         string = _extract_target_string(text, indexes)
         pos_tags = _extract_target_pos_tags(indexes, pnw_labels_by_indexes)
-        return cls(string, lexunit, indexes, pos_tags)
+        return cls(string, lexunit, indexes=indexes, pos_tags=pos_tags)
 
     @property
     def string(self):

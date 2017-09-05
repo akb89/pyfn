@@ -124,16 +124,17 @@ def _extract_sentence_text(sentence_tag):
     return sentence_tag.find('text').text
 
 
-def _extract_sentence(sentence_tag, pnw_labels, document=None):
+def _extract_sentence(sentence_tag, pnwb_labels, document=None):
     sentence_text = _extract_sentence_text(sentence_tag)
-    sentence = Sentence(int(sentence_tag.get('ID')), sentence_text, pnw_labels)
+    sentence = Sentence(text=sentence_text, _id=int(sentence_tag.get('ID')),
+                        pnwb_labels=pnwb_labels)
     logger.debug('Processing sentence #{}: {}'.format(sentence._id, sentence.text))
     if document:
         sentence.document = document
     return sentence
 
 
-def _extract_pnw_labels(annoset_tags):
+def _extract_pnwb_labels(annoset_tags):
     all_labels = []
     if not annoset_tags:
         return all_labels
@@ -177,7 +178,7 @@ def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
     if not annoset_tags:
         return []
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
-    pnw_labels = _extract_pnw_labels(annoset_tags)
-    sentence = _extract_sentence(sentence_tag, pnw_labels, document=document)
+    pnwb_labels = _extract_pnwb_labels(annoset_tags)
+    sentence = _extract_sentence(sentence_tag, pnwb_labels, document=document)
     return _extract_fn_annosets(annoset_tags, sentence, lexunit=lexunit,
                                 fe_dict=fe_dict)

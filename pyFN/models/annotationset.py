@@ -11,8 +11,9 @@ __all__ = ['AnnotationSet']
 class AnnotationSet():
     """FrameNet AnnotationSet class."""
 
-    def __init__(self, _id, sentence, target, fn_labelstore, vustore=None,
-                 valence_pattern=None, c_date=None):
+    def __init__(self, _id=None, sentence=None, target=None,
+                 fn_labelstore=None, vustore=None, valence_pattern=None,
+                 c_date=None):
         """Constructor."""
         self.__id = _id
         self._sentence = sentence
@@ -32,8 +33,8 @@ class AnnotationSet():
         vustore = ValenceUnitStore.from_fn_data(
             fn_labelstore.labels_by_indexes, fe_dict)
         valence_pattern = ValencePattern(vustore.valence_units)
-        return AnnotationSet(_id, sentence, target, fn_labelstore, vustore,
-                             valence_pattern, c_date)
+        return cls(_id, sentence, target, fn_labelstore, vustore,
+                   valence_pattern, c_date)
 
     @property
     def _id(self):
@@ -74,14 +75,21 @@ class AnnotationSet():
     def _id(self, _id):
         self.__id = _id
 
+    @target.setter
+    def target(self, target):
+        self._target = target
+
     @fn_labelstore.setter
-    def fn_labelstore(self, fn_labels):
-        self._fn_labelstore = LabelStore(fn_labels)
+    def fn_labelstore(self, fn_labelstore):
+        self._fn_labelstore = fn_labelstore
 
     @sentence.setter
     def sentence(self, sentence):
         self._sentence = sentence
 
+    @valence_pattern.setter
+    def valence_pattern(self, valence_pattern):
+        self._valence_pattern = valence_pattern
 
     def __hash__(self):
         return hash(self._id)
@@ -90,4 +98,4 @@ class AnnotationSet():
         return (self._id) == (other._id)
 
     def __ne__(self, other):
-        return not(self == other)
+        return not self == other

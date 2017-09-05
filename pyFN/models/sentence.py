@@ -8,7 +8,7 @@ __all__ = ['Sentence']
 class Sentence():
     """FrameNet sentence class."""
 
-    def __init__(self, _id, text, pnwb_labels, document=None):
+    def __init__(self, _id=None, text=None, pnwb_labels=None, document=None):
         """Constructor."""
         self.__id = _id
         self._document = document
