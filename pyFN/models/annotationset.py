@@ -75,6 +75,7 @@ class AnnotationSet():
         """Return the annotationset created Date cDate."""
         return self._c_date
 
+    @property
     def xml_schema_type(self):
         """Return the initial XML format the AnnotationSet was
         generated from: FN 'fulltext', 'exemplar' (lu) or 'semeval'."""

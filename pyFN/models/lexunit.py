@@ -1,7 +1,5 @@
 """FrameNet LexUnit class."""
 
-import pyFN.utils.framenet as fn_utils
-
 __all__ = ['LexUnit']
 
 
@@ -13,7 +11,6 @@ class LexUnit():
         self.__id = _id
         self._name = name
         self._frame = frame
-
 
     @property
     def _id(self):
@@ -28,7 +25,9 @@ class LexUnit():
     @property
     def pos(self):
         """Return the part of speech (POS) of the lexical unit."""
-        return fn_utils.extract_pos(self._name)
+        if self._name is None:
+            return None
+        return self._name.split('.')[1]
 
     @property
     def frame(self):
