@@ -22,21 +22,16 @@ def unmarshall_semeval07_xml(xml_file_path):
         param1 xml_files_path: full path to a SemEval 2007 FrameNet XML file.
 
     """
-    logger.info('Unmarshalling SemEval FrameNet XML file: {}'.format(xml_file_path))
-    tree = element_tree.parse(xml_file_path)
-    root = tree.getroot()
-    documents_tags = root.findall('documents')
-    for documents_tag in documents_tags:
-        document_tags = documents_tag.findall('document')
-        for document_tag in document_tags:
-            paragraphs_tags = document_tag.findall('paragraphs')
-            for paragraphs_tag in paragraphs_tags:
-                paragraph_tags = paragraphs_tag.findall('paragraph')
-                for paragraph_tag in paragraph_tags:
-                    sentences_tags = paragraph_tag.findall('sentences')
-                    for sentences_tag in sentences_tags:
-                        sentence_tags = sentences_tag.findall('sentence')
-                        for sentence_tag in sentence_tags:
-                            annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(sentence_tag)
+    logger.info('Unmarshalling SemEval FrameNet XML file: {}'
+                .format(xml_file_path))
+    for documents_tag in element_tree.parse(xml_file_path).getroot().findall(
+            'documents'):
+        for document_tag in documents_tag.findall('document'):
+            for paragraphs_tag in document_tag.findall('paragraphs'):
+                for paragraph_tag in paragraphs_tag.findall('paragraph'):
+                    for sentences_tag in paragraph_tag.findall('sentences'):
+                        for sentence_tag in sentences_tag.findall('sentence'):
+                            annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(
+                                sentence_tag, xml_schema_type='semeval')
                             if annosets:
                                 yield annosets

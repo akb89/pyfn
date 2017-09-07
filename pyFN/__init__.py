@@ -8,7 +8,7 @@ import logging
 import logging.config
 
 import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
-import pyFN.marshalling.unmarshallers.lexunit as lexunit_unmarshaller
+import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
 import pyFN.utils.config as config_utils
 import pyFN.loading.loader as loader
@@ -20,7 +20,7 @@ from pyFN.models.sentence import Sentence
 from pyFN.models.target import Target
 from pyFN.models.valencepattern import ValencePattern
 
-__all__ = ['unmarshall_fulltext_xml', 'unmarshall_lexunit_xml',
+__all__ = ['unmarshall_fulltext_xml', 'unmarshall_exemplar_xml',
            'unmarshall_semeval07_xml', 'AnnotationSet', 'Frame', 'LabelStore',
            'LexUnit', 'Sentence', 'Target', 'ValencePattern']
 
@@ -35,8 +35,8 @@ def unmarshall_fulltext_xml(xml_filepath, fe_dict=None):
     return fulltext_unmarshaller.unmarshall_fulltext_xml(xml_filepath, fe_dict)
 
 
-def unmarshall_lexunit_xml(xml_filepath, fe_dict=None):
-    return lexunit_unmarshaller.unmarshall_lexunit_xml(xml_filepath, fe_dict)
+def unmarshall_exemplar_xml(xml_filepath, fe_dict=None):
+    return exemplar_unmarshaller.unmarshall_exemplar_xml(xml_filepath, fe_dict)
 
 
 def unmarshall_semeval07_xml(xml_filepath):

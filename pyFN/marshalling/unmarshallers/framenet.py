@@ -66,7 +66,8 @@ def _extract_labels(layer_tags):
     return labels
 
 
-def _extract_fn_annoset(annoset_tag, sentence, lexunit=None, fe_dict=None):
+def _extract_fn_annoset(annoset_tag, sentence, xml_schema_type, lexunit=None,
+                        fe_dict=None):
     _id = int(annoset_tag.get('ID'))
     logger.debug('Processing annotationSet #{}'.format(_id))
     labels = _extract_labels(_extract_layer_tags(annoset_tag))
@@ -79,8 +80,10 @@ def _extract_fn_annoset(annoset_tag, sentence, lexunit=None, fe_dict=None):
             lexunit._id = int(annoset_tag.get('luID'))
         if annoset_tag.get('luName'):
             lexunit.name = annoset_tag.get('luName')
-    return AnnotationSet.from_fn_data(_id, labels, lexunit, sentence,
-                                      fe_dict=fe_dict)
+    return AnnotationSet.from_fn_data(_id=_id, fn_labels=labels,
+                                      lexunit=lexunit, sentence=sentence,
+                                      fe_dict=fe_dict,
+                                      xml_schema_type=xml_schema_type)
 
 
 def _extract_layer_tags(annoset_tag):
@@ -111,9 +114,11 @@ def _is_fn_annoset(annoset_tag):
     return _has_fe_layer(annoset_tag)
 
 
-def _extract_fn_annosets(annoset_tags, sentence, lexunit=None, fe_dict=None):
-    return [_extract_fn_annoset(annoset_tag, sentence, lexunit=lexunit,
-            fe_dict=fe_dict) for annoset_tag in annoset_tags
+def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type, lexunit=None,
+                         fe_dict=None):
+    return [_extract_fn_annoset(annoset_tag, sentence, xml_schema_type,
+                                lexunit=lexunit, fe_dict=fe_dict)
+            for annoset_tag in annoset_tags
             if _is_fn_annoset(annoset_tag)]
 
 
@@ -128,7 +133,8 @@ def _extract_sentence(sentence_tag, pnwb_labels, document=None):
     sentence_text = _extract_sentence_text(sentence_tag)
     sentence = Sentence(text=sentence_text, _id=int(sentence_tag.get('ID')),
                         pnwb_labels=pnwb_labels)
-    logger.debug('Processing sentence #{}: {}'.format(sentence._id, sentence.text))
+    logger.debug('Processing sentence #{}: {}'.format(sentence._id,
+                                                      sentence.text))
     if document:
         sentence.document = document
     return sentence
@@ -171,8 +177,9 @@ def _extract_annoset_tags(sentence_tag):
     return annoset_tags
 
 
-def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
-                                          lexunit=None, fe_dict=None):
+def extract_fn_annosets_from_sentence_tag(sentence_tag, xml_schema_type,
+                                          document=None, lexunit=None,
+                                          fe_dict=None):
     """Return a List<AnnotationSet> extracted from a single <sentence> tag."""
     annoset_tags = _extract_annoset_tags(sentence_tag)
     if not annoset_tags:
@@ -180,5 +187,5 @@ def extract_fn_annosets_from_sentence_tag(sentence_tag, document=None,
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
     pnwb_labels = _extract_pnwb_labels(annoset_tags)
     sentence = _extract_sentence(sentence_tag, pnwb_labels, document=document)
-    return _extract_fn_annosets(annoset_tags, sentence, lexunit=lexunit,
-                                fe_dict=fe_dict)
+    return _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
+                                lexunit=lexunit, fe_dict=fe_dict)

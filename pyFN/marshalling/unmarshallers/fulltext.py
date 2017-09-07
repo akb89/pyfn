@@ -52,6 +52,7 @@ def unmarshall_fulltext_xml(xml_file_path, fe_dict=None):
     sentence_tags = root.findall('fn:sentence', const.FN_XML_NAMESPACE)
     for sentence_tag in sentence_tags:
         annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(
-            sentence_tag, document=document, fe_dict=fe_dict)
+            sentence_tag, xml_schema_type='fulltext', document=document,
+            fe_dict=fe_dict)
         if annosets:
             yield annosets
