@@ -1,11 +1,12 @@
-"""Behavior tests for unmarshallers.framenet."""
+"""Behavior tests for unmarshallers.exemplar."""
 
 import os
 
 import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 
 
-LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources', 'lu.xml')
+LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
+                           'splits_dir', 'lu', 'lu.xml')
 
 ex_annosets_list = list(exemplar_unmarshaller.unmarshall_exemplar_xml(LU_XML_FILE))
 

@@ -1,4 +1,4 @@
-"""Behavior tests for unmarshallers.framenet."""
+"""Behavior tests for unmarshallers.fulltext."""
 
 import os
 
@@ -6,7 +6,7 @@ import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
 
 FULLTEXT_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
-                                 'fulltext.xml')
+                                 'splits_dir', 'fulltext', 'fulltext.xml')
 
 fulltext_annosets_list = list(fulltext_unmarshaller.unmarshall_fulltext_xml(FULLTEXT_XML_FILE))
 

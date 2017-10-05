@@ -1,4 +1,4 @@
-"""Behavior tests for unmarshallers.framenet."""
+"""Behavior tests for unmarshallers.semeval."""
 
 import os
 

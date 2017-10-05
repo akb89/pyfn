@@ -12,7 +12,7 @@ __all__ = ['unmarshall_exemplar_xml']
 logger = logging.getLogger(__name__)
 
 
-def unmarshall_exemplar_xml(xml_file_path, fe_dict=None):
+def unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
     """Unmarshall a FrameNet lu XML file from file path.
 
     Return a generator over a list of AnnotationSet instances extracted
@@ -38,4 +38,8 @@ def unmarshall_exemplar_xml(xml_file_path, fe_dict=None):
                 sentence_tag, xml_schema_type='exemplar', lexunit=lexunit,
                 fe_dict=fe_dict)
             if annosets:
-                yield annosets
+                if not flatten:
+                    yield annosets
+                if flatten:
+                    for annoset in annosets:
+                        yield annoset

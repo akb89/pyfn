@@ -7,6 +7,7 @@ import os
 import logging
 import logging.config
 
+import pyFN.extraction.extractors.framenet as framenet_extractor
 import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
@@ -31,6 +32,13 @@ logging.config.dictConfig(
 logger = logging.getLogger(__name__)
 
 
+def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
+                     fe_dict=None, flatten=False):
+    return framenet_extractor.extract_annosets(splits_dirpath, with_fulltexts,
+                                               with_exemplars, fe_dict,
+                                               flatten)
+
+
 def unmarshall_fulltext_xml(xml_filepath, fe_dict=None):
     return fulltext_unmarshaller.unmarshall_fulltext_xml(xml_filepath, fe_dict)
 
@@ -45,3 +53,8 @@ def unmarshall_semeval07_xml(xml_filepath):
 
 def load_fe_dict(frame_xml_dirpath):
     return loader.load_fe_dict(frame_xml_dirpath)
+
+
+def load_config(config_file):
+    """Load an ImmutableConfig from a YAML configuration file."""
+    return config_utils.load(config_file)
