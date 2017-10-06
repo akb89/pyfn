@@ -47,8 +47,8 @@ def unmarshall_exemplar_xml(xml_filepath, fe_dict=None):
     return exemplar_unmarshaller.unmarshall_exemplar_xml(xml_filepath, fe_dict)
 
 
-def unmarshall_semeval07_xml(xml_filepath):
-    return semeval_unmarshaller.unmarshall_semeval07_xml(xml_filepath)
+def unmarshall_semeval07_xml(xml_filepath, flatten=False):
+    return semeval_unmarshaller.unmarshall_semeval07_xml(xml_filepath, flatten)
 
 
 def load_fe_dict(frame_xml_dirpath):
