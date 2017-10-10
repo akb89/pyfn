@@ -6,7 +6,7 @@ import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 
 
 LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
-                           'splits_dir', 'lu', 'lu.xml')
+                           'splits', 'lu', 'lu.xml')
 
 ex_annosets_list = list(exemplar_unmarshaller.unmarshall_exemplar_xml(LU_XML_FILE))
 

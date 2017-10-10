@@ -6,7 +6,7 @@ import pyFN.extraction.extractors.framenet as fn_extractor
 
 
 SPLITS_DIRPATH = os.path.join(os.path.dirname(__file__), 'resources',
-                              'splits_dir')
+                              'splits')
 
 
 def test_extract_annosets_with_ft_with_ex_flatten_false():

@@ -6,7 +6,7 @@ import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
 
 FULLTEXT_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
-                                 'splits_dir', 'fulltext', 'fulltext.xml')
+                                 'splits', 'fulltext', 'fulltext.xml')
 
 fulltext_annosets_list = list(fulltext_unmarshaller.unmarshall_fulltext_xml(FULLTEXT_XML_FILE))
 
