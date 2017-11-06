@@ -13,6 +13,7 @@ import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
 import pyFN.utils.config as config_utils
 import pyFN.loading.loader as loader
+import pyFN.utils.filter as filter_utils
 from pyFN.models.annotationset import AnnotationSet
 from pyFN.models.frame import Frame
 from pyFN.models.labelstore import LabelStore
@@ -30,6 +31,10 @@ logging.config.dictConfig(
         os.path.join(os.path.dirname(__file__), 'logging', 'logging.yml')))
 
 logger = logging.getLogger(__name__)
+
+
+def filter_annosets(source_annosets, target_annosets):
+    return filter_utils.filter_annosets(source_annosets, target_annosets)
 
 
 def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
