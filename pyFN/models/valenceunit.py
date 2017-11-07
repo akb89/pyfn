@@ -37,10 +37,10 @@ class ValenceUnit():
         if not self._fe.coretype:
             return ''
         if self._fe.itype:
-            if self._fe.coretype == 'Core':
+            if self._fe.coretype == 'Core' or self._fe.coretype == 'Core-Unexpressed':
                 return '{}#C.{}'.format(self._fe.name, self._fe.itype)
             return '{}#NC.{}'.format(self._fe.name, self._fe.itype)
-        if self._fe.coretype == 'Core':
+        if self._fe.coretype == 'Core' or self._fe.coretype == 'Core-Unexpressed':
             return '{}#C.{}.{}'.format(self._fe.name, self._pt, self._gf)
         return '{}#NC.{}.{}'.format(self._fe.name, self._pt, self._gf)
 

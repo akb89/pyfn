@@ -5,10 +5,10 @@ from pyFN.models.frameelement import FrameElement
 from pyFN.models.valenceunit import ValenceUnit
 
 def test_sorted_valence_units():
-    fe1 = FrameElement(_id=1, name='A')
-    fe2 = FrameElement(_id=2, name='B')
-    fe3 = FrameElement(_id=3, name='A', itype='INI')
-    fe4 = FrameElement(_id=3, name='A', itype='CNI')
+    fe1 = FrameElement(_id=1, name='A', coretype='Core')
+    fe2 = FrameElement(_id=2, name='B', coretype='Core')
+    fe3 = FrameElement(_id=3, name='A', coretype='Core', itype='INI')
+    fe4 = FrameElement(_id=3, name='A', coretype='Core', itype='CNI')
     vu1 = ValenceUnit(fe=fe3)
     vu2 = ValenceUnit(fe=fe4)
     vu3 = ValenceUnit(fe=fe1, pt='DP', gf='Ext')
