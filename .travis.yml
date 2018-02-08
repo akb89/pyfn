@@ -8,4 +8,4 @@ install:
   - pip install pytest
 
 script:
-  - python -m pytest --cov=tests/ tests/
+  - python -m pytest tests/
