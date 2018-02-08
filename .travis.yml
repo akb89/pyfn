@@ -4,7 +4,11 @@ python:
   - "3.6"
 
 install:
-  - pip install pytest
+  - pip install coveralls
+  - pip install pylint pydocstyle pycodestyle pytest-cov
 
 script:
-  - python -m pytest tests/
+  - python -m pytest --cov=tests/ tests/
+
+after_success:
+  - coveralls
