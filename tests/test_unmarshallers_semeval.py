@@ -18,5 +18,5 @@ def test_semeval_annoset():
     assert len(annoset.fn_labelstore.labels) == 3
     assert annoset.target.lexunit.frame.name == 'Likelihood'
     assert annoset.target.string == 'may'
-    assert len(annoset.vustore.valence_units) == 0
-    assert annoset.valence_pattern.with_fe_name == ''
+    assert len(annoset.vustore.valence_units) == 2
+    assert annoset.valence_pattern.with_fe_name == 'Hypothetical_event.undefined.undefined Hypothetical_event.undefined.undefined'

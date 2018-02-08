@@ -11,7 +11,6 @@ __all__ = ['ValenceUnitStore']
 
 logger = logging.getLogger(__name__)
 
-
 def _contains_unspecified_fe_pt_gf(index, labels):
     """Return true iff.
 
@@ -53,8 +52,10 @@ def _contains_unspecified_indexes(index, labels):
 def _to_valence_units_by_indexes(labels_by_indexes, fe_dict=None):
     valence_units_by_indexes = defaultdict(list)
     for index, labels in labels_by_indexes.items():
-        if _contains_unspecified_indexes(index, labels) or\
-         _contains_unspecified_fe_pt_gf(index, labels):
+        # if _contains_unspecified_indexes(index, labels) or\
+        #  _contains_unspecified_fe_pt_gf(index, labels):
+        # TODO: check this
+        if _contains_unspecified_indexes(index, labels):
             valence_units_by_indexes[index] = []
         else:
             if index[0] == -1 or index[1] == -1:  # if start or end is not
@@ -84,9 +85,13 @@ def _to_valence_units_by_indexes(labels_by_indexes, fe_dict=None):
                     else:
                         fe = FrameElement(_id=fe_label.fe_id,
                                           name=fe_label.name)
-                    valence_unit = ValenceUnit(fe, pt_labels[0].name,
-                                               gf_labels[0].name)
-                    valence_units_by_indexes[index].append(valence_unit)
+                    if pt_labels and gf_labels:  # TODO check also this
+                        valence_unit = ValenceUnit(fe, pt_labels[0].name,
+                                                   gf_labels[0].name)
+                        valence_units_by_indexes[index].append(valence_unit)
+                    else:
+                        valence_unit = ValenceUnit(fe, 'undefined', 'undefined')
+                        valence_units_by_indexes[index].append(valence_unit)
     return valence_units_by_indexes
 
 
