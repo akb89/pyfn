@@ -28,16 +28,16 @@ with open('README.rst','w') as outfile:
 [release-image]:https://img.shields.io/github/release/akb89/pyFN.svg?style=flat-square
 [release-url]:https://github.com/akb89/pyFN/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyFN.svg?style=flat-square
-[pypi-url]:
+[pypi-url]:https://github.com/akb89/pyFN/releases/latest
 [travis-image]:https://img.shields.io/travis/akb89/pyFN.svg?style=flat-square
 [travis-url]:https://travis-ci.org/akb89/pyFN
 [coverage-image]:https://img.shields.io/coveralls/akb89/pyFN/master.svg?style=flat-square
 [coverage-url]:https://coveralls.io/github/akb89/pyFN?branch=master
 [framenet-image]:https://img.shields.io/badge/framenet-1.5%E2%87%A1-blue.svg?style=flat-square
 [framenet-url]:https://framenet.icsi.berkeley.edu/fndrupal
-[python-image]:
-[python-url]:https://img.shields.io/pypi/pyversions/pyFN.svg
+[python-image]:https://img.shields.io/pypi/pyversions/pyFN.svg?style=flat-square
+[python-url]:https://github.com/akb89/pyFN/releases/latest
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE.txt
-[req-url]: https://requires.io/github/akb89/pyFN/requirements/?branch=master
+[req-url]:https://github.com/akb89/pyFN/releases/latest
 [req-image]: https://img.shields.io/requires/github/akb89/pyFN.svg?style=flat-square
