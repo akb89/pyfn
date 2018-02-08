@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-'''pyFN setup.py.
+"""pyFN setup.py.
 
 This file details modalities for packaging the pyFN application.
-'''
+"""
 
 from setuptools import setup
 
