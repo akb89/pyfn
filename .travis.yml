@@ -4,12 +4,15 @@ python:
   - "3.6"
 
 install:
-  - python setup.py -q install
-  - pip install pydocstyle coveralls
+  # - python setup.py -q install
+  # - pip install pydocstyle coveralls
+  - pip install coveralls
+  - pip install pydocstyle pytest-cov
 
 script:
-  - python setup.py test
-  - pydocstyle pyfn
+  # - python setup.py test
+  # - pydocstyle pyfn
+  - python -m pytest --cov=pyFN tests/
 
 after_success:
   - coveralls
