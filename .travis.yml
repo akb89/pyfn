@@ -3,11 +3,8 @@ python:
   - "3.5"
   - "3.6"
 
-install:
-  - python setup.py -q install
-
 script:
-  - python setup.py test
+  - pytest
   - pydocstyle pyfn
 
 after_success:
