@@ -5,12 +5,11 @@ python:
 
 install:
   - pip install coveralls
-  - pip install pylint pydocstyle pytest-cov
+  - pip install pydocstyle
 
 script:
-  - python -m pytest --cov=pyfn tests/
+  - python setup.py test
   - pydocstyle pyfn
-  - pylint --disable=duplicate-code --rcfile=.pylintrc pyfn
 
 after_success:
   - coveralls
