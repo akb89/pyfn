@@ -12,7 +12,7 @@ install:
 script:
   # - python setup.py test
   # - pydocstyle pyfn
-  - python -m pytest --cov=pyFN tests/
+  - python -m pytest --cov=pyfn tests/
 
 after_success:
   - coveralls
