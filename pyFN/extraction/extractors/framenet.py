@@ -36,8 +36,8 @@ def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
     The splits directory should contain two subdirectories name 'fulltext'
     and 'lu'.
     Returns a list of generators over AnnotationSet with [AnnotationSet] <->
-    1 fulltext or exemplar XML file if flatten=False
-    Returns a generator over AnnotationSet (a single list) if flatten=True
+    1 fulltext or exemplar XML file if flatten==False
+    Returns a generator over AnnotationSet (a single list) if flatten==True
     """
     logger.info('Extracting pyfn.AnnotationSet items from {}'
                 .format(splits_dirpath))

@@ -12,6 +12,7 @@ __all__ = ['unmarshall_exemplar_xml']
 logger = logging.getLogger(__name__)
 
 
+# pylint:disable=duplicate-code
 def unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
     """Unmarshall a FrameNet lu XML file from file path.
 
@@ -34,12 +35,12 @@ def unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
         sentence_tags = subcorpus_tag.findall('fn:sentence',
                                               const.FN_XML_NAMESPACE)
         for sentence_tag in sentence_tags:
-            return fn_unmarshaller.extract_fn_annosets(
+            annosets = fn_unmarshaller.extract_fn_annosets(
                 sentence_tag, xml_schema_type='exemplar', lexunit=lexunit,
                 fe_dict=fe_dict)
-            # if annosets:
-            #     if not flatten:
-            #         yield annosets
-            #     if flatten:
-            #         for annoset in annosets:
-            #             yield annoset
+            if annosets:
+                if not flatten:
+                    yield annosets
+                if flatten:
+                    for annoset in annosets:
+                        yield annoset

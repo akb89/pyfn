@@ -4,7 +4,6 @@ import os
 import pickle
 import logging
 import mmh3
-import pyfn.marshalling.unmarshallers.frame as unmarshaller
 import pyfn.utils.constants as const
 import pyfn.utils.xml as xml_utils
 
@@ -33,7 +32,9 @@ def load_fe_dict(frame_xml_dirpath):
         with open(fe_dict_filepath, 'rb') as identifier_stream:
             return pickle.load(identifier_stream)
     logger.debug('Could not find fe dict matching identifier:')
-    fe_dict = unmarshaller.unmarshall_frame_xml(frame_xml_dirpath)
+    # TODO: implement frame unmarshaller
+    # fe_dict = unmarshaller.unmarshall_frame_xml(frame_xml_dirpath)
+    fe_dict = {}
     with open(fe_dict, 'wb') as identifier_stream:
         pickle.dump(fe_dict, identifier_stream,
                     protocol=pickle.HIGHEST_PROTOCOL)

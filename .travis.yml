@@ -10,7 +10,7 @@ install:
 script:
   - python -m pytest --cov=pyfn tests/
   - pydocstyle pyfn
-  - pylint --rcfile .pylintrc pyfn
+  - pylint --rcfile .pylintrc pyfn --disable=duplicate-code
 
 after_success:
   - coveralls
