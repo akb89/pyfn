@@ -8,7 +8,7 @@ install:
   - pip install pylint pydocstyle pytest-cov
 
 script:
-  - pytest --cov=pyfn tests/
+  - python -m pytest tests/
   - pydocstyle pyfn
   - pylint --disable=duplicate-code --rcfile=.pylintrc pyfn
 
