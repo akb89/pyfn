@@ -8,17 +8,19 @@ from pyfn.models.valencepattern import ValencePattern
 __all__ = ['AnnotationSet']
 
 
+# pylint: disable=R0902
 class AnnotationSet():
     """FrameNet AnnotationSet class."""
 
+    # pylint: disable=R0913
     def __init__(self, _id=None, sentence=None, target=None,
-                 fn_labelstore=None, vustore=None, valence_pattern=None,
+                 labelstore=None, vustore=None, valence_pattern=None,
                  c_date=None, xml_schema_type=None):
         """Constructor."""
         self.__id = _id
         self._sentence = sentence
         self._target = target
-        self._fn_labelstore = fn_labelstore
+        self._labelstore = labelstore
         self._vustore = vustore
         self._valence_pattern = valence_pattern
         self._c_date = c_date
@@ -31,12 +33,12 @@ class AnnotationSet():
         target = Target.from_fn_data(fn_labels, sentence.text,
                                      sentence.pnw_labelstore.labels_by_indexes,
                                      lexunit)
-        fn_labelstore = LabelStore(fn_labels)
+        labelstore = LabelStore(fn_labels)
         vustore = ValenceUnitStore.from_fn_data(
-            fn_labelstore.labels_by_indexes, fe_dict)
+            labelstore.labels_by_indexes, fe_dict)
         valence_pattern = ValencePattern(vustore.valence_units)
         return cls(_id=_id, sentence=sentence, target=target,
-                   fn_labelstore=fn_labelstore, vustore=vustore,
+                   labelstore=labelstore, vustore=vustore,
                    valence_pattern=valence_pattern, c_date=c_date,
                    xml_schema_type=xml_schema_type)
 
@@ -56,9 +58,9 @@ class AnnotationSet():
         return self._target
 
     @property
-    def fn_labelstore(self):
+    def labelstore(self):
         """Return a LabelStore object."""
-        return self._fn_labelstore
+        return self._labelstore
 
     @property
     def vustore(self):
@@ -77,8 +79,11 @@ class AnnotationSet():
 
     @property
     def xml_schema_type(self):
-        """Return the initial XML format the AnnotationSet was
-        generated from: FN 'fulltext', 'exemplar' (lu) or 'semeval'."""
+        """Return the initial XML format.
+
+        The XML format corresponds to the schema from which the AnnotationSet
+        was generated: FN 'fulltext', 'exemplar' (lu) or 'semeval'.
+        """
         return self._xml_schema_type
 
     @_id.setter
@@ -89,9 +94,9 @@ class AnnotationSet():
     def target(self, target):
         self._target = target
 
-    @fn_labelstore.setter
-    def fn_labelstore(self, fn_labelstore):
-        self._fn_labelstore = fn_labelstore
+    @labelstore.setter
+    def labelstore(self, labelstore):
+        self._labelstore = labelstore
 
     @sentence.setter
     def sentence(self, sentence):
@@ -102,10 +107,13 @@ class AnnotationSet():
         self._valence_pattern = valence_pattern
 
     def __hash__(self):
+        """Return hash on AnnotationSet _id."""
         return hash(self._id)
 
     def __eq__(self, other):
+        """Compare _id fields of two AnnotationSet instances."""
         return (self._id) == (other._id)
 
     def __ne__(self, other):
+        """Return standard not equal comparator."""
         return not self == other

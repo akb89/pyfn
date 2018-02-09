@@ -48,6 +48,7 @@ class Target():
 
     @classmethod
     def from_fn_data(cls, fn_labels, text, pnw_labels_by_indexes, lexunit):
+        """Return Target instance generated from FrameNet data."""
         indexes = _extract_target_indexes(fn_labels)
         string = _extract_target_string(text, indexes)
         pos_tags = _extract_target_pos_tags(indexes, pnw_labels_by_indexes)

@@ -3,6 +3,7 @@
 __all__ = ['Frame']
 
 
+# pylint: disable=R0903
 class Frame():
     """FrameNet Frame class."""
 
@@ -23,4 +24,10 @@ class Frame():
 
     @_id.setter
     def _id(self, _id):
+        """Set the frame _id."""
         self.__id = _id
+
+    @name.setter
+    def name(self, name):
+        """Set the frame name."""
+        self._name = name

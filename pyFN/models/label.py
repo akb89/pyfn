@@ -3,9 +3,11 @@
 __all__ = ['Label']
 
 
+# pylint: disable=R0902
 class Label():
     """FrameNet Label class."""
 
+    # pylint: disable=R0913
     def __init__(self, name, layer, start=None, end=None, fe_id=None,
                  itype=None, fg_color=None, bg_color=None):
         """Constructor."""
@@ -40,7 +42,7 @@ class Label():
 
     @property
     def itype(self):
-        """Return the label itype (if set)."""
+        """Return the label instantiation type (if set)."""
         return self._itype
 
     @property
@@ -82,12 +84,18 @@ class Label():
     def bg_color(self, bg_color):
         self._bg_color = bg_color
 
-    # def __str__(self):
-    #     return '{}#{}#{}#{}'.format(self.name, self.start, self.end, self.layer.name)
     def __str__(self):
+        """Return stringified label.
+
+        Return {name}#{layer.name}#{itype} if label is a null
+        instantiation (itype).
+        Return {name}#{layer.name}#{start}#{end} otherwise.
+        """
         if self.itype:
             return '{}#{}#{}'.format(self.name, self.layer.name, self.itype)
-        return '{}#{}#{}#{}'.format(self.name, self.layer.name, self.start, self.end)
+        return '{}#{}#{}#{}'.format(self.name, self.layer.name, self.start,
+                                    self.end)
 
     def __repr__(self):
+        """Return stringified object."""
         return str(self)

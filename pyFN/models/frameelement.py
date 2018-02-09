@@ -19,14 +19,24 @@ class FrameElement():
 
     @property
     def name(self):
+        """Return FrameElement name."""
         return self._name
 
     @property
     def coretype(self):
+        """Return FrameElement core type.
+
+        Core Types include: 'Core', 'Core-Unexpressed', 'Peripheral' or
+        'Extra-Thematic'. See FrameNet book for details.
+        """
         return self._coretype
 
     @property
     def itype(self):
+        """Return FrameElement instantiation type.
+
+        itypes include 'INI', 'CNI' and 'DNI'. Seee FrameNet book for details.
+        """
         return self._itype
 
     @coretype.setter

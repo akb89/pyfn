@@ -130,7 +130,7 @@ function-name-hint=(([a-z][a-z0-9_]{2,30})|(_[a-z0-9_]*))$
 function-rgx=(([a-z][a-z0-9_]{2,30})|(_[a-z0-9_]*))$
 
 # Good variable names which should always be accepted, separated by a comma
-good-names=logger
+good-names=logger,fe
 
 # Include a hint for the correct naming format with invalid-name
 include-naming-hint=yes
@@ -224,10 +224,10 @@ notes=FIXME,XXX,TODO
 [SIMILARITIES]
 
 # Ignore comments when computing similarities.
-ignore-comments=yes
+ignore-comments=no
 
 # Ignore docstrings when computing similarities.
-ignore-docstrings=yes
+ignore-docstrings=no
 
 # Ignore imports when computing similarities.
 ignore-imports=no

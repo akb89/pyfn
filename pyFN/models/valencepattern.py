@@ -20,6 +20,7 @@ class ValencePattern():
 
     @property
     def valence_units(self):
+        """Return a list of valence units."""
         return self._valence_units
 
     @property

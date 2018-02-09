@@ -10,7 +10,7 @@ from pyfn.models.layer import Layer
 from pyfn.models.lexunit import LexUnit
 from pyfn.models.sentence import Sentence
 
-__all__ = ['extract_fn_annosets_from_sentence_tag']
+__all__ = ['extract_fn_annosets']
 
 logger = logging.getLogger(__name__)
 
@@ -177,15 +177,21 @@ def _extract_annoset_tags(sentence_tag):
     return annoset_tags
 
 
-def extract_fn_annosets_from_sentence_tag(sentence_tag, xml_schema_type,
-                                          document=None, lexunit=None,
-                                          fe_dict=None):
-    """Return a List<AnnotationSet> extracted from a single <sentence> tag."""
+def extract_fn_annosets(sentence_tag, xml_schema_type,
+                        document=None, lexunit=None,
+                        fe_dict=None, flatten=False):
+    """Return a [AnnotationSet,...,] extracted from a single <sentence> tag."""
     annoset_tags = _extract_annoset_tags(sentence_tag)
     if not annoset_tags:
         return []
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
     pnwb_labels = _extract_pnwb_labels(annoset_tags)
     sentence = _extract_sentence(sentence_tag, pnwb_labels, document=document)
-    return _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
-                                lexunit=lexunit, fe_dict=fe_dict)
+    annosets = _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
+                                    lexunit=lexunit, fe_dict=fe_dict)
+    if annosets:
+        if not flatten:
+            yield annosets
+        if flatten:
+            for annoset in annosets:
+                yield annoset

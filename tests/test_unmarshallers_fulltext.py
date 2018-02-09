@@ -21,7 +21,7 @@ def test_fulltext_annoset():
     assert annoset._id == 6557242
     assert annoset.sentence._id == 4106520
     assert annoset.sentence.text == 'That \'s where you - and Goodwill - come in .'
-    assert len(annoset.fn_labelstore.labels) == 5
+    assert len(annoset.labelstore.labels) == 5
     assert len(annoset.vustore.valence_units) == 2
     assert annoset.valence_pattern.with_fe_name == 'Figure.Sfin.Dep Ground.undefined.undefined'
 

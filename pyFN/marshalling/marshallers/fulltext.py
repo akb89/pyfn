@@ -3,6 +3,6 @@
 __all__ = ['marshall_to_fulltext_xml']
 
 
-def marshall_to_fulltext_xml(annosets_list, output_filepath):
+def marshall_to_fulltext_xml():
     """Marshall a list of AnnotationSets to a FN fulltext XML file."""
     return

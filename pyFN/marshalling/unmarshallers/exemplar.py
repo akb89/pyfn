@@ -34,12 +34,12 @@ def unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
         sentence_tags = subcorpus_tag.findall('fn:sentence',
                                               const.FN_XML_NAMESPACE)
         for sentence_tag in sentence_tags:
-            annosets = fn_unmarshaller.extract_fn_annosets_from_sentence_tag(
+            return fn_unmarshaller.extract_fn_annosets(
                 sentence_tag, xml_schema_type='exemplar', lexunit=lexunit,
                 fe_dict=fe_dict)
-            if annosets:
-                if not flatten:
-                    yield annosets
-                if flatten:
-                    for annoset in annosets:
-                        yield annoset
+            # if annosets:
+            #     if not flatten:
+            #         yield annosets
+            #     if flatten:
+            #         for annoset in annosets:
+            #             yield annoset
