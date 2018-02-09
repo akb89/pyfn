@@ -39,5 +39,5 @@ with open('README.rst','w') as outfile:
 [python-url]:https://github.com/akb89/pyfn/releases/latest
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE.txt
-[req-url]:https://github.com/akb89/pyfn/releases/latest
+[req-url]:https://requires.io/github/akb89/pyfn/requirements/?branch=master
 [req-image]:https://img.shields.io/requires/github/akb89/pyfn.svg?style=flat-square
