@@ -26,10 +26,13 @@ class Layer():
         self._rank = rank
 
     def __hash__(self):
+        """Return hash on Layer name and rank."""
         return hash((self._name, self._rank))
 
     def __eq__(self, other):
+        """Compare name and rank fields of two Layer instances."""
         return self._name == other.name and self._rank == other.rank
 
     def __ne__(self, other):
+        """Return standard not equal comparator."""
         return not self == other
