@@ -4,8 +4,8 @@ python:
   - "3.6"
 
 install:
-  - pip install coveralls
-  - pip install pylint pydocstyle pytest-cov
+  - python setup.py -q install
+  - pip install pylint pydocstyle pytest-cov coveralls
 
 script:
   - python -m pytest --cov=pyfn tests/
