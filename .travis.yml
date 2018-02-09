@@ -5,6 +5,7 @@ python:
 
 install:
   - python setup.py -q install
+  - pip install pydocstyle coveralls
 
 script:
   - python setup.py test
