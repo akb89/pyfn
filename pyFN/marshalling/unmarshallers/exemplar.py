@@ -2,10 +2,10 @@
 
 import logging
 import xml.etree.ElementTree as element_tree
-import pyFN.utils.constants as const
-import pyFN.marshalling.unmarshallers.framenet as fn_unmarshaller
-from pyFN.models.frame import Frame
-from pyFN.models.lexunit import LexUnit
+import pyfn.utils.constants as const
+import pyfn.marshalling.unmarshallers.framenet as fn_unmarshaller
+from pyfn.models.frame import Frame
+from pyfn.models.lexunit import LexUnit
 
 __all__ = ['unmarshall_exemplar_xml']
 

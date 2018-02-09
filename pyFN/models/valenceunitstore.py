@@ -4,8 +4,8 @@ from collections import defaultdict
 
 import logging
 
-from pyFN.models.frameelement import FrameElement
-from pyFN.models.valenceunit import ValenceUnit
+from pyfn.models.frameelement import FrameElement
+from pyfn.models.valenceunit import ValenceUnit
 
 __all__ = ['ValenceUnitStore']
 

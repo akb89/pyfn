@@ -1,31 +1,31 @@
 #!/usr/bin/env python3
-"""pyFN setup.py.
+"""pyfn setup.py.
 
-This file details modalities for packaging the pyFN application.
+This file details modalities for packaging the pyfn application.
 """
 
 from setuptools import setup
 
 setup(
-    name='pyFN',
+    name='pyfn',
     description='A python module to process FrameNet XML data',
     author='Alexandre Kabbach',
     author_email='akb@3azouz.net',
     version='0.1.0',
-    url='https://github.com/akb89/pyFN',
-    download_url='https://github.com/akb89/pyFN/archive/0.1.0.tar.gz',
+    url='https://github.com/akb89/pyfn',
+    download_url='https://github.com/akb89/pyfn/archive/0.1.0.tar.gz',
     license='MIT',
     keywords=['framenet', 'xml', 'marshalling', 'unmarshalling'],
     platforms=['any'],
-    packages=['pyFN',
-              'pyFN.extraction',
-              'pyFN.extraction.extractors',
-              'pyFN.loading',
-              'pyFN.marshalling',
-              'pyFN.marshalling.marshallers',
-              'pyFN.marshalling.unmarshallers',
-              'pyFN.models',
-              'pyFN.utils'],
+    packages=['pyfn',
+              'pyfn.extraction',
+              'pyfn.extraction.extractors',
+              'pyfn.loading',
+              'pyfn.marshalling',
+              'pyfn.marshalling.marshallers',
+              'pyfn.marshalling.unmarshallers',
+              'pyfn.models',
+              'pyfn.utils'],
     install_requires=['PyYAML==3.12', 'mmh3==2.4', 'lxml==3.7.3'],
     setup_requires=['pytest-runner==3.0', 'pytest-pylint==0.8.0'],
     tests_require=['pytest==3.4.0', 'pylint==1.8.2'],

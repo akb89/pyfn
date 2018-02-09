@@ -1,7 +1,7 @@
 """Custom immutable objects."""
 
-from pyFN.exceptions.method import InvalidMethodError
-from pyFN.exceptions.parameter import InvalidParameterError
+from pyfn.exceptions.method import InvalidMethodError
+from pyfn.exceptions.parameter import InvalidParameterError
 
 __all__ = ['FrozenDict', 'ImmutableConfig']
 

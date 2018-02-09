@@ -3,9 +3,9 @@
 import itertools
 import logging
 
-import pyFN.utils.xml as xml_utils
-import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
-import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
+import pyfn.utils.xml as xml_utils
+import pyfn.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
+import pyfn.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
 
 __all__ = ['extract_annosets']
@@ -31,7 +31,7 @@ def _extract_ft_annosets(ft_filepaths, fe_dict=None, flatten=False):
 
 def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
                      fe_dict=None, flatten=False):
-    """Return a list of pyFN.AnnotationSet extracted from splits paths.
+    """Return a list of pyfn.AnnotationSet extracted from splits paths.
 
     The splits directory should contain two subdirectories name 'fulltext'
     and 'lu'.
@@ -39,7 +39,7 @@ def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
     1 fulltext or exemplar XML file if flatten=False
     Returns a generator over AnnotationSet (a single list) if flatten=True
     """
-    logger.info('Extracting pyFN.AnnotationSet items from {}'
+    logger.info('Extracting pyfn.AnnotationSet items from {}'
                 .format(splits_dirpath))
     ft_annosets = []
     ex_annosets = []

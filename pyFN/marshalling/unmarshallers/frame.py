@@ -1,6 +1,6 @@
 """Unmarshall frame.xml file."""
 
-from pyFN.models.frameelement import FrameElement
+from pyfn.models.frameelement import FrameElement
 
 __all__ = ['unmarshall_frame_xml']
 

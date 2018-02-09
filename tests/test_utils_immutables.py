@@ -2,11 +2,11 @@
 
 import pytest
 
-from pyFN.utils.immutables import FrozenDict
-from pyFN.utils.immutables import ImmutableConfig
+from pyfn.utils.immutables import FrozenDict
+from pyfn.utils.immutables import ImmutableConfig
 
-from pyFN.exceptions.method import InvalidMethodError
-from pyFN.exceptions.parameter import InvalidParameterError
+from pyfn.exceptions.method import InvalidMethodError
+from pyfn.exceptions.parameter import InvalidParameterError
 
 
 def test_frozen_dict():

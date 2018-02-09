@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
+import pyfn.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 
 
 LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',

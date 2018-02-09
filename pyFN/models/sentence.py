@@ -1,6 +1,6 @@
 """FrameNet Sentence class."""
 
-from pyFN.models.labelstore import LabelStore
+from pyfn.models.labelstore import LabelStore
 
 __all__ = ['Sentence']
 

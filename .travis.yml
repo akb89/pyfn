@@ -8,10 +8,10 @@ install:
   - pip install pylint pydocstyle pycodestyle pytest-cov
 
 script:
-  - python -m pytest --cov=pyFN tests/
-  - pydocstyle pyFN
-  - pycodestyle pyFN
-  - pylint --rcfile .pylintrc pyFN
+  - python -m pytest --cov=pyfn tests/
+  - pydocstyle pyfn
+  - pycodestyle pyfn
+  - pylint --rcfile .pylintrc pyfn
 
 after_success:
   - coveralls

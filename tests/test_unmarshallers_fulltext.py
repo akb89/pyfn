@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
+import pyfn.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
 
 FULLTEXT_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',

@@ -1,26 +1,26 @@
-"""Welcome to pyFN.
+"""Welcome to pyfn.
 
-pyFN can be used to process FrameNet XML data.
+pyfn can be used to process FrameNet XML data.
 """
 
 # import os
 # import logging
 # import logging.config
 #
-# import pyFN.extraction.extractors.framenet as framenet_extractor
-# import pyFN.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
-# import pyFN.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
-# import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
-# import pyFN.loading.loader as loader
-# import pyFN.utils.filter as filter_utils
-# import pyFN.utils.config as config_utils
-# from pyFN.models.annotationset import AnnotationSet
-# from pyFN.models.frame import Frame
-# from pyFN.models.labelstore import LabelStore
-# from pyFN.models.lexunit import LexUnit
-# from pyFN.models.sentence import Sentence
-# from pyFN.models.target import Target
-# from pyFN.models.valencepattern import ValencePattern
+# import pyfn.extraction.extractors.framenet as framenet_extractor
+# import pyfn.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
+# import pyfn.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
+# import pyfn.marshalling.unmarshallers.semeval as semeval_unmarshaller
+# import pyfn.loading.loader as loader
+# import pyfn.utils.filter as filter_utils
+# import pyfn.utils.config as config_utils
+# from pyfn.models.annotationset import AnnotationSet
+# from pyfn.models.frame import Frame
+# from pyfn.models.labelstore import LabelStore
+# from pyfn.models.lexunit import LexUnit
+# from pyfn.models.sentence import Sentence
+# from pyfn.models.target import Target
+# from pyfn.models.valencepattern import ValencePattern
 
 # __all__ = ['unmarshall_fulltext_xml', 'unmarshall_exemplar_xml',
 #            'unmarshall_semeval07_xml', 'AnnotationSet', 'Frame', 'LabelStore',

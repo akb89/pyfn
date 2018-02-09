@@ -1,8 +1,8 @@
 """Testing sorting of ValenceUnit objects."""
 
-import pyFN.models.valencepattern as valencepattern
-from pyFN.models.frameelement import FrameElement
-from pyFN.models.valenceunit import ValenceUnit
+import pyfn.models.valencepattern as valencepattern
+from pyfn.models.frameelement import FrameElement
+from pyfn.models.valenceunit import ValenceUnit
 
 def test_sorted_valence_units():
     fe1 = FrameElement(_id=1, name='A', coretype='Core')

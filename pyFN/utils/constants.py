@@ -1,4 +1,4 @@
-"""Constants used by pyFN."""
+"""Constants used by pyfn."""
 
 import os
 

@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.marshalling.unmarshallers.semeval as semeval_unmarshaller
+import pyfn.marshalling.unmarshallers.semeval as semeval_unmarshaller
 
 
 SEMEVAL_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources', 'semeval.xml')

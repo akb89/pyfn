@@ -99,6 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
-pyFNtest.py
+pyfntest.py
 debug.py
 .pytest_*

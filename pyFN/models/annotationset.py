@@ -1,9 +1,9 @@
 """(Enriched) FrameNet AnnotationSet object class."""
 
-from pyFN.models.labelstore import LabelStore
-from pyFN.models.target import Target
-from pyFN.models.valenceunitstore import ValenceUnitStore
-from pyFN.models.valencepattern import ValencePattern
+from pyfn.models.labelstore import LabelStore
+from pyfn.models.target import Target
+from pyfn.models.valenceunitstore import ValenceUnitStore
+from pyfn.models.valencepattern import ValencePattern
 
 __all__ = ['AnnotationSet']
 

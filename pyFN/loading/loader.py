@@ -4,9 +4,9 @@ import os
 import pickle
 import logging
 import mmh3
-import pyFN.marshalling.unmarshallers.frame as unmarshaller
-import pyFN.utils.constants as const
-import pyFN.utils.xml as xml_utils
+import pyfn.marshalling.unmarshallers.frame as unmarshaller
+import pyfn.utils.constants as const
+import pyfn.utils.xml as xml_utils
 
 __all__ = ['load_fe_dict']
 

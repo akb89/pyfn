@@ -2,11 +2,11 @@
 
 import logging
 import xml.etree.ElementTree as element_tree
-import pyFN.utils.constants as const
-import pyFN.marshalling.unmarshallers.framenet as fn_unmarshaller
-from pyFN.models.corpus import Corpus
-from pyFN.models.document import Document
-from pyFN.exceptions.xml import XMLProcessingError
+import pyfn.utils.constants as const
+import pyfn.marshalling.unmarshallers.framenet as fn_unmarshaller
+from pyfn.models.corpus import Corpus
+from pyfn.models.document import Document
+from pyfn.exceptions.xml import XMLProcessingError
 
 __all__ = ['unmarshall_fulltext_xml']
 

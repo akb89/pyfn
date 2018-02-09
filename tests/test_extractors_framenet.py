@@ -2,7 +2,7 @@
 
 import os
 
-import pyFN.extraction.extractors.framenet as fn_extractor
+import pyfn.extraction.extractors.framenet as fn_extractor
 
 
 SPLITS_DIRPATH = os.path.join(os.path.dirname(__file__), 'resources',

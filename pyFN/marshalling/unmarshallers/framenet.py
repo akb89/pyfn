@@ -2,13 +2,13 @@
 
 import logging
 
-import pyFN.utils.constants as const
-from pyFN.models.annotationset import AnnotationSet
-from pyFN.models.frame import Frame
-from pyFN.models.label import Label
-from pyFN.models.layer import Layer
-from pyFN.models.lexunit import LexUnit
-from pyFN.models.sentence import Sentence
+import pyfn.utils.constants as const
+from pyfn.models.annotationset import AnnotationSet
+from pyfn.models.frame import Frame
+from pyfn.models.label import Label
+from pyfn.models.layer import Layer
+from pyfn.models.lexunit import LexUnit
+from pyfn.models.sentence import Sentence
 
 __all__ = ['extract_fn_annosets_from_sentence_tag']
 
