@@ -28,7 +28,8 @@ setup(
               'pyfn.utils'],
     install_requires=['PyYAML==3.12', 'mmh3==2.5.1', 'lxml==4.1.1'],
     setup_requires=['pytest-runner==3.0', 'pytest-pylint==0.8.0'],
-    tests_require=['pytest==3.4.0', 'pylint==1.8.2'],
+    tests_require=['pytest==3.4.0', 'pylint==1.8.2', 'coveralls==1.2.0',
+                   'pydocstyle==2.1.1'],
     classifiers=['Development Status :: 2 - Pre-Alpha',
                  'Environment :: Web Environment',
                  'Intended Audience :: Developers',
@@ -42,4 +43,5 @@ setup(
                  'Topic :: Scientific/Engineering :: Artificial Intelligence',
                  'Topic :: Software Development :: Libraries :: Python Modules',
                  'Topic :: Text Processing :: Linguistic'],
+    zip_safe=True,
 )
