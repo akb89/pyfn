@@ -10,7 +10,50 @@
 
 Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
-## HowTo &ndash;
+## HowTo
+### Convert FrameNet XML splits to BIOS tagging format
+Splits directory should follow:
+```
+.
+|-- fndata-1.x
+|   |-- train
+|   |   |-- fulltext
+|   |   |   |-- ABC.xml
+|   |   |   |-- DEF.xml
+|   |   |   |-- ...
+|   |   |-- lu
+|   |   |   |-- lu$%*.xml
+|   |   |   |-- lu%*$.xml
+|   |   |   |-- ...
+|   |-- dev
+|   |   |-- fulltext
+|   |   |   |-- HIJ.xml
+|   |   |   |-- KLM.xml
+|   |   |   |-- ...
+|   |   |-- lu
+|   |   |   |-- lu%$*.xml
+|   |   |   |-- lu%$*.xml
+|   |   |   |-- ...
+|   |-- test
+|   |   |-- fulltext
+|   |   |   |-- NOP.xml
+|   |   |   |-- QRS.xml
+|   |   |   |-- ...
+|   |   |-- lu
+|   |   |   |-- lu*$%.xml
+|   |   |   |-- lu*%$.xml
+|   |   |   |-- ...
+```
+
+```bash
+pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/bios/splits/dir
+```
+The script will then generate n-files under the `/abs/path/to/bios/splits/dir` directory, depending on your splits configuration (train, dev, test):
+- train.bios
+- dev.bios
+- test.bios
+
+## PyPI
 
 https://tom-christie.github.io/articles/pypi/
 
