@@ -151,6 +151,7 @@ def _extract_pnwb_labels(annoset_tags):
         labels = _extract_labels(layer_tags)
         if labels:
             all_labels.extend(labels)
+        # TODO: replace by a list of valid layer tag name set globally
         for layer_tag in layer_tags:
             if layer_tag.get('name') == 'PENN'\
              or layer_tag.get('name') == 'NER'\
