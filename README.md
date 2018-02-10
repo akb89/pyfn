@@ -35,6 +35,47 @@ The script will then generate n-files under the `/abs/path/to/bios/splits/dir` d
 - dev.bios
 - test.bios
 
+## Notes on preprocessing
+We filtered out (in train splits) annotationsets which contained overlapping
+labels as this is incompatible with BIOS tagging. Ex:
+```xml
+<annotationSet cDate="10/26/2007 01:19:33 PDT Fri" luID="14604" luName="clear.v" frameID="506" frameName="Grant_permission" status="MANUAL" ID="2017100">
+    <layer rank="1" name="Target">
+        <label cBy="361" end="10" start="5" name="Target"/>
+    </layer>
+    <layer rank="1" name="FE">
+        <label cBy="361" feID="4076" bgColor="FF0000" fgColor="FFFFFF" end="3" start="0" name="Grantor"/>
+        <label cBy="361" feID="4078" bgColor="2E8B57" fgColor="FFFFFF" end="53" start="12" name="Action"/>
+    </layer>
+    <layer rank="1" name="GF">
+        <label end="3" start="0" name="Ext"/>
+        <label end="53" start="12" name="Obj"/>
+    </layer>
+    <layer rank="1" name="PT">
+        <label end="3" start="0" name="NP"/>
+        <label end="53" start="12" name="NP"/>
+    </layer>
+    <layer rank="1" name="Other"/>
+    <layer rank="1" name="Sent"/>
+    <layer rank="1" name="Verb"/>
+    <layer rank="2" name="FE">
+        <label cBy="361" feID="4077" bgColor="0000FF" fgColor="FFFFFF" end="53" start="21" name="Grantee"/>
+    </layer>
+</annotationSet>
+```
+
+```
+1	Iraq	_	Iraq	NP	NNP	1519	_	_	_	_	_	_	_	S-Grantor
+2	clears	_	clear	VVZ	NNS	1519	_	_	_	_	_	clear.v	Grant_permission	O
+3	visit	_	visit	nn	NN	1519	_	_	_	_	_	_	_	B-Action
+4	by	_	by	in	IN	1519	_	_	_	_	_	_	_	I-Action
+5	Ohio	_	Ohio	NP	NNP	1519	_	_	_	_	_	_	_	I-Action
+6	official	_	official	nn	NN	1519	_	_	_	_	_	_	_	I-Action
+7	By	_	By	in	IN	1519	_	_	_	_	_	_	_	I-Action
+8	Scott	_	Scott	NP	NNP	1519	_	_	_	_	_	_	_	I-Action
+9	Montgomery	_	Montgomery	NP	NNP	1519	_	_	_	_	_	_	_	I-Action
+```
+
 ## PyPI
 
 https://tom-christie.github.io/articles/pypi/
