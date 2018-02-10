@@ -18,31 +18,13 @@ Splits directory should follow:
 |-- fndata-1.x
 |   |-- train
 |   |   |-- fulltext
-|   |   |   |-- ABC.xml
-|   |   |   |-- DEF.xml
-|   |   |   |-- ...
 |   |   |-- lu
-|   |   |   |-- lu$%*.xml
-|   |   |   |-- lu%*$.xml
-|   |   |   |-- ...
 |   |-- dev
 |   |   |-- fulltext
-|   |   |   |-- HIJ.xml
-|   |   |   |-- KLM.xml
-|   |   |   |-- ...
 |   |   |-- lu
-|   |   |   |-- lu%$*.xml
-|   |   |   |-- lu%$*.xml
-|   |   |   |-- ...
 |   |-- test
 |   |   |-- fulltext
-|   |   |   |-- NOP.xml
-|   |   |   |-- QRS.xml
-|   |   |   |-- ...
 |   |   |-- lu
-|   |   |   |-- lu*$%.xml
-|   |   |   |-- lu*%$.xml
-|   |   |   |-- ...
 ```
 
 ```bash

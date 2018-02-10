@@ -29,7 +29,15 @@ def _convert(args):
         # train/dev/test dir (other keywords not allowed) and each dir should
         # contain either fulltext, either lu dir, nothing else
         with_exemplars = args.with_exemplars == 'true'
-        fn_splits_dict = _get_fn_splits_dict(args.source_path, with_exemplars)
+        annosets_dict = _filter_splits_dict(
+            _get_annosets_dict(args.source_path, with_exemplars))
+    if args.target_format == 'bios':
+        # TODO: if the splits_dict contains more than one item but
+        # the target_path is a filepath and not a dirpath, change the
+        # target_path to the parent directory_path
+        _convert_to_bios(annosets_dict, args.target_path)
+    if args.target_format == 'semeval':
+        pass
 
 
 def main():
