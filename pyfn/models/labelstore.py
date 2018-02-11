@@ -46,9 +46,11 @@ class LabelStore():
 
     @property
     def labels_by_layer(self):
-        """Return a dict of Label objects, excluding PENN, NER and WSL labels.
+        """Return a dict of Label objects.
 
         Keys are Layer objects and values are lists of Label objects
+        Labelstore in annoset exclude PENN, NER and WSL labels.
+        Thoses labels are included in the pnw_labelstore of the Sentence instances
         """
         if not self._labels:
             return {}

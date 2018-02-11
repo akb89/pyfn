@@ -40,9 +40,11 @@ def _create_label(label_tag, layer_tag):
 
 
 def _extract_label_tags(layer_tag):
+    # For FrameNet XML format
     label_tags = layer_tag.findall('fn:label', const.FN_XML_NAMESPACE)
     if label_tags:
         return label_tags
+    # For SEMEVAL XML format
     labels_tags = layer_tag.findall('labels')
     if not labels_tags:
         return []
@@ -53,24 +55,26 @@ def _extract_label_tags(layer_tag):
     return label_tags
 
 
-def _extract_labels(layer_tags):
+def _extract_labels(layer_tags, layer_names):
     if not layer_tags:
         return []
     labels = []
     for layer_tag in layer_tags:
-        label_tags = _extract_label_tags(layer_tag)
-        if not label_tags:
-            continue
-        for label_tag in label_tags:
-            labels.append(_create_label(label_tag, layer_tag))
+        if layer_tag.get('name') in layer_names:
+            label_tags = _extract_label_tags(layer_tag)
+            if not label_tags:
+                continue
+            for label_tag in label_tags:
+                labels.append(_create_label(label_tag, layer_tag))
     return labels
 
 
-def _extract_fn_annoset(annoset_tag, sentence, xml_schema_type, lexunit=None,
-                        fe_dict=None):
+def _extract_fn_annoset(annoset_tag, sentence, xml_schema_type,
+                        annoset_layer_names, lexunit=None, fe_dict=None):
     _id = int(annoset_tag.get('ID'))
     logger.debug('Processing annotationSet #{}'.format(_id))
-    labels = _extract_labels(_extract_layer_tags(annoset_tag))
+    labels = _extract_labels(_extract_layer_tags(annoset_tag),
+                             annoset_layer_names)
     if lexunit is None:  # processing a fulltext file
         frame = Frame(annoset_tag.get('frameName'))
         if annoset_tag.get('frameID'):
@@ -87,9 +91,11 @@ def _extract_fn_annoset(annoset_tag, sentence, xml_schema_type, lexunit=None,
 
 
 def _extract_layer_tags(annoset_tag):
+    # For FrameNet XML format
     layer_tags = annoset_tag.findall('fn:layer', const.FN_XML_NAMESPACE)
     if layer_tags:
         return layer_tags
+    # For SEMEVAL XML format
     layers_tags = annoset_tag.findall('layers')
     if not layers_tags:
         return []
@@ -114,9 +120,11 @@ def _is_fn_annoset(annoset_tag):
     return _has_fe_layer(annoset_tag)
 
 
-def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type, lexunit=None,
+def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
+                         annoset_layer_names, lexunit=None,
                          fe_dict=None):
     return [_extract_fn_annoset(annoset_tag, sentence, xml_schema_type,
+                                annoset_layer_names,
                                 lexunit=lexunit, fe_dict=fe_dict)
             for annoset_tag in annoset_tags
             if _is_fn_annoset(annoset_tag)]
@@ -140,34 +148,21 @@ def _extract_sentence(sentence_tag, pnwb_labels, document=None):
     return sentence
 
 
-def _extract_pnwb_labels(annoset_tags):
+def _extract_sent_labels(annoset_tags, layer_names):
     all_labels = []
-    if not annoset_tags:
-        return all_labels
     for annoset_tag in annoset_tags:
         layer_tags = _extract_layer_tags(annoset_tag)
-        if not layer_tags:
-            return all_labels
-        labels = _extract_labels(layer_tags)
-        if labels:
-            all_labels.extend(labels)
-        # TODO: replace by a list of valid layer tag name set globally
-        for layer_tag in layer_tags:
-            if layer_tag.get('name') == 'PENN'\
-             or layer_tag.get('name') == 'NER'\
-             or layer_tag.get('name') == 'WSL'\
-             or layer_tag.get('name') == 'BNC':
-                labels = _extract_labels(layer_tag)
-                if labels:
-                    all_labels.extend(labels)
+        all_labels.extend(_extract_labels(layer_tags, layer_names))
     return all_labels
 
 
 def _extract_annoset_tags(sentence_tag):
+    # For FrameNet XML format
     annoset_tags = sentence_tag.findall('fn:annotationSet',
                                         const.FN_XML_NAMESPACE)
     if annoset_tags:
         return annoset_tags
+    # For SEMEVAL XML format
     annosets_tags = sentence_tag.findall('annotationSets')
     if not annosets_tags:
         return []
@@ -186,7 +181,8 @@ def extract_fn_annosets(sentence_tag, xml_schema_type,
     if not annoset_tags:
         return []
     logger.debug('Processing {} annotationSet tags'.format(len(annoset_tags)))
-    pnwb_labels = _extract_pnwb_labels(annoset_tags)
+    pnwb_labels = _extract_sent_labels(annoset_tags, const.SENT_LAYERS)
     sentence = _extract_sentence(sentence_tag, pnwb_labels, document=document)
     return _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
+                                const.ANNO_LAYERS,
                                 lexunit=lexunit, fe_dict=fe_dict)

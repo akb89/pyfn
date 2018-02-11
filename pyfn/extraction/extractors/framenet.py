@@ -27,7 +27,8 @@ def _filter_annosets_dict(annosets_dict):
         dev_annosets, _dev_annosets = itertools.tee(filtered_dev_annosets)
         filtered_annosets_dict['dev'] = dev_annosets
         filtered_annosets_dict['train'] = f_utils.filter_annosets(
-            annosets_dict['train'], itertools.chain(_dev_annosets, __test_annosets))
+            annosets_dict['train'], itertools.chain(_dev_annosets,
+                                                    __test_annosets))
     else:
         filtered_annosets_dict['train'] = f_utils.filter_annosets(
             annosets_dict['train'], _test_annosets)

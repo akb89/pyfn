@@ -91,6 +91,45 @@ in test:
 
 ```
 
+ERRORS in open-sesame:
+Making multi-token jump like the `having` in:
+`...Iran admitted to HAVING imported...`:
+```
+1	Additionally	_	Additionally	rb	RB	2047	_	_	_	_	_	_	_	O
+2	,	_	,	,	,	2047	_	_	_	_	_	_	_	O
+3	Iran	_	Iran	NP	NNP	2047	_	_	_	_	_	_	_	O
+4	admitted	_	admit	VVD	VBD	2047	_	_	_	_	_	_	_	O
+5	to	_	to	to	TO	2047	_	_	_	_	_	_	_	O
+6	imported	_	import	VVN	VBN	2047	_	_	_	_	_	_	_	O
+7	from	_	from	in	IN	2047	_	_	_	_	_	_	_	O
+8	China	_	China	NP	NNP	2047	_	_	_	_	_	_	_	O
+9	1.8	_	1.8	cd	CD	2047	_	_	_	_	_	_	_	S-Count
+10	tons	_	ton	nns	NNS	2047	_	_	_	_	_	ton.n	Measure_mass	S-Unit
+11	of	_	of	in	IN	2047	_	_	_	_	_	_	_	B-Stuff
+12	nuclear	_	nuclear	jj	JJ	2047	_	_	_	_	_	_	_	I-Stuff
+13	material	_	material	nn	NN	2047	_	_	_	_	_	_	_	I-Stuff
+14	(	_	(	(	:	2047	_	_	_	_	_	_	_	I-Stuff
+15	UF6	_	UF6	NP	NNP	2047	_	_	_	_	_	_	_	I-Stuff
+16	,	_	,	,	,	2047	_	_	_	_	_	_	_	I-Stuff
+17	UF4	_	UF4	NP	NNP	2047	_	_	_	_	_	_	_	I-Stuff
+18	and	_	and	cc	CC	2047	_	_	_	_	_	_	_	I-Stuff
+19	UO2	_	UO2	jj	NNP	2047	_	_	_	_	_	_	_	I-Stuff
+20	)	_	)	)	NNP	2047	_	_	_	_	_	_	_	I-Stuff
+21	used	_	use	VVN	VBD	2047	_	_	_	_	_	_	_	O
+22	to	_	to	to	TO	2047	_	_	_	_	_	_	_	O
+23	manufacture	_	manufacture	VV	VB	2047	_	_	_	_	_	_	_	O
+24	uranium	_	uranium	nn	NN	2047	_	_	_	_	_	_	_	O
+25	metal	_	metal	nn	NN	2047	_	_	_	_	_	_	_	O
+26	,	_	,	,	,	2047	_	_	_	_	_	_	_	O
+27	which	_	which	wdt	WDT	2047	_	_	_	_	_	_	_	O
+28	is	_	be	VBZ	VBZ	2047	_	_	_	_	_	_	_	O
+29	essential	_	essential	jj	JJ	2047	_	_	_	_	_	_	_	O
+30	in	_	in	in	IN	2047	_	_	_	_	_	_	_	O
+31	weapons	_	weapon	nns	NNS	2047	_	_	_	_	_	_	_	O
+32	production	_	production	nn	NN	2047	_	_	_	_	_	_	_	O
+33	.	_	.	sent	.	2047	_	_	_	_	_	_	_	O
+```
+
 ## Notes on preprocessing
 We filtered out (in train splits) annotationsets which contained overlapping
 labels as this is incompatible with BIOS tagging. Ex:
