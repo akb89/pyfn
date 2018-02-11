@@ -1,11 +1,11 @@
 """Extract AnnotationSet objects from FrameNet XML files."""
 
 import os
-import re
 import itertools
 import logging
 
 import pyfn.utils.xml as xml_utils
+import pyfn.utils.filter as f_utils
 import pyfn.marshalling.unmarshallers.exemplar as exemplar_unmarshaller
 import pyfn.marshalling.unmarshallers.fulltext as fulltext_unmarshaller
 
@@ -15,41 +15,22 @@ __all__ = ['extract_annosets', 'get_annosets_dict']
 logger = logging.getLogger(__name__)
 
 
-def _get_text_hash(text):
-    return re.sub(r'\s+', '', text.strip())
-
-
-def _filter_annosets(annosets, filtered_sent_hash_set):
-    for annoset in annosets:
-        text_hash = _get_text_hash(annoset.sentence.text)
-        if text_hash not in filtered_sent_hash_set:
-            yield annoset
-        else:
-            print('Found hash: {}'.format(text_hash))
-
-
-def _get_sent_hash_set(annosets):
-    return {_get_text_hash(annoset.sentence.text) for annoset in
-            annosets}
-
-
 def _filter_annosets_dict(annosets_dict):
     # At least test and train, dev is optional
     filtered_annosets_dict = {}
-    test_annosets, _test_annosets = itertools.tee(annosets_dict['test'])
-    test_sent_hash_set = _get_sent_hash_set(_test_annosets)
+    test_annosets, _test_annosets, __test_annosets = itertools.tee(
+        annosets_dict['test'], 3)
     filtered_annosets_dict['test'] = test_annosets
     if annosets_dict['dev']:
-        dev_annosets, _dev_annosets = itertools.tee(annosets_dict['dev'])
-        filtered_annosets_dict['dev'] = _filter_annosets(
-            dev_annosets, test_sent_hash_set)
-        dev_sent_hash_set = set(_get_sent_hash_set(_dev_annosets)).union(
-            test_sent_hash_set)
-        filtered_annosets_dict['train'] = _filter_annosets(
-            annosets_dict['train'], dev_sent_hash_set)
+        filtered_dev_annosets = f_utils.filter_annosets(
+            annosets_dict['dev'], _test_annosets)
+        dev_annosets, _dev_annosets = itertools.tee(filtered_dev_annosets)
+        filtered_annosets_dict['dev'] = dev_annosets
+        filtered_annosets_dict['train'] = f_utils.filter_annosets(
+            annosets_dict['train'], itertools.chain(_dev_annosets, __test_annosets))
     else:
-        filtered_annosets_dict['train'] = _filter_annosets(
-            annosets_dict['train'], test_sent_hash_set)
+        filtered_annosets_dict['train'] = f_utils.filter_annosets(
+            annosets_dict['train'], _test_annosets)
     return filtered_annosets_dict
 
 

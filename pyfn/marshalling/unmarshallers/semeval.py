@@ -10,7 +10,7 @@ __all__ = ['unmarshall_semeval07_xml']
 logger = logging.getLogger(__name__)
 
 
-def unmarshall_semeval07_xml(xml_file_path, flatten=False):
+def unmarshall_semeval07_xml(xml_filepath, flatten=False):
     """Unmarshall a SemEval 2007 FrameNet XML file from file path.
 
     Return a generator of AnnotationSet instances extracted from the
@@ -23,9 +23,9 @@ def unmarshall_semeval07_xml(xml_file_path, flatten=False):
 
     """
     logger.info('Unmarshalling SemEval FrameNet XML file: {}'
-                .format(xml_file_path))
+                .format(xml_filepath))
     # pylint: disable=R1702
-    for documents_tag in element_tree.parse(xml_file_path).getroot().findall(
+    for documents_tag in element_tree.parse(xml_filepath).getroot().findall(
             'documents'):
         for document_tag in documents_tag.findall('document'):
             for paragraphs_tag in document_tag.findall('paragraphs'):
