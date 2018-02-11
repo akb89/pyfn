@@ -49,7 +49,8 @@ def marshall_annosets_dict(annosets_dict, target_dirpath):
         with open(output_filepath, 'w', encoding='utf-8') as output_stream:
             for annoset in annosets:
                 if _is_invalid_annoset(annoset):
-                    logger.warning(
+                    # TODO: add stats
+                    logger.debug(
                         'Invalid AnnotationSet #{}. No FE or multiple FE '
                         'labels specified on the same item'.format(
                             annoset._id))

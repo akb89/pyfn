@@ -35,6 +35,62 @@ The script will then generate n-files under the `/abs/path/to/bios/splits/dir` d
 - dev.bios
 - test.bios
 
+## Notes on splits
+We implemented additional filtering to make sure train and test data did not
+overlap.
+Example with the sentence:
+```
+Even if Iran possesses these biological agents , it faces a significant challenge in their weaponization and delivery .
+```
+Present in the test set in `KBEval__utd-icsi.xml` and in the train set in `NTI__Iran_Biological.xml`
+Problem is present in open-sesame fulltext mode:
+in train:
+```
+1	Even	_	Even	rb	RB	1551	_	_	_	_	_	_	_	O
+2	if	_	if	in	IN	1551	_	_	_	_	_	_	_	O
+3	Iran	_	Iran	NP	NNP	1551	_	_	_	_	_	_	_	S-Owner
+4	possesses	_	posse	VVZ	NNS	1551	_	_	_	_	_	possess.v	Possession	O
+5	these	_	these	dt	DT	1551	_	_	_	_	_	_	_	B-Possession
+6	biological	_	biological	jj	JJ	1551	_	_	_	_	_	_	_	I-Possession
+7	agents	_	agent	nns	NNS	1551	_	_	_	_	_	_	_	I-Possession
+8	,	_	,	,	,	1551	_	_	_	_	_	_	_	O
+9	it	_	it	PP	PRP	1551	_	_	_	_	_	_	_	O
+10	faces	_	face	VVZ	VBZ	1551	_	_	_	_	_	_	_	O
+11	a	_	a	dt	DT	1551	_	_	_	_	_	_	_	O
+12	significant	_	significant	jj	JJ	1551	_	_	_	_	_	_	_	O
+13	challenge	_	challenge	nn	NN	1551	_	_	_	_	_	_	_	O
+14	in	_	in	in	IN	1551	_	_	_	_	_	_	_	O
+15	their	_	their	PP$	PRP$	1551	_	_	_	_	_	_	_	O
+16	weaponization	_	weaponization	nn	NN	1551	_	_	_	_	_	_	_	O
+17	and	_	and	cc	CC	1551	_	_	_	_	_	_	_	O
+18	delivery	_	delivery	nn	NN	1551	_	_	_	_	_	_	_	O
+19	.	_	.	sent	.	1551	_	_	_	_	_	_	_	O
+```
+
+in test:
+```
+1	Even	_	Even	rb	RB	1418	_	_	_	_	_	_	_	O
+2	if	_	if	in	IN	1418	_	_	_	_	_	_	_	O
+3	Iran	_	Iran	NP	NNP	1418	_	_	_	_	_	_	_	O
+4	possesses	_	posse	VVZ	NNS	1418	_	_	_	_	_	_	_	O
+5	these	_	these	dt	DT	1418	_	_	_	_	_	_	_	O
+6	biological	_	biological	jj	JJ	1418	_	_	_	_	_	_	_	O
+7	agents	_	agent	nns	NNS	1418	_	_	_	_	_	_	_	O
+8	,	_	,	,	,	1418	_	_	_	_	_	_	_	O
+9	it	_	it	PP	PRP	1418	_	_	_	_	_	_	_	O
+10	faces	_	face	VVZ	VBZ	1418	_	_	_	_	_	_	_	O
+11	a	_	a	dt	DT	1418	_	_	_	_	_	_	_	O
+12	significant	_	significant	jj	JJ	1418	_	_	_	_	_	_	_	O
+13	challenge	_	challenge	nn	NN	1418	_	_	_	_	_	_	_	O
+14	in	_	in	in	IN	1418	_	_	_	_	_	_	_	O
+15	their	_	their	PP$	PRP$	1418	_	_	_	_	_	_	_	S-Material
+16	weaponization	_	weaponization	nn	NN	1418	_	_	_	_	_	weaponization.n	Processing_materials	O
+17	and	_	and	cc	CC	1418	_	_	_	_	_	_	_	O
+18	delivery	_	delivery	nn	NN	1418	_	_	_	_	_	_	_	O
+19	.	_	.	sent	.	1418	_	_	_	_	_	_	_	O
+
+```
+
 ## Notes on preprocessing
 We filtered out (in train splits) annotationsets which contained overlapping
 labels as this is incompatible with BIOS tagging. Ex:
