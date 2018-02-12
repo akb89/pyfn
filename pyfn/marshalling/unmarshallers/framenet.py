@@ -219,19 +219,46 @@ def _filter_annosets_dict(annosets_dict):
     return filtered_annosets_dict
 
 
-def _get_annosets_dict_from_fn_xml(fn_splits_dirpath, with_exemplars):
-    annosets_dict = {}
-    for splits_name in os.listdir(fn_splits_dirpath):
-        if os.path.isdir(os.path.join(fn_splits_dirpath, splits_name)):
-            splits_dirpath = os.path.join(fn_splits_dirpath, splits_name)
-            annosets = extract_annosets(
-                splits_dirpath, with_fulltexts=True,
-                with_exemplars=with_exemplars, flatten=True)
-            annosets_dict[splits_name] = annosets
-    return annosets_dict
+def _get_annosets_dict_from_fn_xml(fn_splits_dirpath, splits, with_exemplars):
+    if splits == 'test':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         flatten=True),
+                'dev': [], 'train': []}
+    if splits == 'dev':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         flatten=True),
+                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                     'dev'),
+                                        with_fulltexts=True,
+                                        with_exemplars=with_exemplars,
+                                        flatten=True),
+                'train': []}
+    if splits == 'train':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         flatten=True),
+                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                     'dev'),
+                                        with_fulltexts=True,
+                                        with_exemplars=with_exemplars,
+                                        flatten=True),
+                'train': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                       'train'),
+                                          with_fulltexts=True,
+                                          with_exemplars=with_exemplars,
+                                          flatten=True)}
+    return {}
 
 
-def get_annosets_dict(source_path, with_exemplars):
+def get_annosets_dict(source_path, splits, with_exemplars):
     """Return a string to AnnotationSet generator dict.
 
     Keys are splits name (train, dev, test) and values are generators
@@ -239,7 +266,7 @@ def get_annosets_dict(source_path, with_exemplars):
     """
     logger.info('Creating pyfn.AnnotationSet dict from {}'.format(source_path))
     return _filter_annosets_dict(
-        _get_annosets_dict_from_fn_xml(source_path, with_exemplars))
+        _get_annosets_dict_from_fn_xml(source_path, splits, with_exemplars))
 
 
 def _unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
