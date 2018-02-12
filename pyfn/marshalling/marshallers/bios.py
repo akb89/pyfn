@@ -6,8 +6,11 @@ OUTSIDE = O
 SINGULAR = S
 
 BIOS file format:
-0   1       2       3               4   5           6       7       8       9       10      11      12          13      14
-ID  FORM    LEMMA   PLEMMA(NLTK)    POS PPOS(NLTK)  FEAT    PFEAT   HEAD    PHEAD   DEPREL  PDEPREL FILLPRED    PRED    APREDS
+0   1       2       3               4   5           6       7       8
+ID  FORM    LEMMA   PLEMMA(NLTK)    POS PPOS(NLTK)  FEAT    PFEAT   HEAD
+
+9       10      11      12          13      14
+PHEAD   DEPREL  PDEPREL FILLPRED    PRED    APREDS
 """
 
 import os

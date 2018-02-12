@@ -8,6 +8,7 @@ import argparse
 
 import pyfn.extraction.extractors.framenet as fnxml
 import pyfn.marshalling.marshallers.bios as bios
+import pyfn.marshalling.marshallers.semeval as semeval
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
@@ -23,12 +24,15 @@ def _convert(args):
         raise InvalidParameterError(
             'Source and Target paths are the same! Please specify different '
             'source/target paths')
+    annosets_dict = {}
     if args.source_format == 'fnxml':
         # TODO: check input directory structure: should contain only
         # train/dev/test dir (other keywords not allowed) and each dir should
         # contain either fulltext, either lu dir, nothing else
+        # TODO: when mode is set only parse the mode env
         with_exemplars = args.with_exemplars == 'true'
         annosets_dict = fnxml.get_annosets_dict(args.source_path,
+                                                args.mode,
                                                 with_exemplars)
     if args.target_format == 'bios':
         # TODO: if the splits_dict contains more than one item but
@@ -36,7 +40,8 @@ def _convert(args):
         # target_path to the parent directory_path
         bios.marshall_annosets_dict(annosets_dict, args.target_path)
     if args.target_format == 'semeval':
-        pass
+        # TODO: check that target path is a dirpath
+        semeval.marshall_annosets(annosets_dict, args.mode, args.target_path)
 
 
 def main():
@@ -77,5 +82,9 @@ def main():
                                 default='false',
                                 help='Whether or not to use exemplars in '
                                      'splits. Default to false')
+    parser_convert.add_argument('--splits',
+                                choices=['all', 'train', 'dev', 'test'],
+                                default='all',
+                                help='FrameNet splits to be unmarshalled')
     args = parser.parse_args()
     args.func(args)
