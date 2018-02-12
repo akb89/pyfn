@@ -29,10 +29,6 @@ logging.config.dictConfig(
 logger = logging.getLogger(__name__)
 
 
-def filter_annosets(source_annosets, target_annosets):
-    return filter_utils.filter_annosets(source_annosets, target_annosets)
-
-
 def unmarshall_semeval07_xml(xml_filepath, flatten=False):
     return semeval_unmarshaller.unmarshall_semeval07_xml(xml_filepath, flatten)
 

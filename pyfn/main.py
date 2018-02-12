@@ -29,7 +29,6 @@ def _convert(args):
         # TODO: check input directory structure: should contain only
         # train/dev/test dir (other keywords not allowed) and each dir should
         # contain either fulltext, either lu dir, nothing else
-        # TODO: when mode is set only parse the mode env
         with_exemplars = args.with_exemplars == 'true'
         annosets_dict = fnxml.get_annosets_dict(args.source_path,
                                                 args.splits,

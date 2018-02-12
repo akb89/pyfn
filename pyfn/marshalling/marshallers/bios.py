@@ -20,6 +20,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 
 import pyfn.utils.filter as f_utils
+import pyfn.utils.sort as sort_utils
 from pyfn.exceptions.parameter import InvalidParameterError
 
 __all__ = ['marshall_annosets_dict']
@@ -124,22 +125,6 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer):
     return bios_lines
 
 
-def _is_invalid_annoset(annoset):
-    if 'FE' not in annoset.labelstore.labels_by_layer_name:
-        return True
-    labels_indexes = []
-    for label in annoset.labelstore.labels_by_layer_name['FE']:
-        if label.start == -1 and label.end == -1:
-            # CNI, DNI, INI cases
-            continue
-        for index in labels_indexes:
-            if (label.start >= index[0] and label.start <= index[1]) or \
-             (label.end >= index[0] and label.end <= index[1]):
-                return True
-        labels_indexes.append((label.start, label.end))
-    return False
-
-
 def _get_bios_filepath(target_dirpath, splits_name):
     return os.path.join(target_dirpath, '{}.bios'.format(splits_name))
 
@@ -162,17 +147,10 @@ def marshall_annosets_dict(annosets_dict, target_dirpath):
         with open(bios_filepath, 'w', encoding='utf-8') as bios_stream, \
          open(sent_filepath, 'w', encoding='utf-8') as sent_stream:
             sent_dict = {}
-            for annoset in annosets:
-                if _is_invalid_annoset(annoset):
-                    # TODO: add stats
-                    logger.debug(
-                        'Invalid AnnotationSet #{}. No FE or multiple FE '
-                        'labels specified on the same item'.format(
-                            annoset._id))
-                else:
-                    bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer)
-                    for bios_line in bios_lines:
-                        print(bios_line, file=bios_stream)
-                    print('\n', file=bios_stream)  # at the end of a sentence
+            for annoset in sort_utils.sort_annosets(f_utils.filter_annosets(annosets)):
+                bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer)
+                for bios_line in bios_lines:
+                    print(bios_line, file=bios_stream)
+                print('\n', file=bios_stream)  # at the end of a sentence
             # print out sentences file
             _marshall_sent_dict(sent_dict, sent_stream)

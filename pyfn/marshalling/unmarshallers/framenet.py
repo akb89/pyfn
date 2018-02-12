@@ -206,15 +206,15 @@ def _filter_annosets_dict(annosets_dict):
         annosets_dict['test'], 3)
     filtered_annosets_dict['test'] = test_annosets
     if annosets_dict['dev']:
-        filtered_dev_annosets = f_utils.filter_annosets(
+        filtered_dev_annosets = f_utils.left_difference(
             annosets_dict['dev'], _test_annosets)
         dev_annosets, _dev_annosets = itertools.tee(filtered_dev_annosets)
         filtered_annosets_dict['dev'] = dev_annosets
-        filtered_annosets_dict['train'] = f_utils.filter_annosets(
+        filtered_annosets_dict['train'] = f_utils.left_difference(
             annosets_dict['train'], itertools.chain(_dev_annosets,
                                                     __test_annosets))
     else:
-        filtered_annosets_dict['train'] = f_utils.filter_annosets(
+        filtered_annosets_dict['train'] = f_utils.left_difference(
             annosets_dict['train'], _test_annosets)
     return filtered_annosets_dict
 
