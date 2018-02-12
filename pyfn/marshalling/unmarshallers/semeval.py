@@ -1,7 +1,7 @@
 """Unmarshall SemEval 2007 FrameNet XML files."""
 
 import logging
-import xml.etree.ElementTree as element_tree
+import xml.etree.ElementTree as etree
 
 import pyfn.marshalling.unmarshallers.framenet as fn_unmarshaller
 
@@ -25,7 +25,7 @@ def unmarshall_semeval07_xml(xml_filepath, flatten=False):
     logger.info('Unmarshalling SemEval FrameNet XML file: {}'
                 .format(xml_filepath))
     # pylint: disable=R1702
-    for documents_tag in element_tree.parse(xml_filepath).getroot().findall(
+    for documents_tag in etree.parse(xml_filepath).getroot().findall(
             'documents'):
         for document_tag in documents_tag.findall('document'):
             for paragraphs_tag in document_tag.findall('paragraphs'):

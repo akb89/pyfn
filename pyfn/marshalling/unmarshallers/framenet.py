@@ -4,7 +4,7 @@ import os
 import itertools
 import logging
 
-import xml.etree.ElementTree as element_tree
+import xml.etree.ElementTree as etree
 
 import pyfn.utils.constants as const
 import pyfn.utils.filter as f_utils
@@ -282,7 +282,7 @@ def _unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
 
     """
     logger.info('Unmarshalling FrameNet lu XML file: {}'.format(xml_file_path))
-    tree = element_tree.parse(xml_file_path)
+    tree = etree.parse(xml_file_path)
     root = tree.getroot()
     frame = Frame(root.get('frame'), _id=int(root.get('frameID')))
     lexunit = LexUnit(frame, _id=int(root.get('ID')), name=root.get('name'))
@@ -330,7 +330,7 @@ def _unmarshall_fulltext_xml(xml_file_path, fe_dict=None, flatten=False):
     """
     logger.info('Unmarshalling FrameNet fulltext XML file: {}'.format(
         xml_file_path))
-    tree = element_tree.parse(xml_file_path)
+    tree = etree.parse(xml_file_path)
     root = tree.getroot()
     try:
         document = _extract_document(root.find('fn:header',
