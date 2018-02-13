@@ -18,6 +18,57 @@ __all__ = ['marshall_annosets']
 logger = logging.getLogger(__name__)
 
 
+def _add_fe_labels(layers_tag, layer_id, annoset, label_id):
+    fe_layer = etree.SubElement(layers_tag, 'layer')
+    fe_layer.set('ID', str(layer_id))
+    fe_layer.set('name', 'FE')
+    fe_label_tags = etree.SubElement(fe_layer, 'labels')
+    if 'FE' in annoset.labelstore.labels_by_layer_name:
+        for fe_label in annoset.labelstore.labels_by_layer_name['FE']:
+            if fe_label.start != -1 and fe_label.end != -1:
+                fe_label_tag = etree.SubElement(fe_label_tags, 'label')
+                fe_label_tag.set('ID', str(label_id))
+                label_id += 1
+                fe_label_tag.set('name', fe_label.name)
+                fe_label_tag.set('start', str(fe_label.start))
+                fe_label_tag.set('end', str(fe_label.end))
+    return label_id
+
+
+def _has_fe_labels(annoset):
+    return 'FE' in annoset.labelstore.labels_by_layer_name
+
+
+def _add_target_labels(layers_tag, layer_id, annoset, label_id):
+    target_layer = etree.SubElement(layers_tag, 'layer')
+    target_layer.set('ID', str(layer_id))
+    target_layer.set('name', 'Target')
+    target_labels = etree.SubElement(target_layer, 'labels')
+    for target_index in annoset.target.indexes:
+        target_label = etree.SubElement(target_labels, 'label')
+        target_label.set('ID', str(label_id))
+        label_id += 1
+        target_label.set('start', str(target_index[0]))
+        target_label.set('end', str(target_index[1]))
+    return label_id
+
+
+def _get_annoset_tag(annosets_tag, annoset, annoset_id):
+    annoset_tag = etree.SubElement(annosets_tag, 'annotationSet')
+    annoset_tag.set('ID', str(annoset_id))
+    annoset_tag.set('frameName', annoset.target.lexunit.frame.name)
+    return annoset_tag
+
+
+def _get_sentence_tag(annoset, sentences_tag, sent_id):
+    sentence_tag = etree.SubElement(sentences_tag, 'sentence')
+    sentence_tag.set('ID', str(sent_id))
+    sent_id += 1
+    text = etree.SubElement(sentence_tag, 'text')
+    text.text = annoset.sentence.text
+    return sentence_tag
+
+
 def _marshall_annosets(annosets, output_filepath):
     if not annosets:
         raise InvalidParameterError('No input annosets to marshall. Check '
@@ -25,11 +76,11 @@ def _marshall_annosets(annosets, output_filepath):
     root = etree.Element('corpus')
     root.set('XMLCreated', datetime.datetime.now(
         pytz.utc).strftime('%a %b %d %H:%M:%S %Z %Y'))
-    documents = etree.SubElement(root, 'documents')
-    document = etree.SubElement(documents, 'document')
-    paragraphs = etree.SubElement(document, 'paragraphs')
-    paragraph = etree.SubElement(paragraphs, 'paragraph')
-    sentences = etree.SubElement(paragraph, 'sentences')
+    documents_tag = etree.SubElement(root, 'documents')
+    document_tag = etree.SubElement(documents_tag, 'document')
+    paragraphs_tag = etree.SubElement(document_tag, 'paragraphs')
+    paragraph_tag = etree.SubElement(paragraphs_tag, 'paragraph')
+    sentences_tag = etree.SubElement(paragraph_tag, 'sentences')
     sent_hash = ''
     sent_id = 1
     annoset_id = 1
@@ -37,43 +88,17 @@ def _marshall_annosets(annosets, output_filepath):
     label_id = 1
     for annoset in f_utils.filter_and_sort_annosets(annosets, []):
         if sent_hash != f_utils.get_text_hash(annoset.sentence.text):
-            sentence = etree.SubElement(sentences, 'sentence')
-            sentence.set('ID', str(sent_id))
-            sent_id += 1
+            sentence = _get_sentence_tag(annoset, sentences_tag, sent_id)
             sent_hash = f_utils.get_text_hash(annoset.sentence.text)
-            text = etree.SubElement(sentence, 'text')
-            text.text = annoset.sentence.text
             annosets_tag = etree.SubElement(sentence, 'annotationSets')
-        annoset_tag = etree.SubElement(annosets_tag, 'annotationSet')
-        annoset_tag.set('ID', str(annoset_id))
+        annoset_tag = _get_annoset_tag(annosets_tag, annoset, annoset_id)
         annoset_id += 1
-        annoset_tag.set('frameName', annoset.target.lexunit.frame.name)
-        layers = etree.SubElement(annoset_tag, 'layers')
-        target_layer = etree.SubElement(layers, 'layer')
-        target_layer.set('ID', str(layer_id))
+        layers_tag = etree.SubElement(annoset_tag, 'layers')
+        label_id = _add_target_labels(layers_tag, layer_id, annoset, label_id)
         layer_id += 1
-        target_layer.set('name', 'Target')
-        target_labels = etree.SubElement(target_layer, 'labels')
-        for target_index in annoset.target.indexes:
-            target_label = etree.SubElement(target_labels, 'label')
-            target_label.set('ID', str(label_id))
-            label_id += 1
-            target_label.set('start', str(target_index[0]))
-            target_label.set('end', str(target_index[1]))
-        fe_layer = etree.SubElement(layers, 'layer')
-        fe_layer.set('ID', str(layer_id))
-        layer_id += 1
-        fe_layer.set('name', 'FE')
-        fe_label_tags = etree.SubElement(fe_layer, 'labels')
-        if 'FE' in annoset.labelstore.labels_by_layer_name:
-            for fe_label in annoset.labelstore.labels_by_layer_name['FE']:
-                if fe_label.start != -1 and fe_label.end != -1:
-                    fe_label_tag = etree.SubElement(fe_label_tags, 'label')
-                    fe_label_tag.set('ID', str(label_id))
-                    label_id += 1
-                    fe_label_tag.set('name', fe_label.name)
-                    fe_label_tag.set('start', str(fe_label.start))
-                    fe_label_tag.set('end', str(fe_label.end))
+        if _has_fe_labels(annoset):
+            _add_fe_labels(layers_tag, layer_id, annoset, label_id)
+            layer_id += 1
     tree = etree.ElementTree(root)
     tree.write(output_filepath, encoding='UTF-8', xml_declaration=True,
                pretty_print=True)
