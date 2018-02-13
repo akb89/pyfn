@@ -117,18 +117,18 @@ def _extract_layer_tags(annoset_tag):
     return layer_tags
 
 
-def _has_fe_layer(annoset_tag):
+def _has_target_layer(annoset_tag):
     layer_tags = _extract_layer_tags(annoset_tag)
     if not layer_tags:
         return False
     for layer_tag in layer_tags:
-        if layer_tag.get('name') == 'FE':
+        if layer_tag.get('name') == 'Target':
             return True
     return False
 
 
 def _is_fn_annoset(annoset_tag):
-    return _has_fe_layer(annoset_tag)
+    return _has_target_layer(annoset_tag)
 
 
 def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,

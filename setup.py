@@ -18,8 +18,6 @@ setup(
     keywords=['framenet', 'xml', 'marshalling', 'unmarshalling'],
     platforms=['any'],
     packages=['pyfn',
-              'pyfn.extraction',
-              'pyfn.extraction.extractors',
               'pyfn.loading',
               'pyfn.marshalling',
               'pyfn.marshalling.marshallers',

@@ -35,9 +35,9 @@ def left_difference(source_annosets, target_annosets):
                 annoset.sentence.text)))
 
 
-def _is_invalid_annoset(annoset):
-    if 'FE' not in annoset.labelstore.labels_by_layer_name:
-        return True
+def _has_overlapping_fes(annoset):
+    if not annoset.labelstore.labels_by_layer_name['FE']:
+        return False
     labels_indexes = []
     for label in annoset.labelstore.labels_by_layer_name['FE']:
         if label.start == -1 and label.end == -1:
@@ -51,14 +51,33 @@ def _is_invalid_annoset(annoset):
     return False
 
 
-def filter_annosets(annosets):
+def _has_invalid_labels(annoset):
+    for label in annoset.labelstore.labels:
+        if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
+            return True
+    return False
+
+
+def _is_valid_annoset(annoset, filtering_options):
+    # No matter what, remove annosets containing invalid labels, i.e. labels
+    # with combined specified and unspecified start/end indexes
+    if _has_invalid_labels(annoset):
+        return False
+    # Remove annosets with overlapping frame elements (e.g. for BIOS train)
+    if 'overlap_fes' in filtering_options:
+        if _has_overlapping_fes(annoset):
+            return False
+    # Remove annosets with discontinuous frame elements (for rofames?)
+    if 'disct_fes' in filtering_options:
+        pass
+    # Filter annosets with no frame element layers
+    if 'no_fes' in filtering_options:
+        pass
+    return True
+
+
+def filter_annosets(annosets, filtering_options):
     """Filter annosets."""
     for annoset in annosets:
-        if _is_invalid_annoset(annoset):
-            # TODO: add stats
-            logger.debug(
-                'Invalid AnnotationSet #{}. No FE or multiple FE '
-                'labels specified on the same item'.format(
-                    annoset._id))
-        else:
+        if _is_valid_annoset(annoset, filtering_options):
             yield annoset

@@ -10,9 +10,15 @@
 
 Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
+## TODO
+- [x] FN to BIOS
+- [x] FN to SEMEVAL
+- [ ] FN to CoNLL
+- [ ] BIOS to SEMEVAL
+- [ ] CoNLL to SEMEVAL
+
 ## HowTo
-### Convert FrameNet XML splits to BIOS tagging format
-Splits directory should follow:
+For all usages of pyfn, your FrameNet splits directory should follow:
 ```
 .
 |-- fndata-1.x
@@ -27,13 +33,44 @@ Splits directory should follow:
 |   |   |-- lu
 ```
 
+### From FN XML to BIOS
 ```bash
-pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/bios/splits/dir
+pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir
 ```
-The script will then generate n-files under the `/abs/path/to/bios/splits/dir` directory, depending on your splits configuration (train, dev, test):
-- train.bios
-- dev.bios
-- test.bios
+To add exemplars to fulltext data, do:
+```bash
+pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --with_exemplars true
+```
+
+### From FN XML to CoNLL
+```bash
+pyfn --from fnxml --to conll --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir
+```
+To add exemplars to fulltext data, do:
+```bash
+pyfn --from fnxml --to conll --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --with_exemplars true
+```
+
+### From FN XML to SEMEVAL XML
+To generate a `dev.gold.xml` file in SEMEVAL format:
+```bash
+pyfn --from fnxml --to semeval --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --splits dev
+```
+To generate a `test.gold.xml` file in SEMEVAL format:
+```bash
+pyfn --from fnxml --to semeval --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --splits test
+```
+
+### From BIOS to SEMEVAL XML
+```bash
+pyfn --from bios --to semeval --source /abs/path/to/bios/file --target /abs/path/to/output/dir
+```
+
+### From CoNLL to SEMEVAL XML
+```bash
+pyfn --from conll --to semeval --source /abs/path/to/conll/file --target /abs/path/to/output/dir
+```
+
 
 ## Notes on splits
 We implemented additional filtering to make sure train and test data did not

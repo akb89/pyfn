@@ -4,8 +4,8 @@ The format matches the XML file expected by the perl evaluation script
 of the SEMEVAL 2007 shared task on frame semantic structure extraction.
 """
 
-import os
 import datetime
+import logging
 import pytz
 import lxml.etree as etree
 
@@ -15,6 +15,8 @@ import pyfn.utils.sort as sort_utils
 from pyfn.exceptions.parameter import InvalidParameterError
 
 __all__ = ['marshall_annosets']
+
+logger = logging.getLogger(__name__)
 
 
 def _marshall_annosets(annosets, output_filepath):
@@ -34,7 +36,7 @@ def _marshall_annosets(annosets, output_filepath):
     annoset_id = 1
     layer_id = 1
     label_id = 1
-    for annoset in sort_utils.sort_annosets(f_utils.filter_annosets(annosets)):
+    for annoset in sort_utils.sort_annosets(f_utils.filter_annosets(annosets, [])):
         if sent_hash != f_utils.get_text_hash(annoset.sentence.text):
             sentence = etree.SubElement(sentences, 'sentence')
             sentence.set('ID', str(sent_id))
@@ -77,7 +79,10 @@ def _marshall_annosets(annosets, output_filepath):
                pretty_print=True)
 
 
-def marshall_annosets(annosets_dict, mode, output_dirpath):
+def marshall_annosets(annosets, output_filepath):
     """Marshall a list of pyfn.AnnotationSet objects to SEMEVAL XML."""
-    output_filepath = os.path.join(output_dirpath, '{}.gold.xml'.format(mode))
-    _marshall_annosets(annosets_dict[mode], output_filepath)
+    logger.info('Marshalling pyfn.AnnotationSet objects to SEMEVAL XML...')
+    if not annosets:
+        raise InvalidParameterError('Input pyfn.AnnotationSet list is empty')
+    logger.info('Saving output to {}'.format(output_filepath))
+    _marshall_annosets(annosets, output_filepath)

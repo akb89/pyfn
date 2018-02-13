@@ -75,11 +75,10 @@ def _get_tokens_pos(token_index_3uples, pos_labels_by_indexes):
     return tokens_pos
 
 
-def _get_sent_num(text, sent_dict):
-    sent_hash = f_utils.get_text_hash(text)
-    if sent_hash not in sent_dict:
-        sent_dict[sent_hash] = (len(sent_dict), text)
-    return sent_dict[sent_hash][0]
+def _get_sent_num(sentence, sent_dict):
+    if sentence._id not in sent_dict:
+        sent_dict[sentence._id] = (len(sent_dict), sentence.text)
+    return sent_dict[sentence._id][0]
 
 
 def _get_token_index_3uples(text):
@@ -95,11 +94,11 @@ def _get_token_index_3uples(text):
     return token_index_3uples
 
 
-def _get_bios_lines(annoset, sent_dict, lemmatizer):
+def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
     bios_lines = []
     token_index_3uples = _get_token_index_3uples(annoset.sentence.text)
-    sent_num = _get_sent_num(annoset.sentence.text, sent_dict)
-    token_num = 1
+    sent_num = _get_sent_num(annoset.sentence, sent_dict)
+    token_num = 0
     pos_tags = _get_tokens_pos(
         token_index_3uples, annoset.sentence.pnw_labelstore.labels_by_indexes)
     ppos_tags = _get_tokens_ppos(annoset.sentence.text)
@@ -107,7 +106,13 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer):
     if len(token_index_3uples) != len(pos_tags) or len(pos_tags) != len(ppos_tags):
         raise InvalidParameterError('')
     for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
-        bios_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t'.format(
+        if not train_mode or 'FE' not in annoset.labelstore.labels_by_layer_name:
+            fe_label = '_'
+        else:
+            fe_label = _get_fe_label(
+                token_3uple[1], token_3uple[2],
+                annoset.labelstore.labels_by_layer_name['FE'])
+        bios_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
             token_num,
             token_3uple[0],
             '_',
@@ -118,8 +123,7 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer):
             '_', '_', '_', '_', '_',
             _get_lexunit_label(token_3uple[1], token_3uple[2], annoset.target),
             _get_frame_label(token_3uple[1], token_3uple[2], annoset.target),
-            _get_fe_label(token_3uple[1], token_3uple[2],
-                          annoset.labelstore.labels_by_layer_name['FE']))
+            fe_label)
         bios_lines.append(bios_line)
         token_num += 1
     return bios_lines
@@ -138,7 +142,22 @@ def _marshall_sent_dict(sent_dict, sent_stream):
         print(num_text[1], file=sent_stream)
 
 
-def marshall_annosets_dict(annosets_dict, target_dirpath):
+def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
+                   bios_stream, train_mode=False):
+    if train_mode:
+        f_annosets = sort_utils.sort_annosets(
+            f_utils.filter_annosets(annosets, filtering_options))
+    else:
+        f_annosets = sort_utils.sort_annosets(
+            f_utils.filter_annosets(annosets, []))
+    for annoset in f_annosets:
+        bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
+                                     train_mode)
+        print('\n'.join(bios_lines), file=bios_stream)
+        print('', file=bios_stream)  # at the end of a sentence
+
+
+def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options):
     """Convert a dict of splits-pyfn.AnnotationSet to BIOS splits files."""
     lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
@@ -147,10 +166,14 @@ def marshall_annosets_dict(annosets_dict, target_dirpath):
         with open(bios_filepath, 'w', encoding='utf-8') as bios_stream, \
          open(sent_filepath, 'w', encoding='utf-8') as sent_stream:
             sent_dict = {}
-            for annoset in sort_utils.sort_annosets(f_utils.filter_annosets(annosets)):
-                bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer)
-                for bios_line in bios_lines:
-                    print(bios_line, file=bios_stream)
-                print('\n', file=bios_stream)  # at the end of a sentence
+            if splits_name == 'dev' or splits_name == 'test':
+                _marshall_bios(annosets, filtering_options, sent_dict,
+                               lemmatizer, bios_stream, train_mode=False)
+            elif splits_name == 'train':
+                _marshall_bios(annosets, filtering_options, sent_dict,
+                               lemmatizer, bios_stream, train_mode=True)
+            else:
+                raise InvalidParameterError('Invalid splits_name: {}'.format(
+                    splits_name))
             # print out sentences file
             _marshall_sent_dict(sent_dict, sent_stream)

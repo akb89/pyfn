@@ -3,16 +3,23 @@
 This is the entry point of the application.
 """
 
+import os
 import logging
 import argparse
 
-import pyfn.marshalling.unmarshallers.framenet as fnxml
-import pyfn.marshalling.marshallers.bios as bios
+import pyfn.marshalling.marshallers.bios as biosm
 import pyfn.marshalling.marshallers.semeval as semeval
+import pyfn.marshalling.unmarshallers.bios as biosu
+import pyfn.marshalling.unmarshallers.framenet as fnxml
+
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
 logger = logging.getLogger(__name__)
+
+
+def _extract_splits_name(source_path):
+    return os.path.splitext(os.path.basename(source_path))[0]
 
 
 def _convert(args):
@@ -24,23 +31,31 @@ def _convert(args):
         raise InvalidParameterError(
             'Source and Target paths are the same! Please specify different '
             'source/target paths')
-    annosets_dict = {}
+    # TODO: add validation for input directory structure
     if args.source_format == 'fnxml':
-        # TODO: check input directory structure: should contain only
-        # train/dev/test dir (other keywords not allowed) and each dir should
-        # contain either fulltext, either lu dir, nothing else
         with_exemplars = args.with_exemplars == 'true'
         annosets_dict = fnxml.get_annosets_dict(args.source_path,
                                                 args.splits,
                                                 with_exemplars)
+    if args.source_format == 'bios':
+        if args.sent == '__undefined__':
+            raise InvalidParameterError(
+                'Unspecified sentence file. For BIOS unmarshalling you need '
+                'to specify the --sent parameter pointing at the '
+                '.sentences file absolute filepath')
+        annosets = biosu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
-        # TODO: if the splits_dict contains more than one item but
-        # the target_path is a filepath and not a dirpath, change the
-        # target_path to the parent directory_path
-        bios.marshall_annosets_dict(annosets_dict, args.target_path)
+        biosm.marshall_annosets_dict(annosets_dict, args.target_path,
+                                     args.filter)
     if args.target_format == 'semeval':
-        # TODO: check that target path is a dirpath
-        semeval.marshall_annosets(annosets_dict, args.splits, args.target_path)
+        if args.source_format == 'fnxml':
+            splits_name = args.splits
+            annosets = annosets_dict[splits_name]
+        if args.source_format == 'bios':
+            splits_name = _extract_splits_name(args.source_path)
+        output_filepath = os.path.join(args.target_path, '{}.gold.xml'.format(
+            splits_name))
+        semeval.marshall_annosets(annosets, output_filepath)
 
 
 def main():
@@ -84,6 +99,18 @@ def main():
     parser_convert.add_argument('--splits',
                                 choices=['train', 'dev', 'test'],
                                 default='train',
-                                help='FrameNet splits to be unmarshalled')
+                                help='Names of FrameNet splits to be unmarshalled')
+    parser_convert.add_argument('--sent',
+                                default='__undefined__',
+                                help='Absolute path to the {train,dev,test}.sentences file for BIOS unmarshalling')
+    parser_convert.add_argument('--filter',
+                                nargs='+',
+                                default=[],
+                                help='''Filtering options for the training set:
+    - overlap_fes: filters out all overlapping frame elements (e.g. for training
+    with BIOS-tagged data which do not support overlapping fes)
+    - disct_fes: filters out discontinuous frame elements
+    - no_fes: filters out annotationsets with no frame element layer
+    ''')
     args = parser.parse_args()
     args.func(args)
