@@ -103,5 +103,4 @@ def unmarshall_annosets(bios_filepath, sent_filepath):
                 annoset_id += 1
                 annosets.append(annoset)
                 lines = []
-
     return annosets

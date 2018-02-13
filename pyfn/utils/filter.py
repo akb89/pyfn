@@ -3,7 +3,7 @@
 import re
 import logging
 
-__all__ = ['left_difference', 'filter_annosets']
+__all__ = ['left_difference', 'filter_and_sort_annosets']
 
 logger = logging.getLogger(__name__)
 
@@ -72,12 +72,25 @@ def _is_valid_annoset(annoset, filtering_options):
         pass
     # Filter annosets with no frame element layers
     if 'no_fes' in filtering_options:
-        pass
+        pass  # TODO: don't check only layers, check also labels
     return True
 
 
-def filter_annosets(annosets, filtering_options):
+def _filter_annosets(annosets, filtering_options):
     """Filter annosets."""
     for annoset in annosets:
         if _is_valid_annoset(annoset, filtering_options):
             yield annoset
+
+
+def _sort_annosets(annosets):
+    """Sort a list of pyfn.AnnotationSet objects.
+
+    Sort by annoset.sentence._id first and then by annoset._id
+    """
+    return sorted(annosets, key=lambda annoset: (annoset.sentence._id,
+                                                 annoset._id))
+
+
+def filter_and_sort_annosets(annosets, filtering_options):
+    return _sort_annosets(_filter_annosets(annosets, filtering_options))

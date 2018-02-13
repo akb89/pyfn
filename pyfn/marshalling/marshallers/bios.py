@@ -20,7 +20,6 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 
 import pyfn.utils.filter as f_utils
-import pyfn.utils.sort as sort_utils
 from pyfn.exceptions.parameter import InvalidParameterError
 
 __all__ = ['marshall_annosets_dict']
@@ -39,16 +38,21 @@ def _get_fe_label(start, end, fe_labels):
     return 'O'
 
 
-def _get_frame_label(start, end, target):
+def _get_lexunit(start, end, target):
     if (start, end) in target.indexes:
-        return target.lexunit.frame.name
+        return target.lexunit
+    for istart, iend in target.indexes:
+        if start >= istart and end <= iend:
+            return target.lexunit
     return '_'
 
 
-def _get_lexunit_label(start, end, target):
-    if (start, end) in target.indexes:
-        return target.lexunit.name
-    return '_'
+def _get_frame_name(lexunit):
+    return '_' if lexunit == '_' else lexunit.frame.name
+
+
+def _get_lexunit_name(lexunit):
+    return '_' if lexunit == '_' else lexunit.name
 
 
 def _get_token_lemma(token, pos, lemmatizer):
@@ -121,8 +125,10 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
             ppos,
             sent_num,
             '_', '_', '_', '_', '_',
-            _get_lexunit_label(token_3uple[1], token_3uple[2], annoset.target),
-            _get_frame_label(token_3uple[1], token_3uple[2], annoset.target),
+            _get_lexunit_name(_get_lexunit(token_3uple[1], token_3uple[2],
+                                           annoset.target)),
+            _get_frame_name(_get_lexunit(token_3uple[1], token_3uple[2],
+                                         annoset.target)),
             fe_label)
         bios_lines.append(bios_line)
         token_num += 1
@@ -145,11 +151,10 @@ def _marshall_sent_dict(sent_dict, sent_stream):
 def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
                    bios_stream, train_mode=False):
     if train_mode:
-        f_annosets = sort_utils.sort_annosets(
-            f_utils.filter_annosets(annosets, filtering_options))
+        f_annosets = f_utils.filter_and_sort_annosets(annosets,
+                                                      filtering_options)
     else:
-        f_annosets = sort_utils.sort_annosets(
-            f_utils.filter_annosets(annosets, []))
+        f_annosets = f_utils.filter_and_sort_annosets(annosets, [])
     for annoset in f_annosets:
         bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
                                      train_mode)

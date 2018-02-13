@@ -10,7 +10,6 @@ import pytz
 import lxml.etree as etree
 
 import pyfn.utils.filter as f_utils
-import pyfn.utils.sort as sort_utils
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
@@ -36,7 +35,7 @@ def _marshall_annosets(annosets, output_filepath):
     annoset_id = 1
     layer_id = 1
     label_id = 1
-    for annoset in sort_utils.sort_annosets(f_utils.filter_annosets(annosets, [])):
+    for annoset in f_utils.filter_and_sort_annosets(annosets, []):
         if sent_hash != f_utils.get_text_hash(annoset.sentence.text):
             sentence = etree.SubElement(sentences, 'sentence')
             sentence.set('ID', str(sent_id))
@@ -66,14 +65,15 @@ def _marshall_annosets(annosets, output_filepath):
         layer_id += 1
         fe_layer.set('name', 'FE')
         fe_label_tags = etree.SubElement(fe_layer, 'labels')
-        for fe_label in annoset.labelstore.labels_by_layer_name['FE']:
-            if fe_label.start != -1 and fe_label.end != -1:
-                fe_label_tag = etree.SubElement(fe_label_tags, 'label')
-                fe_label_tag.set('ID', str(label_id))
-                label_id += 1
-                fe_label_tag.set('name', fe_label.name)
-                fe_label_tag.set('start', str(fe_label.start))
-                fe_label_tag.set('end', str(fe_label.end))
+        if 'FE' in annoset.labelstore.labels_by_layer_name:
+            for fe_label in annoset.labelstore.labels_by_layer_name['FE']:
+                if fe_label.start != -1 and fe_label.end != -1:
+                    fe_label_tag = etree.SubElement(fe_label_tags, 'label')
+                    fe_label_tag.set('ID', str(label_id))
+                    label_id += 1
+                    fe_label_tag.set('name', fe_label.name)
+                    fe_label_tag.set('start', str(fe_label.start))
+                    fe_label_tag.set('end', str(fe_label.end))
     tree = etree.ElementTree(root)
     tree.write(output_filepath, encoding='UTF-8', xml_declaration=True,
                pretty_print=True)

@@ -123,6 +123,12 @@ def _has_target_layer(annoset_tag):
         return False
     for layer_tag in layer_tags:
         if layer_tag.get('name') == 'Target':
+            label_tags = _extract_label_tags(layer_tag)
+            if not label_tags:
+                return False  # has a Target layer but no labels
+            for label_tag in label_tags:
+                if label_tag.get('start') is None or label_tag.get('end') is None:
+                    return False
             return True
     return False
 
