@@ -30,7 +30,7 @@ def left_difference(source_annosets, target_annosets):
         if get_text_hash(annoset.sentence.text) \
          not in _get_sent_hash_set(target_annosets):
             yield annoset
-        else:
+        else:  # TODO: check that we found at least one 
             print('Found hash: {}'.format(get_text_hash(
                 annoset.sentence.text)))
 
@@ -53,7 +53,14 @@ def _has_overlapping_fes(annoset):
 
 def _has_invalid_labels(annoset):
     for label in annoset.labelstore.labels:
+        # if the label has an unspecified start/end index
         if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
+            return True
+        # if the label index points at a whitespace
+        if (label.start != -1 and annoset.sentence.text[label.start].isspace()) \
+         or (label.end != -1 and annoset.sentence.text[label.end].isspace()):
+            logger.debug('Found label index pointing at whitespace '
+                         'for annoset #{}'.format(annoset._id))
             return True
     return False
 

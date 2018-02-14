@@ -38,6 +38,7 @@ def _convert(args):
                                                 args.splits,
                                                 with_exemplars)
     if args.source_format == 'bios':
+        logger.info('Unmarshalling data from BIOS tagging format')
         if args.sent == '__undefined__':
             raise InvalidParameterError(
                 'Unspecified sentence file. For BIOS unmarshalling you need '

@@ -26,7 +26,7 @@ __all__ = ['marshall_annosets_dict']
 
 logger = logging.getLogger(__name__)
 
-
+# FIXME: bug when the start label is on a whitespace
 def _get_fe_label(start, end, fe_labels):
     for label in fe_labels:
         if start == label.start and end == label.end:
@@ -73,7 +73,7 @@ def _get_tokens_pos(token_index_3uples, pos_labels_by_indexes):
                 if label.layer.name == 'PENN' or label.layer.name == 'BNC':
                     tokens_pos.append(label.name.upper())
                 else:
-                    raise InvalidParameterError('')
+                    raise InvalidParameterError('Unsupported layer name: {}'.format(label.layer.name))
         else:
             tokens_pos.append('_')
     return tokens_pos
