@@ -169,10 +169,10 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options):
          open(sent_filepath, 'w', encoding='utf-8') as sent_stream:
             sent_dict = {}
             if splits_name == 'dev' or splits_name == 'test':
-                #_marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
-                               #lemmatizer, bios_stream, train_mode=False)  # TODO: reset when done with tests
-                _marshall_bios(annosets, filtering_options, sent_dict,
-                               lemmatizer, bios_stream, train_mode=True)
+                _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
+                               lemmatizer, bios_stream, train_mode=False)
+                # _marshall_bios(annosets, filtering_options, sent_dict, # FOR TESTING
+                #                lemmatizer, bios_stream, train_mode=True)
             elif splits_name == 'train':
                 _marshall_bios(annosets, filtering_options, sent_dict,
                                lemmatizer, bios_stream, train_mode=True)

@@ -97,7 +97,7 @@ def _marshall_annosets(annosets, output_filepath):
         label_id = _add_target_labels(layers_tag, layer_id, annoset, label_id)
         layer_id += 1
         if _has_fe_labels(annoset):
-            _add_fe_labels(layers_tag, layer_id, annoset, label_id)
+            label_id = _add_fe_labels(layers_tag, layer_id, annoset, label_id)
             layer_id += 1
     tree = etree.ElementTree(root)
     tree.write(output_filepath, encoding='UTF-8', xml_declaration=True,
