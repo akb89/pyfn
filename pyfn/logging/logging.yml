@@ -11,11 +11,11 @@ handlers:
     formatter: brief
 loggers:
   pyfn:
-    level: INFO
+    level: WARN
     handlers: [console]
   pyfn.unmarshallers:
-    level: INFO
+    level: WARN
     handlers: [console]
 root:
-  level: INFO
+  level: WARN
   handlers: [console]

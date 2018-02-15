@@ -29,11 +29,12 @@ logger = logging.getLogger(__name__)
 # FIXME: bug when the start label is on a whitespace
 def _get_fe_label(start, end, fe_labels):
     for label in fe_labels:
-        if start == label.start and end == label.end:
+        # FIXME: careful, this is not compatible with discontinuous labels
+        if label.start >= start and label.end <= end:
             return 'S-{}'.format(label.name)
-        if start == label.start:
+        if label.start == start:
             return 'B-{}'.format(label.name)
-        if start > label.start and end <= label.end:
+        if label.start < start and label.end >= start:
             return 'I-{}'.format(label.name)
     return 'O'
 
@@ -150,11 +151,7 @@ def _marshall_sent_dict(sent_dict, sent_stream):
 
 def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
                    bios_stream, train_mode=False):
-    if train_mode:
-        f_annosets = f_utils.filter_and_sort_annosets(annosets,
-                                                      filtering_options)
-    else:
-        f_annosets = f_utils.filter_and_sort_annosets(annosets, [])
+    f_annosets = f_utils.filter_and_sort_annosets(annosets, filtering_options)
     for annoset in f_annosets:
         bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
                                      train_mode)
@@ -163,7 +160,7 @@ def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
 
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options):
-    """Convert a dict of splits-pyfn.AnnotationSet to BIOS splits files."""
+    """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
     lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = _get_bios_filepath(target_dirpath, splits_name)
@@ -172,8 +169,10 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options):
          open(sent_filepath, 'w', encoding='utf-8') as sent_stream:
             sent_dict = {}
             if splits_name == 'dev' or splits_name == 'test':
+                #_marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
+                               #lemmatizer, bios_stream, train_mode=False)  # TODO: reset when done with tests
                 _marshall_bios(annosets, filtering_options, sent_dict,
-                               lemmatizer, bios_stream, train_mode=False)
+                               lemmatizer, bios_stream, train_mode=True)
             elif splits_name == 'train':
                 _marshall_bios(annosets, filtering_options, sent_dict,
                                lemmatizer, bios_stream, train_mode=True)

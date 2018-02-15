@@ -26,12 +26,13 @@ def left_difference(source_annosets, target_annosets):
     which text hash is in the set of the sentences hash
     of the target annosets
     """
+    target_sent_hash_set = _get_sent_hash_set(target_annosets)
     for annoset in source_annosets:
         if get_text_hash(annoset.sentence.text) \
-         not in _get_sent_hash_set(target_annosets):
+         not in target_sent_hash_set:
             yield annoset
-        else:  # TODO: check that we found at least one 
-            print('Found hash: {}'.format(get_text_hash(
+        else:  # TODO: check that we found at least one
+            logger.debug('Found hash: {}'.format(get_text_hash(
                 annoset.sentence.text)))
 
 
@@ -41,18 +42,22 @@ def _has_overlapping_fes(annoset):
     labels_indexes = []
     for label in annoset.labelstore.labels_by_layer_name['FE']:
         if label.start == -1 and label.end == -1:
-            # CNI, DNI, INI cases
-            continue
-        for index in labels_indexes:
-            if (label.start >= index[0] and label.start <= index[1]) or \
-             (label.end >= index[0] and label.end <= index[1]):
+            continue  # CNI, DNI, INI cases
+        for start, end in labels_indexes:
+            if label.start >= start and label.start <= end:
+                return True
+            if label.end >= start and label.end <= end:
+                return True
+            if label.start <= start and label.end >= end:
                 return True
         labels_indexes.append((label.start, label.end))
     return False
 
 
 def _has_invalid_labels(annoset):
+    #print('Checking filtering options on annoset #{}'.format(annoset._id))
     for label in annoset.labelstore.labels:
+        #print(label.start, label.end)
         # if the label has an unspecified start/end index
         if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
             return True
@@ -74,9 +79,14 @@ def _is_valid_annoset(annoset, filtering_options):
     if 'overlap_fes' in filtering_options:
         if _has_overlapping_fes(annoset):
             return False
-    # Remove annosets with discontinuous frame elements (for rofames?)
-    if 'disct_fes' in filtering_options:
-        pass
+    # Remove annosets with discontinuous frame elements
+    if 'disc_fes' in filtering_options:
+        if _has_discontinuous_fes(annoset):
+            return False
+    # Remove annosets with discontinuous targets
+    if 'disc_targets' in filtering_options:
+        if _has_discontinuous_targets(annoset):
+            return False
     # Filter annosets with no frame element layers
     if 'no_fes' in filtering_options:
         pass  # TODO: don't check only layers, check also labels

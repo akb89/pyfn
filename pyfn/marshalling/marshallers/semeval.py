@@ -81,15 +81,15 @@ def _marshall_annosets(annosets, output_filepath):
     paragraphs_tag = etree.SubElement(document_tag, 'paragraphs')
     paragraph_tag = etree.SubElement(paragraphs_tag, 'paragraph')
     sentences_tag = etree.SubElement(paragraph_tag, 'sentences')
-    sent_hash = ''
+    sent_text = ''
     sent_id = 1
     annoset_id = 1
     layer_id = 1
     label_id = 1
     for annoset in f_utils.filter_and_sort_annosets(annosets, []):
-        if sent_hash != f_utils.get_text_hash(annoset.sentence.text):
+        if annoset.sentence.text != sent_text:
             sentence = _get_sentence_tag(annoset, sentences_tag, sent_id)
-            sent_hash = f_utils.get_text_hash(annoset.sentence.text)
+            sent_text = annoset.sentence.text
             annosets_tag = etree.SubElement(sentence, 'annotationSets')
         annoset_tag = _get_annoset_tag(annosets_tag, annoset, annoset_id)
         annoset_id += 1

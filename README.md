@@ -17,6 +17,44 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [ ] BIOS to SEMEVAL
 - [ ] CoNLL to SEMEVAL
 
+
+Special limit case to test for BIOS marshalling:
+with wrong tokenization of `doin'tonight` labels are on `doin` which needs to
+be taken into account in the `_get_fe_label` function
+```
+<sentence corpID="204" docID="709" sentNo="3" paragNo="29" aPos="0" ID="1277105">
+        <text>There 's some stuff that we could doin'tonight .</text>
+<annotationSet cDate="09/17/2007 02:39:01 PDT Mon" luID="10156" luName="can.v" frameID="990" frameName="Capability" status="MANUAL" ID="2016063">
+            <layer rank="1" name="Target">
+                <label cBy="361" end="32" start="28" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="361" feID="5982" bgColor="008000" fgColor="FFFFFF" end="37" start="34" name="Event"/>
+                <label cBy="361" feID="5982" bgColor="008000" fgColor="FFFFFF" end="18" start="9" name="Event"/>
+                <label cBy="361" feID="5982" bgColor="008000" fgColor="FFFFFF" end="23" start="20" name="Event"/>
+                <label cBy="361" feID="5981" bgColor="FF0000" fgColor="FFFFFF" end="26" start="25" name="Entity"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="37" start="34" name="Dep"/>
+                <label end="18" start="9" name="Dep"/>
+                <label end="23" start="20" name="Dep"/>
+                <label end="26" start="25" name="Ext"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="37" start="34" name="VPbrst"/>
+                <label end="18" start="9" name="VPbrst"/>
+                <label end="23" start="20" name="VPbrst"/>
+                <label end="26" start="25" name="NP"/>
+            </layer>
+            <layer rank="1" name="Other">
+                <label end="18" start="9" name="Ant"/>
+                <label end="23" start="20" name="Rel"/>
+            </layer>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Verb"/>
+        </annotationSet>
+```
+
 ## HowTo
 For all usages of pyfn, your FrameNet splits directory should follow:
 ```

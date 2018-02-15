@@ -43,6 +43,9 @@ def _get_labelstore(lines, tokens, text, labelstore):
     # 3. continuous I-tag (coming right after the same B or I tag)
     # 4 discontinuous I-tag (not coming after the same B or I tag)
     if not _has_fe_labels(lines):
+        for label in labelstore.labels:
+            if label.end is None:
+                print('Could not assign end index for label {} in lines {}'.format(label.name, lines))
         return labelstore
     for line in lines:
         line_split = line.split('\t')
@@ -67,8 +70,6 @@ def _get_labelstore(lines, tokens, text, labelstore):
                     labelstore.labels.append(label)
                     return _get_labelstore(lines[lines.index(iline):],
                                            tokens, text, labelstore)
-            if label.end is None:
-                print('Could not assign end index')
             labelstore.labels.append(label)
             return labelstore
         elif line_split[14].startswith('I-'):
@@ -77,6 +78,9 @@ def _get_labelstore(lines, tokens, text, labelstore):
                 'for line [{}] in sentence \'{}\'. Discontinuous FEs are not '
                 'supported by pyfn for the BIOS tagging format'.format(
                     line, ' '.join(tokens)))
+    for label in labelstore.labels:
+        if label.end is None:
+            print('Could not assign end index for label {} in lines {}'.format(label.name, lines))
     return labelstore
 
 

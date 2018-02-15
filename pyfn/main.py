@@ -110,7 +110,8 @@ def main():
                                 help='''Filtering options for the training set:
     - overlap_fes: filters out all overlapping frame elements (e.g. for training
     with BIOS-tagged data which do not support overlapping fes)
-    - disct_fes: filters out discontinuous frame elements
+    - disc_fes: filters out discontinuous frame elements
+    - disc_targets: filters out discontinuous targets
     - no_fes: filters out annotationsets with no frame element layer
     ''')
     args = parser.parse_args()
