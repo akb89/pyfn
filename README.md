@@ -17,6 +17,33 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [ ] BIOS to SEMEVAL
 - [ ] CoNLL to SEMEVAL
 
+
+## Duplicates in test set
+In the test set there can be duplicate annotationsets. Ex:
+```xml
+<sentence ID="246">
+  <text>The pilot perished in the crash .</text>
+  <annotationSets>
+    <annotationSet ID="786" frameName="Death">
+      <layers>
+        <layer ID="1553" name="Target">
+          <labels>
+            <label ID="2343" name="Target" start="10" end="17"/>
+          </labels>
+        </layer>
+        <layer ID="1554" name="FE">
+          <labels>
+            <label ID="2344" name="Protagonist" start="0" end="8"/>
+            <label ID="2345" name="Sub_event" start="19" end="30"/>
+            <label ID="2346" name="Cause" start="19" end="30"/>
+          </labels>
+        </layer>
+      </layers>
+    </annotationSet>
+  </annotationSets>
+</sentence>
+```
+
 ## Refactoring and test set
 With our refactoring on the test set, we went from 4428 annotationsets
 to 4457 annotationsets
@@ -25,7 +52,7 @@ to 4457 annotationsets
 Special limit case to test for BIOS marshalling:
 with wrong tokenization of `doin'tonight` labels are on `doin` which needs to
 be taken into account in the `_get_fe_label` function
-```
+```xml
 <sentence corpID="204" docID="709" sentNo="3" paragNo="29" aPos="0" ID="1277105">
         <text>There 's some stuff that we could doin'tonight .</text>
 <annotationSet cDate="09/17/2007 02:39:01 PDT Mon" luID="10156" luName="can.v" frameID="990" frameName="Capability" status="MANUAL" ID="2016063">

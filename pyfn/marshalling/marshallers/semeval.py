@@ -64,7 +64,6 @@ def _get_annoset_tag(annosets_tag, annoset, annoset_id):
 def _get_sentence_tag(annoset, sentences_tag, sent_id):
     sentence_tag = etree.SubElement(sentences_tag, 'sentence')
     sentence_tag.set('ID', str(sent_id))
-    sent_id += 1
     text = etree.SubElement(sentence_tag, 'text')
     text.text = annoset.sentence.text
     return sentence_tag
@@ -90,6 +89,7 @@ def _marshall_annosets(annosets, output_filepath):
     for annoset in f_utils.filter_and_sort_annosets(annosets, []):
         if annoset.sentence.text != sent_text:
             sentence = _get_sentence_tag(annoset, sentences_tag, sent_id)
+            sent_id += 1
             sent_text = annoset.sentence.text
             annosets_tag = etree.SubElement(sentence, 'annotationSets')
         annoset_tag = _get_annoset_tag(annosets_tag, annoset, annoset_id)

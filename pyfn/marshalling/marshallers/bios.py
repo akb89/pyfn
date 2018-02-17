@@ -111,12 +111,15 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
     if len(token_index_3uples) != len(pos_tags) or len(pos_tags) != len(ppos_tags):
         raise InvalidParameterError('')
     for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
-        if not train_mode or 'FE' not in annoset.labelstore.labels_by_layer_name:
+        if not train_mode:
             fe_label = '_'
         else:
-            fe_label = _get_fe_label(
-                token_3uple[1], token_3uple[2],
-                annoset.labelstore.labels_by_layer_name['FE'])
+            if 'FE' not in annoset.labelstore.labels_by_layer_name:
+                fe_label = 'O'
+            else:
+                fe_label = _get_fe_label(
+                    token_3uple[1], token_3uple[2],
+                    annoset.labelstore.labels_by_layer_name['FE'])
         bios_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
             token_num,
             token_3uple[0],
