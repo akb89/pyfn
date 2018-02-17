@@ -103,7 +103,7 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
     bios_lines = []
     token_index_3uples = _get_token_index_3uples(annoset.sentence.text)
     sent_num = _get_sent_num(annoset.sentence, sent_dict)
-    token_num = 0
+    token_num = 1
     pos_tags = _get_tokens_pos(
         token_index_3uples, annoset.sentence.pnw_labelstore.labels_by_indexes)
     ppos_tags = _get_tokens_ppos(annoset.sentence.text)

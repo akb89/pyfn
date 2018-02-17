@@ -47,6 +47,7 @@ def _add_target_labels(layers_tag, layer_id, annoset, label_id):
     for target_index in annoset.target.indexes:
         target_label = etree.SubElement(target_labels, 'label')
         target_label.set('ID', str(label_id))
+        target_label.set('name', 'Target')
         label_id += 1
         target_label.set('start', str(target_index[0]))
         target_label.set('end', str(target_index[1]))

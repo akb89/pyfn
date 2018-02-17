@@ -52,10 +52,13 @@ def _convert(args):
         if args.source_format == 'fnxml':
             splits_name = args.splits
             annosets = annosets_dict[splits_name]
+            output_filepath = os.path.join(args.target_path, '{}.gold.xml'.format(
+                splits_name))
         if args.source_format == 'bios':
-            splits_name = _extract_splits_name(args.source_path)
-        output_filepath = os.path.join(args.target_path, '{}.gold.xml'.format(
-            splits_name))
+        #     splits_name = _extract_splits_name(args.source_path)
+        #     splits_type = 'predicted'
+            output_filepath = args.target_path
+            print(output_filepath)
         semeval.marshall_annosets(annosets, output_filepath)
 
 
@@ -99,7 +102,7 @@ def main():
                                      'splits. Default to false')
     parser_convert.add_argument('--splits',
                                 choices=['train', 'dev', 'test'],
-                                default='train',
+                                default='test',
                                 help='Names of FrameNet splits to be unmarshalled')
     parser_convert.add_argument('--sent',
                                 default='__undefined__',
@@ -112,7 +115,7 @@ def main():
     with BIOS-tagged data which do not support overlapping fes)
     - disc_fes: filters out discontinuous frame elements
     - disc_targets: filters out discontinuous targets
-    - no_fes: filters out annotationsets with no frame element layer
+    - no_fes: filters out annotationsets with no frame element layers
     ''')
     args = parser.parse_args()
     args.func(args)

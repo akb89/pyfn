@@ -24,7 +24,7 @@ def _has_fe_labels(lines):
 
 def _get_end_index(token_num, tokens, text):
     return _get_start_index(token_num, tokens, text) \
-        + len(tokens[token_num]) - 1
+        + len(tokens[token_num-1]) - 1
 
 
 def _get_start_index(token_num, tokens, text):
@@ -32,7 +32,7 @@ def _get_start_index(token_num, tokens, text):
     for token_index, token in enumerate(tokens):
         while text[start] != token[0]:
             start += 1
-        if token_index == token_num:
+        if token_index + 1 == token_num:
             return start
         start += len(token)
 
@@ -82,7 +82,7 @@ def _update_annoset_target(annoset, tokens, token_index, lexunit,
                            last_target_token_index):
     if not annoset.target:
         annoset.target = Target(
-            string=tokens[token_index],
+            string=tokens[token_index-1],
             lexunit=lexunit,
             indexes=[(_get_start_index(token_index, tokens,
                                        annoset.sentence.text),

@@ -17,6 +17,10 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [ ] BIOS to SEMEVAL
 - [ ] CoNLL to SEMEVAL
 
+## Refactoring and test set
+With our refactoring on the test set, we went from 4428 annotationsets
+to 4457 annotationsets
+
 
 Special limit case to test for BIOS marshalling:
 with wrong tokenization of `doin'tonight` labels are on `doin` which needs to
