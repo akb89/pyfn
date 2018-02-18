@@ -90,23 +90,51 @@ def _is_valid_annoset(annoset, filtering_options):
     # Filter annosets with no frame element layers
     if 'no_fes' in filtering_options:
         pass  # TODO: don't check only layers, check also labels
+        #  the semeval evaluation script will skip sentences with no gold FEs
     return True
+
+
+def _get_target_index_hash(target):
+    return '#'.join(['{}#{}'.format(start, end) for (start, end)
+                     in target.indexes])
+
+
+def _get_annoset_target_hash(annoset):
+    return '{}#{}#{}#{}'.format(
+        annoset.target.string, _get_target_index_hash(annoset.target),
+        annoset.target.lexunit.name, annoset.target.lexunit.frame.name)
+
+
+def _get_annoset_hash(annoset):
+    """Aggressive filtering: may remove non-duplicate annosets but guarantees
+    that not duplicates will remain.
+    """
+    return '{}#{}#{}#{}'.format(get_text_hash(annoset.sentence.text),
+                                annoset.target.string,
+                                annoset.target.lexunit.name,
+                                annoset.target.lexunit.frame.name)
 
 
 def _filter_annosets(annosets, filtering_options):
     """Filter annosets."""
+    annoset_hash_set = set()
     for annoset in annosets:
-        if _is_valid_annoset(annoset, filtering_options):
+        # if _is_valid_annoset(annoset, filtering_options):
+        #     yield annoset
+        annoset_hash = _get_annoset_hash(annoset)
+        if _is_valid_annoset(annoset, filtering_options) and annoset_hash not in annoset_hash_set:
+            annoset_hash_set.add(annoset_hash)
             yield annoset
 
 
 def _sort_annosets(annosets):
     """Sort a list of pyfn.AnnotationSet objects.
 
-    Sort by annoset.sentence._id first and then by annoset._id
+    Sort by annoset.sentence.text first and then by annoset target hash
+    (target.string#target.start#target.end#target.lexunit.name#target.lexunit.frame.name)
     """
-    return sorted(annosets, key=lambda annoset: (annoset.sentence._id,
-                                                 annoset._id))
+    return sorted(annosets, key=lambda annoset: (annoset.sentence.text,  # sort by sentence text as sentences with same text can have different _id
+                                                 _get_annoset_target_hash(annoset)))
 
 
 def filter_and_sort_annosets(annosets, filtering_options):

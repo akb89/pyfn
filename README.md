@@ -14,8 +14,12 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [x] FN to BIOS
 - [x] FN to SEMEVAL
 - [ ] FN to CoNLL
-- [ ] BIOS to SEMEVAL
+- [x] BIOS to SEMEVAL
 - [ ] CoNLL to SEMEVAL
+- [ ] pos tagging MXPOST (BIOS and CONLL)
+- [ ] pos tagging NLP4J (BIOS and CONLL)
+- [ ] dep parsing MST (BIOS and CONLL)
+- [ ] dep parsing with BMST or BARCH (BIOS and CONLL)
 
 
 ## Duplicates in test set

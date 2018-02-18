@@ -66,7 +66,7 @@ class Target():
 
     @property
     def indexes(self):
-        """Return a list of index tuples (start, end)."""
+        """Return a (sorted) list of index tuples (start, end)."""
         return sorted(self._indexes)
 
     @property

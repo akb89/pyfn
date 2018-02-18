@@ -82,7 +82,7 @@ def _marshall_annosets(annosets, output_filepath):
     paragraph_tag = etree.SubElement(paragraphs_tag, 'paragraph')
     sentences_tag = etree.SubElement(paragraph_tag, 'sentences')
     sent_text = ''
-    sent_id = 1
+    sent_id = 0  # to match the semval numbering of sentences
     annoset_id = 1
     layer_id = 1
     label_id = 1
