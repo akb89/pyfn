@@ -25,8 +25,40 @@ __all__ = ['marshall_annosets_dict']
 logger = logging.getLogger(__name__)
 
 
+def _get_token_num(index, text):
+    token_num = -1
+    prev_char_is_whitespace = True
+    for char_index, char in enumerate(text):
+        if char.isspace():
+            prev_char_is_whitespace = True
+            continue
+        else:
+            if prev_char_is_whitespace:
+                token_num += 1
+            prev_char_is_whitespace = False
+        if char_index == index:
+            return token_num
+    raise Exception('Could not determine token number for char index '
+                    '{} in sentence \'{}\''
+                    .format(index, text))
+
+
 def _get_fe_chunks(annoset):
-    return
+    # Annosets are filtered so no start/end index points at a whitespace
+    fe_chunks = ''
+    if 'FE' not in annoset.labelstore.labels_by_layer_name:
+        return fe_chunks
+    for label in annoset.labelstore.labels_by_layer_name['FE']:
+        if label.start != -1 and label.end != -1:
+            start_token = _get_token_num(label.start, annoset.sentence.text)
+            end_token = _get_token_num(label.end, annoset.sentence.text)
+            if start_token == end_token:
+                fe_chunks = '{}\t{}\t{}'.format(
+                    fe_chunks, label.name, start_token).strip()
+            else:
+                fe_chunks = '{}\t{}\t{}:{}'.format(
+                    fe_chunks, label.name, start_token, end_token).strip()
+    return fe_chunks
 
 
 def _get_frame_fe_num(annoset):
@@ -39,38 +71,40 @@ def _get_frame_fe_num(annoset):
     return frame_fe_num
 
 
-def _get_target_token_num(start, end, text):
-    token_num = -1
-    prev_char_is_whitespace = True
-    for index, char in enumerate(text):
-        if char.isspace():
-            prev_char_is_whitespace = True
-            continue
+def _get_max_index(indexes):
+    max_index = -1
+    for (start, end) in indexes:
+        if start == -1 or end == -1:
+            raise InvalidParameterError('Target start/end indexes are '
+                                        'undefined')
+        if max_index == -1:
+            max_index = max(start, end)
         else:
-            if prev_char_is_whitespace:
-                token_num += 1
-            prev_char_is_whitespace = False
-        if index == end:
-            return token_num
-    raise Exception('Could not determine target token number for target '
-                    'with (start, end) indexes ({}, {}) in sentence \'{}\''
-                    .format(start, end, text))
+            max_index = max(max_index, start, end)
+    return max_index
 
 
-def _get_target_token_nums(indexes, text):
-    return '{}_{}'.format(_get_target_token_num(indexes[0][0],
-                                                indexes[0][1], text),
-                          _get_target_token_num(indexes[-1][0],
-                                                indexes[-1][1], text))
+def _get_min_index(indexes):
+    min_index = -1
+    for (start, end) in indexes:
+        if start == -1 or end == -1:
+            raise InvalidParameterError('Target start/end indexes are '
+                                        'undefined')
+        if min_index == -1:
+            min_index = min(start, end)
+        else:
+            min_index = min(min_index, start, end)
+    return min_index
 
 
-def _get_annoset_target_token_nums(annoset):
-    if len(annoset.target.indexes) == 1:
-        return _get_target_token_num(annoset.target.indexes[0][0],
-                                     annoset.target.indexes[0][1],
-                                     annoset.sentence.text)
-    return _get_target_token_nums(annoset.target.indexes,
-                                  annoset.sentence.text)
+def _get_target_token_num(target, text):
+    min_index = _get_min_index(target.indexes)
+    max_index = _get_max_index(target.indexes)
+    min_token_num = _get_token_num(min_index, text)
+    max_token_num = _get_token_num(max_index, text)
+    if min_token_num == max_token_num:
+        return min_token_num
+    return '{}_{}'.format(min_token_num, max_token_num)
 
 
 def _get_semafor_line(annoset, sent_dict, train_mode):
@@ -78,17 +112,17 @@ def _get_semafor_line(annoset, sent_dict, train_mode):
         return '1\t0.0\t1\t{}\t{}\t{}\t{}\t{}'.format(
             annoset.target.lexunit.frame.name,
             annoset.target.lexunit.name,
-            _get_annoset_target_token_nums(annoset),
+            _get_target_token_num(annoset.target, annoset.sentence.text),
             annoset.target.string,
             marsh_utils.get_sent_num(annoset.sentence.text, sent_dict))
     return '1\t0.0\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
         _get_frame_fe_num(annoset),
         annoset.target.lexunit.frame.name,
         annoset.target.lexunit.name,
-        _get_annoset_target_token_nums(annoset),
+        _get_target_token_num(annoset.target, annoset.sentence.text),
         annoset.target.string,
         marsh_utils.get_sent_num(annoset.sentence.text, sent_dict),
-        _get_fe_chunks(annoset))
+        _get_fe_chunks(annoset)).strip()
 
 
 def _marshall_semafor(annosets, filtering_options, sent_dict,
