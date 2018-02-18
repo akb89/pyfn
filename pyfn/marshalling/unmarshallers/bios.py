@@ -36,6 +36,7 @@ def _get_start_index(token_num, tokens, text):
             return start
         start += len(token)
 
+
 def _get_labelstore(lines, tokens, text, labelstore):
     # Multiple cases to handle:
     # 1. S-tag
@@ -59,7 +60,8 @@ def _get_labelstore(lines, tokens, text, labelstore):
                                                  text))
             for iline in lines[lines.index(line)+1:]:
                 iline_split = iline.split('\t')
-                if iline_split[14].startswith('I-') and iline_split[14][2:] == label_name:
+                if iline_split[14].startswith('I-') \
+                 and iline_split[14][2:] == label_name:
                     label.end = _get_end_index(int(iline_split[0]),
                                                tokens, text)
                     continue
@@ -139,18 +141,40 @@ def _get_sent_dict(sent_filepath):
     return sent_dict
 
 
-def unmarshall_annosets(bios_filepath, sent_filepath):
-    """Unmarshall a BIOS-tagged file to pyfn.AnnotationSet objects."""
+def _create_sent_dict(bios_filepath):
+    sent_dict = {}
+    with open(bios_filepath, 'r') as bios_stream:
+        tokens = []
+        sent_index = -1
+        for line in bios_stream:
+            line = line.strip()
+            if line != '':
+                tokens.append(line.split('\t')[1])
+                sent_index = int(line.split('\t')[6])
+            else:
+                sent_dict[sent_index] = ' '.join(tokens)
+                tokens = []
+    return sent_dict
+
+
+def unmarshall_annosets(bios_filepath, sent_filepath=None):
+    """Unmarshall a BIOS-tagged file to pyfn.AnnotationSet objects.
+
+    If the sent_filepath is specified, the sentences dict will be created
+    from the .sentences file. Else, it will be created from the tokens in
+    the .bios file.
+    """
     annosets = []
-    sent_dict = _get_sent_dict(sent_filepath)
+    if sent_filepath:
+        sent_dict = _get_sent_dict(sent_filepath)
+    else:
+        sent_dict = _create_sent_dict(bios_filepath)
     with open(bios_filepath, 'r') as bios_stream:
         index = -1
         annoset_id = 0
         lines = []
         for line in bios_stream:
-            line = line.rstrip()  # Careful: in gold FN data, some lines are
-            # not trimmed. Ex: '_whitespace_ Simply put , Stephanopoulos did
-            # as much...'
+            line = line.strip()
             if line != '':
                 line_split = line.split('\t')
                 sent_index = int(line_split[6])

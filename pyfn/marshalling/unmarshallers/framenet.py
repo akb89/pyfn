@@ -149,6 +149,9 @@ def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
 
 def _extract_sentence_text(sentence_tag):
     text_tag = sentence_tag.find('fn:text', const.FN_XML_NAMESPACE)
+    # Careful: in gold FN data, some lines are
+    # not trimmed. Ex: '_whitespace_ Simply put , Stephanopoulos did
+    # as much...' hence the rstrip and not a simple strip
     if text_tag is not None:
         return text_tag.text.rstrip()
     return sentence_tag.find('text').text.rstrip()

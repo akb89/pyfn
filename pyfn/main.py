@@ -8,6 +8,7 @@ import logging
 import argparse
 
 import pyfn.marshalling.marshallers.bios as biosm
+import pyfn.marshalling.marshallers.semafor as semaform
 import pyfn.marshalling.marshallers.semeval as semeval
 import pyfn.marshalling.unmarshallers.bios as biosu
 import pyfn.marshalling.unmarshallers.framenet as fnxml
@@ -45,21 +46,26 @@ def _convert(args):
                 'to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = biosu.unmarshall_annosets(args.source_path, args.sent)
+    if args.source_format == 'semafor':
+        pass
     if args.target_format == 'bios':
+        output_sentences = args.output_sentences == 'true'
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
-                                     args.filter)
+                                     args.filter, output_sentences)
     if args.target_format == 'semeval':
         if args.source_format == 'fnxml':
             splits_name = args.splits
             annosets = annosets_dict[splits_name]
-            output_filepath = os.path.join(args.target_path, '{}.gold.xml'.format(
-                splits_name))
+            output_filepath = os.path.join(args.target_path,
+                                           '{}.gold.xml'.format(splits_name))
         if args.source_format == 'bios':
-        #     splits_name = _extract_splits_name(args.source_path)
-        #     splits_type = 'predicted'
             output_filepath = args.target_path
             print(output_filepath)
         semeval.marshall_annosets(annosets, output_filepath)
+    if args.target_format == 'semafor':
+        output_sentences = args.output_sentences == 'true'
+        semaform.marshall_annosets_dict(annosets_dict, args.target_path,
+                                        args.filter, output_sentences)
 
 
 def main():
@@ -79,16 +85,18 @@ def main():
                                 help='Absolute filepath to target file')
     parser_convert.add_argument('--from', required=True,
                                 dest='source_format',
-                                choices=['conll', 'bios', 'semeval', 'fnxml'],
+                                choices=['semafor', 'bios', 'semeval',
+                                         'fnxml'],
                                 help='''Source format. Choose between:
-    - conll: the CoNLL format used by the semafor parser
+    - semafor: the format used by the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
     ''')
     parser_convert.add_argument('--to', required=True,
                                 dest='target_format',
-                                choices=['conll', 'bios', 'semeval', 'fnxml'],
+                                choices=['semafor', 'bios', 'semeval',
+                                         'fnxml'],
                                 help='''Target format. Choose between:
     - conll: the CoNLL format used by the semafor parser
     - bios: the BIOS format used by the open-sesame parser
@@ -100,19 +108,27 @@ def main():
                                 default='false',
                                 help='Whether or not to use exemplars in '
                                      'splits. Default to false')
+    parser_convert.add_argument('--output_sentences',
+                                choices=['true', 'false'],
+                                default='false',
+                                help='Whether or not to output the .sentences '
+                                     'files in bios or semafor marshalling')
     parser_convert.add_argument('--splits',
                                 choices=['train', 'dev', 'test'],
                                 default='test',
-                                help='Names of FrameNet splits to be unmarshalled')
+                                help='Names of FrameNet splits to be '
+                                     'unmarshalled')
     parser_convert.add_argument('--sent',
                                 default='__undefined__',
-                                help='Absolute path to the {train,dev,test}.sentences file for BIOS unmarshalling')
+                                help='Absolute path to the '
+                                     '{train,dev,test}.sentences file for '
+                                     'BIOS unmarshalling')
     parser_convert.add_argument('--filter',
                                 nargs='+',
                                 default=[],
                                 help='''Filtering options for the training set:
-    - overlap_fes: filters out all overlapping frame elements (e.g. for training
-    with BIOS-tagged data which do not support overlapping fes)
+    - overlap_fes: filters out all overlapping frame elements (e.g. for
+    training with BIOS-tagged data which do not support overlapping fes)
     - disc_fes: filters out discontinuous frame elements
     - disc_targets: filters out discontinuous targets
     - no_fes: filters out annotationsets with no frame element layers

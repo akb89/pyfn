@@ -55,9 +55,8 @@ def _has_overlapping_fes(annoset):
 
 
 def _has_invalid_labels(annoset):
-    #print('Checking filtering options on annoset #{}'.format(annoset._id))
+    """Checking for both FE and Target labels."""
     for label in annoset.labelstore.labels:
-        #print(label.start, label.end)
         # if the label has an unspecified start/end index
         if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
             return True
@@ -119,10 +118,9 @@ def _filter_annosets(annosets, filtering_options):
     """Filter annosets."""
     annoset_hash_set = set()
     for annoset in annosets:
-        # if _is_valid_annoset(annoset, filtering_options):
-        #     yield annoset
         annoset_hash = _get_annoset_hash(annoset)
-        if _is_valid_annoset(annoset, filtering_options) and annoset_hash not in annoset_hash_set:
+        if _is_valid_annoset(annoset, filtering_options) \
+         and annoset_hash not in annoset_hash_set:
             annoset_hash_set.add(annoset_hash)
             yield annoset
 
@@ -133,8 +131,10 @@ def _sort_annosets(annosets):
     Sort by annoset.sentence.text first and then by annoset target hash
     (target.string#target.start#target.end#target.lexunit.name#target.lexunit.frame.name)
     """
-    return sorted(annosets, key=lambda annoset: (annoset.sentence.text,  # sort by sentence text as sentences with same text can have different _id
-                                                 _get_annoset_target_hash(annoset)))
+    # sort by sentence text as sentences with same text can have different _id
+    return sorted(annosets, key=lambda annoset: (annoset.sentence.text,
+                                                 _get_annoset_target_hash(
+                                                     annoset)))
 
 
 def filter_and_sort_annosets(annosets, filtering_options):
