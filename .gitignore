@@ -103,3 +103,4 @@ pyfntest.py
 debug.py
 .pytest_*
 data/
+resources/
