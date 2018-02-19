@@ -35,10 +35,9 @@ def _convert(args):
             'source/target paths')
     # TODO: add validation for input directory structure
     if args.source_format == 'fnxml':
-        with_exemplars = args.with_exemplars == 'true'
         annosets_dict = fnxml.get_annosets_dict(args.source_path,
                                                 args.splits,
-                                                with_exemplars)
+                                                args.with_exemplars)
     if args.source_format == 'bios':
         if args.sent == '__undefined__':
             raise InvalidParameterError(
@@ -54,9 +53,8 @@ def _convert(args):
                 '.sentences file absolute filepath')
         annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
-        output_sentences = args.output_sentences == 'true'
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
-                                     args.filter, output_sentences)
+                                     args.filter, args.output_sentences)
     if args.target_format == 'semeval':
         if args.source_format == 'fnxml':
             splits_name = args.splits
@@ -67,9 +65,8 @@ def _convert(args):
             output_filepath = args.target_path
         semeval.marshall_annosets(annosets, output_filepath)
     if args.target_format == 'semafor':
-        output_sentences = args.output_sentences == 'true'
         semaform.marshall_annosets_dict(annosets_dict, args.target_path,
-                                        args.filter, output_sentences)
+                                        args.filter, args.output_sentences)
 
 
 def main():
@@ -108,13 +105,11 @@ def main():
     - fnxml: the standard FrameNet XML format
     ''')
     parser_convert.add_argument('--with_exemplars',
-                                choices=['true', 'false'],
-                                default='false',
+                                action='store_true', default=False,
                                 help='Whether or not to use exemplars in '
                                      'splits. Default to false')
     parser_convert.add_argument('--output_sentences',
-                                choices=['true', 'false'],
-                                default='false',
+                                action='store_true', default=False,
                                 help='Whether or not to output the .sentences '
                                      'files in bios or semafor marshalling')
     parser_convert.add_argument('--splits',
