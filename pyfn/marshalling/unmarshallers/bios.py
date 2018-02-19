@@ -1,5 +1,7 @@
 """Unmarshalling BIOS tagging format to pyfn.AnnotationSet objects."""
 
+import pyfn.utils.marshalling as marsh_utils
+
 from pyfn.exceptions.parameter import InvalidParameterError
 
 from pyfn.models.annotationset import AnnotationSet
@@ -22,21 +24,6 @@ def _has_fe_labels(lines):
     return False
 
 
-def _get_end_index(token_num, tokens, text):
-    return _get_start_index(token_num, tokens, text) \
-        + len(tokens[token_num-1]) - 1
-
-
-def _get_start_index(token_num, tokens, text):
-    start = 0
-    for token_index, token in enumerate(tokens):
-        while text[start] != token[0]:
-            start += 1
-        if token_index + 1 == token_num:
-            return start
-        start += len(token)
-
-
 def _get_labelstore(lines, tokens, text, labelstore):
     # Multiple cases to handle:
     # 1. S-tag
@@ -49,20 +36,20 @@ def _get_labelstore(lines, tokens, text, labelstore):
         line_split = line.split('\t')
         if line_split[14].startswith('S-'):
             label = Label(name=line_split[14][2:], layer=Layer(name='FE'),
-                          start=_get_start_index(int(line_split[0]), tokens,
+                          start=marsh_utils.get_start_index(int(line_split[0])-1, tokens,
                                                  text),
-                          end=_get_end_index(int(line_split[0]), tokens, text))
+                          end=marsh_utils.get_end_index(int(line_split[0])-1, tokens, text))
             labelstore.labels.append(label)
         elif line_split[14].startswith('B-'):
             label_name = line_split[14][2:]
             label = Label(name=label_name, layer=Layer(name='FE'),
-                          start=_get_start_index(int(line_split[0]), tokens,
+                          start=marsh_utils.get_start_index(int(line_split[0])-1, tokens,
                                                  text))
             for iline in lines[lines.index(line)+1:]:
                 iline_split = iline.split('\t')
                 if iline_split[14].startswith('I-') \
                  and iline_split[14][2:] == label_name:
-                    label.end = _get_end_index(int(iline_split[0]),
+                    label.end = marsh_utils.get_end_index(int(iline_split[0])-1,
                                                tokens, text)
                     continue
                 else:
@@ -84,24 +71,24 @@ def _update_annoset_target(annoset, tokens, token_index, lexunit,
                            last_target_token_index):
     if not annoset.target:
         annoset.target = Target(
-            string=tokens[token_index-1],
+            #string=tokens[token_index-1],  FIXME: the string needs to be updated
             lexunit=lexunit,
-            indexes=[(_get_start_index(token_index, tokens,
+            indexes=[(marsh_utils.get_start_index(token_index-1, tokens,
                                        annoset.sentence.text),
-                      _get_end_index(token_index, tokens,
+                      marsh_utils.get_end_index(token_index-1, tokens,
                                      annoset.sentence.text))])
     else:
         if token_index - last_target_token_index > 1:
             annoset.target.indexes.append(
-                (_get_start_index(token_index, tokens,
+                (marsh_utils.get_start_index(token_index-1, tokens,
                                   annoset.sentence.text),
-                 _get_end_index(token_index, tokens,
+                 marsh_utils.get_end_index(token_index-1, tokens,
                                 annoset.sentence.text)))
         else:
             annoset.target.indexes = [
                 (annoset.target.indexes[
                     len(annoset.target.indexes)-1][0],
-                 _get_end_index(token_index, tokens,
+                 marsh_utils.get_end_index(token_index-1, tokens,
                                 annoset.sentence.text))]
 
 
@@ -124,21 +111,6 @@ def _create_annoset(lines, sentence, annoset_id):
     annoset.labelstore = _get_labelstore(lines, tokens, sentence.text,
                                          LabelStore(labels=[]))
     return annoset
-
-
-def _create_sentence(_id, text):
-    return Sentence(_id=_id, text=text)
-
-
-def _get_sent_dict(sent_filepath):
-    sent_dict = {}
-    sent_iter = 0
-    with open(sent_filepath, 'r') as sent_stream:
-        for line in sent_stream:
-            line = line.rstrip()
-            sent_dict[sent_iter] = line
-            sent_iter += 1
-    return sent_dict
 
 
 def _create_sent_dict(bios_filepath):
@@ -166,7 +138,7 @@ def unmarshall_annosets(bios_filepath, sent_filepath=None):
     """
     annosets = []
     if sent_filepath:
-        sent_dict = _get_sent_dict(sent_filepath)
+        sent_dict = marsh_utils.get_sent_dict(sent_filepath)
     else:
         sent_dict = _create_sent_dict(bios_filepath)
     with open(bios_filepath, 'r') as bios_stream:
@@ -179,8 +151,8 @@ def unmarshall_annosets(bios_filepath, sent_filepath=None):
                 line_split = line.split('\t')
                 sent_index = int(line_split[6])
                 if sent_index != index:
-                    sentence = _create_sentence(sent_index,
-                                                sent_dict[sent_index])
+                    sentence = Sentence(_id=sent_index,
+                                        text=sent_dict[sent_index])
                     index = sent_index
                 lines.append(line)
             else:

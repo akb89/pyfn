@@ -99,17 +99,14 @@ def _get_target_index_hash(target):
 
 
 def _get_annoset_target_hash(annoset):
-    return '{}#{}#{}#{}'.format(
-        annoset.target.string, _get_target_index_hash(annoset.target),
-        annoset.target.lexunit.name, annoset.target.lexunit.frame.name)
+    return '{}#{}#{}'.format(_get_target_index_hash(annoset.target),
+                             annoset.target.lexunit.name,
+                             annoset.target.lexunit.frame.name)
 
 
 def _get_annoset_hash(annoset):
-    """Aggressive filtering: may remove non-duplicate annosets but guarantees
-    that not duplicates will remain.
-    """
     return '{}#{}#{}#{}'.format(get_text_hash(annoset.sentence.text),
-                                annoset.target.string,
+                                annoset.target.indexes,  # TODO: not sure about this. Same annosets for sentences with different tokenization may remain
                                 annoset.target.lexunit.name,
                                 annoset.target.lexunit.frame.name)
 

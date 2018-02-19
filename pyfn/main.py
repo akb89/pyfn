@@ -12,6 +12,7 @@ import pyfn.marshalling.marshallers.semafor as semaform
 import pyfn.marshalling.marshallers.semeval as semeval
 import pyfn.marshalling.unmarshallers.bios as biosu
 import pyfn.marshalling.unmarshallers.framenet as fnxml
+import pyfn.marshalling.unmarshallers.semafor as semaforu
 
 
 from pyfn.exceptions.parameter import InvalidParameterError
@@ -39,15 +40,19 @@ def _convert(args):
                                                 args.splits,
                                                 with_exemplars)
     if args.source_format == 'bios':
-        logger.info('Unmarshalling data from BIOS tagging format')
         if args.sent == '__undefined__':
             raise InvalidParameterError(
-                'Unspecified sentence file. For BIOS unmarshalling you need '
+                'Unspecified sentence file. For bios unmarshalling you need '
                 'to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = biosu.unmarshall_annosets(args.source_path, args.sent)
     if args.source_format == 'semafor':
-        pass
+        if args.sent == '__undefined__':
+            raise InvalidParameterError(
+                'Unspecified sentence file. For semafor unmarshalling you '
+                'need to specify the --sent parameter pointing at the '
+                '.sentences file absolute filepath')
+        annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
         output_sentences = args.output_sentences == 'true'
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
@@ -58,9 +63,8 @@ def _convert(args):
             annosets = annosets_dict[splits_name]
             output_filepath = os.path.join(args.target_path,
                                            '{}.gold.xml'.format(splits_name))
-        if args.source_format == 'bios':
+        if args.source_format == 'bios' or args.source_format == 'semafor':
             output_filepath = args.target_path
-            print(output_filepath)
         semeval.marshall_annosets(annosets, output_filepath)
     if args.target_format == 'semafor':
         output_sentences = args.output_sentences == 'true'

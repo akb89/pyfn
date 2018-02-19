@@ -39,7 +39,7 @@ def _extract_target_indexes(fn_labels):
 class Target():
     """FrameNet target class."""
 
-    def __init__(self, string, lexunit, indexes=None, pos_tags=None):
+    def __init__(self, string=None, lexunit=None, indexes=None, pos_tags=None):
         """Constructor."""
         self._string = string
         self._lexunit = lexunit
