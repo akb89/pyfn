@@ -14,6 +14,36 @@ Part-of-speech tag a given .sentences file with a specified tagger.
 EOF
 }
 
+convert_mxpost_to_conllx() {
+  INPUT_FILE=$1
+  OUTPUT_FINAL_FILE=$2
+  OUTPUT_TMP_FILE="/tmp/file.txt"
+  OUTPUT_TMP_DIR="/tmp/splitted"
+
+  rm $OUTPUT_TMP_FILE
+  rm $OUTPUT_FINAL_FILE
+  mkdir $OUTPUT_TMP_DIR;
+
+  perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > $OUTPUT_TMP_FILE
+
+  cd $OUTPUT_TMP_DIR;
+  csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
+
+  for i in $(ls $OUTPUT_TMP_DIR/*); do
+      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
+      echo "" >> $OUTPUT_FINAL_FILE
+  done;
+
+  cut -f 1 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.1.txt
+  cut -f 2 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.2.txt
+  cut -f 3 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.3.txt
+  perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
+
+  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > $OUTPUT_FINAL_FILE
+
+  rm -rf $OUTPUT_TMP_DIR;
+}
+
 is_input_file_set=FALSE
 is_tagger_set=FALSE
 
@@ -78,12 +108,13 @@ if [ "${tagger}" = "mxpost" ]; then
     pushd ${MXPOST_HOME}
     ./mxpost tagger.project < ${file} > ${file}.mxpost 2> ${LOGS_DIR}/mxpost.log
     echo "Done"
-    echo "Converting to .conllx format..."
+    echo "Converting .mxpost file to .conllx format..."
+    convert_mxpost_to_conllx ${file}.mxpost ${file}.mxpost.conllx
     echo "Done"
 fi
 
 if [ "${tagger}" = "nlp4j" ]; then
-    echo "Converting to NLP4J input format..."
+    echo "Converting .sentences to .tsv format..."
 
     echo "Done"
     echo "POS tagging via NLP4J..."
@@ -94,6 +125,6 @@ if [ "${tagger}" = "nlp4j" ]; then
       -oe nlp4j \
       -threads ${num_threads} > ${LOGS_DIR}/nlp4j.log
     echo "Done"
-    echo "Converting to .conllx format..."
+    echo "Converting .nlp4j to .conllx format..."
     echo "Done"
 fi
