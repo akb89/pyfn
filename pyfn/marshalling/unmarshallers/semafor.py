@@ -42,7 +42,8 @@ def _get_target(start_token, end_token, luname, framename, text):
     else:
         indexes = [(marsh_utils.get_start_index(start_token, text.split(),
                                                 text),
-                    marsh_utils.get_end_index(start_token, text.split(), text)),
+                    marsh_utils.get_end_index(start_token, text.split(),
+                                              text)),
                    (marsh_utils.get_start_index(end_token, text.split(),
                                                 text),
                     marsh_utils.get_end_index(end_token, text.split(),
