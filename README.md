@@ -13,13 +13,20 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 ## TODO
 - [x] FN to BIOS
 - [x] FN to SEMEVAL
-- [ ] FN to CoNLL
+- [x] FN to SEMAFOR
 - [x] BIOS to SEMEVAL
-- [ ] CoNLL to SEMEVAL
-- [ ] pos tagging MXPOST (BIOS and CONLL)
-- [ ] pos tagging NLP4J (BIOS and CONLL)
-- [ ] dep parsing MST (BIOS and CONLL)
-- [ ] dep parsing with BMST or BARCH (BIOS and CONLL)
+- [x] SEMAFOR to SEMEVAL
+- [x] pos tagging MXPOST
+- [x] pos tagging NLP4J
+- [ ] dep parsing MST
+- [ ] dep parsing with BMST or BARCH
+- [ ] lemmatize MXPOST
+- [ ] merge all.lemma.tags
+- [ ] merge .bios and .conllx
+- [ ] open-sesame frame data
+- [ ] frame identification
+- [ ] syntactic scaffolding
+- [ ] phrase structure parses
 
 
 ## Duplicates in test set
