@@ -56,7 +56,7 @@ convert_sentences_to_tsv() {
   rm ${OUTPUT_FINAL_FILE} 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
-  perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe 's/\n/\n\n/g'|perl -pe "s/ +/\n/g"|perl -pe 's/^$/_ù_ù_/g' > ${OUTPUT_TMP_FILE}
+  perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe "s/\n/\n\n/g" | perl -pe "s/ +/\n/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
 
   cd $OUTPUT_TMP_DIR;
   csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
@@ -79,6 +79,16 @@ convert_sentences_to_tsv() {
 convert_nlp4j_to_conllx() {
   local INPUT_FILE=$1
   local OUTPUT_FINAL_FILE=$2
+  local OUTPUT_TMP_DIR="/tmp/nlp4j"
+
+  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
+
+  cut -f 1-4 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/first.to.fourth
+  cut -f 4 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/fifth
+  cut -f 6 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/sixth
+  paste ${OUTPUT_TMP_DIR}/first.to.fourth ${OUTPUT_TMP_DIR}/fifth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth | perl -pe "s/^\t+$//g" > ${OUTPUT_FINAL_FILE}
+
+  rm -rf $OUTPUT_TMP_DIR;
 }
 
 is_input_file_set=FALSE
