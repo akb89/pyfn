@@ -15,21 +15,21 @@ EOF
 }
 
 convert_mxpost_to_conllx() {
-  INPUT_FILE=$1
-  OUTPUT_FINAL_FILE=$2
-  OUTPUT_TMP_FILE="/tmp/file.txt"
-  OUTPUT_TMP_DIR="/tmp/splitted"
+  local INPUT_FILE=$1
+  local OUTPUT_FINAL_FILE=$2
+  local OUTPUT_TMP_FILE="/tmp/file.txt"
+  local OUTPUT_TMP_DIR="/tmp/splitted"
 
   rm $OUTPUT_TMP_FILE 2> /dev/null
   rm $OUTPUT_FINAL_FILE 2> /dev/null
-  mkdir $OUTPUT_TMP_DIR; 2> /dev/null
+  mkdir $OUTPUT_TMP_DIR 2> /dev/null
 
   perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > $OUTPUT_TMP_FILE
 
   cd $OUTPUT_TMP_DIR;
   csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
 
-  for i in $(ls $OUTPUT_TMP_DIR/*); do
+  for i in $(find -s $OUTPUT_TMP_DIR -iname "0*"); do
       perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
       echo "" >> $OUTPUT_FINAL_FILE
   done;
@@ -42,39 +42,43 @@ convert_mxpost_to_conllx() {
   paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > $OUTPUT_FINAL_FILE
 
   rm -rf $OUTPUT_TMP_DIR;
+  cd -
 
 }
 
 convert_sentences_to_tsv() {
-  INPUT_FILE=$1
-  OUTPUT_FINAL_FILE=$2
-  OUTPUT_TMP_FILE="/tmp/file.txt"
-  OUTPUT_TMP_DIR="/tmp/splitted"
+  local INPUT_FILE=$1
+  local OUTPUT_FINAL_FILE=$2
+  local OUTPUT_TMP_FILE="/tmp/file.txt"
+  local OUTPUT_TMP_DIR="/tmp/splitted"
 
   rm ${OUTPUT_TMP_FILE} 2> /dev/null
   rm ${OUTPUT_FINAL_FILE} 2> /dev/null
-  mkdir ${OUTPUT_TMP_DIR};
+  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
-  perl -pe "s/\n/\ _ù_ù_\n/g" ${INPUT_FILE} | perl -pe "s/\s+/\n/g" | perl -i -n -e 'print if /\S/' | perl -pe "s/\_ù_ù_//g" > ${OUTPUT_TMP_FILE}
-  #perl -i -n -e 'print if /\S/' ${OUTPUT_TMP_FILE}
-  #perl -pe "s/\_ù_ù_//g" ${OUTPUT_TMP_FILE} > ${OUTPUT_TMP_FILE}
+  perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe 's/\n/\n\n/g'|perl -pe "s/ +/\n/g"|perl -pe 's/^$/_ù_ù_/g' > ${OUTPUT_TMP_FILE}
 
-  cd ${OUTPUT_TMP_DIR};
-  csplit -s -k -f "" -n 10 ${OUTPUT_TMP_FILE} "/_ù_ù_/" "{2000000}" 2> /dev/null
-  #
-  # for i in $(ls ${OUTPUT_TMP_DIR}/*); do
-  #     perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> ${OUTPUT_FINAL_FILE}
-  #     echo "" >> ${OUTPUT_FINAL_FILE}
-  # done;
-  #
-  # cut -f 1 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
-  # cut -f 2 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
-  # cut -f 3 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.3.txt
-  # perl -pe "s/[0-9]+/_/g" ${OUTPUT_TMP_DIR}/cutted.1.txt > ${OUTPUT_TMP_DIR}/cutted.0.txt
-  #
-  # paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.3.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > ${OUTPUT_FINAL_FILE}
-  #
-  # rm -rf ${OUTPUT_TMP_DIR};
+  cd $OUTPUT_TMP_DIR;
+  csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
+
+  for i in $(find -s $OUTPUT_TMP_DIR -iname "0*"); do
+      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
+      echo "" >> $OUTPUT_FINAL_FILE
+  done;
+
+  cut -f 1 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.1.txt
+  cut -f 2 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.2.txt
+  perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
+
+  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > $OUTPUT_FINAL_FILE
+
+  rm -rf $OUTPUT_TMP_DIR;
+  cd -
+}
+
+convert_nlp4j_to_conllx() {
+  local INPUT_FILE=$1
+  local OUTPUT_FINAL_FILE=$2
 }
 
 is_input_file_set=FALSE
@@ -151,6 +155,7 @@ if [ "${tagger}" = "nlp4j" ]; then
     convert_sentences_to_tsv ${file} ${file}.tsv
     echo "Done"
     echo "POS tagging via NLP4J..."
+
     sh ${NLP4J_HOME}/bin/nlpdecode \
       -c ${nlp4j_config} \
       -format tsv \
@@ -159,6 +164,6 @@ if [ "${tagger}" = "nlp4j" ]; then
       -threads ${num_threads} > ${LOGS_DIR}/nlp4j.log
     echo "Done"
     echo "Converting .nlp4j to .conllx format..."
-    #convert_nlp4j_to_conllx ${file}.tsv.nlp4j ${file}.nlp4j.conllx
+    convert_nlp4j_to_conllx ${file}.tsv.nlp4j ${file}.nlp4j.conllx
     echo "Done"
 fi
