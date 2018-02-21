@@ -69,6 +69,32 @@ def _has_invalid_labels(annoset):
     return False
 
 
+def _has_no_fes(annoset):
+    if not annoset.labelstore.labels_by_layer_name['FE']:
+        return True
+    return False
+
+
+def _has_discontinuous_target(annoset):
+    if len(annoset.target.indexes) == 1:
+        return False
+    prev_end = annoset.target.indexes[0][1]
+    for (start, end) in annoset.target.indexes[1:]:
+        if start - prev_end > 2:
+            return True
+        else:
+            prev_end = end
+    return False
+
+
+def _has_discontinuous_fes(annoset):
+    if not annoset.labelstore.labels_by_layer_name['FE']:
+        return False
+    for label in annoset.labelstore.labels_by_layer_name['FE']:
+        pass  # TODO: implement?
+    return False
+
+
 def _is_valid_annoset(annoset, filtering_options):
     # No matter what, remove annosets containing invalid labels, i.e. labels
     # with combined specified and unspecified start/end indexes
@@ -84,12 +110,13 @@ def _is_valid_annoset(annoset, filtering_options):
             return False
     # Remove annosets with discontinuous targets
     if 'disc_targets' in filtering_options:
-        if _has_discontinuous_targets(annoset):
+        if _has_discontinuous_target(annoset):
             return False
     # Filter annosets with no frame element layers
     if 'no_fes' in filtering_options:
-        pass  # TODO: don't check only layers, check also labels
-        #  the semeval evaluation script will skip sentences with no gold FEs
+        # the semeval evaluation script will skip sentences with no gold FEs
+        if _has_no_fes(annoset):
+            return False
     return True
 
 
@@ -106,15 +133,21 @@ def _get_annoset_target_hash(annoset):
 
 def _get_annoset_hash(annoset):
     return '{}#{}#{}#{}'.format(get_text_hash(annoset.sentence.text),
-                                annoset.target.indexes,  # TODO: not sure about this. Same annosets for sentences with different tokenization may remain
+                                annoset.target.indexes,  # TODO: not sure about
+                                # this. Same annosets for sentences with
+                                # different tokenization may remain
                                 annoset.target.lexunit.name,
                                 annoset.target.lexunit.frame.name)
 
 
-def _filter_annosets(annosets, filtering_options):
+def _filter_annosets(annosets, filtering_options, excluded_frames,
+                     excluded_annosets):
     """Filter annosets."""
     annoset_hash_set = set()
     for annoset in annosets:
+        if annoset._id in excluded_annosets \
+         or annoset.target.lexunit.frame.name in excluded_frames:
+            continue
         annoset_hash = _get_annoset_hash(annoset)
         if _is_valid_annoset(annoset, filtering_options) \
          and annoset_hash not in annoset_hash_set:
@@ -134,5 +167,7 @@ def _sort_annosets(annosets):
                                                      annoset)))
 
 
-def filter_and_sort_annosets(annosets, filtering_options):
-    return _sort_annosets(_filter_annosets(annosets, filtering_options))
+def filter_and_sort_annosets(annosets, filtering_options, excluded_frames,
+                             excluded_annosets):
+    return _sort_annosets(_filter_annosets(annosets, filtering_options,
+                                           excluded_frames, excluded_annosets))

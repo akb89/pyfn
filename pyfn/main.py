@@ -126,11 +126,21 @@ def main():
                                 nargs='+',
                                 default=[],
                                 help='''Filtering options for the training set:
-    - overlap_fes: filters out all overlapping frame elements (e.g. for
-    training with BIOS-tagged data which do not support overlapping fes)
-    - disc_fes: filters out discontinuous frame elements
-    - disc_targets: filters out discontinuous targets
-    - no_fes: filters out annotationsets with no frame element layers
+    - overlap_fes: filters out annosets with overlapping frame elements
+    - disc_fes: filters out annosets with discontinuous frame elements
+    - disc_targets: filters out annosets with discontinuous targets
+    - no_fes: filters out annotationsets with no frame element labels
     ''')
+    parser_convert.add_argument('--exclude_frames',
+                                nargs='+',
+                                default=[],
+                                help='List of frame names to be excluded from '
+                                     'unmarshalled FrameNet XML')
+    parser_convert.add_argument('--exclude_annosets',
+                                nargs='+',
+                                type=int,
+                                default=[],
+                                help='List of annoset ids to be excluded from '
+                                     'unmarshalled FrameNet XML')
     args = parser.parse_args()
     args.func(args)
