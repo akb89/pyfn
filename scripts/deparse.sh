@@ -77,6 +77,7 @@ prepare_mst_input() {
   local INPUT_FILE=$1
   local OUTPUT_TMP_DIR="/tmp/mst"
 
+  rm -rf $OUTPUT_TMP_DIR 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   while read line; do
@@ -97,6 +98,7 @@ convert_mst_to_conllx() {
   local CONLLX_FILE=$2
   local OUTPUT_TMP_DIR="/tmp/mst"
 
+  rm -rf $OUTPUT_TMP_DIR 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   cut -f 1-6 ${CONLLX_FILE} > ${OUTPUT_TMP_DIR}/conllx.first.to.sixth
