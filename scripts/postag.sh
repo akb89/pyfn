@@ -99,7 +99,7 @@ while :; do
             show_help
             exit
             ;;
-        -f|--file)       # Takes an option argument; ensure it has been specified.
+        -f|--file)
             if [ "$2" ]; then
                 is_input_file_set=TRUE
                 file=$2
@@ -108,7 +108,7 @@ while :; do
                 die "ERROR: '--file' requires a non-empty option argument"
             fi
             ;;
-        -t|--tagger)       # Takes an option argument; ensure it has been specified.
+        -t|--tagger)
             if [ "$2" ]; then
                 is_tagger_set=TRUE
                 tagger=$2

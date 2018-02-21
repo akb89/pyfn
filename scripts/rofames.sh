@@ -16,6 +16,9 @@ EOF
 }
 
 is_mode_set=FALSE
+is_xpdir_set=FALSE
+use_hierarchy=FALSE
+is_tagger_set=FALSE
 
 while :; do
     case $1 in
@@ -32,15 +35,28 @@ while :; do
                 die "ERROR: '--mode' requires a non-empty option argument"
             fi
             ;;
-        -t|--tagger)
+        -x|--xpdir)
             if [ "$2" ]; then
-                is_tagger_set=TRUE
-                tagger=$2
+                is_xpdir_set=TRUE
+                XPDIR=$2
                 shift
             else
-                die "ERROR: '--tagger' requires a non-empty option argument"
+                die "ERROR: '--xpdir' requires a non-empty option argument"
             fi
             ;;
+      -u|--use_hierarchy)
+            use_hierarchy=TRUE
+            shift
+            ;;
+      -t|--tagger)
+          if [ "$2" ]; then
+              is_tagger_set=TRUE
+              tagger=$2
+              shift
+          else
+              die "ERROR: '--tagger' requires a non-empty option argument"
+          fi
+          ;;
         --)
             shift
             break
@@ -53,3 +69,59 @@ while :; do
     esac
     shift
 done
+
+if [ "${is_mode_set}" = FALSE ]; then
+    die "ERROR: '--mode' parameter is required."
+fi
+
+if [ "${is_xpdir_set}" = FALSE ]; then
+    die "ERROR: '--xpdir' parameter is required."
+fi
+
+case "${mode}" in
+    train )
+        ;;
+    decode )
+        ;;
+    * )
+        die "Invalid mode '${mode}': should be 'train' or 'decode'"
+esac
+
+if [ "${mode}" = decode ]; then
+  if [ "${is_tagger_set}" = FALSE ]; then
+      die "ERROR: '--tagger' parameter is required."
+  fi
+  case "${tagger}" in
+      mxpost )
+          ;;
+      nlp4j )
+          ;;
+      * )
+          die "Invalid POS tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
+  esac
+fi
+
+if [ "${mode}" = train ]; then
+  bash ${ROFAMES_HOME}/bin/train.sh \
+    ${JAVA_HOME_BIN} \
+    ${XPDIR} \
+    ${lambda} \
+    ${batch_size} \
+    ${save_every_k_batches} \
+    ${num_models_to_save} \
+    ${min_ram} \
+    ${max_ram} \
+    ${num_threads} \
+    ${use_hierarchy} \
+    ${LOGS_DIR}
+fi
+
+if [ "${mode}" = decode ]; then
+  bash ${ROFAMES_HOME}/bin/decode.sh \
+    ${JAVA_HOME_BIN} \
+    ${XPDIR} \
+    ${tagger} \
+    ${max_ram} \
+    ${use_hierarchy} \
+    ${LOGS_DIR}
+fi

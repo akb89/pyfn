@@ -15,6 +15,16 @@ if [ "${use_hierarchy}" = TRUE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0-hier.jar"
 fi
 
+echo "ROFAMES TRAIN MODE OPTIONS"
+echo "  JAVA_HOME_BIN = ${JAVA_HOME_BIN}"
+echo "  CLASSPATH = ${CLASSPATH}"
+echo "  XP_DIR = ${XP_DIR}"
+echo "  tagger = ${tagger}"
+echo "  max_ram = ${max_ram}"
+echo "  use_hierarchy = ${use_hierarchy}"
+echo "  LOGS_DIR = ${LOGS_DIR}"
+echo
+
 echo "Decoding with ROFAMES..."
 ${JAVA_HOME_BIN}/java \
     -classpath ${CLASSPATH} \

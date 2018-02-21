@@ -22,7 +22,7 @@ while :; do
             show_help
             exit
             ;;
-        -f|--file)       # Takes an option argument; ensure it has been specified.
+        -f|--file)    
             if [ "$2" ]; then
                 is_input_file_set=TRUE
                 file=$2
@@ -31,7 +31,7 @@ while :; do
                 die "ERROR: '--file' requires a non-empty option argument"
             fi
             ;;
-        -p|--parser)       # Takes an option argument; ensure it has been specified.
+        -p|--parser)
             if [ "$2" ]; then
                 is_parser_set=TRUE
                 parser=$2

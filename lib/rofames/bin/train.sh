@@ -20,6 +20,21 @@ if [ "${use_hierarchy}" = TRUE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0-hier.jar"
 fi
 
+echo "ROFAMES TRAIN MODE OPTIONS"
+echo "  JAVA_HOME_BIN = ${JAVA_HOME_BIN}"
+echo "  CLASSPATH = ${CLASSPATH}"
+echo "  XP_DIR = ${XP_DIR}"
+echo "  lambda = ${lambda}"
+echo "  batch_size = ${batch_size}"
+echo "  save_every_k_batches = ${save_every_k_batches}"
+echo "  num_models_to_save = ${num_models_to_save}"
+echo "  min_ram = ${min_ram}"
+echo "  max_ram = ${max_ram}"
+echo "  num_threads = ${num_threads}"
+echo "  use_hierarchy = ${use_hierarchy}"
+echo "  LOGS_DIR = ${LOGS_DIR}"
+echo
+
 mkdir ${XP_DIR}/model 2> /dev/null
 
 echo "Training ROFAMES parser..."
