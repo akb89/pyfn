@@ -54,7 +54,9 @@ def _convert(args):
         annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
-                                     args.filter, args.output_sentences)
+                                     args.filter, args.output_sentences,
+                                     args.excluded_frames,
+                                     args.excluded_annosets)
     if args.target_format == 'semeval':
         if args.source_format == 'fnxml':
             splits_name = args.splits
@@ -63,10 +65,13 @@ def _convert(args):
                                            '{}.gold.xml'.format(splits_name))
         if args.source_format == 'bios' or args.source_format == 'semafor':
             output_filepath = args.target_path
-        semeval.marshall_annosets(annosets, output_filepath)
+        semeval.marshall_annosets(annosets, output_filepath,
+                                  args.excluded_frames, args.excluded_annosets)
     if args.target_format == 'semafor':
         semaform.marshall_annosets_dict(annosets_dict, args.target_path,
-                                        args.filter, args.output_sentences)
+                                        args.filter, args.output_sentences,
+                                        args.excluded_frames,
+                                        args.excluded_annosets)
 
 
 def main():
@@ -131,12 +136,12 @@ def main():
     - disc_targets: filters out annosets with discontinuous targets
     - no_fes: filters out annotationsets with no frame element labels
     ''')
-    parser_convert.add_argument('--exclude_frames',
+    parser_convert.add_argument('--excluded_frames',
                                 nargs='+',
                                 default=[],
                                 help='List of frame names to be excluded from '
                                      'unmarshalled FrameNet XML')
-    parser_convert.add_argument('--exclude_annosets',
+    parser_convert.add_argument('--excluded_annosets',
                                 nargs='+',
                                 type=int,
                                 default=[],

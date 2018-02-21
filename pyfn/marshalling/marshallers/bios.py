@@ -134,10 +134,14 @@ def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
 
 
 def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
-                   bios_filepath, train_mode):
+                   bios_filepath, excluded_frames,
+                   excluded_annosets, train_mode):
+    files_utils.create_parent_dir_if_not_exists(bios_filepath)
     with open(bios_filepath, 'w', encoding='utf-8') as bios_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
-                                                           filtering_options):
+                                                           filtering_options,
+                                                           excluded_frames,
+                                                           excluded_annosets):
             bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
                                          train_mode)
             print('\n'.join(bios_lines), file=bios_stream)
@@ -145,7 +149,8 @@ def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
 
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
-                           output_sentences):
+                           output_sentences, excluded_frames,
+                           excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
     lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
@@ -159,12 +164,14 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                 splits_name))
         if splits_name == 'dev' or splits_name == 'test':
             _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
-                           lemmatizer, bios_filepath, train_mode=False)
+                           lemmatizer, bios_filepath, excluded_frames,
+                           excluded_annosets, train_mode=False)
             # _marshall_bios(annosets, filtering_options, sent_dict, # FOR TESTING
             #                lemmatizer, bios_stream, train_mode=True)
         elif splits_name == 'train':
             _marshall_bios(annosets, filtering_options, sent_dict,
-                           lemmatizer, bios_filepath, train_mode=True)
+                           lemmatizer, bios_filepath, excluded_frames,
+                           excluded_annosets, train_mode=True)
         # print out sentences file
         if output_sentences:
             marsh_utils.marshall_sent_dict(sent_dict, sent_filepath)

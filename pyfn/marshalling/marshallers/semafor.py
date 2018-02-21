@@ -126,16 +126,21 @@ def _get_semafor_line(annoset, sent_dict, train_mode):
 
 
 def _marshall_semafor(annosets, filtering_options, sent_dict,
-                      semafor_filepath, train_mode):
+                      semafor_filepath, excluded_frames,
+                      excluded_annosets, train_mode):
+    files_utils.create_parent_dir_if_not_exists(semafor_filepath)
     with open(semafor_filepath, 'w', encoding='utf-8') as semafor_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
-                                                           filtering_options):
+                                                           filtering_options,
+                                                           excluded_frames,
+                                                           excluded_annosets):
             semafor_line = _get_semafor_line(annoset, sent_dict, train_mode)
             print(semafor_line, file=semafor_stream)
 
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
-                           output_sentences):
+                           output_sentences, excluded_frames,
+                           excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to SEMAFOR splits files.
 
     The train spits will be converted to a .frame.elements file containing
@@ -157,10 +162,12 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
         if splits_name == 'dev' or splits_name == 'test':
             # No special filtering on dev/test
             _marshall_semafor(annosets, [], sent_dict,
-                              semafor_filepath, train_mode=False)
+                              semafor_filepath, excluded_frames,
+                              excluded_annosets, train_mode=False)
         elif splits_name == 'train':
             _marshall_semafor(annosets, filtering_options, sent_dict,
-                              semafor_filepath, train_mode=True)
+                              semafor_filepath, excluded_frames,
+                              excluded_annosets, train_mode=True)
         # print out sentences file
         if output_sentences:
             marsh_utils.marshall_sent_dict(sent_dict, sent_filepath)

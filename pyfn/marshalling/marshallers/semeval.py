@@ -69,7 +69,8 @@ def _get_sentence_tag(annoset, sentences_tag, sent_id):
     return sentence_tag
 
 
-def _marshall_annosets(annosets, output_filepath):
+def _marshall_annosets(annosets, output_filepath, excluded_frames,
+                       excluded_annosets):
     if not annosets:
         raise InvalidParameterError('No input annosets to marshall. Check '
                                     'input parameters and try again.')
@@ -86,7 +87,9 @@ def _marshall_annosets(annosets, output_filepath):
     annoset_id = 1
     layer_id = 1
     label_id = 1
-    for annoset in f_utils.filter_and_sort_annosets(annosets, []):
+    for annoset in f_utils.filter_and_sort_annosets(annosets, [],
+                                                    excluded_frames,
+                                                    excluded_annosets):
         if annoset.sentence.text != sent_text:
             sentence = _get_sentence_tag(annoset, sentences_tag, sent_id)
             sent_id += 1
@@ -105,10 +108,12 @@ def _marshall_annosets(annosets, output_filepath):
                pretty_print=True)
 
 
-def marshall_annosets(annosets, output_filepath):
+def marshall_annosets(annosets, output_filepath, excluded_frames,
+                      excluded_annosets):
     """Marshall a list of pyfn.AnnotationSet objects to SEMEVAL XML."""
     logger.info('Marshalling pyfn.AnnotationSet objects to SEMEVAL XML...')
     if not annosets:
         raise InvalidParameterError('Input pyfn.AnnotationSet list is empty')
     logger.info('Saving output to {}'.format(output_filepath))
-    _marshall_annosets(annosets, output_filepath)
+    _marshall_annosets(annosets, output_filepath, excluded_frames,
+                       excluded_annosets)

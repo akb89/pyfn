@@ -4,7 +4,8 @@ import os
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
-__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_semafor_filepath']
+__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_semafor_filepath',
+           'create_parent_dir_if_not_exists']
 
 
 def get_semafor_filepath(target_dirpath, splits_name):
@@ -22,3 +23,7 @@ def get_bios_filepath(target_dirpath, splits_name):
 
 def get_sent_filepath(target_dirpath, splits_name):
     return os.path.join(target_dirpath, '{}.sentences'.format(splits_name))
+
+
+def create_parent_dir_if_not_exists(filepath):
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
