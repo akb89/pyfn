@@ -18,7 +18,7 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [x] SEMAFOR to SEMEVAL
 - [x] pos tagging MXPOST
 - [x] pos tagging NLP4J
-- [ ] dep parsing MST
+- [x] dep parsing MST
 - [x] dep parsing with BMST or BARCH
 - [x] lemmatize MXPOST
 - [ ] merge all.lemma.tags

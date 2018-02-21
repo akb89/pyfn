@@ -2,15 +2,14 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
-# Usage info
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -f FILE -t {mst,bmst,barch}
+Usage: ${0##*/} [-h] -f FILE -p {mst,bmst,barch}
 Dependency-parse a given .conllx file with a specified parser.
 
-  -h, --help           display this help and exit
-  -f, --file   FILE    absolute path to input .conllx file
-  -p, --parser PARSER  Dependency parser to be used: 'mst', 'bmst' or 'barch'
+  -h, --help                     display this help and exit
+  -f, --file   FILE              absolute path to input .conllx file
+  -p, --parser {mst,bmst,barch}  dependency parser to be used: 'mst', 'bmst' or 'barch'
 EOF
 }
 

@@ -1,10 +1,17 @@
 #!/bin/bash
 
 # Change the following settings according to your environment
-export num_threads=2
 export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
+export num_threads=2
 export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
 export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
+
+# If you intend to use the ROFAMES (SEMAFOR) parser, set the following
+lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
+batch_size=4000 # number of batches processed at once for argument identification.
+save_every_k_batches=400 # for argument identification
+num_models_to_save=60 # for argument identification
+
 
 # Do not change the followings
 export SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

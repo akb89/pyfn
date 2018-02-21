@@ -2,10 +2,9 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
-# Usage info
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -f FILE -t {mxpost,nlp4j}
+Usage: ${0##*/} [-h] -f FILE
 Lemmatize a given .conllx file with NLP4J.
 
   -h, --help           display this help and exit

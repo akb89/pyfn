@@ -2,15 +2,14 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
-# Usage info
 show_help() {
 cat << EOF
 Usage: ${0##*/} [-h] -f FILE -t {mxpost,nlp4j}
 Part-of-speech tag a given .sentences file with a specified tagger.
 
-  -h, --help           display this help and exit
-  -f, --file   FILE    absolute path to input .sentences file
-  -t, --tagger TAGGER  POS tagger to be used: 'mxpost' or 'nlp4j'
+  -h, --help                   display this help and exit
+  -f, --file   FILE            absolute path to input .sentences file
+  -t, --tagger {mxpost,nlp4j}  POS tagger to be used: 'mxpost' or 'nlp4j'
 EOF
 }
 
