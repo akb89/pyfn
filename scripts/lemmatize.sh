@@ -46,6 +46,8 @@ if [ "${is_input_file_set}" = FALSE ]; then
     die "ERROR: '--file' parameter is required."
 fi
 
+mkdir ${LOGS_DIR} 2> /dev/null
+
 echo "Lemmatizing with NLP4J..."
 echo "Processing file: ${file}"
 

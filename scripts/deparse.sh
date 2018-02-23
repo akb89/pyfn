@@ -112,6 +112,8 @@ convert_mst_to_conllx() {
 
 echo "Initializing dependency parsing..."
 
+mkdir ${LOGS_DIR} 2> /dev/null
+
 if [ "${parser}" = "mst" ]; then
     echo "Preparing .conllx input for MST parsing..."
     echo "Processing file: ${file}"

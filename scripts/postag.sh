@@ -149,6 +149,8 @@ esac
 
 echo "Initializing part-of-speech tagging..."
 
+mkdir ${LOGS_DIR} 2> /dev/null
+
 if [ "${tagger}" = "mxpost" ]; then
     echo "POS tagging via MXPOST..."
     pushd ${MXPOST_HOME}

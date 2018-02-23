@@ -124,6 +124,8 @@ case "${splits}" in
         die "Invalid splits '${splits}': should be 'dev' or 'test'"
 esac
 
+mkdir ${LOGS_DIR} 2> /dev/null
+
 if [ "${mode}" = train ]; then
   bash ${ROFAMES_HOME}/bin/train.sh \
     ${JAVA_HOME_BIN} \
