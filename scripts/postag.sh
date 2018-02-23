@@ -28,7 +28,7 @@ convert_mxpost_to_conllx() {
   cd $OUTPUT_TMP_DIR;
   csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
 
-  for i in $(find -s $OUTPUT_TMP_DIR -iname "0*"); do
+  for i in $(find $OUTPUT_TMP_DIR -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
       perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
       echo "" >> $OUTPUT_FINAL_FILE
   done;
@@ -60,7 +60,7 @@ convert_sentences_to_tsv() {
   cd $OUTPUT_TMP_DIR;
   csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
 
-  for i in $(find -s $OUTPUT_TMP_DIR -iname "0*"); do
+  for i in $(find $OUTPUT_TMP_DIR -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
       perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
       echo "" >> $OUTPUT_FINAL_FILE
   done;

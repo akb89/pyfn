@@ -61,3 +61,22 @@ fi
 if [ "${is_input_conllx_set}" = FALSE ]; then
     die "ERROR: '--conllx' parameter is required."
 fi
+
+merge_bios_conllx() {
+  BIOS_FILE=$1
+  CONLLX_FILE=$2
+
+  OUTPUT_TMP_DIR="/tmp/merge_bios_conllx"
+
+  rm -R $OUTPUT_TMP_DIR 2> /dev/null
+  mkdir $OUTPUT_TMP_DIR 2> /dev/null
+
+  
+
+  rm -R $OUTPUT_TMP_DIR 2> /dev/null
+}
+
+echo "Merginf .conllx content to .bios file for the open-sesame parser..."
+echo "Processing .bios file: ${bios}"
+echo "Processing .conllx file: ${conllx}"
+merge_bios_conllx $bios $conllx

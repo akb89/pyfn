@@ -54,6 +54,7 @@ flatten_conllx_to_all_lemma_tags() {
 
   rm $OUTPUT_TMP_FILE 2> /dev/null
   rm $OUTPUT_FINAL_FILE 2> /dev/null
+  rm -R $OUTPUT_TMP_DIR 2> /dev/null
   mkdir $OUTPUT_TMP_DIR 2> /dev/null
 
   perl -pe "s/^$/_ù_ù_/g" $INPUT_FILE > $OUTPUT_TMP_FILE
@@ -64,7 +65,7 @@ flatten_conllx_to_all_lemma_tags() {
 
   RM_STOP="_ù_ù_"
 
-  for i in $(find -s $OUTPUT_TMP_DIR -iname "0*"); do
+  for i in $(find $OUTPUT_TMP_DIR -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
       LN=$(grep -v $RM_STOP $i | wc -l | perl -pe "s/\s+//g")
       if [[ $LN -eq 0 ]]; then
           continue;
