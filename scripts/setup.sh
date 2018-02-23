@@ -7,6 +7,7 @@ export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms 
 export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
 
 # ROFAMES/SEMAFOR hyperparameters
+export kbest=1 # keep k-best parse
 export lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
 export batch_size=4000 # number of batches processed at once for argument identification.
 export save_every_k_batches=400 # for argument identification
