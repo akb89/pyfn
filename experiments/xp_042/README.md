@@ -23,8 +23,8 @@ Splits are generated with:
 pyfn convert \
   --from fnxml \
   --to rofames \
-  --source /path/to/fndata-1.5-with-dev/ \
-  --target /path/to/experiments/xp_042/data/ \
+  --source /path/to/fndata-1.5-with-dev \
+  --target /path/to/experiments/xp_042/data \
   --splits train \
   --output_sentences \
   --excluded_frames=Test35 \
