@@ -11,7 +11,7 @@ Train or decode with the ROFAMES parser.
   -m, --mode          {train,decode}  rofames mode to use: train or decode
   -x, --xpdir         XPDIR           absolute path to the xp directory (where data/ and model/ will be stored)
   -u, --use_hierarchy                 if specified, parser will use the hierarchy feature
-  -t, --tagger        {mxpost,nlp4j}  the POS tagger used for preprocessing splits (used for decoding only)
+  -t, --tagger        {mxpost,nlp4j}  the POS tagger used for preprocessing splits
 EOF
 }
 
@@ -78,6 +78,10 @@ if [ "${is_xpdir_set}" = FALSE ]; then
     die "ERROR: '--xpdir' parameter is required."
 fi
 
+if [ "${is_tagger_set}" = FALSE ]; then
+    die "ERROR: '--tagger' parameter is required."
+fi
+
 case "${mode}" in
     train )
         ;;
@@ -87,24 +91,20 @@ case "${mode}" in
         die "Invalid mode '${mode}': should be 'train' or 'decode'"
 esac
 
-if [ "${mode}" = decode ]; then
-  if [ "${is_tagger_set}" = FALSE ]; then
-      die "ERROR: '--tagger' parameter is required."
-  fi
-  case "${tagger}" in
-      mxpost )
-          ;;
-      nlp4j )
-          ;;
-      * )
-          die "Invalid POS tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
-  esac
-fi
+case "${tagger}" in
+    mxpost )
+        ;;
+    nlp4j )
+        ;;
+    * )
+        die "Invalid POS tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
+esac
 
 if [ "${mode}" = train ]; then
   bash ${ROFAMES_HOME}/bin/train.sh \
     ${JAVA_HOME_BIN} \
     ${XPDIR} \
+    ${tagger}
     ${lambda} \
     ${batch_size} \
     ${save_every_k_batches} \

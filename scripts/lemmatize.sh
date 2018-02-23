@@ -20,7 +20,7 @@ while :; do
             show_help
             exit
             ;;
-        -f|--file)       # Takes an option argument; ensure it has been specified.
+        -f|--file)
             if [ "$2" ]; then
                 is_input_file_set=TRUE
                 file=$2
