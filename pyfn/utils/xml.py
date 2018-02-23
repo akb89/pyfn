@@ -8,7 +8,8 @@ __all__ = ['extract', 'get_xml_filepaths']
 def extract(directory):
     """Extract all filepaths ending with .xml from directory and return as list."""
     return [os.path.join(directory, filename) for filename in
-            os.listdir(directory) if filename.endswith('.xml')]
+            os.listdir(directory) if filename.endswith('.xml')
+            and not filename.startswith('.')]
 
 
 def get_xml_filepaths(splits_dirpath, subdir):
