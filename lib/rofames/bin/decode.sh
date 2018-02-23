@@ -2,10 +2,12 @@
 
 JAVA_HOME_BIN=$1
 XP_DIR=$2
-tagger=$3
-max_ram=$4
-use_hierarchy=$5
-LOGS_DIR=$6
+splits=$3
+tagger=$4
+kbest=$5
+max_ram=$6
+use_hierarchy=$7
+LOGS_DIR=$8
 
 if [ "${use_hierarchy}" = FALSE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0.jar"
@@ -30,10 +32,10 @@ ${JAVA_HOME_BIN}/java \
     -classpath ${CLASSPATH} \
     -Xmx${max_ram} \
     edu.unige.clcl.fn.score.ScoreWithFrames \
-    ${XP_DIR}/data/test.sentences.${tagger}.conllx \
-    ${XP_DIR}/data/test.frames \
+    ${XP_DIR}/data/${splits}.sentences.${tagger}.conllx \
+    ${XP_DIR}/data/${splits}.frames \
     ${XP_DIR}/model/parser.conf \
     ${XP_DIR}/data/framenet.frame.element.map \
     ${XP_DIR}/model/argmodel.dat \
-    1 \
-    ${XP_DIR}/data/test.frame.elements > ${LOGS_DIR}/rofames.decode.log
+    ${kbest} \
+    ${XP_DIR}/data/${splits}.frame.elements > ${LOGS_DIR}/rofames.decode.log

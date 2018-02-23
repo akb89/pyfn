@@ -4,14 +4,15 @@ JAVA_HOME_BIN=$1
 XP_DIR=$2
 tagger=$3
 lambda=$4
-batch_size=$5
-save_every_k_batches=$6
-num_models_to_save=$7
-min_ram=$8
-max_ram=$9
-num_threads=${10}
-use_hierarchy=${11}
-LOGS_DIR=${12}
+kbest=$5
+batch_size=$6
+save_every_k_batches=$7
+num_models_to_save=$8
+min_ram=$9
+max_ram=$${10}
+num_threads=${11}
+use_hierarchy=${12}
+LOGS_DIR=${13}
 
 if [ "${use_hierarchy}" = FALSE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0.jar"
@@ -55,7 +56,7 @@ ${JAVA_HOME_BIN}/java \
     ${XP_DIR}/model/parser.conf \
     ${XP_DIR}/model/train.sentences.frame.elements.spans \
     true \
-    1 \
+    ${kbest} \
     null > ${LOGS_DIR}/rofames.train.create.alphabet.log
 
 echo
