@@ -4,11 +4,11 @@ import os
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
-__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_semafor_filepath',
+__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_rofames_filepath',
            'create_parent_dir_if_not_exists']
 
 
-def get_semafor_filepath(target_dirpath, splits_name):
+def get_rofames_filepath(target_dirpath, splits_name):
     if splits_name not in ['train', 'dev', 'test']:
         raise InvalidParameterError('Unsupported splits_name: {}'.format(
             splits_name))
