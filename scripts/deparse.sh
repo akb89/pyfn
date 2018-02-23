@@ -22,7 +22,7 @@ while :; do
             show_help
             exit
             ;;
-        -f|--file)    
+        -f|--file)
             if [ "$2" ]; then
                 is_input_file_set=TRUE
                 file=$2
@@ -114,9 +114,11 @@ echo "Initializing dependency parsing..."
 
 if [ "${parser}" = "mst" ]; then
     echo "Preparing .conllx input for MST parsing..."
+    echo "Processing file: ${file}"
     prepare_mst_input $file
     echo "Done"
     echo "Dependency-parsing via MSTParser..."
+    echo "Processing file: ${file}"
     pushd ${MST_PARSER_HOME}
     ${JAVA_HOME_BIN}/java \
       -classpath ".:./lib/trove.jar:./lib/mallet-deps.jar:./lib/mallet.jar" \
@@ -133,12 +135,14 @@ if [ "${parser}" = "mst" ]; then
     	format:CONLL > ${LOGS_DIR}/mst.log
     echo "Done"
     echo "Converting .mst to .conllx..."
+    echo "Processing file: ${file}.mst"
     convert_mst_to_conllx ${file}.mst ${file}
     echo "Done"
 fi
 
 if [ "${parser}" = "bmst" ]; then
   echo "Dependency-parsing via BIST MST parser..."
+  echo "Processing file: ${file}"
   OUTPUT_DIR=$(dirname "${file}")
   python ${BMST_PARSER_HOME}/parser.py \
       --predict \
@@ -154,6 +158,7 @@ fi
 
 if [ "${parser}" = "barch" ]; then
   echo "Dependency-parsing via BIST ARCH parser..."
+  echo "Processing file: ${file}"
   OUTPUT_DIR=$(dirname "${file}")
   python ${BARCH_PARSER_HOME}/parser.py \
       --predict \

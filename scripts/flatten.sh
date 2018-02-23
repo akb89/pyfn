@@ -84,4 +84,6 @@ flatten_conllx_to_all_lemma_tags() {
   cd -
 }
 
+echo "Converting to .flattened format for the ROFAMES parser..."
+echo "Processing file: ${file}"
 flatten_conllx_to_all_lemma_tags $file $file.flattened

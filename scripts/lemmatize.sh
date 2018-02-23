@@ -47,6 +47,7 @@ if [ "${is_input_file_set}" = FALSE ]; then
 fi
 
 echo "Lemmatizing with NLP4J..."
+echo "Processing file: ${file}"
 
 sh ${NLP4J_HOME}/bin/nlpdecode \
   -c ${nlp4j_config} \

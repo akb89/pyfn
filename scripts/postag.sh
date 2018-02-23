@@ -9,7 +9,7 @@ Part-of-speech tag a given .sentences file with a specified tagger.
 
   -h, --help                   display this help and exit
   -f, --file   FILE            absolute path to input .sentences file
-  -t, --tagger {mxpost,nlp4j}  POS tagger to be used: 'mxpost' or 'nlp4j'
+  -t, --tagger {mxpost,nlp4j}  pos tagger to be used: 'mxpost' or 'nlp4j'
 EOF
 }
 
@@ -144,7 +144,7 @@ case "${tagger}" in
     nlp4j )
         ;;   #fallthru
     * )
-        die "Invalid POS tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
+        die "Invalid pos tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
 esac
 
 echo "Initializing part-of-speech tagging..."
@@ -152,19 +152,22 @@ echo "Initializing part-of-speech tagging..."
 if [ "${tagger}" = "mxpost" ]; then
     echo "POS tagging via MXPOST..."
     pushd ${MXPOST_HOME}
+    echo "Processing file: ${file}"
     ./mxpost tagger.project < ${file} > ${file}.mxpost 2> ${LOGS_DIR}/mxpost.log
     echo "Done"
     echo "Converting .mxpost file to .conllx format..."
+    echo "Processing file: ${file}.mxpost"
     convert_mxpost_to_conllx ${file}.mxpost ${file}.mxpost.conllx
     echo "Done"
 fi
 
 if [ "${tagger}" = "nlp4j" ]; then
     echo "Converting .sentences to .tsv format..."
+    echo "Processing file: ${file}"
     convert_sentences_to_tsv ${file} ${file}.tsv
     echo "Done"
     echo "POS tagging via NLP4J..."
-
+    echo "Processing file: ${file}.tsv"
     sh ${NLP4J_HOME}/bin/nlpdecode \
       -c ${nlp4j_config} \
       -format tsv \
@@ -173,6 +176,7 @@ if [ "${tagger}" = "nlp4j" ]; then
       -threads ${num_threads} > ${LOGS_DIR}/nlp4j.log
     echo "Done"
     echo "Converting .nlp4j to .conllx format..."
+    echo "Processing file: ${file}.nlp4j"
     convert_nlp4j_to_conllx ${file}.tsv.nlp4j ${file}.nlp4j.conllx
     echo "Done"
 fi
