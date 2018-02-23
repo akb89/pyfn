@@ -105,3 +105,4 @@ data/
 resources/
 model/
 lib/
+*.tar.bz2
