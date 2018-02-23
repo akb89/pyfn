@@ -132,12 +132,8 @@ def _get_annoset_target_hash(annoset):
 
 
 def _get_annoset_hash(annoset):
-    return '{}#{}#{}#{}'.format(get_text_hash(annoset.sentence.text),
-                                annoset.target.indexes,  # TODO: not sure about
-                                # this. Same annosets for sentences with
-                                # different tokenization may remain
-                                annoset.target.lexunit.name,
-                                annoset.target.lexunit.frame.name)
+    return '{}#{}'.format(get_text_hash(annoset.sentence.text),
+                          _get_annoset_target_hash(annoset))
 
 
 def _filter_annosets(annosets, filtering_options, excluded_frames,
