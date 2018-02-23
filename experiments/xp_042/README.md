@@ -22,7 +22,7 @@ Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to semafor \
+  --to rofames \
   --source /path/to/fndata-1.5-with-dev/ \
   --target /path/to/experiments/xp_042/data/ \
   --splits train \
@@ -33,7 +33,6 @@ pyfn convert \
 
 ### Preprocessing
 
-#### POS tagging
 ```
-./path/to/pyfn/scripts/postag.sh --file /path/to/experiments/xp_042/data/train.sentences -t mxpost
+./preprocess.sh -x /path/to/experiments/xp_042 -t mxpost -d mst -p rofames -v
 ```
