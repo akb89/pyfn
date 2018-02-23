@@ -38,7 +38,7 @@ convert_mxpost_to_conllx() {
   cut -f 3 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.3.txt
   perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
 
-  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > $OUTPUT_FINAL_FILE
+  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > $OUTPUT_FINAL_FILE
 
   rm -rf $OUTPUT_TMP_DIR;
   cd -
@@ -69,7 +69,7 @@ convert_sentences_to_tsv() {
   cut -f 2 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.2.txt
   perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
 
-  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | sed -e '$ d' > $OUTPUT_FINAL_FILE
+  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > $OUTPUT_FINAL_FILE
 
   rm -rf $OUTPUT_TMP_DIR;
   cd -
