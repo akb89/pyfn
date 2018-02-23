@@ -103,3 +103,5 @@ debug.py
 .pytest_*
 data/
 resources/
+model/
+lib/
