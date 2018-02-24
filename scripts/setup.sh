@@ -15,6 +15,7 @@ export num_models_to_save=60 # for argument identification
 
 # Do not change the following
 export SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export XP_DIR="${SCRIPTS_DIR}/../experiments"
 export RESOURCES_DIR="${SCRIPTS_DIR}/../resources"
 export LIB_DIR="${SCRIPTS_DIR}/../lib"
 export LOGS_DIR="${SCRIPTS_DIR}/../log"
@@ -27,6 +28,7 @@ export BARCH_PARSER_HOME="${LIB_DIR}/bistparser/barchybrid/src"
 export ROFAMES_HOME="${LIB_DIR}/rofames"
 export OPEN_SESAME_HOME="/Users/AKB/GitHub/open-sesame"  # TODO change this after test
 #export OPEN_SESAME_HOME="${LIB_DIR}/open-sesame"
+export SEMEVAL_HOME="${LIB_DIR}/semeval"
 
 export nlp4j_config="${RESOURCES_DIR}/config-decode-pos.xml"
 export mst_parser_model="${RESOURCES_DIR}/wsj.model"

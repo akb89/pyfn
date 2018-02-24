@@ -4,11 +4,11 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_DIR -t {mxpost,nlp4j} -p {rofames,open-sesame} [-d {mst,bmst,barch}] [-v]
+Usage: ${0##*/} [-h] -x XP_NUM -t {mxpost,nlp4j} -p {rofames,open-sesame} [-d {mst,bmst,barch}] [-v]
 Preprocess FrameNet train/dev/test splits.
 
   -h, --help                           display this help and exit
-  -x, --xpdir   XP_DIR                 absolute path to the xp directory containing a data/ dir with FN train/dev/test splits
+  -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)
   -t, --tagger  {mxpost,nlp4j}         pos tagger to be used: 'mxpost' or 'nlp4j'
   -p, --parser  {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
   -d, --dep     {mst,bmst,barch}       dependency parser to be used: 'mst', 'bmst' or 'barch'
@@ -16,7 +16,7 @@ Preprocess FrameNet train/dev/test splits.
 EOF
 }
 
-is_xp_dir_set=FALSE
+is_xp_set=FALSE
 is_tagger_set=FALSE
 is_dep_parser_set=FALSE
 is_fs_parser_set=FALSE
@@ -29,13 +29,13 @@ while :; do
             show_help
             exit
             ;;
-        -x|--xpdir)
+        -x|--xp)
             if [ "$2" ]; then
                 is_xp_dir_set=TRUE
-                XP_DIR=$2
+                xp="xp_$2"
                 shift
             else
-                die "ERROR: '--xpdir' requires a non-empty option argument"
+                die "ERROR: '--xp' requires a non-empty option argument"
             fi
             ;;
         -t|--tagger)
@@ -81,8 +81,8 @@ while :; do
     shift
 done
 
-if [ "${is_xp_dir_set}" = FALSE ]; then
-    die "ERROR: '--file' parameter is required."
+if [ "${is_xp_set}" = FALSE ]; then
+    die "ERROR: '--xp' parameter is required."
 fi
 
 if [ "${is_tagger_set}" = FALSE ]; then
@@ -129,12 +129,12 @@ fi
 
 echo "Initializing preprocessing..."
 echo "Preprocessing setup:"
-echo "  XP_DIR: ${XP_DIR}"
+echo "  XP_DIR: ${XP_DIR}/${xp}"
 echo "  POS tagger: ${tagger}"
 echo "  Dependency parser: ${deparser}"
 echo "  Frame semantic parser: ${fsparser}"
 
-DATA_DIR=${XP_DIR}/data
+DATA_DIR=${XP_DIR}/${xp}/data
 
 if [ "${tagger}" = "mxpost" ]; then
   bash ${SCRIPTS_DIR}/postag.sh -f ${DATA_DIR}/train.sentences -t mxpost
