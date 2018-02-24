@@ -76,20 +76,20 @@ prepare_mst_input() {
   local INPUT_FILE=$1
   local OUTPUT_TMP_DIR="/tmp/mst"
 
-  rm -rf $OUTPUT_TMP_DIR 2> /dev/null
+  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   while read line; do
       echo $line | grep '^$' > /dev/null && echo "" >> ${OUTPUT_TMP_DIR}/mst.tmp
       echo $line | grep '^$' > /dev/null || echo "0" >> ${OUTPUT_TMP_DIR}/mst.tmp
-  done < $INPUT_FILE;
+  done < ${INPUT_FILE};
 
   cut -f 1-6 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/mst.first.to.sixth
   cut -f 8-10 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/mst.eigth.to.tenth
 
   paste ${OUTPUT_TMP_DIR}/mst.first.to.sixth ${OUTPUT_TMP_DIR}/mst.tmp ${OUTPUT_TMP_DIR}/mst.eigth.to.tenth | perl -pe "s/^\t+$//g" > ${INPUT_FILE}
 
-  rm -rf $OUTPUT_TMP_DIR
+  rm -rf ${OUTPUT_TMP_DIR}
 }
 
 convert_mst_to_conllx() {

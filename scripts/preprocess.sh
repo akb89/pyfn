@@ -132,7 +132,6 @@ echo "  POS tagger: ${tagger}"
 echo "  Dependency parser: ${deparser}"
 echo "  Frame semantic parser: ${fsparser}"
 
-SCRIPTS_DIR=$(dirname "${BASH_SOURCE[0]}")
 DATA_DIR=${XP_DIR}/data
 
 if [ "${tagger}" = "mxpost" ]; then

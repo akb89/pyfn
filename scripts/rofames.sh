@@ -40,7 +40,7 @@ while :; do
         -x|--xpdir)
             if [ "$2" ]; then
                 is_xpdir_set=TRUE
-                XPDIR=$2
+                XP_DIR=$2
                 shift
             else
                 die "ERROR: '--xpdir' requires a non-empty option argument"
@@ -129,8 +129,8 @@ mkdir ${LOGS_DIR} 2> /dev/null
 if [ "${mode}" = train ]; then
   bash ${ROFAMES_HOME}/bin/train.sh \
     ${JAVA_HOME_BIN} \
-    ${XPDIR} \
-    ${tagger}
+    ${XP_DIR} \
+    ${tagger} \
     ${lambda} \
     ${kbest} \
     ${batch_size} \
@@ -146,7 +146,7 @@ fi
 if [ "${mode}" = decode ]; then
   bash ${ROFAMES_HOME}/bin/decode.sh \
     ${JAVA_HOME_BIN} \
-    ${XPDIR} \
+    ${XP_DIR} \
     ${splits} \
     ${tagger} \
     ${kbest} \
