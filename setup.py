@@ -32,7 +32,7 @@ setup(
     install_requires=['PyYAML==3.12', 'mmh3==2.5.1', 'lxml==4.1.1',
                       'nltk==3.2.5', 'pytz'],
     setup_requires=['pytest-runner==4.0', 'pytest-pylint==0.8.0'],
-    tests_require=['pytest==3.4.0', 'pylint==1.8.2', 'pytest-cov==2.5.1'],
+    tests_require=['pytest==3.4.1', 'pylint==1.8.2', 'pytest-cov==2.5.1'],
     classifiers=['Development Status :: 2 - Pre-Alpha',
                  'Environment :: Web Environment',
                  'Intended Audience :: Developers',
