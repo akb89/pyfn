@@ -13,11 +13,13 @@ from pyfn.models.sentence import Sentence
 
 
 def test_has_overlapping_fes():
-    annoset = AnnotationSet(labelstore=LabelStore(labels=[]))
     label_1 = Label(name=None, layer=Layer(name='FE'), start=96, end=105)
     label_2 = Label(name=None, layer=Layer(name='FE'), start=90, end=105)
-    annoset.labelstore.labels.extend([label_1, label_2])
+    label_3 = Label(name=None, layer=Layer(name='FE'), start=40, end=89)
+    annoset = AnnotationSet(labelstore=LabelStore(labels=[label_1, label_2]))
+    annoset1 = AnnotationSet(labelstore=LabelStore(labels=[label_2, label_3]))
     assert f_utils._has_overlapping_fes(annoset) is True
+    assert f_utils._has_overlapping_fes(annoset1) is False
 
 def test_get_annoset_hash():
     annoset = AnnotationSet(sentence=Sentence(text=' This IS a    TEST o test '),
