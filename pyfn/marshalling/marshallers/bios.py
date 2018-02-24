@@ -153,6 +153,8 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                            output_sentences, excluded_frames,
                            excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
+    logger.info('Marshalling {splits:pyfn.AnnotationSet} dict to BIOS...')
+    logger.info('Filtering options = {}'.format(filtering_options))
     lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = files_utils.get_bios_filepath(target_dirpath,
