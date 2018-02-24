@@ -105,4 +105,5 @@ data/
 resources/
 model/
 lib/
+!lib/rofames/bin/
 *.tar.bz2
