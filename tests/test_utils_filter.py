@@ -6,6 +6,10 @@ from pyfn.models.annotationset import AnnotationSet
 from pyfn.models.labelstore import LabelStore
 from pyfn.models.label import Label
 from pyfn.models.layer import Layer
+from pyfn.models.lexunit import LexUnit
+from pyfn.models.frame import Frame
+from pyfn.models.target import Target
+from pyfn.models.sentence import Sentence
 
 
 def test_has_overlapping_fes():
@@ -14,3 +18,34 @@ def test_has_overlapping_fes():
     label_2 = Label(name=None, layer=Layer(name='FE'), start=90, end=105)
     annoset.labelstore.labels.extend([label_1, label_2])
     assert f_utils._has_overlapping_fes(annoset) is True
+
+def test_get_annoset_hash():
+    annoset = AnnotationSet(sentence=Sentence(text=' This IS a    TEST o test '),
+                            target=Target(lexunit=LexUnit(name='test test.n',
+                                                          frame=Frame(name='Test')),
+                                          indexes=[(14,17), (21,24)]))
+    assert f_utils._get_annoset_hash(annoset) == 'thisisatestotest#14#17#21#24#test test.n#Test'
+
+def test_filter_annosets():
+    excluded_annoset_id = AnnotationSet(_id=1)
+    excluded_frame = AnnotationSet(target=Target(lexunit=LexUnit(frame=Frame(name='Excluded'))))
+    duplicate_annoset1 = AnnotationSet(_id=2, sentence=Sentence(text=' This IS a    TEST o test '),
+                            target=Target(lexunit=LexUnit(name='test test.n',
+                                                          frame=Frame(name='Test')),
+                                          indexes=[(14,17), (21,24)]),
+                            labelstore=LabelStore(labels=[Label(start=1, end=2)]))
+    duplicate_annoset2 = AnnotationSet(_id=3, sentence=Sentence(text=' This IS a    TEST o test '),
+                           target=Target(lexunit=LexUnit(name='test test.n',
+                                                         frame=Frame(name='Test')),
+                                         indexes=[(14,17), (21,24)]),
+                            labelstore=LabelStore(labels=[Label(start=1, end=2)]))
+    missing_label = AnnotationSet(target=Target(lexunit=LexUnit(frame=Frame(name='Test'))),
+                                  labelstore=LabelStore(labels=[Label(start=-1, end=2)]))
+    whitespace_label = AnnotationSet(sentence=Sentence(text=' pointing at whitespace'),
+                                     target=Target(lexunit=LexUnit(frame=Frame(name='Test'))),
+                                     labelstore=LabelStore(labels=[Label(start=0, end=2)]))
+    annosets = [excluded_annoset_id, excluded_frame, duplicate_annoset1,
+                duplicate_annoset2, missing_label, whitespace_label]
+    filtered_annosets = list(f_utils._filter_annosets(annosets, [], ['Excluded'], [1]))
+    assert len(filtered_annosets) == 1
+    assert filtered_annosets[0]._id == 2

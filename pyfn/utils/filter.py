@@ -14,7 +14,7 @@ def get_text_hash(text):
     Hash is defined as the text string stripped from all its whitespaces.
     Whitespaces are defined using the regex 's+'.
     """
-    return re.sub(r'\s+', '', text.strip())
+    return re.sub(r'\s+', '', text.lower().strip())
 
 
 def _get_sent_hash_set(annosets):
@@ -60,7 +60,6 @@ def _has_overlapping_fes(annoset):
 
 
 def _has_invalid_labels(annoset):
-    """Check for both FE and Target labels."""
     for label in annoset.labelstore.labels:
         # if the label has an unspecified start/end index
         if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
@@ -143,18 +142,18 @@ def _get_annoset_hash(annoset):
 
 def _filter_annosets(annosets, filtering_options, excluded_frames,
                      excluded_annosets):
-    """Filter annosets."""
     annoset_hash_set = set()
     for annoset in annosets:
-        print('Processing annoset._id = {}'.format(annoset._id))
         if annoset._id in excluded_annosets \
          or annoset.target.lexunit.frame.name in excluded_frames:
             continue
+        if not _is_valid_annoset(annoset, filtering_options):
+            continue
         annoset_hash = _get_annoset_hash(annoset)
-        if _is_valid_annoset(annoset, filtering_options) \
-         and annoset_hash not in annoset_hash_set:
-            annoset_hash_set.add(annoset_hash)
-            yield annoset
+        if annoset_hash in annoset_hash_set:
+            continue
+        annoset_hash_set.add(annoset_hash)
+        yield annoset
 
 
 def _sort_annosets(annosets):
