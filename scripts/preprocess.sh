@@ -4,14 +4,14 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_DIR -t {mxpost,nlp4j} -d {mst,bmst,barch} -p {rofames,open-sesame} [-v]
+Usage: ${0##*/} [-h] -x XP_DIR -t {mxpost,nlp4j} -p {rofames,open-sesame} [-d {mst,bmst,barch}] [-v]
 Preprocess FrameNet train/dev/test splits.
 
   -h, --help                           display this help and exit
   -x, --xpdir   XP_DIR                 absolute path to the xp directory containing a data/ dir with FN train/dev/test splits
   -t, --tagger  {mxpost,nlp4j}         pos tagger to be used: 'mxpost' or 'nlp4j'
-  -d, --dep     {mst,bmst,barch}       dependency parser to be used: 'mst', 'bmst' or 'barch'
   -p, --parser  {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
+  -d, --dep     {mst,bmst,barch}       dependency parser to be used: 'mst', 'bmst' or 'barch'
   -v, --dev                            if set, script will also preprocess dev splits
 EOF
 }
@@ -21,6 +21,7 @@ is_tagger_set=FALSE
 is_dep_parser_set=FALSE
 is_fs_parser_set=FALSE
 process_dev=FALSE
+deparser=NONE
 
 while :; do
     case $1 in
@@ -88,10 +89,6 @@ if [ "${is_tagger_set}" = FALSE ]; then
     die "ERROR: '--tagger' parameter is required."
 fi
 
-if [ "${is_dep_parser_set}" = FALSE ]; then
-    die "ERROR: '--dep' parameter is required."
-fi
-
 if [ "${is_fs_parser_set}" = FALSE ]; then
     die "ERROR: '--parser' parameter is required."
 fi
@@ -105,17 +102,6 @@ case "${tagger}" in
         die "Invalid pos tagger '${tagger}': Should be 'mxpost' or 'nlp4j'"
 esac
 
-case "${deparser}" in
-    mst )
-        ;;   #fallthru
-    bmst )
-        ;;   #fallthru
-    barch )
-        ;;   #fallthru
-    * )
-        die "Invalid dependency parser '${deparser}': Should be 'mst', 'bmst' or 'barch'"
-esac
-
 case "${fsparser}" in
     rofames )
         ;;   #fallthru
@@ -124,6 +110,22 @@ case "${fsparser}" in
     * )
         die "Invalid frame semantic parser '${fsparser}': Should be 'rofames' or 'open-sesame'"
 esac
+
+if [ "${fsparser}" = "rofames" ]; then
+  if [ "${is_dep_parser_set}" = FALSE ]; then
+      die "ERROR: '--dep' parameter is required with --parser rofames."
+  fi
+  case "${deparser}" in
+      mst )
+          ;;   #fallthru
+      bmst )
+          ;;   #fallthru
+      barch )
+          ;;   #fallthru
+      * )
+          die "Invalid dependency parser '${deparser}': Should be 'mst', 'bmst' or 'barch'"
+  esac
+fi
 
 echo "Initializing preprocessing..."
 echo "Preprocessing setup:"

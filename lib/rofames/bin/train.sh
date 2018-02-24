@@ -41,7 +41,7 @@ echo
 
 mkdir ${XP_DIR}/model 2> /dev/null
 
-echo "Training ROFAMES parser..."
+echo "Training ROFAMES..."
 
 echo
 echo "Argument Identification -- Step 1: Creating alphabet"

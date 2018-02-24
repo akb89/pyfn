@@ -4,14 +4,14 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -m {train,decode} -x XP_DIR -s {dev,test} -t {mxpost,nlp4j} [-u]
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_DIR -t {mxpost,nlp4j} [-s {dev,test}] [-u]
 Train or decode with the ROFAMES parser.
 
   -h, --help                           display this help and exit
   -m, --mode          {train,decode}   rofames mode to use: train or decode
   -x, --xpdir         XP_DIR           absolute path to the xp directory (where data/ and model/ will be stored)
-  -s, --splits        {dev,test}       which splits to use: dev or test
   -t, --tagger        {mxpost,nlp4j}   the POS tagger used for preprocessing splits
+  -s, --splits        {dev,test}       which splits to use in decode mode: dev or test
   -u, --use_hierarchy                  if specified, parser will use the hierarchy feature
 EOF
 }
@@ -93,10 +93,6 @@ if [ "${is_tagger_set}" = FALSE ]; then
     die "ERROR: '--tagger' parameter is required."
 fi
 
-if [ "${is_splits_set}" = FALSE ]; then
-    die "ERROR: '--splits' parameter is required."
-fi
-
 case "${mode}" in
     train )
         ;;
@@ -113,15 +109,6 @@ case "${tagger}" in
         ;;
     * )
         die "Invalid POS tagger '${tagger}': should be 'mxpost' or 'nlp4j'"
-esac
-
-case "${splits}" in
-    dev )
-        ;;
-    test )
-        ;;
-    * )
-        die "Invalid splits '${splits}': should be 'dev' or 'test'"
 esac
 
 mkdir ${LOGS_DIR} 2> /dev/null
@@ -144,6 +131,17 @@ if [ "${mode}" = train ]; then
 fi
 
 if [ "${mode}" = decode ]; then
+  if [ "${is_splits_set}" = FALSE ]; then
+      die "ERROR: '--splits' parameter is required."
+  fi
+  case "${splits}" in
+      dev )
+          ;;
+      test )
+          ;;
+      * )
+          die "Invalid splits '${splits}': should be 'dev' or 'test'"
+  esac
   bash ${ROFAMES_HOME}/bin/decode.sh \
     ${JAVA_HOME_BIN} \
     ${XP_DIR} \
