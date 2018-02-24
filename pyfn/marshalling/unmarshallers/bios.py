@@ -36,21 +36,22 @@ def _get_labelstore(lines, tokens, text, labelstore):
         line_split = line.split('\t')
         if line_split[14].startswith('S-'):
             label = Label(name=line_split[14][2:], layer=Layer(name='FE'),
-                          start=marsh_utils.get_start_index(int(line_split[0])-1, tokens,
-                                                 text),
-                          end=marsh_utils.get_end_index(int(line_split[0])-1, tokens, text))
+                          start=marsh_utils.get_start_index(
+                              int(line_split[0])-1, tokens, text),
+                          end=marsh_utils.get_end_index(int(line_split[0])-1,
+                                                        tokens, text))
             labelstore.labels.append(label)
         elif line_split[14].startswith('B-'):
             label_name = line_split[14][2:]
             label = Label(name=label_name, layer=Layer(name='FE'),
-                          start=marsh_utils.get_start_index(int(line_split[0])-1, tokens,
-                                                 text))
+                          start=marsh_utils.get_start_index(
+                              int(line_split[0])-1, tokens, text))
             for iline in lines[lines.index(line)+1:]:
                 iline_split = iline.split('\t')
                 if iline_split[14].startswith('I-') \
                  and iline_split[14][2:] == label_name:
-                    label.end = marsh_utils.get_end_index(int(iline_split[0])-1,
-                                               tokens, text)
+                    label.end = marsh_utils.get_end_index(
+                        int(iline_split[0])-1, tokens, text)
                     continue
                 else:
                     labelstore.labels.append(label)
@@ -71,25 +72,24 @@ def _update_annoset_target(annoset, tokens, token_index, lexunit,
                            last_target_token_index):
     if not annoset.target:
         annoset.target = Target(
-            #string=tokens[token_index-1],  FIXME: the string needs to be updated
             lexunit=lexunit,
             indexes=[(marsh_utils.get_start_index(token_index-1, tokens,
-                                       annoset.sentence.text),
+                                                  annoset.sentence.text),
                       marsh_utils.get_end_index(token_index-1, tokens,
-                                     annoset.sentence.text))])
+                                                annoset.sentence.text))])
     else:
         if token_index - last_target_token_index > 1:
             annoset.target.indexes.append(
                 (marsh_utils.get_start_index(token_index-1, tokens,
-                                  annoset.sentence.text),
+                                             annoset.sentence.text),
                  marsh_utils.get_end_index(token_index-1, tokens,
-                                annoset.sentence.text)))
+                                           annoset.sentence.text)))
         else:
             annoset.target.indexes = [
                 (annoset.target.indexes[
                     len(annoset.target.indexes)-1][0],
                  marsh_utils.get_end_index(token_index-1, tokens,
-                                annoset.sentence.text))]
+                                           annoset.sentence.text))]
 
 
 def _create_annoset(lines, sentence, annoset_id):

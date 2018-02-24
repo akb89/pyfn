@@ -17,6 +17,8 @@ __all__ = ['marshall_annosets']
 
 logger = logging.getLogger(__name__)
 
+# pylint: disable-msg=R0914
+
 
 def _add_fe_labels(layers_tag, layer_id, annoset, label_id):
     fe_layer = etree.SubElement(layers_tag, 'layer')

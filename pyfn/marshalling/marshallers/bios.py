@@ -142,6 +142,7 @@ def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
                                                            filtering_options,
                                                            excluded_frames,
                                                            excluded_annosets):
+            #print('Processing annoset._id = {}'.format(annoset._id))
             bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
                                          train_mode)
             print('\n'.join(bios_lines), file=bios_stream)

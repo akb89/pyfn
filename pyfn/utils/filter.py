@@ -9,6 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 def get_text_hash(text):
+    """Return hashed text.
+
+    Hash is defined as the text string stripped from all its whitespaces.
+    Whitespaces are defined using the regex 's+'.
+    """
     return re.sub(r'\s+', '', text.strip())
 
 
@@ -55,7 +60,7 @@ def _has_overlapping_fes(annoset):
 
 
 def _has_invalid_labels(annoset):
-    """Checking for both FE and Target labels."""
+    """Check for both FE and Target labels."""
     for label in annoset.labelstore.labels:
         # if the label has an unspecified start/end index
         if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
@@ -90,8 +95,8 @@ def _has_discontinuous_target(annoset):
 def _has_discontinuous_fes(annoset):
     if not annoset.labelstore.labels_by_layer_name['FE']:
         return False
-    for label in annoset.labelstore.labels_by_layer_name['FE']:
-        pass  # TODO: implement?
+    # for label in annoset.labelstore.labels_by_layer_name['FE']:
+    #     pass  # TODO: implement?
     return False
 
 
@@ -141,6 +146,7 @@ def _filter_annosets(annosets, filtering_options, excluded_frames,
     """Filter annosets."""
     annoset_hash_set = set()
     for annoset in annosets:
+        print('Processing annoset._id = {}'.format(annoset._id))
         if annoset._id in excluded_annosets \
          or annoset.target.lexunit.frame.name in excluded_frames:
             continue
@@ -165,5 +171,15 @@ def _sort_annosets(annosets):
 
 def filter_and_sort_annosets(annosets, filtering_options, excluded_frames,
                              excluded_annosets):
+    """Return a generator over a list of sorted and filtered annosets.
+
+    Annosets are filtered according to specified filtering_options.
+    Annosets are sorted according to annoset.sentence.text first and
+    annoset target hash then:
+    (target.string#target.start#target.end#target.lexunit.name#target.lexunit.frame.name)
+    Annosets with annoset.target.lexunit.frame.name in excluded_frames are
+    excluded.
+    Annosets with annoset._id in excluded_annosets are excluded.
+    """
     return _sort_annosets(_filter_annosets(annosets, filtering_options,
                                            excluded_frames, excluded_annosets))

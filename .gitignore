@@ -102,11 +102,15 @@ pyfntest.py
 debug.py
 .pytest_*
 data/
-resources/
+resources/*
+!tests/resources/
 model/
 !lib/
 lib/*
 !lib/rofames
 lib/rofames/*
 !lib/rofames/bin
+!lib/open-sesame
+lib/open-sesame/*
+!lib/open-sesame/bin
 *.tar.bz2
