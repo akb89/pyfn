@@ -8,7 +8,7 @@ class Label():
     """FrameNet Label class."""
 
     # pylint: disable=R0913
-    def __init__(self, name, layer, start=None, end=None, fe_id=None,
+    def __init__(self, name=None, layer=None, start=None, end=None, fe_id=None,
                  itype=None, fg_color=None, bg_color=None):
         """Constructor."""
         self._name = name
