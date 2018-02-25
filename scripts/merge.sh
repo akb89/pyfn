@@ -127,7 +127,6 @@ merge_bios_conllx() {
   rm -rf ${OUTPUT_TMP_BIOS_DIR}
   rm -rf ${OUTPUT_TMP_CONLLX_DIR}
   rm -rf ${OUTPUT_TMP_DIR}
-  cd -
 }
 
 echo "Merging .conllx content to .bios file for the open-sesame parser..."
