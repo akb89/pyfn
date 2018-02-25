@@ -73,10 +73,12 @@ case "${mode}" in
         die "Invalid mode '${mode}': should be 'train' or 'decode'"
 esac
 
+mkdir ${XP_DIR}/${xp}/model 2> /dev/null
+
 if [ "${mode}" = train ]; then
   python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
     --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
     --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
     --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
-    --vecf ${}
+    --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
 fi
