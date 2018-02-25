@@ -20,7 +20,7 @@
 
 ### Preprocessing
 | POS tagger | Lemmatizer | Dependency parser |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | MXPOST | NLP4J | - |
 
 ### Frame Semantic Parsing
