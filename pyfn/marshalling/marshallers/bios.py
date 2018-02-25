@@ -13,10 +13,8 @@ ID  FORM    LEMMA   PLEMMA(NLTK)    POS PPOS(NLTK)  FEAT    PFEAT   HEAD
 PHEAD   DEPREL  PDEPREL FILLPRED    PRED    APREDS  FE_CORETYPE
 """
 
+import itertools
 import logging
-# import nltk
-#
-# from nltk.stem import WordNetLemmatizer
 
 import pyfn.utils.files as files_utils
 import pyfn.utils.filter as filt_utils
@@ -100,7 +98,7 @@ def _get_token_index_3uples(text):
 def _get_valence_units_by_indexes(vustore, start, end):
     vus = []
     for (vu_start, vu_end), vu in vustore.valence_units_by_indexes.items():
-        if start >= vu_start and end <= vu_end:
+        if (start >= vu_start and end <= vu_end) or (vu_start >= start and vu_end <= end):
             vus.extend(vu)
     return vus
 
@@ -118,7 +116,7 @@ def _get_fe_coretype(fe_label, vus):
                     'found in ValenceUnit list {}'.format(fe_name, vus))
 
 
-def _get_bios_lines(annoset, sent_dict, train_mode=False):
+def _get_bios_lines(annoset, sent_dict, with_fe_anno=False):
     bios_lines = []
     token_index_3uples = _get_token_index_3uples(annoset.sentence.text)
     sent_num = marsh_utils.get_sent_num(annoset.sentence.text, sent_dict)
@@ -131,7 +129,7 @@ def _get_bios_lines(annoset, sent_dict, train_mode=False):
     #     raise InvalidParameterError('')
     #for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
     for token_3uple in token_index_3uples:
-        if not train_mode or 'FE' not in annoset.labelstore.labels_by_layer_name:
+        if not with_fe_anno or 'FE' not in annoset.labelstore.labels_by_layer_name:
             fe_label = 'O'
             fe_coretype = '_'
         else:
@@ -169,14 +167,14 @@ def _get_bios_lines(annoset, sent_dict, train_mode=False):
 
 
 def _marshall_bios(annosets, filtering_options, sent_dict, bios_filepath,
-                   excluded_frames, excluded_annosets, train_mode):
+                   excluded_frames, excluded_annosets, with_fe_anno):
     files_utils.create_parent_dir_if_not_exists(bios_filepath)
     with open(bios_filepath, 'w', encoding='utf-8') as bios_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
                                                            filtering_options,
                                                            excluded_frames,
                                                            excluded_annosets):
-            bios_lines = _get_bios_lines(annoset, sent_dict, train_mode)
+            bios_lines = _get_bios_lines(annoset, sent_dict, with_fe_anno)
             print('\n'.join(bios_lines), file=bios_stream)
             print('', file=bios_stream)  # at the end of a sentence
 
@@ -191,6 +189,8 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = files_utils.get_bios_filepath(target_dirpath,
                                                       splits_name)
+        bios_semeval_filepath = files_utils.get_bios_semeval_filepath(
+            target_dirpath, splits_name)
         sent_filepath = files_utils.get_sent_filepath(target_dirpath,
                                                       splits_name)
         sent_dict = {}
@@ -198,15 +198,17 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
             raise InvalidParameterError('Invalid splits_name: {}'.format(
                 splits_name))
         if splits_name == 'dev' or splits_name == 'test':
+            annosets, _annosets = itertools.tee(annosets, 2)
             _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
-                           bios_filepath, excluded_frames,
-                           excluded_annosets, train_mode=False)
-            # _marshall_bios(annosets, filtering_options, sent_dict, # FOR TESTING
-            #                lemmatizer, bios_stream, train_mode=True)
+                           bios_semeval_filepath, excluded_frames,
+                           excluded_annosets, with_fe_anno=False)
+            _marshall_bios(_annosets, filtering_options, sent_dict,
+                           bios_filepath, excluded_frames, excluded_annosets,
+                           with_fe_anno=True)
         elif splits_name == 'train':
             _marshall_bios(annosets, filtering_options, sent_dict,
                            bios_filepath, excluded_frames,
-                           excluded_annosets, train_mode=True)
+                           excluded_annosets, with_fe_anno=True)
         # print out sentences file
         if output_sentences:
             marsh_utils.marshall_sent_dict(sent_dict, sent_filepath)
