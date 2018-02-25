@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Change the following settings according to your environment
+# ROFAMES options to be changed according to your env
 export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
 export num_threads=2
 export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
