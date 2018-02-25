@@ -19,28 +19,28 @@ convert_mxpost_to_conllx() {
   local OUTPUT_TMP_FILE="/tmp/file.txt"
   local OUTPUT_TMP_DIR="/tmp/splitted"
 
-  rm $OUTPUT_TMP_FILE 2> /dev/null
-  rm $OUTPUT_FINAL_FILE 2> /dev/null
-  mkdir $OUTPUT_TMP_DIR 2> /dev/null
+  rm ${OUTPUT_TMP_FILE} 2> /dev/null
+  rm ${OUTPUT_FINAL_FILE} 2> /dev/null
+  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
-  perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > $OUTPUT_TMP_FILE
+  perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
 
-  cd $OUTPUT_TMP_DIR;
-  csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
+  cd ${OUTPUT_TMP_DIR};
+  csplit -s -k -f "" -n 10 ${OUTPUT_TMP_FILE} "/_ù_ù_/" "{2000000}" 2> /dev/null
 
-  for i in $(find $OUTPUT_TMP_DIR -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
-      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
-      echo "" >> $OUTPUT_FINAL_FILE
+  for i in $(find ${OUTPUT_TMP_DIR} -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
+      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> ${OUTPUT_FINAL_FILE}
+      echo "" >> ${OUTPUT_FINAL_FILE}
   done;
 
-  cut -f 1 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.1.txt
-  cut -f 2 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.2.txt
-  cut -f 3 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.3.txt
-  perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
+  cut -f 1 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
+  cut -f 2 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
+  cut -f 3 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.3.txt
+  perl -pe "s/[0-9]+/_/g" ${OUTPUT_TMP_DIR}/cutted.1.txt > ${OUTPUT_TMP_DIR}/cutted.0.txt
 
-  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.3.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > $OUTPUT_FINAL_FILE
+  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.3.txt ${OUTPUT_TMP_DIR}/cutted.3.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > ${OUTPUT_FINAL_FILE}
 
-  rm -rf $OUTPUT_TMP_DIR;
+  rm -rf ${OUTPUT_TMP_DIR};
   cd -
 
 }
@@ -57,21 +57,21 @@ convert_sentences_to_tsv() {
 
   perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe "s/\n/\n\n/g" | perl -pe "s/ +/\n/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
 
-  cd $OUTPUT_TMP_DIR;
-  csplit -s -k -f "" -n 10 $OUTPUT_TMP_FILE "/_ù_ù_/" "{2000000}" 2> /dev/null
+  cd ${OUTPUT_TMP_DIR};
+  csplit -s -k -f "" -n 10 ${OUTPUT_TMP_FILE} "/_ù_ù_/" "{2000000}" 2> /dev/null
 
-  for i in $(find $OUTPUT_TMP_DIR -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
-      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> $OUTPUT_FINAL_FILE
-      echo "" >> $OUTPUT_FINAL_FILE
+  for i in $(find ${OUTPUT_TMP_DIR} -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
+      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> ${OUTPUT_FINAL_FILE}
+      echo "" >> ${OUTPUT_FINAL_FILE}
   done;
 
-  cut -f 1 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.1.txt
-  cut -f 2 $OUTPUT_FINAL_FILE > $OUTPUT_TMP_DIR/cutted.2.txt
-  perl -pe "s/[0-9]+/_/g" $OUTPUT_TMP_DIR/cutted.1.txt > $OUTPUT_TMP_DIR/cutted.0.txt
+  cut -f 1 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
+  cut -f 2 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
+  perl -pe "s/[0-9]+/_/g" ${OUTPUT_TMP_DIR}/cutted.1.txt > ${OUTPUT_TMP_DIR}/cutted.0.txt
 
-  paste $OUTPUT_TMP_DIR/cutted.1.txt $OUTPUT_TMP_DIR/cutted.2.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt $OUTPUT_TMP_DIR/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > $OUTPUT_FINAL_FILE
+  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > ${OUTPUT_FINAL_FILE}
 
-  rm -rf $OUTPUT_TMP_DIR;
+  rm -rf ${OUTPUT_TMP_DIR};
   cd -
 }
 
@@ -87,7 +87,7 @@ convert_nlp4j_to_conllx() {
   cut -f 6 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/sixth
   paste ${OUTPUT_TMP_DIR}/first.to.fourth ${OUTPUT_TMP_DIR}/fifth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth | perl -pe "s/^\t+$//g" > ${OUTPUT_FINAL_FILE}
 
-  rm -rf $OUTPUT_TMP_DIR;
+  rm -rf ${OUTPUT_TMP_DIR};
 }
 
 is_input_file_set=FALSE
