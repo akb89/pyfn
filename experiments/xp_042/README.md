@@ -1,7 +1,16 @@
 # XP\#042
 
 Replicating Das baseline used in Kshirsagar et al. (2015)
-FN 1.5 no dev split preprocessing with MXPOST + MSTParser
+FN 1.5 preprocessing with MXPOST + MSTParser
+
+No extra filtering is applied. Frames and Annosets are filtered following open-sesame and train/dev/test splits match open-sesame
+
+## Score
+
+### Test
+| P| R | F1 |
+| --- | --- | --- |
+| 65.2 | 53.8 | 59.0 |
 
 ## Setup
 ### Splits
@@ -14,10 +23,15 @@ FN 1.5 no dev split preprocessing with MXPOST + MSTParser
 | --- | --- | --- | --- | --- |
 | FALSE | FALSE | FALSE | FALSE |
 
-### Preprocessing and parsing
-| POS tagger | Lemmatizer | Dependency parser | Frame semantic parser |
+### Preprocessing
+| POS tagger | Lemmatizer | Dependency parser |
 | --- | --- | --- | --- |
-| MXPOST | NLP4J | MST | ROFAMES
+| MXPOST | NLP4J | MST |
+
+### Frame Semantic Parsing
+| Parser | Hierarchy feature |
+| --- | --- |
+| ROFAMES | FALSE |
 
 ## Generation
 ### Splits
@@ -39,10 +53,3 @@ pyfn convert \
 ```
 ./preprocess.sh -x 042 -t mxpost -d mst -p rofames
 ```
-
-## Score
-
-### Test
-| P| R | F1 |
-| --- | --- | --- |
-| 65.2 | 53.8 | 59.0 |
