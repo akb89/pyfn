@@ -31,7 +31,7 @@ while :; do
             ;;
         -x|--xp)
             if [ "$2" ]; then
-                is_xp_dir_set=TRUE
+                is_xp_set=TRUE
                 xp="xp_$2"
                 shift
             else
@@ -185,4 +185,8 @@ fi
 
 if [ "${fsparser}" = "open-sesame" ]; then
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/train.bios -c ${DATA_DIR}/train.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios -c ${DATA_DIR}/dev.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios.semeval -c ${DATA_DIR}/dev.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios -c ${DATA_DIR}/test.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios.semeval -c ${DATA_DIR}/test.sentences.${tagger}.conllx
 fi
