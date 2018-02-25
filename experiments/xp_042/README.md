@@ -1,10 +1,13 @@
 # XP\#042
 
+Replicating Das baseline used in Kshirsagar et al. (2015)
+FN 1.5 no dev split preprocessing with MXPOST + MSTParser
+
 ## Setup
 ### Splits
-| FrameNet version | Fulltext | Exemplar |
-| --- | --- | --- |
-| 1.5 | TRUE | FALSE |
+| FrameNet version | Fulltext | Exemplar | Frames
+| --- | --- | --- | --- |
+| 1.5 | TRUE | FALSE |  | GOLD |
 
 ### Filtering in training data
 | No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
@@ -23,7 +26,7 @@ Splits are generated with:
 pyfn convert \
   --from fnxml \
   --to rofames \
-  --source /path/to/fndata-1.5-with-dev \
+  --source /path/to/fndata-1.5 \
   --target /path/to/experiments/xp_042/data \
   --splits train \
   --output_sentences \
@@ -34,5 +37,12 @@ pyfn convert \
 ### Preprocessing
 
 ```
-./preprocess.sh -x /path/to/experiments/xp_042 -t mxpost -d mst -p rofames -v
+./preprocess.sh -x 042 -t mxpost -d mst -p rofames
 ```
+
+## Score
+
+### Test
+| P| R | F1 |
+| --- | --- | --- |
+|  | |  |

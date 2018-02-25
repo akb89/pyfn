@@ -105,6 +105,7 @@ data/
 resources/*
 !tests/resources/
 model/
+score/
 !lib/
 lib/*
 !lib/rofames
