@@ -5,7 +5,7 @@ import os
 from pyfn.exceptions.parameter import InvalidParameterError
 
 __all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_rofames_filepath',
-           'create_parent_dir_if_not_exists']
+           'create_parent_dir_if_not_exists', 'get_bios_semeval_filepath']
 
 
 def get_rofames_filepath(target_dirpath, splits_name):
@@ -29,6 +29,14 @@ def get_bios_filepath(target_dirpath, splits_name):
     Look for the file under the specified taret_dirpath.
     """
     return os.path.join(target_dirpath, '{}.bios'.format(splits_name))
+
+
+def get_bios_semeval_filepath(target_dirpath, splits_name):
+    """Return the absolute path of the {splits_name}.bios.semeval file.
+
+    Look for the file under the specified taret_dirpath.
+    """
+    return os.path.join(target_dirpath, '{}.bios.semeval'.format(splits_name))
 
 
 def get_sent_filepath(target_dirpath, splits_name):
