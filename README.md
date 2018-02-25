@@ -28,6 +28,11 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [ ] syntactic scaffolding
 - [ ] phrase structure parses
 
+## Dependencies
+On Linux:
+```
+sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+```
 
 ## Duplicates in test set
 In the test set there can be duplicate annotationsets. Ex:

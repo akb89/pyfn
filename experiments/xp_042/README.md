@@ -49,7 +49,7 @@ pyfn convert \
 ```
 
 ### Preprocessing
-
+Splits are preprocessed with:
 ```
 ./preprocess.sh -x 042 -t mxpost -d mst -p rofames
 ```
