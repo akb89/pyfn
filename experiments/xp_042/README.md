@@ -7,7 +7,7 @@ FN 1.5 no dev split preprocessing with MXPOST + MSTParser
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
 | --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE |  | GOLD |
+| 1.5 | TRUE | FALSE | GOLD |
 
 ### Filtering in training data
 | No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
@@ -45,4 +45,4 @@ pyfn convert \
 ### Test
 | P| R | F1 |
 | --- | --- | --- |
-|  | |  |
+| 65.2 | 53.8 | 59.0 |
