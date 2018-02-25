@@ -113,4 +113,6 @@ lib/rofames/*
 !lib/open-sesame
 lib/open-sesame/*
 !lib/open-sesame/bin
+!lib/semeval
 *.tar.bz2
+*.DS_Store
