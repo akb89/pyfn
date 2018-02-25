@@ -10,7 +10,7 @@ __all__ = ['unmarshall_semeval07_xml']
 logger = logging.getLogger(__name__)
 
 
-def unmarshall_semeval07_xml(xml_filepath, flatten=False):
+def unmarshall_semeval07_xml(xml_filepath, fe_dict, flatten=False):
     """Unmarshall a SemEval 2007 FrameNet XML file from file path.
 
     Return a generator of AnnotationSet instances extracted from the
@@ -33,7 +33,8 @@ def unmarshall_semeval07_xml(xml_filepath, flatten=False):
                     for sentences_tag in paragraph_tag.findall('sentences'):
                         for sentence_tag in sentences_tag.findall('sentence'):
                             annosets = fn_unmarshaller.extract_fn_annosets(
-                                sentence_tag, xml_schema_type='semeval')
+                                sentence_tag, xml_schema_type='semeval',
+                                fe_dict=fe_dict)
                             if annosets:
                                 if not flatten:
                                     yield annosets

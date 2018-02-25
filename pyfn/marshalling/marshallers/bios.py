@@ -9,14 +9,14 @@ BIOS file format:
 0   1       2       3               4   5           6       7       8
 ID  FORM    LEMMA   PLEMMA(NLTK)    POS PPOS(NLTK)  FEAT    PFEAT   HEAD
 
-9       10      11      12          13      14
-PHEAD   DEPREL  PDEPREL FILLPRED    PRED    APREDS
+9       10      11      12          13      14      15
+PHEAD   DEPREL  PDEPREL FILLPRED    PRED    APREDS  FE_CORETYPE
 """
 
 import logging
-import nltk
-
-from nltk.stem import WordNetLemmatizer
+# import nltk
+#
+# from nltk.stem import WordNetLemmatizer
 
 import pyfn.utils.files as files_utils
 import pyfn.utils.filter as filt_utils
@@ -64,87 +64,119 @@ def _get_token_lemma(token, pos, lemmatizer):
     return lemmatizer.lemmatize(token)
 
 
-def _get_tokens_ppos(text):
-    return [item[1] for item in nltk.pos_tag(text.split())]
-
-
-def _get_tokens_pos(token_index_3uples, pos_labels_by_indexes):
-    tokens_pos = []
-    for _, start, end in token_index_3uples:
-        if (start, end) in pos_labels_by_indexes:
-            for label in pos_labels_by_indexes[(start, end)]:
-                if label.layer.name == 'PENN' or label.layer.name == 'BNC':
-                    tokens_pos.append(label.name.upper())
-                else:
-                    raise InvalidParameterError('Unsupported layer name: {}'
-                                                .format(label.layer.name))
-        else:
-            tokens_pos.append('_')
-    return tokens_pos
+# def _get_tokens_ppos(text):
+#     return [item[1] for item in nltk.pos_tag(text.split())]
+#
+#
+# def _get_tokens_pos(token_index_3uples, pos_labels_by_indexes):
+#     tokens_pos = []
+#     for _, start, end in token_index_3uples:
+#         if (start, end) in pos_labels_by_indexes:
+#             for label in pos_labels_by_indexes[(start, end)]:
+#                 if label.layer.name == 'PENN' or label.layer.name == 'BNC':
+#                     tokens_pos.append(label.name.upper())
+#                 else:
+#                     raise InvalidParameterError('Unsupported layer name: {}'
+#                                                 .format(label.layer.name))
+#         else:
+#             tokens_pos.append('_')
+#     return tokens_pos
 
 
 def _get_token_index_3uples(text):
-    """Return a dict: {token: (start, end)} of token to start/end indexe tuples."""
+    """Return a dict: {token: (start, end)} of token to start/end index tuples."""
     token_index_3uples = []
     tokens = text.split()
     start_index = 0
     for token in tokens:
         while token[0] != text[start_index]:
             start_index += 1
-        token_index_3uples.append((token, start_index, start_index+len(token)-1))
+        token_index_3uples.append((token, start_index,
+                                   start_index+len(token)-1))
         start_index += len(token)
     return token_index_3uples
 
 
-def _get_bios_lines(annoset, sent_dict, lemmatizer, train_mode=False):
+def _get_valence_units_by_indexes(vustore, start, end):
+    vus = []
+    for (vu_start, vu_end), vu in vustore.valence_units_by_indexes.items():
+        if start >= vu_start and end <= vu_end:
+            vus.extend(vu)
+    return vus
+
+
+def _get_fe_coretype(fe_label, vus):
+    if fe_label == 'O':
+        raise InvalidParameterError('Unspecified FE label: {}'.format(fe_label))
+    if not vus:
+        raise InvalidParameterError('Input ValenceUnit list is empty')
+    fe_name = fe_label[2:]
+    for vu in vus:
+        if vu.fe.name == fe_name:
+            return vu.fe.coretype
+    raise Exception('Could not output FE coreType: no matching FE name \'{}\' '
+                    'found in ValenceUnit list {}'.format(fe_name, vus))
+
+
+def _get_bios_lines(annoset, sent_dict, train_mode=False):
     bios_lines = []
     token_index_3uples = _get_token_index_3uples(annoset.sentence.text)
     sent_num = marsh_utils.get_sent_num(annoset.sentence.text, sent_dict)
     token_num = 1
-    pos_tags = _get_tokens_pos(
-        token_index_3uples, annoset.sentence.pnw_labelstore.labels_by_indexes)
-    ppos_tags = _get_tokens_ppos(annoset.sentence.text)
+    # pos_tags = _get_tokens_pos(
+    #     token_index_3uples, annoset.sentence.pnw_labelstore.labels_by_indexes)
+    # ppos_tags = _get_tokens_ppos(annoset.sentence.text)
     # Checking some stuff:
-    if len(token_index_3uples) != len(pos_tags) or len(pos_tags) != len(ppos_tags):
-        raise InvalidParameterError('')
-    for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
+    # if len(token_index_3uples) != len(pos_tags) or len(pos_tags) != len(ppos_tags):
+    #     raise InvalidParameterError('')
+    #for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
+    for token_3uple in token_index_3uples:
         if not train_mode or 'FE' not in annoset.labelstore.labels_by_layer_name:
             fe_label = 'O'
+            fe_coretype = '_'
         else:
             fe_label = _get_fe_label(
                 token_3uple[1], token_3uple[2],
                 annoset.labelstore.labels_by_layer_name['FE'])
-        bios_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
+            if fe_label == 'O':
+                fe_coretype = '_'
+            else:
+                vus = _get_valence_units_by_indexes(annoset.vustore,
+                                                    token_3uple[1],
+                                                    token_3uple[2])
+                fe_coretype = _get_fe_coretype(fe_label, vus)
+        bios_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(
             token_num,
             token_3uple[0],
             '_',
-            _get_token_lemma(token_3uple[0], ppos, lemmatizer),
-            pos,
-            ppos,
+            #_get_token_lemma(token_3uple[0], ppos, lemmatizer),
+            '_',
+            #pos,
+            '_',
+            #ppos,
+            '_',
             sent_num,
             '_', '_', '_', '_', '_',
             _get_lexunit_name(_get_lexunit(token_3uple[1], token_3uple[2],
                                            annoset.target)),
             _get_frame_name(_get_lexunit(token_3uple[1], token_3uple[2],
                                          annoset.target)),
-            fe_label)
+            fe_label,
+            fe_coretype)
         bios_lines.append(bios_line)
         token_num += 1
     return bios_lines
 
 
-def _marshall_bios(annosets, filtering_options, sent_dict, lemmatizer,
-                   bios_filepath, excluded_frames,
-                   excluded_annosets, train_mode):
+def _marshall_bios(annosets, filtering_options, sent_dict, bios_filepath,
+                   excluded_frames, excluded_annosets, train_mode):
     files_utils.create_parent_dir_if_not_exists(bios_filepath)
     with open(bios_filepath, 'w', encoding='utf-8') as bios_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
                                                            filtering_options,
                                                            excluded_frames,
                                                            excluded_annosets):
-            #print('Processing annoset._id = {}'.format(annoset._id))
-            bios_lines = _get_bios_lines(annoset, sent_dict, lemmatizer,
-                                         train_mode)
+            bios_lines = _get_bios_lines(annoset, sent_dict, train_mode)
             print('\n'.join(bios_lines), file=bios_stream)
             print('', file=bios_stream)  # at the end of a sentence
 
@@ -155,7 +187,7 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
     """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
     logger.info('Marshalling {splits:pyfn.AnnotationSet} dict to BIOS...')
     logger.info('Filtering options = {}'.format(filtering_options))
-    lemmatizer = WordNetLemmatizer()
+    #lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = files_utils.get_bios_filepath(target_dirpath,
                                                       splits_name)
@@ -167,13 +199,13 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                 splits_name))
         if splits_name == 'dev' or splits_name == 'test':
             _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
-                           lemmatizer, bios_filepath, excluded_frames,
+                           bios_filepath, excluded_frames,
                            excluded_annosets, train_mode=False)
             # _marshall_bios(annosets, filtering_options, sent_dict, # FOR TESTING
             #                lemmatizer, bios_stream, train_mode=True)
         elif splits_name == 'train':
             _marshall_bios(annosets, filtering_options, sent_dict,
-                           lemmatizer, bios_filepath, excluded_frames,
+                           bios_filepath, excluded_frames,
                            excluded_annosets, train_mode=True)
         # print out sentences file
         if output_sentences:

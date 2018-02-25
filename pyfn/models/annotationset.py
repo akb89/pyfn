@@ -28,7 +28,7 @@ class AnnotationSet():
 
     @classmethod
     def from_fn_data(cls, _id, fn_labels, lexunit, sentence, xml_schema_type,
-                     c_date=None, fe_dict=None):
+                     fe_dict, c_date=None):
         """Return an instance of AnnotationSet generated from given FN data."""
         target = Target.from_fn_data(fn_labels, sentence.text,
                                      sentence.pnw_labelstore.labels_by_indexes,

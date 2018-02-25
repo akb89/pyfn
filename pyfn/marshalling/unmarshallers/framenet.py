@@ -16,6 +16,7 @@ from pyfn.models.annotationset import AnnotationSet
 from pyfn.models.corpus import Corpus
 from pyfn.models.document import Document
 from pyfn.models.frame import Frame
+from pyfn.models.frameelement import FrameElement
 from pyfn.models.label import Label
 from pyfn.models.layer import Layer
 from pyfn.models.lexunit import LexUnit
@@ -81,7 +82,7 @@ def _extract_labels(layer_tags, layer_names):
 
 
 def _extract_fn_annoset(annoset_tag, sentence, xml_schema_type,
-                        annoset_layer_names, lexunit=None, fe_dict=None):
+                        annoset_layer_names, fe_dict, lexunit=None):
     _id = int(annoset_tag.get('ID'))
     logger.debug('Processing annotationSet #{}'.format(_id))
     labels = _extract_labels(_extract_layer_tags(annoset_tag),
@@ -138,11 +139,10 @@ def _is_fn_annoset(annoset_tag):
 
 
 def _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
-                         annoset_layer_names, lexunit=None,
-                         fe_dict=None):
+                         annoset_layer_names, fe_dict, lexunit=None):
     return [_extract_fn_annoset(annoset_tag, sentence, xml_schema_type,
                                 annoset_layer_names,
-                                lexunit=lexunit, fe_dict=fe_dict)
+                                fe_dict=fe_dict, lexunit=lexunit)
             for annoset_tag in annoset_tags
             if _is_fn_annoset(annoset_tag)]
 
@@ -193,9 +193,8 @@ def _extract_annoset_tags(sentence_tag):
     return annoset_tags
 
 
-def extract_fn_annosets(sentence_tag, xml_schema_type,
-                        document=None, lexunit=None,
-                        fe_dict=None):
+def extract_fn_annosets(sentence_tag, xml_schema_type, fe_dict,
+                        document=None, lexunit=None):
     """Return a [AnnotationSet,...,] extracted from a single <sentence> tag."""
     annoset_tags = _extract_annoset_tags(sentence_tag)
     if not annoset_tags:
@@ -205,80 +204,10 @@ def extract_fn_annosets(sentence_tag, xml_schema_type,
     sentence = _extract_sentence(sentence_tag, pnwb_labels, document=document)
     return _extract_fn_annosets(annoset_tags, sentence, xml_schema_type,
                                 const.ANNO_LAYERS,
-                                lexunit=lexunit, fe_dict=fe_dict)
+                                fe_dict=fe_dict, lexunit=lexunit)
 
 
-def _filter_annosets_dict(annosets_dict):
-    # At least test and train, dev is optional
-    filtered_annosets_dict = {}
-    test_annosets, _test_annosets, __test_annosets = itertools.tee(
-        annosets_dict['test'], 3)
-    filtered_annosets_dict['test'] = test_annosets
-    if annosets_dict['dev']:
-        filtered_dev_annosets = f_utils.left_difference(
-            annosets_dict['dev'], _test_annosets)
-        dev_annosets, _dev_annosets = itertools.tee(filtered_dev_annosets)
-        filtered_annosets_dict['dev'] = dev_annosets
-        filtered_annosets_dict['train'] = f_utils.left_difference(
-            annosets_dict['train'], itertools.chain(_dev_annosets,
-                                                    __test_annosets))
-    else:
-        filtered_annosets_dict['train'] = f_utils.left_difference(
-            annosets_dict['train'], _test_annosets)
-    return filtered_annosets_dict
-
-
-def _get_annosets_dict_from_fn_xml(fn_splits_dirpath, splits, with_exemplars):
-    if splits == 'test':
-        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                      'test'),
-                                         with_fulltexts=True,
-                                         with_exemplars=with_exemplars,
-                                         flatten=True),
-                'dev': [], 'train': []}
-    if splits == 'dev':
-        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                      'test'),
-                                         with_fulltexts=True,
-                                         with_exemplars=with_exemplars,
-                                         flatten=True),
-                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                     'dev'),
-                                        with_fulltexts=True,
-                                        with_exemplars=with_exemplars,
-                                        flatten=True),
-                'train': []}
-    if splits == 'train':
-        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                      'test'),
-                                         with_fulltexts=True,
-                                         with_exemplars=with_exemplars,
-                                         flatten=True),
-                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                     'dev'),
-                                        with_fulltexts=True,
-                                        with_exemplars=with_exemplars,
-                                        flatten=True),
-                'train': extract_annosets(os.path.join(fn_splits_dirpath,
-                                                       'train'),
-                                          with_fulltexts=True,
-                                          with_exemplars=with_exemplars,
-                                          flatten=True)}
-    return {}
-
-
-def get_annosets_dict(source_path, splits, with_exemplars):
-    """Return a string to AnnotationSet generator dict.
-
-    Keys are splits name (train, dev, test) and values are generators
-    on AnnotationSet objects.
-    """
-    logger.info('Creating pyfn.AnnotationSet dict from {}'.format(source_path))
-    return _filter_annosets_dict(
-        _get_annosets_dict_from_fn_xml(source_path, splits, with_exemplars))
-
-
-def _unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
+def _unmarshall_exemplar_xml(xml_file_path, fe_dict, flatten=False):
     """Unmarshall a FrameNet lu XML file from file path.
 
     Return a generator over a list of AnnotationSet instances extracted
@@ -301,8 +230,8 @@ def _unmarshall_exemplar_xml(xml_file_path, fe_dict=None, flatten=False):
                                               const.FN_XML_NAMESPACE)
         for sentence_tag in sentence_tags:
             annosets = extract_fn_annosets(
-                sentence_tag, xml_schema_type='exemplar', lexunit=lexunit,
-                fe_dict=fe_dict)
+                sentence_tag, xml_schema_type='exemplar', fe_dict=fe_dict,
+                lexunit=lexunit)
             if annosets:
                 if not flatten:
                     yield annosets
@@ -325,7 +254,7 @@ def _extract_document(header_tag):
                     corpus)
 
 
-def _unmarshall_fulltext_xml(xml_file_path, fe_dict=None, flatten=False):
+def _unmarshall_fulltext_xml(xml_file_path, fe_dict, flatten=False):
     """Unmarshall a FrameNet fulltext XML file from file path.
 
     Return a generator on AnnotationSet instances extracted from the
@@ -350,8 +279,8 @@ def _unmarshall_fulltext_xml(xml_file_path, fe_dict=None, flatten=False):
     sentence_tags = root.findall('fn:sentence', const.FN_XML_NAMESPACE)
     for sentence_tag in sentence_tags:
         annosets = extract_fn_annosets(
-            sentence_tag, xml_schema_type='fulltext', document=document,
-            fe_dict=fe_dict)
+            sentence_tag, xml_schema_type='fulltext', fe_dict=fe_dict,
+            document=document)
         if annosets:
             if not flatten:
                 yield annosets
@@ -360,7 +289,7 @@ def _unmarshall_fulltext_xml(xml_file_path, fe_dict=None, flatten=False):
                     yield annoset
 
 
-def _extract_ex_annosets(ex_filepaths, fe_dict=None, flatten=False):
+def _extract_ex_annosets(ex_filepaths, fe_dict, flatten=False):
     generators = []
     for exemplar_filepath in ex_filepaths:
         generators.append(_unmarshall_exemplar_xml(
@@ -368,7 +297,7 @@ def _extract_ex_annosets(ex_filepaths, fe_dict=None, flatten=False):
     return generators
 
 
-def _extract_ft_annosets(ft_filepaths, fe_dict=None, flatten=False):
+def _extract_ft_annosets(ft_filepaths, fe_dict, flatten=False):
     generators = []
     for fulltext_filepath in ft_filepaths:
         generators.append(_unmarshall_fulltext_xml(
@@ -377,7 +306,7 @@ def _extract_ft_annosets(ft_filepaths, fe_dict=None, flatten=False):
 
 
 def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
-                     fe_dict=None, flatten=False):
+                     fe_dict, flatten=False):
     """Return a list of pyfn.AnnotationSet extracted from splits paths.
 
     The splits directory should contain two subdirectories name 'fulltext'
@@ -399,3 +328,113 @@ def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
                                                    'lu')
         ex_annosets = _extract_ex_annosets(ex_filepaths, fe_dict, flatten)
     return itertools.chain(*ft_annosets, *ex_annosets)
+
+
+def _filter_annosets_dict(annosets_dict):
+    # At least test and train, dev is optional
+    filtered_annosets_dict = {}
+    test_annosets, _test_annosets, __test_annosets = itertools.tee(
+        annosets_dict['test'], 3)
+    filtered_annosets_dict['test'] = test_annosets
+    if annosets_dict['dev']:
+        filtered_dev_annosets = f_utils.left_difference(
+            annosets_dict['dev'], _test_annosets)
+        dev_annosets, _dev_annosets = itertools.tee(filtered_dev_annosets)
+        filtered_annosets_dict['dev'] = dev_annosets
+        filtered_annosets_dict['train'] = f_utils.left_difference(
+            annosets_dict['train'], itertools.chain(_dev_annosets,
+                                                    __test_annosets))
+    else:
+        filtered_annosets_dict['train'] = f_utils.left_difference(
+            annosets_dict['train'], _test_annosets)
+    return filtered_annosets_dict
+
+
+def _extract_frame_element(fe_tag):
+    return FrameElement(_id=int(fe_tag.get('ID')), name=fe_tag.get('name'),
+                        coretype=fe_tag.get('coreType'))
+
+
+def _get_fe_dict(frame_xml_filepaths):
+    fe_dict = {}
+    if not frame_xml_filepaths:
+        logger.warning('Could not find \'frame\' directory under {}. '
+                       'Unmarshalling FrameNet XML files without '
+                       'FrameElement dictionary. '
+                       'If you wish to access FE coreType information, '
+                       'you may want to start over add the FrameNet frame/ '
+                       'subdirectory containing frame XML files '
+                       'under your FN splits directory'.format(
+                           frame_xml_filepaths))
+        return fe_dict
+    for frame_xml_filepath in frame_xml_filepaths:
+        logger.info('Unmarshalling frame XML file {}'.format(frame_xml_filepath))
+        tree = etree.parse(frame_xml_filepath)
+        root = tree.getroot()
+        try:
+            fe_tags = root.findall('fn:FE', const.FN_XML_NAMESPACE)
+            for fe_tag in fe_tags:
+                frame_element = _extract_frame_element(fe_tag)
+                fe_dict[frame_element._id] = frame_element
+        except XMLProcessingError as err:
+            raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
+                                     .format(frame_xml_filepath, str(err)))
+    return fe_dict
+
+
+def _get_annosets_dict_from_fn_xml(fn_splits_dirpath, splits, with_exemplars):
+    fe_dict = _get_fe_dict(xml_utils.get_xml_filepaths(fn_splits_dirpath,
+                                                       'frame'))
+    if splits == 'test':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         fe_dict=fe_dict,
+                                         flatten=True),
+                'dev': [], 'train': []}
+    if splits == 'dev':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         fe_dict=fe_dict,
+                                         flatten=True),
+                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                     'dev'),
+                                        with_fulltexts=True,
+                                        with_exemplars=with_exemplars,
+                                        fe_dict=fe_dict,
+                                        flatten=True),
+                'train': []}
+    if splits == 'train':
+        return {'test': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                      'test'),
+                                         with_fulltexts=True,
+                                         with_exemplars=with_exemplars,
+                                         fe_dict=fe_dict,
+                                         flatten=True),
+                'dev': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                     'dev'),
+                                        with_fulltexts=True,
+                                        with_exemplars=with_exemplars,
+                                        fe_dict=fe_dict,
+                                        flatten=True),
+                'train': extract_annosets(os.path.join(fn_splits_dirpath,
+                                                       'train'),
+                                          with_fulltexts=True,
+                                          with_exemplars=with_exemplars,
+                                          fe_dict=fe_dict,
+                                          flatten=True)}
+    return {}
+
+
+def get_annosets_dict(source_path, splits, with_exemplars):
+    """Return a string to AnnotationSet generator dict.
+
+    Keys are splits name (train, dev, test) and values are generators
+    on AnnotationSet objects.
+    """
+    logger.info('Creating pyfn.AnnotationSet dict from {}'.format(source_path))
+    return _filter_annosets_dict(
+        _get_annosets_dict_from_fn_xml(source_path, splits, with_exemplars))

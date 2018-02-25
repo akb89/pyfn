@@ -11,8 +11,18 @@ LU_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
                            'splits', 'lu', 'lu.xml')
 FULLTEXT_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources',
                                  'splits', 'fulltext', 'fulltext.xml')
-ex_annosets_list = list(framenet._unmarshall_exemplar_xml(LU_XML_FILE))
-fulltext_annosets_list = list(framenet._unmarshall_fulltext_xml(FULLTEXT_XML_FILE))
+ex_annosets_list = list(framenet._unmarshall_exemplar_xml(LU_XML_FILE, {}))
+fulltext_annosets_list = list(framenet._unmarshall_fulltext_xml(FULLTEXT_XML_FILE, {}))
+
+
+def test_get_fe_dict():
+    FRAME1_XML_FILEPATH = os.path.join(SPLITS_DIRPATH, 'frame', 'Being_at_risk.xml')
+    FRAME2_XML_FILEPATH = os.path.join(SPLITS_DIRPATH, 'frame', 'Request.xml')
+    fe_dict = framenet._get_fe_dict([FRAME1_XML_FILEPATH, FRAME2_XML_FILEPATH])
+    assert len(fe_dict) == 24
+    assert fe_dict[1492]._id == 1492
+    assert fe_dict[1492].name == 'Means'
+    assert fe_dict[1492].coretype == 'Peripheral'
 
 
 def test_fulltext_annosets_counts():
@@ -67,7 +77,7 @@ def test_lu_target():
 
 def test_extract_annosets_with_ft_with_ex_flatten_false():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, with_fulltexts=True, with_exemplars=True,
+        SPLITS_DIRPATH, with_fulltexts=True, with_exemplars=True, fe_dict={},
         flatten=False))
     assert len(annosets) == 4
     assert len([item for sublist in annosets for item in sublist]) == 10
@@ -75,31 +85,31 @@ def test_extract_annosets_with_ft_with_ex_flatten_false():
 
 def test_extract_annosets_with_ft_with_ex_flatten_true():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, True, True, flatten=True))
+        SPLITS_DIRPATH, True, True, {}, flatten=True))
     assert len(annosets) == 10
 
 
 def test_extract_annosets_with_ft_flatten_false():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, True, False, flatten=False))
+        SPLITS_DIRPATH, True, False, {}, flatten=False))
     assert len(annosets) == 2
     assert len([item for sublist in annosets for item in sublist]) == 8
 
 
 def test_extract_annosets_with_ft_flatten_true():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, True, False, flatten=True))
+        SPLITS_DIRPATH, True, False, {}, flatten=True))
     assert len(annosets) == 8
 
 
 def test_extract_annosets_with_ex_flatten_false():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, False, True, flatten=False))
+        SPLITS_DIRPATH, False, True, {}, flatten=False))
     assert len(annosets) == 2
     assert len([item for sublist in annosets for item in sublist]) == 2
 
 
 def test_extract_annosets_with_ex_flatten_true():
     annosets = list(framenet.extract_annosets(
-        SPLITS_DIRPATH, False, True, flatten=True))
+        SPLITS_DIRPATH, False, True, {}, flatten=True))
     assert len(annosets) == 2

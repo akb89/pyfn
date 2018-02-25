@@ -13,10 +13,7 @@ def extract(directory):
 
 
 def get_xml_filepaths(splits_dirpath, subdir):
-    """Return a list of fullpaths for XML files in splits_dirpath/subdir.
-
-    The subdir parameter is either 'fulltext', either 'lu'.
-    """
+    """Return a list of fullpaths for XML files in splits_dirpath/subdir."""
     dirpath = os.path.join(splits_dirpath, subdir)
     if os.path.exists(dirpath):
         return extract(dirpath)

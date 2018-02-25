@@ -52,7 +52,7 @@ def _contains_unspecified_indexes(index, labels):
 
 
 # pylint: disable=R0912
-def _to_valence_units_by_indexes(labels_by_indexes, fe_dict=None):
+def _to_valence_units_by_indexes(labels_by_indexes, fe_dict):
     valence_units_by_indexes = defaultdict(list)
     for index, labels in labels_by_indexes.items():
         if _contains_unspecified_indexes(index, labels):
@@ -114,7 +114,7 @@ class ValenceUnitStore():
         self._valence_units_by_indexes = valence_units_by_indexes
 
     @classmethod
-    def from_fn_data(cls, fn_labels_by_indexes, fe_dict=None):
+    def from_fn_data(cls, fn_labels_by_indexes, fe_dict):
         """Return ValenceUnitStore instance generated from FrameNet data."""
         valence_units_by_indexes = _to_valence_units_by_indexes(
             fn_labels_by_indexes, fe_dict)
