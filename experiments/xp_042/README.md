@@ -11,7 +11,7 @@ FN 1.5 no dev split preprocessing with MXPOST + MSTParser
 
 ### Filtering in training data
 | No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | FALSE | FALSE | FALSE | FALSE |
 
 ### Preprocessing and parsing
