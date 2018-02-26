@@ -59,6 +59,7 @@ sh ${NLP4J_HOME}/bin/nlpdecode \
   -threads ${num_threads} > ${LOGS_DIR}/nlp4j.log
 
 OUTPUT_TMP_DIR="/tmp/nlp4j"
+rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
 mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
 cut -f 1-3 ${file}.nlp4j > ${OUTPUT_TMP_DIR}/first.to.third
@@ -66,7 +67,7 @@ cut -f 4-10 ${file} > ${OUTPUT_TMP_DIR}/fourth.to.tenth
 
 paste ${OUTPUT_TMP_DIR}/first.to.third ${OUTPUT_TMP_DIR}/fourth.to.tenth | perl -pe "s/^\t+$//g" > ${file}
 
-rm -rf $OUTPUT_TMP_DIR;
+rm -rf ${OUTPUT_TMP_DIR};
 rm ${file}.nlp4j
 
 echo "Done"

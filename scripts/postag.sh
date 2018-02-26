@@ -21,6 +21,7 @@ convert_mxpost_to_conllx() {
 
   rm ${OUTPUT_TMP_FILE} 2> /dev/null
   rm ${OUTPUT_FINAL_FILE} 2> /dev/null
+  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
@@ -53,6 +54,7 @@ convert_sentences_to_tsv() {
 
   rm ${OUTPUT_TMP_FILE} 2> /dev/null
   rm ${OUTPUT_FINAL_FILE} 2> /dev/null
+  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe "s/\n/\n\n/g" | perl -pe "s/ +/\n/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
@@ -80,6 +82,7 @@ convert_nlp4j_to_conllx() {
   local OUTPUT_FINAL_FILE=$2
   local OUTPUT_TMP_DIR="/tmp/nlp4j"
 
+  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
   mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
 
   cut -f 1-4 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/first.to.fourth
