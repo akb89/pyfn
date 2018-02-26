@@ -1,0 +1,21 @@
+<configuration>
+		<tsv>
+				<column index="1" field="form"/>
+				<column index="2" field="lemma"/>
+				<column index="3" field="pos"/>
+				<column index="4" field="feats"/>
+				<column index="5" field="dhead"/>
+				<column index="6" field="deprel"/>
+				<column index="7" field="sheads"/>
+				<column index="8" field="nament"/>
+		</tsv>
+
+    <lexica>
+        <ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
+        <word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
+    </lexica>
+
+    <models>
+    	<pos>/Users/AKB/GitHub/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+    </models>
+</configuration>

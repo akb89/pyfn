@@ -103,6 +103,7 @@ debug.py
 .pytest_*
 data/
 resources/*
+!resources/config-decode-pos.xml
 !tests/resources/
 model/
 score/
