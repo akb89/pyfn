@@ -22,11 +22,9 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 - [x] dep parsing with BMST or BARCH
 - [x] lemmatize MXPOST
 - [x] flatten all.lemma.tags
-- [ ] merge .bios and .conllx
-- [ ] open-sesame frame data
+- [x] merge .bios and .conllx
+- [x] open-sesame frame data
 - [ ] frame identification
-- [ ] syntactic scaffolding
-- [ ] phrase structure parses
 
 ## Dependencies
 On Linux:
