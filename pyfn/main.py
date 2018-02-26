@@ -4,9 +4,12 @@ This is the entry point of the application.
 """
 
 import os
-import logging
 import argparse
 
+import logging
+import logging.config
+
+import pyfn.utils.config as config_utils
 import pyfn.marshalling.marshallers.bios as biosm
 import pyfn.marshalling.marshallers.rofames as rofamesm
 import pyfn.marshalling.marshallers.semeval as semeval
@@ -16,6 +19,10 @@ import pyfn.marshalling.unmarshallers.rofames as rofamesu
 
 
 from pyfn.exceptions.parameter import InvalidParameterError
+
+logging.config.dictConfig(
+    config_utils.load(
+        os.path.join(os.path.dirname(__file__), 'logging', 'logging.yml')))
 
 logger = logging.getLogger(__name__)
 

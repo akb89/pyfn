@@ -183,8 +183,6 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                            output_sentences, excluded_frames,
                            excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
-    logger.info('Marshalling {splits:pyfn.AnnotationSet} dict to BIOS...')
-    logger.info('Filtering options = {}'.format(filtering_options))
     #lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = files_utils.get_bios_filepath(target_dirpath,
@@ -199,13 +197,22 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                 splits_name))
         if splits_name == 'dev' or splits_name == 'test':
             annosets, _annosets = itertools.tee(annosets, 2)
+            logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
+                        '.bios.semeval for {} splits with [] filtering '
+                        'options...'.format(splits_name))
             _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
                            bios_semeval_filepath, excluded_frames,
                            excluded_annosets, with_fe_anno=False)
+            logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
+                        '.bios for {} splits with {} filtering '
+                        'options...'.format(splits_name, filtering_options))
             _marshall_bios(_annosets, filtering_options, sent_dict,
                            bios_filepath, excluded_frames, excluded_annosets,
                            with_fe_anno=True)
         elif splits_name == 'train':
+            logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
+                        '.bios for {} splits with {} filtering '
+                        'options...'.format(splits_name, filtering_options))
             _marshall_bios(annosets, filtering_options, sent_dict,
                            bios_filepath, excluded_frames,
                            excluded_annosets, with_fe_anno=True)
