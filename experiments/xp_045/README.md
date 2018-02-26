@@ -1,5 +1,7 @@
 # XP\#045
 
+With a batch size of 40,000
+
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
