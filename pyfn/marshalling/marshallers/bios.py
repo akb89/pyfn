@@ -43,7 +43,7 @@ def _get_lexunit(start, end, target):
     if (start, end) in target.indexes:
         return target.lexunit
     for istart, iend in target.indexes:
-        if start >= istart and end <= iend:
+        if not (iend < start or istart > end):
             return target.lexunit
     return '_'
 
@@ -60,25 +60,6 @@ def _get_token_lemma(token, pos, lemmatizer):
     if pos.startswith('V'):
         return lemmatizer.lemmatize(token, pos='v')
     return lemmatizer.lemmatize(token)
-
-
-# def _get_tokens_ppos(text):
-#     return [item[1] for item in nltk.pos_tag(text.split())]
-#
-#
-# def _get_tokens_pos(token_index_3uples, pos_labels_by_indexes):
-#     tokens_pos = []
-#     for _, start, end in token_index_3uples:
-#         if (start, end) in pos_labels_by_indexes:
-#             for label in pos_labels_by_indexes[(start, end)]:
-#                 if label.layer.name == 'PENN' or label.layer.name == 'BNC':
-#                     tokens_pos.append(label.name.upper())
-#                 else:
-#                     raise InvalidParameterError('Unsupported layer name: {}'
-#                                                 .format(label.layer.name))
-#         else:
-#             tokens_pos.append('_')
-#     return tokens_pos
 
 
 def _get_token_index_3uples(text):
@@ -120,13 +101,6 @@ def _get_bios_lines(annoset, sent_dict, with_fe_anno=False):
     token_index_3uples = _get_token_index_3uples(annoset.sentence.text)
     sent_num = marsh_utils.get_sent_num(annoset.sentence.text, sent_dict)
     token_num = 1
-    # pos_tags = _get_tokens_pos(
-    #     token_index_3uples, annoset.sentence.pnw_labelstore.labels_by_indexes)
-    # ppos_tags = _get_tokens_ppos(annoset.sentence.text)
-    # Checking some stuff:
-    # if len(token_index_3uples) != len(pos_tags) or len(pos_tags) != len(ppos_tags):
-    #     raise InvalidParameterError('')
-    #for token_3uple, pos, ppos in zip(token_index_3uples, pos_tags, ppos_tags):
     for token_3uple in token_index_3uples:
         if not with_fe_anno or 'FE' not in annoset.labelstore.labels_by_layer_name:
             fe_label = 'O'
