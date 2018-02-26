@@ -18,6 +18,7 @@ EOF
 
 is_mode_set=FALSE
 is_xp_set=FALSE
+with_dep_parses=FALSE
 
 while :; do
     case $1 in
@@ -42,6 +43,10 @@ while :; do
             else
                 die "ERROR: '--xpdir' requires a non-empty option argument"
             fi
+            ;;
+        -d|--with_dep_parses)
+            with_dep_parses=TRUE
+            shift
             ;;
         --)
             shift
@@ -76,9 +81,19 @@ esac
 mkdir ${XP_DIR}/${xp}/model 2> /dev/null
 
 if [ "${mode}" = train ]; then
-  python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
-    --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
-    --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
-    --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
-    --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+  if [ "${with_dep_parses}" = TRUE ]; then
+    python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
+      --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
+      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
+      --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt \
+      --syn dep
+  fi
+  if [ "${with_dep_parses}" = FALSE ]; then
+    python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
+      --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
+      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
+      --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+  fi
 fi
