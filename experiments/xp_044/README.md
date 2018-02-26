@@ -1,4 +1,4 @@
-# XP\#043
+# XP\#044
 
 
 ### Test scores
@@ -20,7 +20,7 @@
 ### Preprocessing
 | POS tagger | Lemmatizer | Dependency parser |
 | --- | --- | --- |
-| MXPOST | NLP4J | - |
+| MXPOST | NLP4J | MST |
 
 ### Frame Semantic Parsing
 | Parser | Hierarchy feature |
@@ -34,7 +34,7 @@ pyfn convert \
   --from fnxml \
   --to bios \
   --source /path/to/fndata-1.5-with-dev
-  --target /path/to/experiments/xp_043/data \
+  --target /path/to/experiments/xp_044/data \
   --splits train \
   --output_sentences \
   --excluded_frames Test35
@@ -44,12 +44,12 @@ pyfn convert \
 ### Preprocessing
 Splits are preprocessed with:
 ```
-./preprocess.sh -x 043 -t mxpost -p open-sesame -v
+./preprocess.sh -x 044 -t mxpost -p open-sesame -d mst -v
 ```
 
 ### Training
 ```
-./open-sesame.sh -m train -x 043
+./open-sesame.sh -m train -x 044
 ```
 
 ### Decoding
