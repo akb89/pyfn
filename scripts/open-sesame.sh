@@ -7,12 +7,12 @@ cat << EOF
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-d] [-u]
 Train or decode with the OPEN-SESAME parser.
 
-  -h, --help                          display this help and exit
-  -m, --mode          {train,decode}  open-sesame mode to use: train or decode
-  -x, --xp            XP_NUM          xp number written as 3 digits (e.g. 001)
-  -s, --splits        {dev,test}      which splits to use in decode mode: dev or test
-  -d, --dep                           if specified, parser will use dependency parses
-  -u, --use_hierarchy                 if specified, parser will use the hierarchy feature
+  -h, --help                              display this help and exit
+  -m, --mode              {train,decode}  open-sesame mode to use: train or decode
+  -x, --xp                XP_NUM          xp number written as 3 digits (e.g. 001)
+  -s, --splits            {dev,test}      which splits to use in decode mode: dev or test
+  -d, --with_dep_parses                   if specified, parser will use dependency parses
+  -u, --with_hierarchy                    if specified, parser will use the hierarchy feature
 EOF
 }
 

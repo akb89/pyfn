@@ -6,14 +6,14 @@ splits=$3
 tagger=$4
 kbest=$5
 max_ram=$6
-use_hierarchy=$7
+with_hierarchy=$7
 LOGS_DIR=$8
 
-if [ "${use_hierarchy}" = FALSE ]; then
+if [ "${with_hierarchy}" = FALSE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0.jar"
 fi
 
-if [ "${use_hierarchy}" = TRUE ]; then
+if [ "${with_hierarchy}" = TRUE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0-hier.jar"
 fi
 
@@ -25,7 +25,7 @@ echo "  splits = ${splits}"
 echo "  tagger = ${tagger}"
 echo "  kbest = ${kbest}"
 echo "  max_ram = ${max_ram}"
-echo "  use_hierarchy = ${use_hierarchy}"
+echo "  with_hierarchy = ${with_hierarchy}"
 echo "  LOGS_DIR = ${LOGS_DIR}"
 echo
 

@@ -7,20 +7,20 @@ cat << EOF
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM -t {mxpost,nlp4j} [-s {dev,test}] [-u]
 Train or decode with the ROFAMES parser.
 
-  -h, --help                           display this help and exit
-  -m, --mode          {train,decode}   rofames mode to use: train or decode
-  -x, --xp            XP_NUM           xp number written as 3 digits (e.g. 001)
-  -t, --tagger        {mxpost,nlp4j}   the POS tagger used for preprocessing splits
-  -s, --splits        {dev,test}       which splits to use in decode mode: dev or test
-  -u, --use_hierarchy                  if specified, parser will use the hierarchy feature
+  -h, --help                             display this help and exit
+  -m, --mode            {train,decode}   rofames mode to use: train or decode
+  -x, --xp              XP_NUM           xp number written as 3 digits (e.g. 001)
+  -t, --tagger          {mxpost,nlp4j}   the POS tagger used for preprocessing splits
+  -s, --splits          {dev,test}       which splits to use in decode mode: dev or test
+  -u, --with_hierarchy                   if specified, parser will use the hierarchy feature
 EOF
 }
 
 is_mode_set=FALSE
 is_xp_set=FALSE
-use_hierarchy=FALSE
 is_tagger_set=FALSE
 is_splits_set=FALSE
+with_hierarchy=FALSE
 
 while :; do
     case $1 in
@@ -64,8 +64,8 @@ while :; do
                 die "ERROR: '--tagger' requires a non-empty option argument"
             fi
             ;;
-        -u|--use_hierarchy)
-              use_hierarchy=TRUE
+        -u|--with_hierarchy)
+              with_hierarchy=TRUE
               shift
               ;;
         --)
@@ -126,7 +126,7 @@ if [ "${mode}" = train ]; then
     ${min_ram} \
     ${max_ram} \
     ${num_threads} \
-    ${use_hierarchy} \
+    ${with_hierarchy} \
     ${LOGS_DIR}
 fi
 
@@ -149,6 +149,6 @@ if [ "${mode}" = decode ]; then
     ${tagger} \
     ${kbest} \
     ${max_ram} \
-    ${use_hierarchy} \
+    ${with_hierarchy} \
     ${LOGS_DIR}
 fi

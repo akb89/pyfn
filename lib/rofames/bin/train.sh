@@ -11,14 +11,14 @@ num_models_to_save=$8
 min_ram=$9
 max_ram=${10}
 num_threads=${11}
-use_hierarchy=${12}
+with_hierarchy=${12}
 LOGS_DIR=${13}
 
-if [ "${use_hierarchy}" = FALSE ]; then
+if [ "${with_hierarchy}" = FALSE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0.jar"
 fi
 
-if [ "${use_hierarchy}" = TRUE ]; then
+if [ "${with_hierarchy}" = TRUE ]; then
   CLASSPATH="$(dirname "${BASH_SOURCE[0]}")/../rofames-1.0.0-hier.jar"
 fi
 
@@ -35,7 +35,7 @@ echo "  num_models_to_save = ${num_models_to_save}"
 echo "  min_ram = ${min_ram}"
 echo "  max_ram = ${max_ram}"
 echo "  num_threads = ${num_threads}"
-echo "  use_hierarchy = ${use_hierarchy}"
+echo "  with_hierarchy = ${with_hierarchy}"
 echo "  LOGS_DIR = ${LOGS_DIR}"
 echo
 
