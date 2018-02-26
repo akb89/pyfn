@@ -1,6 +1,5 @@
 # XP\#044
 
-
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
@@ -49,7 +48,7 @@ Splits are preprocessed with:
 
 ### Training
 ```
-./open-sesame.sh -m train -x 044
+./open-sesame.sh -m train -x 044 -d
 ```
 
 ### Decoding
