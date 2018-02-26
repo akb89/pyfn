@@ -362,8 +362,8 @@ def _get_fe_dict(frame_xml_filepaths):
                        'Unmarshalling FrameNet XML files without '
                        'FrameElement dictionary. '
                        'If you wish to access FE coreType information, '
-                       'you may want to start over add the FrameNet frame/ '
-                       'subdirectory containing frame XML files '
+                       'you may want to start over after adding the FrameNet '
+                       'frame/ subdirectory containing frame XML files '
                        'under your FN splits directory'.format(
                            frame_xml_filepaths))
         return fe_dict
