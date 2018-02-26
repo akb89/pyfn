@@ -82,7 +82,6 @@ def _get_token_lemma(token, pos, lemmatizer):
 
 
 def _get_token_index_3uples(text):
-    """Return a dict: {token: (start, end)} of token to start/end index tuples."""
     token_index_3uples = []
     tokens = text.split()
     start_index = 0
@@ -95,12 +94,12 @@ def _get_token_index_3uples(text):
     return token_index_3uples
 
 
-def _get_valence_units_by_indexes(vustore, start, end):
-    vus = []
-    for (vu_start, vu_end), vu in vustore.valence_units_by_indexes.items():
-        if (start >= vu_start and end <= vu_end) or (vu_start >= start and vu_end <= end):
-            vus.extend(vu)
-    return vus
+def _get_valence_units_by_indexes(vus_by_indexes_dict, start, end):
+    valence_units = []
+    for (vu_start, vu_end), vus in vus_by_indexes_dict.items():
+        if not (vu_end < start or vu_start > end):
+            valence_units.extend(vus)
+    return valence_units
 
 
 def _get_fe_coretype(fe_label, vus):
@@ -139,7 +138,7 @@ def _get_bios_lines(annoset, sent_dict, with_fe_anno=False):
             if fe_label == 'O':
                 fe_coretype = '_'
             else:
-                vus = _get_valence_units_by_indexes(annoset.vustore,
+                vus = _get_valence_units_by_indexes(annoset.vustore.valence_units_by_indexes,
                                                     token_3uple[1],
                                                     token_3uple[2])
                 fe_coretype = _get_fe_coretype(fe_label, vus)
