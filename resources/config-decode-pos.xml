@@ -3,11 +3,6 @@
 				<column index="1" field="form"/>
 				<column index="2" field="lemma"/>
 				<column index="3" field="pos"/>
-				<column index="4" field="feats"/>
-				<column index="5" field="dhead"/>
-				<column index="6" field="deprel"/>
-				<column index="7" field="sheads"/>
-				<column index="8" field="nament"/>
 		</tsv>
 
     <lexica>
