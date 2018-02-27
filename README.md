@@ -12,9 +12,9 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
 ## Install
 To run pyfn and all the scripts located under scripts/ you need the following files:
-- data.7z containing all the FrameNet splits for FN 1.5 and FN 1.7
-- lib.7z containing all the different external softwares (taggers, parsers, etc.)
-- resources.7z containing all the required resources
+- [data.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
+- [lib.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
+- [resources.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/resources.7z) containing all the required resources
 
 Extract the content of all the archives via `7z x archive_name.7z` under the pyfn root directory. Your pyfn folder structure should look like:
 ```
