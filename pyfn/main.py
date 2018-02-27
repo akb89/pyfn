@@ -63,6 +63,7 @@ def _convert(args):
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
                                      args.filter, args.output_sentences,
                                      args.excluded_frames,
+                                     args.excluded_sentences,
                                      args.excluded_annosets)
     if args.target_format == 'semeval':
         if args.source_format == 'fnxml':
@@ -73,11 +74,14 @@ def _convert(args):
         if args.source_format == 'bios' or args.source_format == 'rofames':
             output_filepath = args.target_path
         semeval.marshall_annosets(annosets, output_filepath,
-                                  args.excluded_frames, args.excluded_annosets)
+                                  args.excluded_frames,
+                                  args.excluded_sentences,
+                                  args.excluded_annosets)
     if args.target_format == 'rofames':
         rofamesm.marshall_annosets_dict(annosets_dict, args.target_path,
                                         args.filter, args.output_sentences,
                                         args.excluded_frames,
+                                        args.excluded_sentences,
                                         args.excluded_annosets)
 
 
