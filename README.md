@@ -86,6 +86,11 @@ To install the **pyfn** app, run the following command under the pyfn/ root dire
 ```bash
 sudo -H python3 setup.py develop
 ```
+
+## Corentin
+You want to replicate XP#045. Don't forget to change the batch_size to 40,000 instead of 4,000 in the `setup.sh` file.
+Also, you may need to manually copy `data/fndata-1.5-with-dev/framenet.frame.element.map` to the `experiments/xp_045/data` directory
+
 ## TODO
 - [x] FN to BIOS
 - [x] FN to SEMEVAL
