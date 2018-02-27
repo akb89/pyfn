@@ -49,20 +49,20 @@ Extract the content of all the archives via `7z x archive_name.7z` under the pyf
 Modify the `resources/config-decode-pos.xml` file by replace the models.pos absolute path to your `resources/nlp4j.plemma.model.all.xz`
 ```xml
 <configuration>
-		<tsv>
-				<column index="1" field="form"/>
-				<column index="2" field="lemma"/>
-				<column index="3" field="pos"/>
-		</tsv>
+	<tsv>
+		<column index="1" field="form"/>
+		<column index="2" field="lemma"/>
+		<column index="3" field="pos"/>
+	</tsv>
 
-    <lexica>
-        <ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
-        <word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
-    </lexica>
+	<lexica>
+		<ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
+		<word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
+	</lexica>
 
-    <models>
-    	<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
-    </models>
+	<models>
+		<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+	</models>
 </configuration>
 ```
 
