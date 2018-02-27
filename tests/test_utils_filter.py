@@ -68,3 +68,10 @@ def test_filter_annosets():
         annosets, [], [1], [5], [1]))
     assert len(filtered_annosets) == 1
     assert filtered_annosets[0]._id == 3
+
+
+def test_has_non_breaking_spaces():
+    has = AnnotationSet(sentence=Sentence(text='Near the village of Agía Déka — named after ten saints who were martyred here — and widely scattered in farmland , are the remains of Górtis ( Gortyn ) , capital of the island during the Roman era ( from 65 b.c. ) and also an important city in Minoan times .'))
+    not_has = AnnotationSet(sentence=Sentence(text='This is a test sentence with non non-breaking spaces'))
+    assert f_utils._has_non_breaking_spaces(has) is True
+    assert f_utils._has_non_breaking_spaces(not_has) is False

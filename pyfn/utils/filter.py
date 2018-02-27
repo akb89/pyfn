@@ -99,6 +99,11 @@ def _has_discontinuous_fes(annoset):
     return False
 
 
+def _has_non_breaking_spaces(annoset):
+    return u'\u00A0' in annoset.sentence.text
+
+
+# pylint: disable-msg=R0911
 def _is_valid_annoset(annoset, filtering_options):
     # No matter what, remove annosets containing invalid labels, i.e. labels
     # with combined specified and unspecified start/end indexes
@@ -120,6 +125,9 @@ def _is_valid_annoset(annoset, filtering_options):
     if 'no_fes' in filtering_options:
         # the semeval evaluation script will skip sentences with no gold FEs
         if _has_no_fes(annoset):
+            return False
+    if 'non_breaking_spaces' in filtering_options:
+        if _has_non_breaking_spaces(annoset):
             return False
     return True
 

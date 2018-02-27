@@ -146,6 +146,8 @@ def main():
     - disc_fes: filters out annosets with discontinuous frame elements
     - disc_targets: filters out annosets with discontinuous targets
     - no_fes: filters out annotationsets with no frame element labels
+    - non_breaking_spaces: filters out annotationsets with sentence.text
+      containing non-breaking spaces
     ''')
     parser_convert.add_argument('--excluded_frames',
                                 nargs='+',

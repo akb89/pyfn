@@ -39,7 +39,7 @@ pyfn convert \
   --splits train \
   --output_sentences \
   --excluded_frames 398
-  --excluded_sentences 1271774, 1277988, 1278010
+  --excluded_sentences 1271774 1277988 1278010
   --filter overlap_fes
 ```
 Excluded sentences are excluded from train.
