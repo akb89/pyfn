@@ -10,6 +10,82 @@
 
 Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
+## Install
+To run pyfn and all the scripts located under scripts/ you need the following files:
+- data.7z containing all the FrameNet splits for FN 1.5 and FN 1.7
+- lib.7z containing all the different external softwares (taggers, parsers, etc.)
+- resources.7z containing all the required resources
+
+Extract the content of all the archives via `7z x archive_name.7z` under the pyfn root directory. Your pyfn folder structure should look like:
+```
+.
+|-- pyfn
+|   |-- data
+|   |   |-- fndata-1.5-with-dev
+|   |   |-- fndata-1.7-with-dev
+|   |-- experiments
+|   |-- lib
+|   |   |-- bistparser
+|   |   |-- jmx
+|   |   |-- mstparser
+|   |   |-- nlp4j
+|   |   |-- open-sesame
+|   |   |-- rofames
+|   |   |-- semeval
+|   |-- pyfn
+|   |-- resources
+|   |   |-- bestarchybrid.model
+|   |   |-- bestarchybrid.params
+|   |   |-- bestfirstorder.model
+|   |   |-- bestfirstorder.params
+|   |   |-- config-decode-pos.xml
+|   |   |-- nlp4j.plemma.model.all.xz
+|   |   |-- sskip.100.vectors
+|   |   |-- wsj.model
+|   |-- scripts
+|   |-- tests
+```
+
+Modify the `resources/config-decode-pos.xml` file by replace the models.pos absolute path to your `resources/nlp4j.plemma.model.all.xz`
+```xml
+<configuration>
+		<tsv>
+				<column index="1" field="form"/>
+				<column index="2" field="lemma"/>
+				<column index="3" field="pos"/>
+		</tsv>
+
+    <lexica>
+        <ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
+        <word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
+    </lexica>
+
+    <models>
+    	<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+    </models>
+</configuration>
+```
+
+To use the scripts, modify the `scripts/setup.sh` file:
+```bash
+export JAVA_HOME_BIN="/path/to/java/bin"
+export num_threads=2
+export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
+export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
+...
+export OPEN_SESAME_HOME="/absolute/path/to/open-sesame"
+...
+```
+
+On linux, install the following dependencies:
+```bash
+sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+```
+
+To install the **pyfn** app, run the following command under the pyfn/ root directory:
+```bash
+sudo -H python3 setup.py develop
+```
 ## TODO
 - [x] FN to BIOS
 - [x] FN to SEMEVAL
