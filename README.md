@@ -12,9 +12,9 @@ Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
 ## Install
 To run pyfn and all the scripts located under scripts/ you need the following files:
-- data.7z containing all the FrameNet splits for FN 1.5 and FN 1.7
-- lib.7z containing all the different external softwares (taggers, parsers, etc.)
-- resources.7z containing all the required resources
+- [data.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
+- [lib.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
+- [resources.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/resources.7z) containing all the required resources
 
 Extract the content of all the archives via `7z x archive_name.7z` under the pyfn root directory. Your pyfn folder structure should look like:
 ```
@@ -49,20 +49,20 @@ Extract the content of all the archives via `7z x archive_name.7z` under the pyf
 Modify the `resources/config-decode-pos.xml` file by replace the models.pos absolute path to your `resources/nlp4j.plemma.model.all.xz`
 ```xml
 <configuration>
-		<tsv>
-				<column index="1" field="form"/>
-				<column index="2" field="lemma"/>
-				<column index="3" field="pos"/>
-		</tsv>
+	<tsv>
+		<column index="1" field="form"/>
+		<column index="2" field="lemma"/>
+		<column index="3" field="pos"/>
+	</tsv>
 
-    <lexica>
-        <ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
-        <word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
-    </lexica>
+	<lexica>
+		<ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
+		<word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
+	</lexica>
 
-    <models>
-    	<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
-    </models>
+	<models>
+		<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+	</models>
 </configuration>
 ```
 
