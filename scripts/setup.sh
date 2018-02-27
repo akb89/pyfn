@@ -26,8 +26,7 @@ export MST_PARSER_HOME="${LIB_DIR}/mstparser"
 export BMST_PARSER_HOME="${LIB_DIR}/bistparser/bmstparser/src"
 export BARCH_PARSER_HOME="${LIB_DIR}/bistparser/barchybrid/src"
 export ROFAMES_HOME="${LIB_DIR}/rofames"
-export OPEN_SESAME_HOME="/Users/AKB/GitHub/open-sesame"  # TODO change this after test
-#export OPEN_SESAME_HOME="${LIB_DIR}/open-sesame"
+export OPEN_SESAME_HOME="${LIB_DIR}/open-sesame"
 export SEMEVAL_HOME="${LIB_DIR}/semeval"
 
 export nlp4j_config="${RESOURCES_DIR}/config-decode-pos.xml"
