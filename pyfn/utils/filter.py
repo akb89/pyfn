@@ -141,11 +141,12 @@ def _get_annoset_hash(annoset):
 
 
 def _filter_annosets(annosets, filtering_options, excluded_frames,
-                     excluded_annosets):
+                     excluded_sentences, excluded_annosets):
     annoset_hash_set = set()
     for annoset in annosets:
         if annoset._id in excluded_annosets \
-         or annoset.target.lexunit.frame.name in excluded_frames:
+         or annoset.target.lexunit.frame._id in excluded_frames \
+         or annoset.sentence._id in excluded_sentences:
             continue
         if not _is_valid_annoset(annoset, filtering_options):
             continue
@@ -169,7 +170,7 @@ def _sort_annosets(annosets):
 
 
 def filter_and_sort_annosets(annosets, filtering_options, excluded_frames,
-                             excluded_annosets):
+                             excluded_sentences, excluded_annosets):
     """Return a generator over a list of sorted and filtered annosets.
 
     Annosets are filtered according to specified filtering_options.
@@ -181,4 +182,5 @@ def filter_and_sort_annosets(annosets, filtering_options, excluded_frames,
     Annosets with annoset._id in excluded_annosets are excluded.
     """
     return _sort_annosets(_filter_annosets(annosets, filtering_options,
-                                           excluded_frames, excluded_annosets))
+                                           excluded_frames, excluded_sentences,
+                                           excluded_annosets))

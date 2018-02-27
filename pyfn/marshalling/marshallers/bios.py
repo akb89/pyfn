@@ -120,11 +120,8 @@ def _get_bios_lines(annoset, sent_dict, with_fe_anno=False):
             token_num,
             token_3uple[0],
             '_',
-            #_get_token_lemma(token_3uple[0], ppos, lemmatizer),
             '_',
-            #pos,
             '_',
-            #ppos,
             '_',
             sent_num,
             '_', '_', '_', '_', '_',
@@ -140,12 +137,14 @@ def _get_bios_lines(annoset, sent_dict, with_fe_anno=False):
 
 
 def _marshall_bios(annosets, filtering_options, sent_dict, bios_filepath,
-                   excluded_frames, excluded_annosets, with_fe_anno):
+                   excluded_frames, excluded_sentences, excluded_annosets,
+                   with_fe_anno):
     files_utils.create_parent_dir_if_not_exists(bios_filepath)
     with open(bios_filepath, 'w', encoding='utf-8') as bios_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
                                                            filtering_options,
                                                            excluded_frames,
+                                                           excluded_sentences,
                                                            excluded_annosets):
             bios_lines = _get_bios_lines(annoset, sent_dict, with_fe_anno)
             print('\n'.join(bios_lines), file=bios_stream)
@@ -154,9 +153,8 @@ def _marshall_bios(annosets, filtering_options, sent_dict, bios_filepath,
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                            output_sentences, excluded_frames,
-                           excluded_annosets):
+                           excluded_sentences, excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to BIOS splits files."""
-    #lemmatizer = WordNetLemmatizer()
     for splits_name, annosets in annosets_dict.items():
         bios_filepath = files_utils.get_bios_filepath(target_dirpath,
                                                       splits_name)
@@ -175,20 +173,22 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                         'options...'.format(splits_name))
             _marshall_bios(annosets, [], sent_dict,  # No special filtering on dev/test
                            bios_semeval_filepath, excluded_frames,
+                           excluded_sentences,
                            excluded_annosets, with_fe_anno=False)
             logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
                         '.bios for {} splits with {} filtering '
                         'options...'.format(splits_name, filtering_options))
             _marshall_bios(_annosets, filtering_options, sent_dict,
                            bios_filepath, excluded_frames, excluded_annosets,
-                           with_fe_anno=True)
+                           excluded_sentences, with_fe_anno=True)
         elif splits_name == 'train':
             logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
                         '.bios for {} splits with {} filtering '
                         'options...'.format(splits_name, filtering_options))
             _marshall_bios(annosets, filtering_options, sent_dict,
                            bios_filepath, excluded_frames,
-                           excluded_annosets, with_fe_anno=True)
+                           excluded_sentences, excluded_annosets,
+                           with_fe_anno=True)
         # print out sentences file
         if output_sentences:
             marsh_utils.marshall_sent_dict(sent_dict, sent_filepath)

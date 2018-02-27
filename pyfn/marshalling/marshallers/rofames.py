@@ -127,12 +127,13 @@ def _get_rofames_line(annoset, sent_dict, train_mode):
 
 def _marshall_rofames(annosets, filtering_options, sent_dict,
                       rofames_filepath, excluded_frames,
-                      excluded_annosets, train_mode):
+                      excluded_sentences, excluded_annosets, train_mode):
     files_utils.create_parent_dir_if_not_exists(rofames_filepath)
     with open(rofames_filepath, 'w', encoding='utf-8') as rofames_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
                                                            filtering_options,
                                                            excluded_frames,
+                                                           excluded_sentences,
                                                            excluded_annosets):
             rofames_line = _get_rofames_line(annoset, sent_dict, train_mode)
             print(rofames_line, file=rofames_stream)
@@ -140,7 +141,7 @@ def _marshall_rofames(annosets, filtering_options, sent_dict,
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                            output_sentences, excluded_frames,
-                           excluded_annosets):
+                           excluded_sentences, excluded_annosets):
     """Convert a dict of {splits:pyfn.AnnotationSet} to SEMAFOR splits files.
 
     The train spits will be converted to a .frame.elements file containing
@@ -163,11 +164,13 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
             # No special filtering on dev/test
             _marshall_rofames(annosets, [], sent_dict,
                               rofames_filepath, excluded_frames,
-                              excluded_annosets, train_mode=False)
+                              excluded_sentences, excluded_annosets,
+                              train_mode=False)
         elif splits_name == 'train':
             _marshall_rofames(annosets, filtering_options, sent_dict,
                               rofames_filepath, excluded_frames,
-                              excluded_annosets, train_mode=True)
+                              excluded_sentences, excluded_annosets,
+                              train_mode=True)
         # print out sentences file
         if output_sentences:
             marsh_utils.marshall_sent_dict(sent_dict, sent_filepath)

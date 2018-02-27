@@ -145,9 +145,16 @@ def main():
     ''')
     parser_convert.add_argument('--excluded_frames',
                                 nargs='+',
+                                type=int,
                                 default=[],
-                                help='List of frame names to be excluded from '
+                                help='List of frame ids to be excluded from '
                                      'unmarshalled FrameNet XML')
+    parser_convert.add_argument('--excluded_sentences',
+                                nargs='+',
+                                type=int,
+                                default=[],
+                                help='List of sentence ids to be excluded '
+                                     'from unmarshalled FrameNet XML')
     parser_convert.add_argument('--excluded_annosets',
                                 nargs='+',
                                 type=int,

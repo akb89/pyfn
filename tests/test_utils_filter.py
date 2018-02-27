@@ -27,7 +27,7 @@ def test_has_overlapping_fes():
     assert f_utils._has_overlapping_fes(annoset2) is True
 
 def test_get_annoset_hash():
-    annoset = AnnotationSet(sentence=Sentence(text=' This IS a    TEST o test '),
+    annoset = AnnotationSet(sentence=Sentence(_id=1, text=' This IS a    TEST o test '),
                             target=Target(lexunit=LexUnit(name='test test.n',
                                                           frame=Frame(name='Test')),
                                           indexes=[(14,17), (21,24)]))
@@ -35,24 +35,36 @@ def test_get_annoset_hash():
 
 def test_filter_annosets():
     excluded_annoset_id = AnnotationSet(_id=1)
-    excluded_frame = AnnotationSet(target=Target(lexunit=LexUnit(frame=Frame(name='Excluded'))))
-    duplicate_annoset1 = AnnotationSet(_id=2, sentence=Sentence(text=' This IS a    TEST o test '),
-                            target=Target(lexunit=LexUnit(name='test test.n',
-                                                          frame=Frame(name='Test')),
-                                          indexes=[(14,17), (21,24)]),
-                            labelstore=LabelStore(labels=[Label(start=1, end=2)]))
-    duplicate_annoset2 = AnnotationSet(_id=3, sentence=Sentence(text=' This IS a    TEST o test '),
-                           target=Target(lexunit=LexUnit(name='test test.n',
-                                                         frame=Frame(name='Test')),
-                                         indexes=[(14,17), (21,24)]),
-                            labelstore=LabelStore(labels=[Label(start=1, end=2)]))
-    missing_label = AnnotationSet(target=Target(lexunit=LexUnit(frame=Frame(name='Test'))),
-                                  labelstore=LabelStore(labels=[Label(start=-1, end=2)]))
-    whitespace_label = AnnotationSet(sentence=Sentence(text=' pointing at whitespace'),
-                                     target=Target(lexunit=LexUnit(frame=Frame(name='Test'))),
-                                     labelstore=LabelStore(labels=[Label(start=0, end=2)]))
-    annosets = [excluded_annoset_id, excluded_frame, duplicate_annoset1,
-                duplicate_annoset2, missing_label, whitespace_label]
-    filtered_annosets = list(f_utils._filter_annosets(annosets, [], ['Excluded'], [1]))
+    excluded_frame = AnnotationSet(
+        _id=2, target=Target(lexunit=LexUnit(frame=Frame(_id=1, name='Excluded'))))
+    duplicate_annoset1 = AnnotationSet(
+        _id=3, sentence=Sentence(_id=1, text=' This IS a    TEST o test '),
+        target=Target(lexunit=LexUnit(name='test test.n',
+                                      frame=Frame(_id=2, name='Test')),
+                      indexes=[(14, 17), (21, 24)]),
+        labelstore=LabelStore(labels=[Label(start=1, end=2)]))
+    duplicate_annoset2 = AnnotationSet(
+        _id=4, sentence=Sentence(_id=2, text=' This IS a    TEST o test '),
+        target=Target(lexunit=LexUnit(name='test test.n',
+                                      frame=Frame(_id=2, name='Test')),
+                      indexes=[(14, 17), (21, 24)]),
+        labelstore=LabelStore(labels=[Label(start=1, end=2)]))
+    missing_label = AnnotationSet(
+        _id=5, sentence=Sentence(_id=3),
+        target=Target(lexunit=LexUnit(frame=Frame(_id=2, name='Test'))),
+        labelstore=LabelStore(labels=[Label(start=-1, end=2)]))
+    whitespace_label = AnnotationSet(
+        _id=6, sentence=Sentence(_id=4, text=' pointing at whitespace'),
+        target=Target(lexunit=LexUnit(frame=Frame(_id=2, name='Test'))),
+        labelstore=LabelStore(labels=[Label(start=0, end=2)]))
+    excluded_sentence_id = AnnotationSet(
+        _id=7, sentence=Sentence(_id=5),
+        target=Target(lexunit=LexUnit(name='test test.n',
+                                      frame=Frame(_id=2, name='Test'))))
+    annosets = [excluded_annoset_id, excluded_sentence_id, excluded_frame,
+                duplicate_annoset1, duplicate_annoset2, missing_label,
+                whitespace_label]
+    filtered_annosets = list(f_utils._filter_annosets(
+        annosets, [], [1], [5], [1]))
     assert len(filtered_annosets) == 1
-    assert filtered_annosets[0]._id == 2
+    assert filtered_annosets[0]._id == 3
