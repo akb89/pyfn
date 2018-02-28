@@ -119,3 +119,4 @@ lib/open-sesame/*
 *.tar.bz2
 *.DS_Store
 *.7z
+experiments/xp_002/*
