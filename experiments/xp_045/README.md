@@ -68,6 +68,11 @@ Sentence 1565683 is filtered due to the way MXPOST processes certain characters:
 The goal of the American Cancer Society , __ Unit , is to reach the employees and officers of every business in the county with important cancer information .
 ```
 
+### Preparing data
+```
+./prepare.sh -x 045 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+```
+
 ### Preprocessing
 Splits are preprocessed with:
 ```

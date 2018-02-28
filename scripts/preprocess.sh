@@ -138,13 +138,13 @@ DATA_DIR=${XP_DIR}/${xp}/data
 
 if [ "${tagger}" = "mxpost" ]; then
   bash ${SCRIPTS_DIR}/postag.sh -f ${DATA_DIR}/train.sentences -t mxpost
-  bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/train.sentences.mxpost.conllx
+  bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/train.sentences.conllx
   if [ "${process_dev}" = TRUE ]; then
     bash ${SCRIPTS_DIR}/postag.sh -f ${DATA_DIR}/dev.sentences -t mxpost
-    bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/dev.sentences.mxpost.conllx
+    bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/dev.sentences.conllx
   fi
   bash ${SCRIPTS_DIR}/postag.sh -f ${DATA_DIR}/test.sentences -t mxpost
-  bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/test.sentences.mxpost.conllx
+  bash ${SCRIPTS_DIR}/lemmatize.sh -f ${DATA_DIR}/test.sentences.conllx
 fi
 
 if [ "${tagger}" = "nlp4j" ]; then
@@ -156,37 +156,37 @@ if [ "${tagger}" = "nlp4j" ]; then
 fi
 
 if [ "${deparser}" = "mst" ]; then
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.${tagger}.conllx -p mst
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.conllx -p mst
   if [ "${process_dev}" = TRUE ]; then
-    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.${tagger}.conllx -p mst
+    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.conllx -p mst
   fi
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.${tagger}.conllx -p mst
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.conllx -p mst
 fi
 
 if [ "${deparser}" = "bmst" ]; then
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.${tagger}.conllx -p bmst
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.conllx -p bmst
   if [ "${process_dev}" = TRUE ]; then
-    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.${tagger}.conllx -p bmst
+    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.conllx -p bmst
   fi
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.${tagger}.conllx -p bmst
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.conllx -p bmst
 fi
 
 if [ "${deparser}" = "barch" ]; then
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.${tagger}.conllx -p barch
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/train.sentences.conllx -p barch
   if [ "${process_dev}" = TRUE ]; then
-    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.${tagger}.conllx -p barch
+    bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/dev.sentences.conllx -p barch
   fi
-  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.${tagger}.conllx -p barch
+  bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.conllx -p barch
 fi
 
 if [ "${fsparser}" = "rofames" ]; then
-  bash ${SCRIPTS_DIR}/flatten.sh -f ${DATA_DIR}/train.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/flatten.sh -f ${DATA_DIR}/train.sentences.conllx
 fi
 
 if [ "${fsparser}" = "open-sesame" ]; then
-  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios -c ${DATA_DIR}/dev.sentences.${tagger}.conllx
-  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios.semeval -c ${DATA_DIR}/dev.sentences.${tagger}.conllx
-  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios -c ${DATA_DIR}/test.sentences.${tagger}.conllx
-  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios.semeval -c ${DATA_DIR}/test.sentences.${tagger}.conllx
-  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/train.bios -c ${DATA_DIR}/train.sentences.${tagger}.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios -c ${DATA_DIR}/dev.sentences.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios.semeval -c ${DATA_DIR}/dev.sentences.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios -c ${DATA_DIR}/test.sentences.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios.semeval -c ${DATA_DIR}/test.sentences.conllx
+  bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/train.bios -c ${DATA_DIR}/train.sentences.conllx
 fi

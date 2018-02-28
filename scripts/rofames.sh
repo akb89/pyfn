@@ -4,13 +4,12 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM -t {mxpost,nlp4j} [-s {dev,test}] [-u]
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-u]
 Train or decode with the ROFAMES parser.
 
   -h, --help                             display this help and exit
   -m, --mode            {train,decode}   rofames mode to use: train or decode
   -x, --xp              XP_NUM           xp number written as 3 digits (e.g. 001)
-  -t, --tagger          {mxpost,nlp4j}   the POS tagger used for preprocessing splits
   -s, --splits          {dev,test}       which splits to use in decode mode: dev or test
   -u, --with_hierarchy                   if specified, parser will use the hierarchy feature
 EOF
@@ -18,7 +17,6 @@ EOF
 
 is_mode_set=FALSE
 is_xp_set=FALSE
-is_tagger_set=FALSE
 is_splits_set=FALSE
 with_hierarchy=FALSE
 
@@ -55,15 +53,6 @@ while :; do
                 die "ERROR: '--splits' requires a non-empty option argument"
             fi
             ;;
-        -t|--tagger)
-            if [ "$2" ]; then
-                is_tagger_set=TRUE
-                tagger=$2
-                shift
-            else
-                die "ERROR: '--tagger' requires a non-empty option argument"
-            fi
-            ;;
         -u|--with_hierarchy)
               with_hierarchy=TRUE
               shift
@@ -89,10 +78,6 @@ if [ "${is_xp_set}" = FALSE ]; then
     die "ERROR: '--xp' parameter is required."
 fi
 
-if [ "${is_tagger_set}" = FALSE ]; then
-    die "ERROR: '--tagger' parameter is required."
-fi
-
 case "${mode}" in
     train )
         ;;
@@ -102,22 +87,12 @@ case "${mode}" in
         die "Invalid mode '${mode}': should be 'train' or 'decode'"
 esac
 
-case "${tagger}" in
-    mxpost )
-        ;;
-    nlp4j )
-        ;;
-    * )
-        die "Invalid POS tagger '${tagger}': should be 'mxpost' or 'nlp4j'"
-esac
-
 mkdir ${LOGS_DIR} 2> /dev/null
 
 if [ "${mode}" = train ]; then
   bash ${ROFAMES_HOME}/bin/train.sh \
     ${JAVA_HOME_BIN} \
     ${XP_DIR}/${xp} \
-    ${tagger} \
     ${lambda} \
     ${kbest} \
     ${batch_size} \
@@ -146,7 +121,6 @@ if [ "${mode}" = decode ]; then
     ${JAVA_HOME_BIN} \
     ${XP_DIR}/${xp} \
     ${splits} \
-    ${tagger} \
     ${kbest} \
     ${max_ram} \
     ${with_hierarchy} \
