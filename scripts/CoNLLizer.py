@@ -68,7 +68,7 @@ def conllize(delim, fields, files, cols = [], withs = []):
             items = lines.split(delim)
             selection = []
             for f in final_fields:
-                if f >= len(items):
+                if f-1 >= len(items):
                     print("Field %i not recoverable, exit..." % f, file=sys.stderr)
                     sys.exit(1)
 
@@ -113,7 +113,7 @@ def flatten(delim, cdelim, fields, files, cols = [], withs = [], count_tokens = 
 
             items = lines.split(cdelim)
             for f in final_fields:
-                if f >= len(items):
+                if f-1 >= len(items):
                     print("Field %i not recoverable, exit..." % f, file=sys.stderr)
                     sys.exit(1)
 
