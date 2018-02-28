@@ -18,6 +18,7 @@ EOF
 
 is_mode_set=FALSE
 is_xp_set=FALSE
+is_splits_set=FALSE
 with_dep_parses=FALSE
 
 while :; do
@@ -44,6 +45,15 @@ while :; do
                 die "ERROR: '--xpdir' requires a non-empty option argument"
             fi
             ;;
+        -s|--splits)
+            if [ "$2" ]; then
+                is_splits_set=TRUE
+                splits=$2
+                shift
+            else
+                die "ERROR: '--splits' requires a non-empty option argument"
+            fi
+            ;;
         -d|--with_dep_parses)
             with_dep_parses=TRUE
             shift
@@ -62,11 +72,11 @@ while :; do
 done
 
 if [ "${is_mode_set}" = FALSE ]; then
-    die "ERROR: '--mode' parameter is required."
+    die "ERROR: '--mode' parameter is required"
 fi
 
 if [ "${is_xp_set}" = FALSE ]; then
-    die "ERROR: '--xp' parameter is required."
+    die "ERROR: '--xp' parameter is required"
 fi
 
 case "${mode}" in
@@ -78,7 +88,37 @@ case "${mode}" in
         die "Invalid mode '${mode}': should be 'train' or 'decode'"
 esac
 
+if [ "${mode}" = decode ]; then
+  if [ "${is_splits_set}" = FALSE ]; then
+      die "ERROR: '--splits' parameter is required for decoding"
+  fi
+  case "${splits}" in
+      dev )
+          ;;
+      test )
+          ;;
+      * )
+          die "Invalid splits '${splits}': should be 'dev' or 'test'"
+  esac
+fi
+
 mkdir ${XP_DIR}/${xp}/model 2> /dev/null
+
+postprocess_decoded_file() {
+  BIOS_FILE=$1
+  DECODED_FILE=$2
+  OUTPUT_TMP_DIR="/tmp/biospost"
+
+  rm -rf $OUTPUT_TMP_DIR 2> /dev/null
+  mkdir $OUTPUT_TMP_DIR 2> /dev/null
+
+  cut -f 1-14 ${BIOS_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
+  cut -f 15 ${DECODED_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
+
+  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt  | perl -pe "s/^\t+$//g" | cat -s > ${DECODED_FILE}
+
+  rm -rf $OUTPUT_TMP_DIR;
+}
 
 if [ "${mode}" = train ]; then
   if [ "${with_dep_parses}" = TRUE ]; then
@@ -96,4 +136,15 @@ if [ "${mode}" = train ]; then
       --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
       --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
   fi
+fi
+
+if [ "${mode}" = decode ]; then
+  python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
+    --mode test \
+    --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
+    --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
+    --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged \
+    --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+
+    postprocess_decoded_file ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged.decoded
 fi
