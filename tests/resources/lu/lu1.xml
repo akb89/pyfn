@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="lexUnit.xsl"?>
+<lexUnit status="Created" incorporatedFE="Role" POS="N" name="officer.n" ID="16013" frame="Leadership" frameID="73" totalAnnotated="42" xsi:schemaLocation="../schema/lexUnit.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <corpus name="MASC" ID="150">
+            <document description="officer" ID="21979"/>
+        </corpus>
+        <frame>
+            <FE fgColor="FFFFFF" bgColor="808080" type="Core" abbrev="act" name="Activity"/>
+            <FE fgColor="FFFFFF" bgColor="FF69B4" type="Peripheral" abbrev="Degr" name="Degree"/>
+            <FE fgColor="FFFFFF" bgColor="9400D3" type="Extra-Thematic" abbrev="Dep" name="Depictive"/>
+            <FE fgColor="FFFFFF" bgColor="008000" type="Peripheral" abbrev="des" name="Descriptor"/>
+            <FE fgColor="FFFFFF" bgColor="2E8B57" type="Extra-Thematic" abbrev="Dom" name="Domain"/>
+            <FE fgColor="000000" bgColor="7FFF00" type="Peripheral" abbrev="Dur" name="Duration"/>
+            <FE fgColor="FFFFFF" bgColor="0000FF" type="Core" abbrev="gov" name="Governed"/>
+            <FE fgColor="FFFFFF" bgColor="FF0000" type="Core" abbrev="lea" name="Leader"/>
+            <FE fgColor="FFFFFF" bgColor="FF00FF" type="Peripheral" abbrev="Manr" name="Manner"/>
+            <FE fgColor="FFFFFF" bgColor="A52A2A" type="Peripheral" abbrev="Mns" name="Means"/>
+            <FE fgColor="FFFFFF" bgColor="00BFFF" type="Core" abbrev="Role" name="Role"/>
+            <FE fgColor="FFFFFF" bgColor="FFA500" type="Peripheral" abbrev="Tim" name="Time"/>
+            <FE fgColor="FFFFFF" bgColor="00008B" type="Peripheral" abbrev="Typ" name="Type"/>
+        </frame>
+    </header>
+    <definition>FN: a person who is in a role of authority in an institution</definition>
+    <lexeme POS="N" name="officer"/>
+    <subCorpus name="manually-added">
+      <sentence corpID="150" docID="21979" sentNo="4" paragNo="7" aPos="0" ID="1565683">
+        <text>The goal of the American Cancer Society , __ Unit , is to reach the employees and officers of every business in the county with important cancer information .</text>
+        <annotationSet cDate="06/09/2010 03:49:28 PDT Wed" status="UNANN" ID="2570964">
+            <layer rank="1" name="PENN">
+                <label end="2" start="0" name="dt"/>
+                <label end="7" start="4" name="nn"/>
+                <label end="10" start="9" name="in"/>
+                <label end="14" start="12" name="dt"/>
+                <label end="23" start="16" name="NP"/>
+                <label end="30" start="25" name="NP"/>
+                <label end="38" start="32" name="NP"/>
+                <label end="40" start="40" name=","/>
+                <label end="43" start="42" name="NP"/>
+                <label end="48" start="45" name="NP"/>
+                <label end="50" start="50" name=","/>
+                <label end="53" start="52" name="VBZ"/>
+                <label end="56" start="55" name="to"/>
+                <label end="62" start="58" name="VV"/>
+                <label end="66" start="64" name="dt"/>
+                <label end="76" start="68" name="nns"/>
+                <label end="80" start="78" name="cc"/>
+                <label end="89" start="82" name="nns"/>
+                <label end="92" start="91" name="in"/>
+                <label end="98" start="94" name="dt"/>
+                <label end="107" start="100" name="nn"/>
+                <label end="110" start="109" name="in"/>
+                <label end="114" start="112" name="dt"/>
+                <label end="121" start="116" name="nn"/>
+                <label end="126" start="123" name="in"/>
+                <label end="136" start="128" name="jj"/>
+                <label end="143" start="138" name="nn"/>
+                <label end="155" start="145" name="nn"/>
+                <label end="157" start="157" name="sent"/>
+            </layer>
+            <layer rank="1" name="NER">
+                <label end="38" start="16" name="organization"/>
+                <label end="48" start="42" name="organization"/>
+            </layer>
+            <layer rank="1" name="WSL">
+                <label end="2" start="0" name="NT"/>
+                <label end="10" start="9" name="NT"/>
+                <label end="14" start="12" name="NT"/>
+                <label end="23" start="16" name="NT"/>
+                <label end="30" start="25" name="NT"/>
+                <label end="38" start="32" name="NT"/>
+                <label end="40" start="40" name="NT"/>
+                <label end="43" start="42" name="NT"/>
+                <label end="48" start="45" name="NT"/>
+                <label end="50" start="50" name="NT"/>
+                <label end="53" start="52" name="NT"/>
+                <label end="56" start="55" name="NT"/>
+                <label end="66" start="64" name="NT"/>
+                <label end="80" start="78" name="NT"/>
+                <label end="92" start="91" name="NT"/>
+                <label end="98" start="94" name="NT"/>
+                <label end="110" start="109" name="NT"/>
+                <label end="114" start="112" name="NT"/>
+                <label end="126" start="123" name="NT"/>
+                <label end="157" start="157" name="NT"/>
+            </layer>
+        </annotationSet>
+        <annotationSet cDate="08/25/2010 04:00:05 PDT Wed" status="MANUAL" ID="2610771">
+            <layer rank="1" name="Target">
+                <label cBy="976" end="89" start="82" name="Target"/>
+            </layer>
+            <layer rank="1" name="FE">
+                <label cBy="976" feID="347" end="89" start="82" name="Leader"/>
+                <label cBy="976" feID="6431" end="121" start="91" name="Governed"/>
+            </layer>
+            <layer rank="1" name="GF">
+                <label end="121" start="91" name="Dep"/>
+            </layer>
+            <layer rank="1" name="PT">
+                <label end="121" start="91" name="PP"/>
+            </layer>
+            <layer rank="1" name="Other"/>
+            <layer rank="1" name="Sent"/>
+            <layer rank="1" name="Noun"/>
+        </annotationSet>
+      </sentence>
+    </subCorpus>
+  </lexUnit>

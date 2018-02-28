@@ -41,7 +41,8 @@ pyfn convert \
   --splits train \
   --with_exemplars \
   --output_sentences \
-  --excluded_frames 398
+  --excluded_frames 398 \
+  --excluded_sentences 1565683 \
   --filter non_breaking_spaces
 ```
 
@@ -61,6 +62,10 @@ With_IN such_PDT a_DT long_JJ stretch_NN of_IN coast_NN to_TO cover_VB and_CC so
 Within_IN a_DT day_NN 's_POS walk_NN are_VBP a_DT lake_NN and_CC streams_NNS with_IN good_JJ fishing_NN ,_, especially_RB for_IN trout_NN ,_, and_CC you_PRP 'll_MD have_VB a_DT fair_JJ chance_NN of_IN spotting_VBG some_DT of_IN the_DT park_NN 's_POS wildlife_NN ,_, too — bobcats_NNS ,_, coyotes_NNS ,_, golden_JJ eagles_NNS ,_, black_JJ bear_NN ,_, spotted_VBD skunk_NN ,_, and_CC cougar_NN ._.
 You_PRP 'll_MD find_VB a_DT full_JJ range_NN of_IN sports_NNS offered_VBN :_: from_IN tennis_NN ,_, windsurfing_NN ,_, and_CC waterskiing_NN to_TO snorkeling_VBG and_CC diving — however_VB it_PRP is_VBZ fair_JJ to_TO say_VB that_IN the_DT underwater_JJ world_NN so_RB close_RB to_TO the_DT capital_NN can_MD be_VB disappointing_JJ ._.
 
+```
+Sentence 1565683 is filtered due to the way MXPOST processes certain characters:
+```
+The goal of the American Cancer Society , __ Unit , is to reach the employees and officers of every business in the county with important cancer information .
 ```
 
 ### Preprocessing

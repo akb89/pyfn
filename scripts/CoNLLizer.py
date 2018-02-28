@@ -1,9 +1,10 @@
 #! /usr/bin/env python3
+#!
 import os, re, sys
 import argparse, contextlib, functools
 from collections import defaultdict
 
-def brown_to_conll(bdelim, sdelim, cdelim, filepath, insert_ids = False):
+def brown_to_conll(bdelim, sdelim, cdelim, filepath, insert_ids=False):
     with open(filepath) as stream:
         for line in stream:
             line = line.strip()

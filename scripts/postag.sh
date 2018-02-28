@@ -13,86 +13,6 @@ Part-of-speech tag a given .sentences file with a specified tagger.
 EOF
 }
 
-convert_mxpost_to_conllx() {
-  local INPUT_FILE=$1
-  local OUTPUT_FINAL_FILE=$2
-  local OUTPUT_TMP_FILE="/tmp/file.txt"
-  local OUTPUT_TMP_DIR="/tmp/splitted"
-
-  rm ${OUTPUT_TMP_FILE} 2> /dev/null
-  rm ${OUTPUT_FINAL_FILE} 2> /dev/null
-  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
-  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
-
-  perl -pe "s/ +/\n/g" $INPUT_FILE | perl -pe "s/_/\t/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
-
-  cd ${OUTPUT_TMP_DIR};
-  csplit -s -k -f "" -n 10 ${OUTPUT_TMP_FILE} "/_ù_ù_/" "{2000000}" 2> /dev/null
-
-  for i in $(find ${OUTPUT_TMP_DIR} -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
-      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> ${OUTPUT_FINAL_FILE}
-      echo "" >> ${OUTPUT_FINAL_FILE}
-  done;
-
-  cut -f 1 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
-  cut -f 2 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
-  cut -f 3 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.3.txt
-  perl -pe "s/[0-9]+/_/g" ${OUTPUT_TMP_DIR}/cutted.1.txt > ${OUTPUT_TMP_DIR}/cutted.0.txt
-
-  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.3.txt ${OUTPUT_TMP_DIR}/cutted.3.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > ${OUTPUT_FINAL_FILE}
-
-  rm -rf ${OUTPUT_TMP_DIR};
-  cd -
-
-}
-
-convert_sentences_to_tsv() {
-  local INPUT_FILE=$1
-  local OUTPUT_FINAL_FILE=$2
-  local OUTPUT_TMP_FILE="/tmp/file.txt"
-  local OUTPUT_TMP_DIR="/tmp/splitted"
-
-  rm ${OUTPUT_TMP_FILE} 2> /dev/null
-  rm ${OUTPUT_FINAL_FILE} 2> /dev/null
-  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
-  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
-
-  perl -pe "s/^ +//g" ${INPUT_FILE}|perl -pe "s/\n/\n\n/g" | perl -pe "s/ +/\n/g" | perl -pe "s/^$/_ù_ù_/g" > ${OUTPUT_TMP_FILE}
-
-  cd ${OUTPUT_TMP_DIR};
-  csplit -s -k -f "" -n 10 ${OUTPUT_TMP_FILE} "/_ù_ù_/" "{2000000}" 2> /dev/null
-
-  for i in $(find ${OUTPUT_TMP_DIR} -iname "0*" -print0 | sort -z | xargs -0 | tr " " "\n"); do
-      perl -pe "s/_ù_ù_//g" $i | grep -v "^$" | nl -w3 | perl -pe "s/^ +//g" >> ${OUTPUT_FINAL_FILE}
-      echo "" >> ${OUTPUT_FINAL_FILE}
-  done;
-
-  cut -f 1 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
-  cut -f 2 ${OUTPUT_FINAL_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
-  perl -pe "s/[0-9]+/_/g" ${OUTPUT_TMP_DIR}/cutted.1.txt > ${OUTPUT_TMP_DIR}/cutted.0.txt
-
-  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt ${OUTPUT_TMP_DIR}/cutted.0.txt | perl -pe "s/^\t+$//g" | cat -s > ${OUTPUT_FINAL_FILE}
-
-  rm -rf ${OUTPUT_TMP_DIR};
-  cd -
-}
-
-convert_nlp4j_to_conllx() {
-  local INPUT_FILE=$1
-  local OUTPUT_FINAL_FILE=$2
-  local OUTPUT_TMP_DIR="/tmp/nlp4j"
-
-  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
-  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
-
-  cut -f 1-4 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/first.to.fourth
-  cut -f 4 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/fifth
-  cut -f 6 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/sixth
-  paste ${OUTPUT_TMP_DIR}/first.to.fourth ${OUTPUT_TMP_DIR}/fifth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth ${OUTPUT_TMP_DIR}/sixth | perl -pe "s/^\t+$//g" > ${OUTPUT_FINAL_FILE}
-
-  rm -rf ${OUTPUT_TMP_DIR};
-}
-
 is_input_file_set=FALSE
 is_tagger_set=FALSE
 
@@ -162,14 +82,19 @@ if [ "${tagger}" = "mxpost" ]; then
     echo "Done"
     echo "Converting .mxpost file to .conllx format..."
     echo "Processing file: ${file}.mxpost"
-    convert_mxpost_to_conllx ${file}.mxpost ${file}.mxpost.conllx
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file}.mxpost > ${file}.mxpost.conll.tmp
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,4,3,3,4,4,4,4,4 -r 4 -w _ ${file}.mxpost.conll.tmp ${file}.mxpost.conll.tmp > ${file}.conllx
+    rm ${file}.mxpost.conll.tmp
+    rm ${file}.mxpost
     echo "Done"
 fi
 
 if [ "${tagger}" = "nlp4j" ]; then
     echo "Converting .sentences to .tsv format..."
     echo "Processing file: ${file}"
-    convert_sentences_to_tsv ${file} ${file}.tsv
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file} > ${file}.tsv.tmp
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,3,3,3,3,3,3,3 -r 3 -w _ ${file}.tsv.tmp ${file}.tsv.tmp > ${file}.tsv
+    rm ${file}.tsv.tmp
     echo "Done"
     echo "POS tagging via NLP4J..."
     echo "Processing file: ${file}.tsv"
@@ -181,7 +106,9 @@ if [ "${tagger}" = "nlp4j" ]; then
       -threads ${num_threads} > ${LOGS_DIR}/nlp4j.log
     echo "Done"
     echo "Converting .nlp4j to .conllx format..."
-    echo "Processing file: ${file}.nlp4j"
-    convert_nlp4j_to_conllx ${file}.tsv.nlp4j ${file}.nlp4j.conllx
+    echo "Processing file: ${file}.tsv.nlp4j"
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,3,4,4,5,5,5,5,5 -r 5 -w _ ${file}.tsv.nlp4j ${file}.tsv.nlp4j > ${file}.conllx
+    rm ${file}.tsv
+    rm ${file}.tsv.nlp4j
     echo "Done"
 fi

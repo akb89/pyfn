@@ -72,26 +72,6 @@ case "${parser}" in
         die "Invalid dependency parser '${parser}': Should be 'mst', 'bmst' or 'barch'"
 esac
 
-prepare_mst_input() {
-  local INPUT_FILE=$1
-  local OUTPUT_TMP_DIR="/tmp/mst"
-
-  rm -rf ${OUTPUT_TMP_DIR} 2> /dev/null
-  mkdir ${OUTPUT_TMP_DIR} 2> /dev/null
-
-  while read line; do
-      echo $line | grep '^$' > /dev/null && echo "" >> ${OUTPUT_TMP_DIR}/mst.tmp
-      echo $line | grep '^$' > /dev/null || echo "0" >> ${OUTPUT_TMP_DIR}/mst.tmp
-  done < ${INPUT_FILE};
-
-  cut -f 1-6 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/mst.first.to.sixth
-  cut -f 8-10 ${INPUT_FILE} > ${OUTPUT_TMP_DIR}/mst.eigth.to.tenth
-
-  paste ${OUTPUT_TMP_DIR}/mst.first.to.sixth ${OUTPUT_TMP_DIR}/mst.tmp ${OUTPUT_TMP_DIR}/mst.eigth.to.tenth | perl -pe "s/^\t+$//g" > ${INPUT_FILE}
-
-  rm -rf ${OUTPUT_TMP_DIR}
-}
-
 convert_mst_to_conllx() {
   local MST_FILE=$1
   local CONLLX_FILE=$2
@@ -104,7 +84,7 @@ convert_mst_to_conllx() {
   cut -f 7-8 ${MST_FILE} > ${OUTPUT_TMP_DIR}/mst.seventh.to.eigth
   cut -f 9-10 ${CONLLX_FILE} > ${OUTPUT_TMP_DIR}/ninth.to.tenth
 
-  paste ${OUTPUT_TMP_DIR}/conllx.first.to.sixth ${OUTPUT_TMP_DIR}/mst.seventh.to.eigth ${OUTPUT_TMP_DIR}/ninth.to.tenth | perl -pe "s/^\t+$//g" > ${CONLLX_FILE}
+  paste ${OUTPUT_TMP_DIR}/conllx.first.to.sixth ${OUTPUT_TMP_DIR}/mst.seventh.to.eigth ${OUTPUT_TMP_DIR}/ninth.to.tenth | perl -pe "s/^\t+$//g" > ${CONLLX_FILE}.tmp
 
   rm ${MST_FILE}
   rm -rf $OUTPUT_TMP_DIR
@@ -115,30 +95,32 @@ echo "Initializing dependency parsing..."
 mkdir ${LOGS_DIR} 2> /dev/null
 
 if [ "${parser}" = "mst" ]; then
-    echo "Preparing .conllx input for MST parsing..."
-    echo "Processing file: ${file}"
-    prepare_mst_input $file
-    echo "Done"
-    echo "Dependency-parsing via MSTParser..."
-    echo "Processing file: ${file}"
-    pushd ${MST_PARSER_HOME}
-    ${JAVA_HOME_BIN}/java \
-      -classpath ".:./lib/trove.jar:./lib/mallet-deps.jar:./lib/mallet.jar" \
-    	-Xms${min_ram} \
-    	-Xmx${max_ram} \
-    	mst.DependencyParser \
-    	test \
-    	separate-lab \
-    	model-name:${mst_parser_model} \
-    	decode-type:proj \
-    	order:2 \
-    	test-file:${file} \
-    	output-file:${file}.mst \
-    	format:CONLL > ${LOGS_DIR}/mst.log
-    echo "Done"
-    echo "Converting .mst to .conllx..."
-    echo "Processing file: ${file}.mst"
-    convert_mst_to_conllx ${file}.mst ${file}
+    # echo "Preparing .conllx input for MST parsing..."
+    # echo "Processing file: ${file}"
+    # #prepare_mst_input $file
+    # python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1-10 -r 7 -w 0 ${file} ${file} > ${file}.mst
+    # echo "Done"
+    # echo "Dependency-parsing via MSTParser..."
+    # echo "Processing file: ${file}"
+    # pushd ${MST_PARSER_HOME}
+    # ${JAVA_HOME_BIN}/java \
+    #   -classpath ".:./lib/trove.jar:./lib/mallet-deps.jar:./lib/mallet.jar" \
+    # 	-Xms${min_ram} \
+    # 	-Xmx${max_ram} \
+    # 	mst.DependencyParser \
+    # 	test \
+    # 	separate-lab \
+    # 	model-name:${mst_parser_model} \
+    # 	decode-type:proj \
+    # 	order:2 \
+    # 	test-file:${file} \
+    # 	output-file:${file}.mst \
+    # 	format:CONLL > ${LOGS_DIR}/mst.log
+    # echo "Done"
+    # echo "Converting .mst to .conllx..."
+    # echo "Processing file: ${file}.mst"
+    #convert_mst_to_conllx ${file}.mst ${file}
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1-6,9-10 ${file} -f 7-8 ${file}.mst
     echo "Done"
 fi
 

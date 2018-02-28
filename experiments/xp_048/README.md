@@ -36,7 +36,7 @@ pyfn convert \
   --target /path/to/experiments/xp_048/data \
   --splits train \
   --output_sentences \
-  --excluded_frames Test35
+  --excluded_frames 398
   --filter overlap_fes
 ```
 
