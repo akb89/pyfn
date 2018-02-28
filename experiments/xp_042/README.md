@@ -41,8 +41,7 @@ pyfn convert \
   --target /path/to/experiments/xp_042/data \
   --splits train \
   --output_sentences \
-  --excluded_frames Test35 \
-  --excluded_annosets 2019791
+  --excluded_frames 398 
 ```
 
 ### Preprocessing
