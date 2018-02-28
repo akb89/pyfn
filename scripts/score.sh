@@ -72,6 +72,15 @@ esac
 
 mkdir ${XP_DIR}/${xp}/score 2> /dev/null
 
+echo "Converting decoded file to SEMEVAL XML format..."
+pyfn convert \
+  --from bios \
+  --to semeval \
+  --source "${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged.decoded" \
+  --target "${XP_DIR}/${xp}/data/${splits}.predicted.xml" \
+  --sent "${XP_DIR}/${xp}/data/${splits}.sentences"
+echo "Done"
+
 echo "Scoring with Kshirsagar et al. (2015) ACL perl script..."
 perl ${SEMEVAL_HOME}/score.acl.pl \
     -c "${XP_DIR}/${xp}/score" \
@@ -85,3 +94,5 @@ perl ${SEMEVAL_HOME}/score.acl.pl \
     "${XP_DIR}/${xp}/data/${splits}.gold.xml" \
     "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
 echo "Done"
+
+cat "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"

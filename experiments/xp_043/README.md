@@ -1,10 +1,9 @@
 # XP\#043
 
-
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  | |
+| 65.7 | 58.8 | 62.1 |
 
 ## Setup
 ### Splits
@@ -33,12 +32,17 @@ Splits are generated with:
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.5-with-dev
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_043/data \
   --splits train \
   --output_sentences \
-  --excluded_frames Test35
+  --excluded_frames 398 \
   --filter overlap_fes
+```
+
+### Preparing data
+```
+./prepare.sh -x 043 -p open-sesame -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
@@ -54,10 +58,10 @@ Splits are preprocessed with:
 
 ### Decoding
 ```
-./open-sesame.sh
+./open-sesame.sh -m decode -x 043 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 043 -s test
 ```

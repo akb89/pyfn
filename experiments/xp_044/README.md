@@ -1,7 +1,5 @@
 # XP\#044
 
-Blocked by RAM requirements
-
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
@@ -45,7 +43,7 @@ pyfn convert \
 Excluded sentences are excluded from train.
 Excluded frames (Test35) are from train and dev.
 
-Followinf sentences are excluded as they lead to multiple roots with the MSTParser:
+Following sentences are excluded as they lead to multiple roots with the MSTParser:
 ```
 Partly as a result of the shortcomings in the Nuclear Non - Proliferation Treaty ( NPT ) safeguards system -- which allowed the rapid development of the Iraqi nuclear program in the 1970s and North Korea 's in the 1990s to go largely undetected -- and partly by assessing Iran 's intentions , the international community and the International Atomic Energy Agency ( IAEA ) have increased their scrutiny of Iran 's activities over the last several years .
 
