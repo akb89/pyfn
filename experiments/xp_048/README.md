@@ -3,7 +3,7 @@
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  | |
+| 63.5 | 59.2 | 61.3 |
 
 ## Setup
 ### Splits
@@ -40,6 +40,11 @@ pyfn convert \
   --filter overlap_fes
 ```
 
+### Preparing data
+```
+./prepare.sh -x 048 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
+```
+
 ### Preprocessing
 Splits are preprocessed with:
 ```
@@ -53,10 +58,10 @@ Splits are preprocessed with:
 
 ### Decoding
 ```
-./open-sesame.sh
+./open-sesame.sh -m decode -x 048 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 048 -s test
 ```

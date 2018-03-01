@@ -37,7 +37,7 @@ pyfn convert \
   --splits train \
   --output_sentences \
   --excluded_frames 398
-  --excluded_sentences 1271774 1277988 1278010
+  --excluded_sentences 1271774 1277988 1278010 \
   --filter overlap_fes
 ```
 Excluded sentences are excluded from train.
@@ -52,6 +52,10 @@ The above groups pose the following dangers : 1- Attacking for the purpose of : 
 The distance between the first and fourth bump should be 100 meters , and the distance between the fourth and the sixth should be 50 meters , so cars can not travel fast in the direction of the building 5- Barbed Wires : They should be placed around the building , around the walls , or on top of the walls 6- Nails Obstacle : These are placed at the main gate in order to puncture the tires of any car crashing in
 ```
 
+### Preparing data
+```
+./prepare.sh -x 044 -p open-sesame -s test -f /path/to/fndata-1.5-with-dev
+```
 
 ### Preprocessing
 Splits are preprocessed with:
@@ -66,7 +70,7 @@ Splits are preprocessed with:
 
 ### Decoding
 ```
-./open-sesame.sh
+./open-sesame.sh -m decode
 ```
 
 ### Scoring
