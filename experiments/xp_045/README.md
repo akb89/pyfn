@@ -1,6 +1,6 @@
 # XP\#045
 
-With a batch size of 40,000
+With a batch size of 40,000 on FATERMIND 10 threads
 
 ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 
@@ -24,6 +24,32 @@ pyfn convert \
   --filter non_breaking_spaces
 ```
 
+### Data preparation
+```
+./prepare.sh -x 045 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+```
+
+### Preprocessing
+```
+./preprocess.sh -x 045 -t mxpost -d mst -p rofames
+```
+
+### Training
+```
+./rofames.sh -m train -x 045
+```
+
+### Decoding
+```
+./
+```
+
+### Scoring
+```
+./score.sh
+```
+
+
 Due to the way MXPOST processes non-breaking spaces, we filter them out.
 It excludes 12 sentences from train.lu:
 ```
@@ -44,29 +70,4 @@ You_PRP 'll_MD find_VB a_DT full_JJ range_NN of_IN sports_NNS offered_VBN :_: fr
 Sentence 1565683 is filtered due to the way MXPOST processes certain characters:
 ```
 The goal of the American Cancer Society , __ Unit , is to reach the employees and officers of every business in the county with important cancer information .
-```
-
-### Data preparation
-```
-./prepare.sh -x 045 -p rofames -s test -f /path/to/fndata-1.5-with-dev
-```
-
-### Preprocessing
-```
-./preprocess.sh -x 045 -t mxpost -d mst -p rofames
-```
-
-### Training
-```
-./rofames.sh -m train -x 045 -t mxpost
-```
-
-### Decoding
-```
-./
-```
-
-### Scoring
-```
-./score.sh
 ```
