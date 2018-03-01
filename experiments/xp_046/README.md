@@ -14,7 +14,7 @@ OPEN-SESAME on FN 1.5 FT + EX with MXPOST and GOLD frames
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.5-with-dev
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_046/data \
   --splits train \
   --with_exemplars \
