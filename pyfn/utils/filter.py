@@ -62,7 +62,12 @@ def _has_overlapping_fes(annoset):
 def _has_invalid_labels(annoset):
     for label in annoset.labelstore.labels:
         # if the label has an unspecified start/end index
-        if label.start == -1 and label.end != -1 or label.start != -1 and label.end == -1:
+        if label.start == -1 and label.end != -1 \
+         or label.start != -1 and label.end == -1:
+            return True
+        # Deal with some messed-up auto-edited labels in FN 1.7
+        if label.start >= len(annoset.sentence.text) \
+         or label.end >= len(annoset.sentence.text):
             return True
         # if the label index points at a whitespace
         if (label.start != -1 and annoset.sentence.text[label.start].isspace()) \
