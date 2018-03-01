@@ -2,36 +2,14 @@
 
 With a batch size of 40,000
 
-BUG with lemmatization: #TODO CHECK
+ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
 |  |  |  |
 
-## Setup
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | TRUE | GOLD |
-
-### Filtering in training data
-| No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
-| --- | --- | --- | --- |
-| FALSE | FALSE | FALSE | FALSE |
-
-### Preprocessing
-| POS tagger | Lemmatizer | Dependency parser |
-| --- | --- | --- | --- |
-| MXPOST | NLP4J | MST |
-
-### Frame Semantic Parsing
-| Parser | Hierarchy feature |
-| --- | --- |
-| ROFAMES | FALSE |
-
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
@@ -68,13 +46,12 @@ Sentence 1565683 is filtered due to the way MXPOST processes certain characters:
 The goal of the American Cancer Society , __ Unit , is to reach the employees and officers of every business in the county with important cancer information .
 ```
 
-### Preparing data
+### Data preparation
 ```
 ./prepare.sh -x 045 -p rofames -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 045 -t mxpost -d mst -p rofames
 ```

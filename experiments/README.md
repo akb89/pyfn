@@ -1,13 +1,27 @@
 # Recap on experiments
 
-- XP042: rofames on FN 1.5 FT with MXPOST + MST
-- XP043: open-sesame on FN 1.5 FT with MXPOST
-- XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
-- XP046: open-sesame on FN 1.5 FT + EX with MXPOST
-- XP047: rofames on FN 1.7 FT with NLP4J + BMST
-- XP048: open-sesame on FN 1.7 FT with NLP4J
-- XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
-- XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
-- XP051: rofames on FN 1.5 FT with MXPOST + MST with HIERARCHY
-- XP052: rofames on FN 1.5 FT + EX with MXPOST + MST with HIERARCHY
+- [x] XP042: rofames on FN 1.5 FT with MXPOST + MST
+- [x] XP043: open-sesame on FN 1.5 FT with MXPOST
+- [ ] XP044: open-sesame on FN 1.5 FT with MXPOST + MST (MEMORY LEAK)
+- [ ] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
+- [ ] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
+- [ ] XP047: rofames on FN 1.7 FT with NLP4J + BMST
+- [x] XP048: open-sesame on FN 1.7 FT with NLP4J
+- [ ] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
+- [ ] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
+- [ ] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
+- [ ] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
+- [ ] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [ ] XP054: rofames on FN 1.7 FT with MXPOST
+- [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
+- [ ] XP056: rofames on FN 1.7 FT with NLP4J + MST
+- [ ] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
+- [ ] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [ ] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
+- [ ] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [ ] XP061: rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
+- [ ] XP062: rofames on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
+- [ ] XP063: rofames on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
+- [ ] XP064: open-sesame on FN 1.7 FT with NLP4J with PRED FRAMES
+- [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
+- [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
