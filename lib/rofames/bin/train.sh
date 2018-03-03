@@ -94,3 +94,4 @@ model_file="$(ls ${XP_DIR}/model/argmodel.dat_* | sort -r | head -n1)"
 echo "Using model file: ${model_file}"
 echo
 cp ${model_file} ${XP_DIR}/model/argmodel.dat
+rm ${XP_DIR}/model/argmodel.dat_*
