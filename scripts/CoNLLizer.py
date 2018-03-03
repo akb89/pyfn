@@ -8,7 +8,7 @@ def brown_to_conll(bdelim, sdelim, cdelim, filepath, insert_ids=False):
     with open(filepath) as stream:
         for line in stream:
             line = line.strip()
-            items = line.split(sdelim)
+            items = re.split(sdelim, line)
             for i, it in enumerate(items):
                 columns = it.split(bdelim)
                 if insert_ids:
@@ -130,7 +130,7 @@ def make_parser():
 
     brown = subs.add_parser('brown', help="Convert Brown format to CoNLL", prog="CoNLLizer")
     brown.add_argument('-d', '--delim', default='_', help='Delimiter between token and part-of-speech (default to tab)')
-    brown.add_argument('-D', '--sdelim', default=' ', help='Delimiter between two elements (default to space)')
+    brown.add_argument('-D', '--sdelim', default='\\s+', help='Delimiter between two elements (default to multi spaces)')
     brown.add_argument('-C', '--cdelim', default='\t', help='CoNLL delimiter (default to tab)')
     brown.add_argument('-i', '--insert-id', action='store_true', help='Insert ID (from 1 to n) in front of the columns?')
     brown.add_argument('files', nargs='?', help='Absolute path to the file')
