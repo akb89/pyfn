@@ -1,5 +1,7 @@
 # XP\#049
 
+BUG with ConLLizer
+
 on FATERMIND batch 40,000 10 threads
 
 ROFAMES on FN 1.7 FT + EX with NLP4J + BMST

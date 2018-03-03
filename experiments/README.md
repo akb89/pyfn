@@ -3,11 +3,11 @@
 - [x] XP042: rofames on FN 1.5 FT with MXPOST + MST
 - [x] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [ ] XP044: open-sesame on FN 1.5 FT with MXPOST + MST (MEMORY LEAK)
-- [-] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
-- [-] XP047: rofames on FN 1.7 FT with NLP4J + BMST
+- [-] XP047: rofames on FN 1.7 FT with NLP4J + BMST (TRAINING BUG)
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [ ] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
+- [ ] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (CONLLIZER BUG)
 - [ ] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [ ] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
@@ -25,3 +25,4 @@
 - [ ] XP064: open-sesame on FN 1.7 FT with NLP4J with PRED FRAMES
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
+- [ ] XP067: XP045 with a batch size of 4,000 instead of 40,000
