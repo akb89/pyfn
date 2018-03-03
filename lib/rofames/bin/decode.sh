@@ -38,4 +38,4 @@ ${JAVA_HOME_BIN}/java \
     ${XP_DIR}/data/framenet.frame.element.map \
     ${XP_DIR}/model/argmodel.dat \
     ${kbest} \
-    ${XP_DIR}/data/${splits}.frame.elements > ${LOGS_DIR}/rofames.decode.log
+    ${XP_DIR}/data/${splits}.frame.elements
