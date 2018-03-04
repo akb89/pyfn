@@ -40,10 +40,8 @@ echo
 mkdir ${XP_DIR}/model 2> /dev/null
 
 echo "Training ROFAMES..."
-
 echo
 echo "Argument Identification -- Step 1: Creating alphabet"
-echo
 ${JAVA_HOME_BIN}/java \
     -classpath ${CLASSPATH} \
     -Xms${min_ram} \
@@ -58,9 +56,7 @@ ${JAVA_HOME_BIN}/java \
     ${kbest} \
     null > ${LOGS_DIR}/rofames.train.create.alphabet.log
 
-echo
 echo "Argument Identification -- Step 2: Caching feature vectors"
-echo
 ${JAVA_HOME_BIN}/java \
     -classpath ${CLASSPATH} \
     -Xms${min_ram} \
@@ -71,10 +67,7 @@ ${JAVA_HOME_BIN}/java \
     train_frame_file:${XP_DIR}/data/train.frame.elements \
     local_features_cache:${XP_DIR}/model/featurecache.jobj > ${LOGS_DIR}/rofames.train.cache.feature.vectors.log
 
-
-echo
 echo "Argument identification -- Step 3: Training argument identification model"
-echo
 ${JAVA_HOME_BIN}/java \
     -classpath ${CLASSPATH} \
     -Xms${min_ram} \
@@ -87,11 +80,10 @@ ${JAVA_HOME_BIN}/java \
     num_threads:${num_threads} \
     batch_size:${batch_size} \
     save_every_k_batches:${save_every_k_batches} \
-    num_models_to_save:${num_models_to_save} > ${LOGS_DIR}/rofames.train.model.log
+    num_models_to_save:${num_models_to_save}
 
 # get the last model file created
 model_file="$(ls ${XP_DIR}/model/argmodel.dat_* | sort -r | head -n1)"
 echo "Using model file: ${model_file}"
-echo
 cp ${model_file} ${XP_DIR}/model/argmodel.dat
 rm ${XP_DIR}/model/argmodel.dat_*
