@@ -17,9 +17,7 @@ pyfn convert \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_047/data \
   --splits train \
-  --output_sentences \
-  --excluded_sentences 4106364 \
-  --filter disc_targets
+  --output_sentences
 ```
 
 ### Data preparation

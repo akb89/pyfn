@@ -1,13 +1,11 @@
 # XP\#044
 
-Memory leak on test
-
 open-sesame on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  | |
+| 65.6 | 59.7 | 62.5 |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
@@ -24,7 +22,7 @@ pyfn convert \
   --target /path/to/experiments/xp_044/data \
   --splits train \
   --output_sentences \
-  --excluded_frames 398
+  --excluded_frames 398 \
   --excluded_sentences 1271774 1277988 1278010 \
   --filter overlap_fes
 ```
@@ -58,7 +56,7 @@ Splits are preprocessed with:
 
 ### Decoding
 ```
-./open-sesame.sh -m decode
+./open-sesame.sh -m decode -x 044 -s test -d
 ```
 
 ### Scoring

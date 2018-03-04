@@ -17,7 +17,7 @@ open-sesame on FN 1.7 FT with NLP4J + BMST
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.7-with-dev
+  --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_057/data \
   --splits train \
   --output_sentences \

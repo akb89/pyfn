@@ -81,7 +81,11 @@ On linux, install the following dependencies:
 ```bash
 sudo apt-get install libxml2 libxml2-dev libxslt1-dev
 ```
-
+Also PERL modules:
+```
+sudo cpan App::cpanminus
+sudo cpanm XML::Parser
+```
 To install the **pyfn** app, run the following command under the pyfn/ root directory:
 ```bash
 sudo -H python3 setup.py develop

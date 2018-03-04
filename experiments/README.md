@@ -1,9 +1,9 @@
 # Recap on experiments
 
-- [x] XP042: rofames on FN 1.5 FT with MXPOST + MST
+- [x] XP042: rofames on FN 1.5 FT with MXPOST + MST XXX
 - [x] XP043: open-sesame on FN 1.5 FT with MXPOST
-- [ ] XP044: open-sesame on FN 1.5 FT with MXPOST + MST (MEMORY LEAK)
-- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
+- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST XXX
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (20 days??)
 - [-] XP047: rofames on FN 1.7 FT with NLP4J + BMST (TRAINING BUG rerunning, try filtering discontinuous targets, try filtering no_fes)
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
@@ -11,11 +11,11 @@
 - [ ] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [ ] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [-] XP053: open-sesame on FN 1.7 FT with MXPOST (BUG, trying to exclude sentence)
+- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [ ] XP054: rofames on FN 1.7 FT with MXPOST
 - [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: rofames on FN 1.7 FT with NLP4J + MST
-- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST (BUG)
+- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [ ] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [ ] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
@@ -26,7 +26,27 @@
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
 - [ ] XP067: XP045 with a batch size of 4,000 instead of 40,000
-- [-] XP068: rofames on FN 1.7 FT with MXPOST + MST
+- [-] XP068: rofames on FN 1.7 FT with MXPOST + MST (BUG)
+
+| XP | P| R | F1 |
+| --- | --- | --- | --- |
+| 042 | 65.2 | 53.8 | 59.0 | REDO DECODING
+| 043 | 65.7 | 58.8 | 62.1 |
+| 044 | 65.6 | 59.7 | 62.5 |
+| 045 | 68.4 | 55.1 | 61.0 | REDO DECODING
+| 046 |  |  |  |
+| 047 |  |  |  |
+| 048 | 63.5 | 59.2 | 61.3 |
+| 049 |  |  |  |
+| 050 |  |  |  |
+| 051 |  |  |  |
+| 052 |  |  |  |
+| 053 |  |  |  |
+| 054 |  |  |  |
+| 055 |  |  |  |
+| 056 |  |  |  |
+| 057 |  |  |  |
+|  |  |  |  |
 
 Excluded sentences:
 

@@ -17,7 +17,7 @@ open-sesame on FN 1.7 FT with MXPOST
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.7-with-dev
+  --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_053/data \
   --splits train \
   --output_sentences \
