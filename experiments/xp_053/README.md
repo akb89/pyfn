@@ -21,6 +21,7 @@ pyfn convert \
   --target /path/to/experiments/xp_053/data \
   --splits train \
   --output_sentences \
+  --excluded_sentences 4106364 \
   --filter overlap_fes
 ```
 
