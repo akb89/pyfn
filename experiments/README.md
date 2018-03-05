@@ -9,7 +9,7 @@
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
 - [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
-- [-] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
+- [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [-] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST (BUG Conllizer REDO all)
 - [ ] XP054: rofames on FN 1.7 FT with MXPOST
