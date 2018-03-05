@@ -1,11 +1,13 @@
-# XP\#068
+# XP\#055
 
-ROFAMES on FN 1.7 FT  with MXPOST + MST
+on CLCL8
+
+open-sesame on FN 1.7 FT with NLP4J + MST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+|  |  | |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
@@ -13,37 +15,35 @@ ROFAMES on FN 1.7 FT  with MXPOST + MST
 | 1.7 | TRUE | FALSE | GOLD |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
-  --source /path/to/fndata-1.7 \
-  --target /path/to/experiments/xp_068/data \
+  --to bios \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_055/data \
   --splits train \
   --output_sentences \
-  --excluded_sentences 4106364
+  --filter overlap_fes
 ```
 
 ### Data preparation
 ```
-./prepare.sh -x 068 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 055 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
-./preprocess.sh -x 068 -t mxpost -d mst -p rofames
+./preprocess.sh -x 055 -t nlp4j -p open-sesame -d mst -v
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 068
+./open-sesame.sh -m train -x 055 -d
 ```
 
 ### Decoding
 ```
-./
+./open-sesame.sh -m decode
 ```
 
 ### Scoring

@@ -7,13 +7,13 @@
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (20 days??)
 - [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
-- [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
+- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
+- [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
 - [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [-] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [-] XP053: open-sesame on FN 1.7 FT with MXPOST (BUG Conllizer REDO all)
-- [ ] XP054: rofames on FN 1.7 FT with MXPOST
-- [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
+- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [-] XP054: rofames on FN 1.7 FT with MXPOST + MST
+- [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: rofames on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [ ] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
@@ -26,9 +26,8 @@
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
 - [ ] XP067: XP045 with a batch size of 4,000 instead of 40,000
-- [-] XP068: rofames on FN 1.7 FT with MXPOST + MST (BUG)
 
-| XP | P| R | F1 |
+| XP | P | R | F1 |
 | --- | --- | --- | --- |
 | 042 | 65.2 | 53.8 | 59.0 | REDO DECODING
 | 043 | 65.7 | 58.8 | 62.1 | REDO TRAINING with 15 EPOCH
