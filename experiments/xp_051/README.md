@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST + HIERARCHY
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 65.3 | 54.9 | 59.7 |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
