@@ -78,11 +78,13 @@ if [ "${tagger}" = "mxpost" ]; then
     echo "POS tagging via MXPOST..."
     pushd ${MXPOST_HOME}
     echo "Processing file: ${file}"
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_"
     ./mxpost tagger.project < ${file} > ${file}.mxpost 2> ${LOGS_DIR}/mxpost.log
     echo "Done"
     echo "Converting .mxpost file to .conllx format..."
     echo "Processing file: ${file}.mxpost"
     python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file}.mxpost > ${file}.mxpost.conll.tmp
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_"
     python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,4,3,3,4,4,4,4,4 -r 4 -w _ ${file}.mxpost.conll.tmp ${file}.mxpost.conll.tmp > ${file}.conllx
     rm ${file}.mxpost.conll.tmp
     rm ${file}.mxpost
@@ -92,7 +94,9 @@ fi
 if [ "${tagger}" = "nlp4j" ]; then
     echo "Converting .sentences to .tsv format..."
     echo "Processing file: ${file}"
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_"
     python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file} > ${file}.tsv.tmp
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_"
     python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,3,3,3,3,3,3,3 -r 3 -w _ ${file}.tsv.tmp ${file}.tsv.tmp > ${file}.tsv
     rm ${file}.tsv.tmp
     echo "Done"
