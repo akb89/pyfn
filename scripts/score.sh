@@ -112,7 +112,7 @@ if [ "${parser}" = "open-sesame" ]; then
   pyfn convert \
     --from bios \
     --to semeval \
-    --source "${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged.decoded" \
+    --source "${XP_DIR}/${xp}/data/${splits}.bios.semeval.decoded" \
     --target "${XP_DIR}/${xp}/data/${splits}.predicted.xml" \
     --sent "${XP_DIR}/${xp}/data/${splits}.sentences"
   echo "Done"

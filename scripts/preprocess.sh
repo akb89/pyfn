@@ -186,7 +186,10 @@ fi
 if [ "${fsparser}" = "open-sesame" ]; then
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios -c ${DATA_DIR}/dev.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios.semeval -c ${DATA_DIR}/dev.sentences.conllx
+  rm ${DATA_DIR}/dev.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios -c ${DATA_DIR}/test.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios.semeval -c ${DATA_DIR}/test.sentences.conllx
+  rm ${DATA_DIR}/test.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/train.bios -c ${DATA_DIR}/train.sentences.conllx
+  rm ${DATA_DIR}/train.sentences.conllx
 fi
