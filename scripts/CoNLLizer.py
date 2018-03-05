@@ -208,19 +208,21 @@ def bios(conll_files, bios_files, fields):
         for lines in zip(*conll_files):
             lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
-            lines = delim.join(lines)
+            lines = '\t'.join(lines)
             if lines == "":
                 conll_sentences.append(conll_sentence)
-                conll_sentence = defaultdict(list)
+                conll_sentence = []
                 continue
             conll_sentence.append(lines.split('\t'))
 
-        for i, lines in enumerate(zip(*bios_files)):
+        i = 0
+        for lines in zip(*bios_files):
             lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
-            lines = delim.join(lines)
+            lines = '\t'.join(lines)
 
             if lines == '':
+                i = 0
                 print("")
                 continue
 
@@ -237,7 +239,9 @@ def bios(conll_files, bios_files, fields):
                     selection.append(items[f-1])
                 else:
                     selection.append(conll_items[f-1])
+            i += 1
             print('\t'.join(selection))
+
 
 
 def make_parser():
@@ -333,6 +337,7 @@ def main():
             print("The field selection is not correct", file=sys.stderr)
             print("It should be either a number or a range or a combination of both separated by commas with no spaces and prefixed by 'c' or 'b'", file=sys.stderr)
             sys.exit(1)
+        return bios(args.conll, args.bios, args.fields)
 
 
 if __name__ == "__main__":
