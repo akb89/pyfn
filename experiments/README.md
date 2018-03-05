@@ -5,13 +5,13 @@
 - [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
 - [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST XXX
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (20 days??)
-- [-] XP047: rofames on FN 1.7 FT with NLP4J + BMST (TRAINING BUG rerunning, try filtering discontinuous targets, try filtering no_fes)
+- [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (CONLLIZER BUG + TRAINING BUG)
-- [ ] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
-- [ ] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
+- [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG Conllizer)
+- [-] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
+- [-] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
+- [-] XP053: open-sesame on FN 1.7 FT with MXPOST (BUG Conllizer REDO all)
 - [ ] XP054: rofames on FN 1.7 FT with MXPOST
 - [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: rofames on FN 1.7 FT with NLP4J + MST
@@ -31,17 +31,17 @@
 | XP | P| R | F1 |
 | --- | --- | --- | --- |
 | 042 | 65.2 | 53.8 | 59.0 | REDO DECODING
-| 043 | 65.7 | 58.8 | 62.1 |
-| 044 | 65.6 | 59.7 | 62.5 |
+| 043 | 65.7 | 58.8 | 62.1 | REDO TRAINING with 15 EPOCH
+| 044 | 65.6 | 59.7 | 62.5 | REDO TRAINING with 15 EPOCH
 | 045 | 68.4 | 55.1 | 61.0 | REDO DECODING
 | 046 |  |  |  |
-| 047 |  |  |  |
-| 048 | 63.5 | 59.2 | 61.3 |
+| 047 | 60.3 | 55.5 | 57.8 |
+| 048 | 63.5 | 59.2 | 61.3 | REDO TRAINING with 15 EPOCH
 | 049 |  |  |  |
 | 050 |  |  |  |
 | 051 |  |  |  |
 | 052 |  |  |  |
-| 053 |  |  |  |
+| 053 |  |  |  | REDO TRAINING with 15 EPOCH
 | 054 |  |  |  |
 | 055 |  |  |  |
 | 056 |  |  |  |

@@ -48,5 +48,5 @@ Splits are preprocessed with:
 
 ### Scoring
 ```
-./score.sh -x 053 -s test
+./score.sh -x 053 -p open-sesame -s test
 ```

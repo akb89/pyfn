@@ -110,6 +110,7 @@ Also, you may need to manually copy `data/fndata-1.5-with-dev/framenet.frame.ele
 - [x] merge .bios and .conllx
 - [x] open-sesame frame data
 - [ ] frame identification
+- [ ] hierarchy feature on FN 1.7
 
 ## Dependencies
 On Linux:

@@ -1,13 +1,11 @@
-# XP\#042
+# XP\#051
 
-ROFAMES on FN 1.5 FT with MXPOST + MST
-
-Replicating Das baseline used in Kshirsagar et al. (2015)
+open-sesame on FN 1.5 FT with MXPOST + MST + HIERARCHY
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-| 65.2 | 53.8 | 59.0 |
+|  |  |  |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
@@ -21,7 +19,7 @@ pyfn convert \
   --from fnxml \
   --to rofames \
   --source /path/to/fndata-1.5 \
-  --target /path/to/experiments/xp_042/data \
+  --target /path/to/experiments/xp_051/data \
   --splits train \
   --output_sentences \
   --excluded_frames 398
@@ -29,25 +27,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 042 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 051 -p rofames -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 042 -t mxpost -d mst -p rofames
+./preprocess.sh -x 051 -t mxpost -d mst -p rofames
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 042
+./rofames.sh -m train -x 051 -u
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 042 -s test
+./rofames.sh -m decode -x 051 -s test -u
 ```
 
 ### Scoring
 ```
-./score.sh -x 042 -p rofames -s test
+./score.sh -x 051 -p rofames -s test
 ```
