@@ -120,3 +120,4 @@ lib/open-sesame/*
 *.DS_Store
 *.7z
 experiments/xp_002/*
+debug.sh
