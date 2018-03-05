@@ -1,13 +1,11 @@
 # XP\#047
 
-on CLCL9
-
 ROFAMES on FN 1.7 FT with NLP4J + BMST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 60.3 | 55.5 | 57.8 |
 
 ### Splits generation
 ```
@@ -37,10 +35,10 @@ pyfn convert \
 
 ### Decoding
 ```
-./
+./rofames.sh -m decode -x 047 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 047 -p rofames -s test
 ```

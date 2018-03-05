@@ -7,7 +7,7 @@ ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 68.4 | 55.1 | 61.0 |
 
 ### Splits generation
 ```
@@ -41,12 +41,12 @@ pyfn convert \
 
 ### Decoding
 ```
-./
+./rofames.sh -m decode -x 045 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 045 -p rofames -s test
 ```
 
 

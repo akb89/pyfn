@@ -1,11 +1,11 @@
-# XP\#048
+# XP\#068
 
-open-sesame on FN 1.7 FT with NLP4J
+ROFAMES on FN 1.7 FT  with MXPOST + MST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-| 63.5 | 59.2 | 61.3 |
+|  |  |  |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
@@ -13,39 +13,40 @@ open-sesame on FN 1.7 FT with NLP4J
 | 1.7 | TRUE | FALSE | GOLD |
 
 ### Splits generation
+Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to bios \
-  --source /path/to/fndata-1.7-with-dev
-  --target /path/to/experiments/xp_048/data \
+  --to rofames \
+  --source /path/to/fndata-1.7 \
+  --target /path/to/experiments/xp_068/data \
   --splits train \
   --output_sentences \
-  --filter overlap_fes
+  --excluded_sentences 4106364
 ```
 
 ### Data preparation
 ```
-./prepare.sh -x 048 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 068 -p rofames -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 Splits are preprocessed with:
 ```
-./preprocess.sh -x 048 -t nlp4j -p open-sesame -v
+./preprocess.sh -x 068 -t mxpost -d mst -p rofames
 ```
 
 ### Training
 ```
-./open-sesame.sh -m train -x 048
+./rofames.sh -m train -x 068
 ```
 
 ### Decoding
 ```
-./open-sesame.sh -m decode -x 048 -s test
+./
 ```
 
 ### Scoring
 ```
-./score.sh -x 048 -s test
+./score.sh
 ```

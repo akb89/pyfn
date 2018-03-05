@@ -81,7 +81,11 @@ On linux, install the following dependencies:
 ```bash
 sudo apt-get install libxml2 libxml2-dev libxslt1-dev
 ```
-
+Also PERL modules:
+```
+sudo cpan App::cpanminus
+sudo cpanm XML::Parser
+```
 To install the **pyfn** app, run the following command under the pyfn/ root directory:
 ```bash
 sudo -H python3 setup.py develop
@@ -106,6 +110,7 @@ Also, you may need to manually copy `data/fndata-1.5-with-dev/framenet.frame.ele
 - [x] merge .bios and .conllx
 - [x] open-sesame frame data
 - [ ] frame identification
+- [ ] hierarchy feature on FN 1.7
 
 ## Dependencies
 On Linux:
