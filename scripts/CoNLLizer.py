@@ -168,7 +168,7 @@ def flatten(delim, cdelim, fields, files, cols = [], withs = [], count_tokens = 
                 else:
                     selection[f].append(items[f-1])
 
-def mask_chars(direction, filepath, chars, masks, is_conll = False, fields = ''):
+def mask_chars(direction, filepath, chars, masks, is_conll = False, fields = '', delim = '\t'):
     def apply(content):
         for char, mask in zip(chars, masks):
             if direction == 'mask':
@@ -185,13 +185,17 @@ def mask_chars(direction, filepath, chars, masks, is_conll = False, fields = '')
         for line in stream:
             line = line.strip()
             if is_conll:
-                items = line.split('\t')
+                if line == "":
+                    print("")
+                    continue
+
+                items = line.split(delim)
                 for f in final_fields:
                     if f-1 >= len(items):
                         print("Field %i not recoverable, exit..." % f, file=sys.stderr)
                         sys.exit(1)
                     items[f-1] = apply(items[f-1])
-                print('\t'.join(items))
+                print(delim.join(items))
             else:
                 line = apply(line)
                 print(line)
@@ -260,6 +264,7 @@ def make_parser():
     for p in [unmasker, masker]:
         p.add_argument('-f', '--fields', default='', help='Fields for replacement (same description as for flatten or conll commands)')
         p.add_argument('-c', '--conll', action='store_true', help='Use CoNLL')
+        p.add_argument('-d', '--delim', default='\t', help='CoNLL delimiter')
         p.add_argument('file', nargs='?', help='Absolute path to the file')
 
     brown = subs.add_parser('brown', help="Convert Brown format to CoNLL", prog="CoNLLizer")
@@ -306,7 +311,7 @@ def main():
             print("The field selection is not correct", file=sys.stderr)
             print("It should be either a number or a range or a combination of both separated by commas with no spaces", file=sys.stderr)
             sys.exit(1)
-        mask_chars(args.commands, args.file, args.string, args.mask, args.conll, args.fields)
+        mask_chars(args.commands, args.file, args.string, args.mask, args.conll, args.fields, args.delim)
     elif args.commands == 'conll' or args.commands == 'flatten':
         if not check_fields_description(args.fields):
             print("The field selection is not correct", file=sys.stderr)
