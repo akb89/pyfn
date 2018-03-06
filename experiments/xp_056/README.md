@@ -1,13 +1,11 @@
 # XP\#056
 
-on CLCL9
-
 rofames on FN 1.7 FT with NLP4J + MST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 59.1 | 53.4 | 56.1 |
 
 ### Splits generation
 ```

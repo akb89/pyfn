@@ -1,10 +1,10 @@
 # Recap on experiments
 
-- [x] XP042: rofames on FN 1.5 FT with MXPOST + MST XXX
+- [x] XP042: rofames on FN 1.5 FT with MXPOST + MST
 - [x] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST XXX
-- [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (20 days??)
+- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
+- [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
 - [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
 - [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
@@ -14,7 +14,7 @@
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [x] XP054: rofames on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
-- [-] XP056: rofames on FN 1.7 FT with NLP4J + MST
+- [x] XP056: rofames on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [-] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
@@ -43,9 +43,18 @@
 | 053 |  |  |  | REDO TRAINING with 15 EPOCH
 | 054 | 56.9 | 53.0 | 54.9 |
 | 055 |  |  |  |
-| 056 |  |  |  |
+| 056 | 59.1 | 53.4 | 56.1 |
 | 057 |  |  |  |
-|  |  |  |  |
+| 058 |  |  |  |
+| 059 |  |  |  |
+| 060 |  |  |  |
+| 061 |  |  |  |
+| 062 |  |  |  |
+| 063 |  |  |  |
+| 064 |  |  |  |
+| 065 |  |  |  |
+| 066 |  |  |  |
+| 067 |  |  |  |
 
 Excluded sentences:
 
