@@ -80,7 +80,7 @@ ${JAVA_HOME_BIN}/java \
     num_threads:${num_threads} \
     batch_size:${batch_size} \
     save_every_k_batches:${save_every_k_batches} \
-    num_models_to_save:${num_models_to_save}
+    num_models_to_save:${num_models_to_save} > ${LOGS_DIR}/rofames.train.model.log
 
 # get the last model file created
 model_file="$(ls ${XP_DIR}/model/argmodel.dat_* | sort -r | head -n1)"
