@@ -7,14 +7,14 @@
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (20 days??)
 - [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST (RELAUNCH TRAINING ONCE UPDATED ROFAMES JAR)
+- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
 - [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
-- [-] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
+- [x] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [-] XP054: rofames on FN 1.7 FT with MXPOST + MST
+- [x] XP054: rofames on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
-- [ ] XP056: rofames on FN 1.7 FT with NLP4J + MST
+- [-] XP056: rofames on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [ ] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
@@ -39,9 +39,9 @@
 | 049 |  |  |  |
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
-| 052 |  |  |  |
+| 052 | 68.6 | 57.0 | 62.3 |
 | 053 |  |  |  | REDO TRAINING with 15 EPOCH
-| 054 |  |  |  |
+| 054 | 56.9 | 53.0 | 54.9 |
 | 055 |  |  |  |
 | 056 |  |  |  |
 | 057 |  |  |  |
