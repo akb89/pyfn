@@ -16,7 +16,7 @@
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [-] XP056: rofames on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
-- [ ] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [-] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY

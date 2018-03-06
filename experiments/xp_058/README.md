@@ -16,7 +16,7 @@ pyfn convert \
   --target /path/to/experiments/xp_058/data \
   --splits train \
   --output_sentences \
-  --no_fes
+  --filter no_fes
 ```
 
 ### Data preparation
