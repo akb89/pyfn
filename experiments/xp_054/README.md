@@ -23,8 +23,7 @@ pyfn convert \
   --source /path/to/fndata-1.7 \
   --target /path/to/experiments/xp_054/data \
   --splits train \
-  --output_sentences \
-  --excluded_sentences 4106364
+  --output_sentences
 ```
 
 ### Data preparation
@@ -44,10 +43,10 @@ pyfn convert \
 
 ### Decoding
 ```
-./
+./rofames.sh -m decode -x 054 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 054 -p rofames -s test
 ```

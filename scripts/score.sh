@@ -132,4 +132,4 @@ perl ${SEMEVAL_HOME}/score.acl.pl \
     "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
 echo "Done"
 
-cat "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
+#cat "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
