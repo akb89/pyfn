@@ -7,16 +7,16 @@
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
 - [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
-- [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
+- [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [x] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [x] XP054: rofames on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [x] XP056: rofames on FN 1.7 FT with NLP4J + MST
-- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
-- [-] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
+- [x] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
@@ -25,7 +25,10 @@
 - [ ] XP064: open-sesame on FN 1.7 FT with NLP4J with PRED FRAMES
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
-- [ ] XP067: XP045 with a batch size of 4,000 instead of 40,000
+- [x] XP067: XP045 with a batch size of 4,000 instead of 40,000
+- [-] XP068: XP049 with a batch size of 4,000 instead of 40,000
+- [-] XP069: rofames on FN 1.5 FT with NLP4J + MST
+- [-] XP070: rofames on FN 1.5 FT with NLP4J + BMST
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
@@ -36,7 +39,7 @@
 | 046 |  |  |  |
 | 047 | 60.3 | 55.5 | 57.8 |
 | 048 | 63.5 | 59.2 | 61.3 | REDO TRAINING with 15 EPOCH
-| 049 |  |  |  |
+| 049 | 59.7 | 56.0 | 57.8 |
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
@@ -44,8 +47,8 @@
 | 054 | 56.9 | 53.0 | 54.9 |
 | 055 |  |  |  |
 | 056 | 59.1 | 53.4 | 56.1 |
-| 057 |  |  |  |
-| 058 |  |  |  |
+| 057 | 65.3 | 60.0 | 62.5 |
+| 058 | 60.6 | 55.7 | 58.1 |
 | 059 |  |  |  |
 | 060 |  |  |  |
 | 061 |  |  |  |
@@ -54,7 +57,7 @@
 | 064 |  |  |  |
 | 065 |  |  |  |
 | 066 |  |  |  |
-| 067 |  |  |  |
+| 067 | 66.7 | 56.5 | 61.2 |
 
 Excluded sentences:
 

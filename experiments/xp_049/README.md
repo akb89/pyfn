@@ -7,7 +7,7 @@ ROFAMES on FN 1.7 FT + EX with NLP4J + BMST
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 59.7 | 56.0 | 57.8 |
 
 ### Splits generation
 ```
@@ -38,10 +38,10 @@ pyfn convert \
 
 ### Decoding
 ```
-./
+./rofames.sh -m decode -x 049 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 049 -p rofames -s test
 ```

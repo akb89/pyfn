@@ -7,7 +7,7 @@ ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 66.7 | 56.5 | 61.2 |
 
 ### Splits generation
 ```
