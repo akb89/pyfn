@@ -5,29 +5,8 @@
 | --- | --- | --- |
 | 65.7 | 58.8 | 62.1 |
 
-## Setup
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
-
-### Filtering in training data
-| No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
-| --- | --- | --- | --- |
-| FALSE | TRUE | FALSE | FALSE |
-
-### Preprocessing
-| POS tagger | Lemmatizer | Dependency parser |
-| --- | --- | --- |
-| MXPOST | NLP4J | - |
-
-### Frame Semantic Parsing
-| Parser | Hierarchy feature |
-| --- | --- |
-| OPEN-SESAME | FALSE |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
@@ -40,7 +19,7 @@ pyfn convert \
   --filter overlap_fes
 ```
 
-### Preparing data
+### Data preparation
 ```
 ./prepare.sh -x 043 -p open-sesame -s test -f /path/to/fndata-1.5-with-dev
 ```

@@ -11,13 +11,13 @@
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [x] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [x] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [x] XP054: rofames on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [x] XP056: rofames on FN 1.7 FT with NLP4J + MST
 - [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [x] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
+- [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
 - [ ] XP062: rofames on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
@@ -26,9 +26,16 @@
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
 - [x] XP067: XP045 with a batch size of 4,000 instead of 40,000
-- [-] XP068: XP049 with a batch size of 4,000 instead of 40,000
-- [-] XP069: rofames on FN 1.5 FT with NLP4J + MST
-- [-] XP070: rofames on FN 1.5 FT with NLP4J + BMST
+- [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
+- [x] XP069: rofames on FN 1.5 FT with NLP4J + MST
+- [x] XP070: rofames on FN 1.5 FT with NLP4J + BMST
+- [-] XP071: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [-] XP072: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
+- [-] XP073: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
+- [-] XP074: rofames on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [ ] XP075: rofames on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
+- [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
+- [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
@@ -43,13 +50,13 @@
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
-| 053 |  |  |  | REDO TRAINING with 15 EPOCH
+| 053 | 62.2 | 59.1 | 60.6 |
 | 054 | 56.9 | 53.0 | 54.9 |
 | 055 |  |  |  |
 | 056 | 59.1 | 53.4 | 56.1 |
 | 057 | 65.3 | 60.0 | 62.5 |
 | 058 | 60.6 | 55.7 | 58.1 |
-| 059 |  |  |  |
+| 059 | 62.4 | 59.3 | 60.8 |
 | 060 |  |  |  |
 | 061 |  |  |  |
 | 062 |  |  |  |
@@ -58,6 +65,17 @@
 | 065 |  |  |  |
 | 066 |  |  |  |
 | 067 | 66.7 | 56.5 | 61.2 |
+| 068 | 57.9 | 56.4 | 57.2 |
+| 069 | 66.2 | 55.5 | 60.3 |
+| 070 | 67.5 | 56.9 | 61.7 |
+| 071 |  |  |  |
+| 072 |  |  |  |
+| 073 |  |  |  |
+| 074 |  |  |  |
+| 075 |  |  |  |
+| 076 |  |  |  |
+| 077 |  |  |  |
+| 078 |  |  |  |
 
 Excluded sentences:
 

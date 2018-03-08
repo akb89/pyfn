@@ -7,7 +7,7 @@ with a batch size of 4,000 instead of 40,000
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 57.9 | 56.4 | 57.2 |
 
 ### Splits generation
 ```

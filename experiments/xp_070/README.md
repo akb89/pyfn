@@ -5,7 +5,7 @@ rofames on FN 1.5 FT with NLP4J + BMST
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 67.5 | 56.9 | 61.7 |
 
 ### Splits generation
 Splits are generated with:

@@ -9,13 +9,7 @@ Replicating Das baseline used in Kshirsagar et al. (2015)
 | --- | --- | --- |
 | 65.2 | 53.8 | 59.0 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
-
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \

@@ -7,13 +7,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST
 | --- | --- | --- |
 | 65.6 | 59.7 | 62.5 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
-
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \

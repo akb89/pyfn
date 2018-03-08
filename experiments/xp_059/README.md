@@ -5,14 +5,9 @@ on CLCL7
 open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
+| 62.4 | 59.3 | 60.8 |
 
 ### Splits generation
 ```
@@ -32,7 +27,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 059 -t nlp4j -p open-sesame -v
 ```
@@ -49,5 +43,5 @@ Splits are preprocessed with:
 
 ### Scoring
 ```
-./score.sh -x 059 -s test
+./score.sh -x 059 -p open-sesame -s test
 ```
