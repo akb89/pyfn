@@ -135,8 +135,8 @@ if [ "${parser}" = "rofames" ]; then
 fi
 
 if [ "${parser}" = "open-sesame" ]; then
-  echo "Copying glove.6B.100d.txt file to XP data directory"
-  cp ${FN_DATA_DIR}/glove.6B.100d.txt ${XP_DIR}/${xp}/data
+  echo "Copying glove.6B.100d.framevocab.txt file to XP data directory"
+  cp ${FN_DATA_DIR}/glove.6B.100d.framevocab.txt ${XP_DIR}/${xp}/data
   echo "Copying frames.xml file to XP data directory"
   cp ${FN_DATA_DIR}/frames.xml ${XP_DIR}/${xp}/data
   echo "Copying frRelations.xml file to XP data directory"
