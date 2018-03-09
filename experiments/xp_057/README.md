@@ -7,11 +7,6 @@ open-sesame on FN 1.7 FT with NLP4J + BMST
 | --- | --- | --- |
 | 65.3 | 60.0 | 62.5 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
-
 ### Splits generation
 ```
 pyfn convert \

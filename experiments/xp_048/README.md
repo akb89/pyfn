@@ -7,11 +7,6 @@ open-sesame on FN 1.7 FT with NLP4J
 | --- | --- | --- |
 | 63.5 | 59.2 | 61.3 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
-
 ### Splits generation
 ```
 pyfn convert \
@@ -30,7 +25,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 048 -t nlp4j -p open-sesame -v
 ```

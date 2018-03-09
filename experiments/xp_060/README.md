@@ -1,7 +1,5 @@
 # XP\#060
 
-on CLCL7
-
 open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 
 ### Test scores
@@ -9,10 +7,6 @@ open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 | --- | --- | --- |
 |  |  | |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
 
 ### Splits generation
 ```
@@ -43,10 +37,10 @@ pyfn convert \
 
 ### Decoding
 ```
-./open-sesame.sh -m decode
+./open-sesame.sh -m decode -x 060 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 060 -p open-sesame -s test
 ```

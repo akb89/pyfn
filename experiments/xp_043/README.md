@@ -25,7 +25,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 043 -t mxpost -p open-sesame -v
 ```

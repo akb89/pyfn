@@ -1,63 +1,71 @@
 # Recap on experiments
 
-- [-] XP042: rofames on FN 1.5 FT with MXPOST + MST
-- [x] XP043: open-sesame on FN 1.5 FT with MXPOST
-- [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [x] XP045: rofames on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
+- [-] XP043: open-sesame on FN 1.5 FT with MXPOST
+- [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
+- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
-- [x] XP047: rofames on FN 1.7 FT with NLP4J + BMST
-- [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [x] XP049: rofames on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
+- [-] XP048: open-sesame on FN 1.7 FT with NLP4J
+- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
-- [x] XP051: rofames on FN 1.5 FT with MXPOST + MST + HIERARCHY
-- [x] XP052: rofames on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [x] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [x] XP054: rofames on FN 1.7 FT with MXPOST + MST
+- [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY
+- [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
+- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [-] XP054: semafor on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
-- [x] XP056: rofames on FN 1.7 FT with NLP4J + MST
-- [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
-- [x] XP058: rofames on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
+- [x] XP056: semafor on FN 1.7 FT with NLP4J + MST
+- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
+- [x] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [ ] XP061: rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
-- [ ] XP062: rofames on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
-- [ ] XP063: rofames on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
+- [ ] XP061: semafor on FN 1.7 FT with NLP4J + BMST + HIERARCHY
+- [ ] XP062: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
+- [ ] XP063: semafor on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP064: open-sesame on FN 1.7 FT with NLP4J with PRED FRAMES
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
-- [ ] XP066: rofames on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
+- [ ] XP066: semafor on FN 1.7 FT + EX with NLP4J + BMST with PRED FRAMES
 - [x] XP067: XP045 with a batch size of 4,000 instead of 40,000
 - [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
-- [x] XP069: rofames on FN 1.5 FT with NLP4J + MST
-- [x] XP070: rofames on FN 1.5 FT with NLP4J + BMST
-- [ ] XP071: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
-- [-] XP072: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
-- [-] XP073: rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
-- [-] XP074: rofames on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [-] XP075: rofames on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
+- [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
+- [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
+- [ ] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [-] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
+- [-] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
+- [-] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [-] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [ ] XP078: open-sesame on FN 1.5 FT with NLP4J
+- [ ] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
+- [ ] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
+- [ ] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
+- [ ] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
+- [ ] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
+- [ ] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
+- [ ] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
-| 042 | 65.2 | 53.8 | 59.0 | REDO DECODING
-| 043 | 65.7 | 58.8 | 62.1 | REDO TRAINING with 15 EPOCH
-| 044 | 65.6 | 59.7 | 62.5 | REDO TRAINING with 15 EPOCH
+| 042 | 65.4 | 53.4 | 58.8 | X
+| 043 | 65.7 | 58.8 | 62.1 | X
+| 044 | 65.6 | 59.7 | 62.5 | X
 | 045 | 68.4 | 55.1 | 61.0 | REDO DECODING
 | 046 |  |  |  |
-| 047 | 60.3 | 55.5 | 57.8 |
-| 048 | 63.5 | 59.2 | 61.3 | REDO TRAINING with 15 EPOCH
+| 047 | 61.2 | 55.2 | 58.1 | X
+| 048 | 63.5 | 59.2 | 61.3 | X
 | 049 | 59.7 | 56.0 | 57.8 |
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
-| 053 | 62.2 | 59.1 | 60.6 |
-| 054 | 56.9 | 53.0 | 54.9 |
+| 053 | 62.2 | 59.1 | 60.6 | X
+| 054 | 56.9 | 53.0 | 54.9 | X
 | 055 |  |  |  |
 | 056 | 59.1 | 53.4 | 56.1 |
-| 057 | 65.3 | 60.0 | 62.5 |
+| 057 | 65.3 | 60.0 | 62.5 | X
 | 058 | 60.6 | 55.7 | 58.1 |
-| 059 | 62.4 | 59.3 | 60.8 |
-| 060 |  |  |  |
+| 059 | 62.4 | 59.3 | 60.8 | X
+| 060 |  |  |  | X
 | 061 |  |  |  |
 | 062 |  |  |  |
 | 063 |  |  |  |

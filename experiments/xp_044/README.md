@@ -17,6 +17,19 @@ pyfn convert \
   --splits train \
   --output_sentences \
   --excluded_frames 398 \
+  --filter overlap_fes
+```
+
+Former:
+```
+pyfn convert \
+  --from fnxml \
+  --to bios \
+  --source /path/to/fndata-1.5-with-dev
+  --target /path/to/experiments/xp_044/data \
+  --splits train \
+  --output_sentences \
+  --excluded_frames 398 \
   --excluded_sentences 1271774 1277988 1278010 \
   --filter overlap_fes
 ```
@@ -38,7 +51,6 @@ The distance between the first and fourth bump should be 100 meters , and the di
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 044 -t mxpost -p open-sesame -d mst -v
 ```

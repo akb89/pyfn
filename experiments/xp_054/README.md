@@ -1,26 +1,18 @@
 # XP\#054
 
-on CLCL9
-
-ROFAMES on FN 1.7 FT with MXPOST + MST
+rofames on FN 1.7 FT with MXPOST + MST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
 | 56.9 | 53.0 | 54.9 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
-
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
   --to rofames \
-  --source /path/to/fndata-1.7 \
+  --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_054/data \
   --splits train \
   --output_sentences

@@ -7,11 +7,6 @@ open-sesame on FN 1.7 FT with MXPOST
 | --- | --- | --- |
 | 62.2 | 59.1 | 60.6 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
-
 ### Splits generation
 ```
 pyfn convert \
@@ -30,7 +25,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 053 -t mxpost -p open-sesame -v
 ```

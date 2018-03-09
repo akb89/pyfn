@@ -1,11 +1,11 @@
 # XP\#047
 
-ROFAMES on FN 1.7 FT with NLP4J + BMST
+rofames on FN 1.7 FT with NLP4J + BMST
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-| 60.3 | 55.5 | 57.8 |
+| 61.2 | 55.2 | 58.1 |
 
 ### Splits generation
 ```

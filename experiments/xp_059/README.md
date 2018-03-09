@@ -1,7 +1,5 @@
 # XP\#059
 
-on CLCL7
-
 open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 
 ### Test scores
