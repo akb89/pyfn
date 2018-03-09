@@ -5,7 +5,7 @@ rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  | |  |
+| 59.0 | 58.1 | 58.5 |
 
 ### Splits generation
 ```

@@ -1,8 +1,6 @@
 # XP\#042
 
-ROFAMES on FN 1.5 FT with MXPOST + MST
-
-Replicating Das baseline used in Kshirsagar et al. (2015)
+rofames on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
 | P| R | F1 |
