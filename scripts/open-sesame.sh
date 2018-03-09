@@ -126,7 +126,7 @@ if [ "${mode}" = train ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --devf ${XP_DIR}/${xp}/data/dev.bios \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt \
       --syn dep
   fi
   if [ "${with_dep_parses}" = FALSE ]; then
@@ -134,7 +134,7 @@ if [ "${mode}" = train ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --devf ${XP_DIR}/${xp}/data/dev.bios \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt
   fi
 fi
 
