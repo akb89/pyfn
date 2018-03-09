@@ -3,7 +3,7 @@
 open-sesame on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 65.6 | 59.7 | 62.5 |
 
@@ -12,7 +12,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.5-with-dev
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_044/data \
   --splits train \
   --output_sentences \

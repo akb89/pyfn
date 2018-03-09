@@ -3,9 +3,9 @@
 rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 59.5 | 56.1 | 57.7 |
+| 59.1 | 56.2 | 57.6 |
 
 ### Splits generation
 ```

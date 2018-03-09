@@ -3,7 +3,7 @@
 rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 59.7 | 55.8 | 57.7 |
 

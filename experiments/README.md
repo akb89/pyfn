@@ -12,7 +12,7 @@
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [-] XP054: semafor on FN 1.7 FT with MXPOST + MST
+- [x] XP054: semafor on FN 1.7 FT with MXPOST + MST
 - [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [x] XP056: semafor on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
@@ -29,21 +29,21 @@
 - [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
 - [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
 - [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
-- [ ] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
-- [-] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
-- [-] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
+- [-] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
+- [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 - [-] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [-] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [ ] XP078: open-sesame on FN 1.5 FT with NLP4J
-- [ ] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
-- [ ] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
-- [ ] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
-- [ ] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
-- [ ] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
+- [-] XP078: open-sesame on FN 1.5 FT with NLP4J
+- [-] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
+- [-] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
+- [-] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
+- [-] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
+- [-] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
 - [ ] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
-- [ ] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
+- [-] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
@@ -59,7 +59,7 @@
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
 | 053 | 62.2 | 59.1 | 60.6 | X
-| 054 | 56.9 | 53.0 | 54.9 | X
+| 054 | 57.5 | 52.6 | 54.9 | X
 | 055 |  |  |  |
 | 056 | 59.1 | 53.4 | 56.1 |
 | 057 | 65.3 | 60.0 | 62.5 | X
@@ -77,8 +77,8 @@
 | 069 | 66.2 | 55.5 | 60.3 |
 | 070 | 67.5 | 56.9 | 61.7 |
 | 071 | 59.7 | 55.8 | 57.7 | REDO with BATCH SIZE 40,000
-| 072 | 59.5 | 56.1 | 57.7 |
-| 073 | 59.0 | 58.1 | 58.5 |
+| 072 | 59.1 | 56.2 | 57.6 |
+| 073 | 60.7 | 57.6 | 59.1 |
 | 074 | 65.2 | 53.8 | 58.9 |
 | 075 |  |  |  |
 | 076 |  |  |  |

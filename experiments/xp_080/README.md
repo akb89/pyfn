@@ -1,6 +1,6 @@
-# XP\#055
+# XP\#080
 
-open-sesame on FN 1.7 FT with NLP4J + MST
+open-sesame on FN 1.7 FT with MXPOST + MST
 
 ### Test scores
 | P | R | F1 |
@@ -13,7 +13,7 @@ pyfn convert \
   --from fnxml \
   --to bios \
   --source /path/to/fndata-1.7-with-dev \
-  --target /path/to/experiments/xp_055/data \
+  --target /path/to/experiments/xp_080/data \
   --splits train \
   --output_sentences \
   --filter overlap_fes
@@ -21,25 +21,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 055 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 080 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 055 -t nlp4j -p open-sesame -d mst -v
+./preprocess.sh -x 080 -t mxpost -p open-sesame -d mst -v
 ```
 
 ### Training
 ```
-./open-sesame.sh -m train -x 055 -d
+./open-sesame.sh -m train -x 080 -d
 ```
 
 ### Decoding
 ```
-./open-sesame.sh -m decode -x 055 -s test -d
+./open-sesame.sh -m decode -x 080 -s test -d
 ```
 
 ### Scoring
 ```
-./score.sh -x 055 -s test
+./score.sh -x 080 -s test
 ```
