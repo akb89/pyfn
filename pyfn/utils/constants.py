@@ -12,3 +12,5 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
 ANNO_LAYERS = ['FE', 'PT', 'GF', 'Target']  # layers stored in the
 # annoset.labelstore
 SENT_LAYERS = ['PENN', 'BNC']  # layers stored in the sentence.labelstore
+
+HIERARCHY_RELATION_TYPES = ['Inheritance', 'SubFrame']

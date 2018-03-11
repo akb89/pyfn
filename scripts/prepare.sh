@@ -118,8 +118,6 @@ pyfn convert \
 echo "Done"
 
 if [ "${parser}" = "rofames" ]; then
-  # echo "Copying framenet.frame.element.map file to XP data directory"
-  # cp ${FN_DATA_DIR}/framenet.frame.element.map ${XP_DIR}/${xp}/data
   echo "Creating framenet.frame.element.map from train splits..."
   ${JAVA_HOME_BIN}/java \
       -classpath "${ROFAMES_HOME}/rofames-1.0.0.jar" \
