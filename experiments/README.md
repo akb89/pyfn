@@ -4,7 +4,7 @@
 - [-] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
 - [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
-- [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST
+- [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
 - [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [-] XP048: open-sesame on FN 1.7 FT with NLP4J
 - [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
@@ -29,20 +29,20 @@
 - [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
 - [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
 - [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
-- [-] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [x] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 - [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
 - [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 - [-] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [-] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
+- [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [-] XP078: open-sesame on FN 1.5 FT with NLP4J
 - [-] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
 - [-] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
-- [-] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
+- [x] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
 - [-] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
 - [-] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
-- [ ] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
+- [-] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
 - [-] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
 
 | XP | P | R | F1 |
@@ -76,14 +76,22 @@
 | 068 | 57.9 | 56.4 | 57.2 |
 | 069 | 66.2 | 55.5 | 60.3 |
 | 070 | 67.5 | 56.9 | 61.7 |
-| 071 | 59.7 | 55.8 | 57.7 | REDO with BATCH SIZE 40,000
+| 071 | 59.8 | 55.8 | 57.8 |
 | 072 | 59.1 | 56.2 | 57.6 |
 | 073 | 60.7 | 57.6 | 59.1 |
 | 074 | 65.2 | 53.8 | 58.9 |
-| 075 |  |  |  |
+| 075 | 64.4 | 59.1 | 61.6 |
 | 076 |  |  |  |
 | 077 |  |  |  |
 | 078 |  |  |  |
+| 079 |  |  |  |
+| 080 |  |  |  |
+| 081 | 67.6 | 56.8 | 61.7 |
+| 082 |  |  |  |
+| 083 |  |  |  |
+| 084 |  |  |  |
+| 085 |  |  |  |
+
 
 Excluded sentences:
 

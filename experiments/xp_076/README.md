@@ -3,7 +3,7 @@
 open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 |  |  |  |
 

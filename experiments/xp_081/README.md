@@ -3,9 +3,9 @@
 rofames on FN 1.5 FT with NLP4J + BARCH
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 67.6 | 56.8 | 61.7 |
 
 ### Splits generation
 Splits are generated with:

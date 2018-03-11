@@ -3,9 +3,9 @@
 rofames on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 64.4 | 59.1 | 61.6 |
 
 ### Splits generation
 ```

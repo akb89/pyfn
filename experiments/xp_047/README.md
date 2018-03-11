@@ -3,7 +3,7 @@
 rofames on FN 1.7 FT with NLP4J + BMST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 61.2 | 55.2 | 58.1 |
 
