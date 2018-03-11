@@ -1,9 +1,9 @@
 # XP\#042
 
-rofames on FN 1.5 FT with MXPOST + MST
+semafor on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 65.4 | 53.4 | 58.8 |
 

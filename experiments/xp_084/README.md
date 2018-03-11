@@ -5,7 +5,7 @@ semafor on FN 1.7 FT with NLP4J + BARCH
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 61.2 | 55.8 | 58.4 |
 
 ### Splits generation
 ```

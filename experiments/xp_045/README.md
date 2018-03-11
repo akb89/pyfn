@@ -1,11 +1,9 @@
 # XP\#045
 
-With a batch size of 40,000 on FATERMIND 10 threads
-
-ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
+semafor on FN 1.5 FT + EX with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 68.4 | 55.1 | 61.0 |
 
@@ -14,7 +12,7 @@ ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 pyfn convert \
   --from fnxml \
   --to rofames \
-  --source /path/to/fndata-1.5 \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_045/data \
   --splits train \
   --with_exemplars \

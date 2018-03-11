@@ -3,11 +3,11 @@
 - [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
 - [-] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
+- [-] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
-- [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
+- [-] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [-] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
@@ -42,15 +42,16 @@
 - [x] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
 - [-] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
 - [-] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
-- [-] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
+- [x] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
 - [-] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
+- [ ] XP086: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
 | 042 | 65.4 | 53.4 | 58.8 | X
 | 043 | 65.7 | 58.8 | 62.1 | X
 | 044 | 65.6 | 59.7 | 62.5 | X
-| 045 | 68.4 | 55.1 | 61.0 | REDO DECODING
+| 045 | 68.4 | 55.1 | 61.0 |
 | 046 |  |  |  |
 | 047 | 61.2 | 55.2 | 58.1 | X
 | 048 | 63.5 | 59.2 | 61.3 | X
@@ -89,7 +90,7 @@
 | 081 | 67.6 | 56.8 | 61.7 |
 | 082 |  |  |  |
 | 083 |  |  |  |
-| 084 |  |  |  |
+| 084 | 61.2 | 55.8 | 58.4 |
 | 085 |  |  |  |
 
 

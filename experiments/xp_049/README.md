@@ -1,11 +1,9 @@
 # XP\#049
 
-on FATERMIND batch 40,000 10 threads
-
-ROFAMES on FN 1.7 FT + EX with NLP4J + BMST
+semafor on FN 1.7 FT + EX with NLP4J + BMST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 59.7 | 56.0 | 57.8 |
 
