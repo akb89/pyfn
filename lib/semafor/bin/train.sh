@@ -48,7 +48,10 @@ if [ "${with_hierarchy}" = TRUE ]; then
       ${XP_DIR}/model/train.sentences.frame.elements.spans \
       true \
       ${kbest} \
-      ${XP_DIR}/data/framenet.frame.element.map > ${LOGS_DIR}/rofames.train.create.alphabet.log
+      ${XP_DIR}/data/framenet.frame.element.map \
+      ancestors_file:${XP_DIR}/data/ancestors.csv \
+      frame_parents_file:${XP_DIR}/data/frame_parents.csv \
+      frame_parent_rolemappings_file:${XP_DIR}/data/frame_parent_rolemappings.csv > ${LOGS_DIR}/rofames.train.create.alphabet.log
 
   echo "Argument Identification -- Step 2: Caching feature vectors"
   ${JAVA_HOME_BIN}/java \
