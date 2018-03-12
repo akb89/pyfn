@@ -1,9 +1,11 @@
 # XP\#043
 
+open-sesame on FN 1.5 FT with MXPOST
+
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 65.7 | 58.8 | 62.1 |
+| 64.9 | 58.9 | 61.8 |
 
 
 ### Splits generation
@@ -41,5 +43,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 043 -s test
+./score.sh -x 043 -p open-sesame -s test
 ```

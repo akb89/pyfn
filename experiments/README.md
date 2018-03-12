@@ -1,13 +1,13 @@
 # Recap on experiments
 
 - [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
-- [-] XP043: open-sesame on FN 1.5 FT with MXPOST
+- [x] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [-] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
 - [-] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [-] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
@@ -36,7 +36,7 @@
 - [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [-] XP078: open-sesame on FN 1.5 FT with NLP4J
+- [x] XP078: open-sesame on FN 1.5 FT with NLP4J
 - [-] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
 - [-] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
 - [x] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
@@ -51,13 +51,13 @@
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
 | 042 | 65.4 | 53.4 | 58.8 | X
-| 043 | 65.7 | 58.8 | 62.1 | X
+| 043 | 64.9 | 58.9 | 61.8 | X
 | 044 | 65.6 | 59.7 | 62.5 | X
-| 045 | 68.4 | 55.1 | 61.0 |
+| 045 | 64.0 | 57.8 | 60.8 | X
 | 046 |  |  |  |
 | 047 | 61.2 | 55.2 | 58.1 | X
 | 048 | 63.5 | 59.2 | 61.3 | X
-| 049 | 59.7 | 56.0 | 57.8 |
+| 049 | 59.7 | 56.0 | 57.8 | X
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
@@ -86,7 +86,7 @@
 | 075 | 64.4 | 59.1 | 61.6 |
 | 076 |  |  |  |
 | 077 |  |  |  |
-| 078 |  |  |  |
+| 078 | 64.8 | 60.2 | 62.4 |
 | 079 |  |  |  |
 | 080 |  |  |  |
 | 081 | 67.6 | 56.8 | 61.7 |
