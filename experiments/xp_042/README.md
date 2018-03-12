@@ -12,7 +12,7 @@ semafor on FN 1.5 FT with MXPOST + MST
 pyfn convert \
   --from fnxml \
   --to semafor \
-  --source /path/to/fndata-1.5 \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_042/data \
   --splits train \
   --output_sentences \

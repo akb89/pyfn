@@ -7,18 +7,13 @@ open-sesame on FN 1.5 FT with MXPOST + MST + HIERARCHY
 | --- | --- | --- |
 | 65.3 | 54.9 | 59.7 |
 
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
-
 ### Splits generation
 Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
   --to semafor \
-  --source /path/to/fndata-1.5 \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_051/data \
   --splits train \
   --output_sentences \
