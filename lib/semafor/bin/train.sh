@@ -41,14 +41,14 @@ if [ "${with_hierarchy}" = TRUE ]; then
       -Xms${min_ram} \
       -Xmx${max_ram} \
       edu.cmu.cs.lti.ark.fn.parsing.CreateAlphabet \
-      ${XP_DIR}/data/train.frame.elements \
-      ${XP_DIR}/data/train.sentences.conllx.flattened \
-      ${XP_DIR}/model/train.events.bin \
-      ${XP_DIR}/model/parser.conf \
-      ${XP_DIR}/model/train.sentences.frame.elements.spans \
-      true \
-      ${kbest} \
-      ${XP_DIR}/data/framenet.frame.element.map \
+      fe_filename:${XP_DIR}/data/train.frame.elements \
+      tag_filename:${XP_DIR}/data/train.sentences.conllx.flattened \
+      event_filename:${XP_DIR}/model/train.events.bin \
+      alphabet_file:${XP_DIR}/model/parser.conf \
+      span_filename:${XP_DIR}/model/train.sentences.frame.elements.spans \
+      do_generate_alphabet:true \
+      kbest:${kbest} \
+      fe_map_file:${XP_DIR}/data/framenet.frame.element.map \
       ancestors_file:${XP_DIR}/data/ancestors.csv \
       frame_parents_file:${XP_DIR}/data/frame_parents.csv \
       frame_parent_rolemappings_file:${XP_DIR}/data/frame_parent_rolemappings.csv > ${LOGS_DIR}/rofames.train.create.alphabet.log
