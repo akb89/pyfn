@@ -121,3 +121,4 @@ lib/open-sesame/*
 *.7z
 experiments/xp_002/*
 debug.sh
+experiments/xp_000/*
