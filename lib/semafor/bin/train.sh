@@ -44,7 +44,7 @@ if [ "${with_hierarchy}" = TRUE ]; then
       fe_filename:${XP_DIR}/data/train.frame.elements \
       tag_filename:${XP_DIR}/data/train.sentences.conllx.flattened \
       event_filename:${XP_DIR}/model/train.events.bin \
-      alphabet_file:${XP_DIR}/model/parser.conf \
+      alphabet_filename:${XP_DIR}/model/parser.conf \
       span_filename:${XP_DIR}/model/train.sentences.frame.elements.spans \
       do_generate_alphabet:true \
       kbest:${kbest} \
