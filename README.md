@@ -30,7 +30,7 @@ Extract the content of all the archives via `7z x archive_name.7z` under the pyf
 |   |   |-- mstparser
 |   |   |-- nlp4j
 |   |   |-- open-sesame
-|   |   |-- rofames
+|   |   |-- semafor
 |   |   |-- semeval
 |   |-- pyfn
 |   |-- resources

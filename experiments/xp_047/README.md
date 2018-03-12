@@ -1,6 +1,6 @@
 # XP\#047
 
-rofames on FN 1.7 FT with NLP4J + BMST
+semafor on FN 1.7 FT with NLP4J + BMST
 
 ### Test scores
 | P | R | F1 |
@@ -11,7 +11,7 @@ rofames on FN 1.7 FT with NLP4J + BMST
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_047/data \
   --splits train \
@@ -20,25 +20,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 047 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 047 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 047 -t nlp4j -d bmst -p rofames
+./preprocess.sh -x 047 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 047
+./semafor.sh -m train -x 047
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 047 -s test
+./semafor.sh -m decode -x 047 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 047 -p rofames -s test
+./score.sh -x 047 -p semafor -s test
 ```

@@ -1,6 +1,6 @@
 # XP\#054
 
-rofames on FN 1.7 FT with MXPOST + MST
+semafor on FN 1.7 FT with MXPOST + MST
 
 ### Test scores
 | P| R | F1 |
@@ -11,7 +11,7 @@ rofames on FN 1.7 FT with MXPOST + MST
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_054/data \
   --splits train \
@@ -20,25 +20,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 054 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 054 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 054 -t mxpost -d mst -p rofames
+./preprocess.sh -x 054 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 054
+./semafor.sh -m train -x 054
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 054 -s test
+./semafor.sh -m decode -x 054 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 054 -p rofames -s test
+./score.sh -x 054 -p semafor -s test
 ```

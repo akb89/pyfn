@@ -2,7 +2,7 @@
 
 With a batch size of 4000 on CLCL9
 
-ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
+SEMAFOR on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 
 ### Test scores
 | P| R | F1 |
@@ -13,7 +13,7 @@ ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.5 \
   --target /path/to/experiments/xp_067/data \
   --splits train \
@@ -26,25 +26,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 067 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 067 -p semafor -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 067 -t mxpost -d mst -p rofames
+./preprocess.sh -x 067 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 067
+./semafor.sh -m train -x 067
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 067 -s test
+./semafor.sh -m decode -x 067 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 067 -p rofames -s test
+./score.sh -x 067 -p semafor -s test
 ```

@@ -12,11 +12,11 @@ import logging.config
 import pyfn.utils.config as config_utils
 import pyfn.marshalling.marshallers.bios as biosm
 import pyfn.marshalling.marshallers.hierarchy as hierm
-import pyfn.marshalling.marshallers.rofames as rofamesm
+import pyfn.marshalling.marshallers.semafor as semaform
 import pyfn.marshalling.marshallers.semeval as semeval
 import pyfn.marshalling.unmarshallers.bios as biosu
 import pyfn.marshalling.unmarshallers.framenet as fnxml
-import pyfn.marshalling.unmarshallers.rofames as rofamesu
+import pyfn.marshalling.unmarshallers.semafor as semaforu
 
 import pyfn.utils.files as futils
 
@@ -64,13 +64,13 @@ def _convert(args):
                 'to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = biosu.unmarshall_annosets(args.source_path, args.sent)
-    if args.source_format == 'rofames':
+    if args.source_format == 'semafor':
         if args.sent == '__undefined__':
             raise InvalidParameterError(
-                'Unspecified sentence file. For rofames unmarshalling you '
+                'Unspecified sentence file. For semafor unmarshalling you '
                 'need to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
-        annosets = rofamesu.unmarshall_annosets(args.source_path, args.sent)
+        annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
                                      args.filter, args.output_sentences,
@@ -83,14 +83,14 @@ def _convert(args):
             annosets = annosets_dict[splits_name]
             output_filepath = os.path.join(args.target_path,
                                            '{}.gold.xml'.format(splits_name))
-        if args.source_format == 'bios' or args.source_format == 'rofames':
+        if args.source_format == 'bios' or args.source_format == 'semafor':
             output_filepath = args.target_path
         semeval.marshall_annosets(annosets, output_filepath,
                                   args.excluded_frames,
                                   args.excluded_sentences,
                                   args.excluded_annosets)
-    if args.target_format == 'rofames':
-        rofamesm.marshall_annosets_dict(annosets_dict, args.target_path,
+    if args.target_format == 'semafor':
+        semaform.marshall_annosets_dict(annosets_dict, args.target_path,
                                         args.filter, args.output_sentences,
                                         args.excluded_frames,
                                         args.excluded_sentences,
@@ -129,20 +129,20 @@ def main():
                                 help='absolute filepath to target dir')
     parser_convert.add_argument('--from', required=True,
                                 dest='source_format',
-                                choices=['rofames', 'bios', 'semeval',
+                                choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
                                 help='''source format. Choose between:
-    - rofames: the format used by the rofames fork of the semafor parser
+    - semafor: the format used by the semafor fork of the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
     ''')
     parser_convert.add_argument('--to', required=True,
                                 dest='target_format',
-                                choices=['rofames', 'bios', 'semeval',
+                                choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
                                 help='''target format. Choose between:
-    - conll: the CoNLL format used by the rofames fork of the semafor parser
+    - conll: the CoNLL format used by the semafor fork of the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
@@ -154,7 +154,7 @@ def main():
     parser_convert.add_argument('--output_sentences',
                                 action='store_true', default=False,
                                 help='whether or not to output the .sentences '
-                                     'files in bios or rofames marshalling')
+                                     'files in bios or semafor marshalling')
     parser_convert.add_argument('--splits',
                                 choices=['train', 'dev', 'test'],
                                 default='test',

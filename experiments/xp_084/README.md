@@ -11,7 +11,7 @@ semafor on FN 1.7 FT with NLP4J + BARCH
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_084/data \
   --splits train \
@@ -20,25 +20,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 084 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 084 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 084 -t nlp4j -d barch -p rofames
+./preprocess.sh -x 084 -t nlp4j -d barch -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 084
+./semafor.sh -m train -x 084
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 084 -s test
+./semafor.sh -m decode -x 084 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 084 -p rofames -s test
+./score.sh -x 084 -p semafor -s test
 ```

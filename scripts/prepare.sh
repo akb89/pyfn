@@ -4,12 +4,12 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM -p {rofames,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
+Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
 Preprocess FrameNet train/dev/test splits.
 
   -h, --help                                   display this help and exit
   -x, --xp              XP_NUM                 xp number written as 3 digits (e.g. 001)
-  -p, --parser          {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
+  -p, --parser          {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
   -s, --splits          {dev,test}             which splits to score: dev or test
   -u, --with_hierarchy                         if specified, will use the hierarchy feature
   -e, --with_exemplars                         if specified, will use the exemplars
@@ -113,12 +113,12 @@ case "${splits}" in
 esac
 
 case "${parser}" in
-    rofames )
+    semafor )
         ;;   #fallthru
     open-sesame )
         ;;   #fallthru
     * )
-        die "Invalid frame semantic parser '${parser}': Should be 'rofames' or 'open-sesame'"
+        die "Invalid frame semantic parser '${parser}': Should be 'semafor' or 'open-sesame'"
 esac
 
 echo "Generating gold SEMEVAL XML file..."
@@ -130,10 +130,10 @@ pyfn convert \
   --splits "${splits}"
 echo "Done"
 
-if [ "${parser}" = "rofames" ]; then
+if [ "${parser}" = "semafor" ]; then
   echo "Creating framenet.frame.element.map from train splits..."
   ${JAVA_HOME_BIN}/java \
-      -classpath "${ROFAMES_HOME}/rofames-1.0.0.jar" \
+      -classpath "${SEMAFOR_HOME}/rofames-1.0.0.jar" \
       -Xmx${max_ram} \
       edu.unige.clcl.fn.data.prep.training.maps.FEMap \
       "${XP_DIR}/${xp}/data/train.frame.elements" \

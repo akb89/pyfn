@@ -17,7 +17,7 @@ Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.5 \
   --target /path/to/experiments/xp_051/data \
   --splits train \
@@ -27,25 +27,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 051 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 051 -p semafor -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 051 -t mxpost -d mst -p rofames
+./preprocess.sh -x 051 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 051 -u
+./semafor.sh -m train -x 051 -u
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 051 -s test -u
+./semafor.sh -m decode -x 051 -s test -u
 ```
 
 ### Scoring
 ```
-./score.sh -x 051 -p rofames -s test
+./score.sh -x 051 -p semafor -s test
 ```

@@ -4,14 +4,14 @@ import os
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
-__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_rofames_filepath',
+__all__ = ['get_bios_filepath', 'get_sent_filepath', 'get_semafor_filepath',
            'create_parent_dir_if_not_exists', 'get_bios_semeval_filepath',
            'get_ancestors_filepath', 'get_frame_parents_filepath',
            'get_rolemappings_filepath', 'get_fr_relation_xml_filepath']
 
 
-def get_rofames_filepath(target_dirpath, splits_name):
-    """Return the absolute path to the ROFAMES file.
+def get_semafor_filepath(target_dirpath, splits_name):
+    """Return the absolute path to the SEMAFOR file.
 
     If splits_name is 'train', function will return train.frame.elements.
     If splits_name is 'dev' or 'test', function will return train.frames.

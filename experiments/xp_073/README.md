@@ -1,6 +1,6 @@
 # XP\#073
 
-rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
+semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 
 ### Test scores
 | P| R | F1 |
@@ -11,7 +11,7 @@ rofames on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_073/data \
   --splits train \
@@ -22,25 +22,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 073 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 073 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 073 -t nlp4j -d bmst -p rofames
+./preprocess.sh -x 073 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 073
+./semafor.sh -m train -x 073
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 073 -s test
+./semafor.sh -m decode -x 073 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 073 -p rofames -s test
+./score.sh -x 073 -p semafor -s test
 ```

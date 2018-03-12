@@ -1,6 +1,6 @@
 # XP\#061
 
-rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
+semafor on FN 1.7 FT with NLP4J + BMST + HIERARCHY
 
 ### Test scores
 | P| R | F1 |
@@ -11,7 +11,7 @@ rofames on FN 1.7 FT with NLP4J + BMST + HIERARCHY
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_061/data \
   --splits train \
@@ -20,25 +20,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 061 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 061 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 061 -t nlp4j -d bmst -p rofames
+./preprocess.sh -x 061 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 061 -u
+./semafor.sh -m train -x 061 -u
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 061 -s test -u
+./semafor.sh -m decode -x 061 -s test -u
 ```
 
 ### Scoring
 ```
-./score.sh -x 061 -p rofames -s test
+./score.sh -x 061 -p semafor -s test
 ```
