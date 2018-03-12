@@ -481,7 +481,7 @@ def extract_relations(fr_relation_xml_filepath):
     tree = etree.parse(fr_relation_xml_filepath)
     root = tree.getroot()
     try:
-        fr_types_tags = root.findall('fn:frameRelations',
+        fr_types_tags = root.findall('fn:frameRelationType',
                                      const.FN_XML_NAMESPACE)
         for fr_type_tag in fr_types_tags:
             frame_relation_type = _extract_frame_relation_type(fr_type_tag)

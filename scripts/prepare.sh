@@ -4,14 +4,16 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM -p {rofames,open-sesame} -s {dev,test} -f FN_DATA_DIR
+Usage: ${0##*/} [-h] -x XP_NUM -p {rofames,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
 Preprocess FrameNet train/dev/test splits.
 
-  -h, --help                           display this help and exit
-  -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)
-  -p, --parser  {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
-  -s, --splits  {dev,test}             which splits to score: dev or test
-  -f, --fn      FN_DATA_DIR            absolute path to FrameNet data directory
+  -h, --help                                   display this help and exit
+  -x, --xp              XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -p, --parser          {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
+  -s, --splits          {dev,test}             which splits to score: dev or test
+  -u, --with_hierarchy                         if specified, will use the hierarchy feature
+  -e, --with_exemplars                         if specified, will use the exemplars
+  -f, --fn              FN_DATA_DIR            absolute path to FrameNet data directory
 EOF
 }
 
@@ -19,6 +21,8 @@ is_xp_set=FALSE
 is_parser_set=FALSE
 is_splits_set=FALSE
 is_fndir_set=FALSE
+with_hierarchy=FALSE
+with_exemplars=FALSE
 
 while :; do
     case $1 in
@@ -62,6 +66,14 @@ while :; do
                 die "ERROR: '--fn' requires a non-empty option argument"
             fi
             ;;
+        -u|--with_hierarchy)
+              with_hierarchy=TRUE
+              shift
+              ;;
+        -e|--with_exemplars)
+              with_exemplars=TRUE
+              shift
+              ;;
         --)
             shift
             break
@@ -114,7 +126,8 @@ pyfn convert \
   --from fnxml \
   --to semeval \
   --source "${FN_DATA_DIR}" \
-  --target "${XP_DIR}/${xp}/data"
+  --target "${XP_DIR}/${xp}/data" \
+  --splits "${splits}"
 echo "Done"
 
 if [ "${parser}" = "rofames" ]; then
@@ -130,6 +143,23 @@ if [ "${parser}" = "rofames" ]; then
   cp ${FN_DATA_DIR}/frames.xml ${XP_DIR}/${xp}/data
   echo "Copying frRelations.xml file to XP data directory"
   cp ${FN_DATA_DIR}/frRelations.xml ${XP_DIR}/${xp}/data
+  if [ "${with_hierarchy}" = TRUE ]; then
+    echo "Generating hierarchy .csv files..."
+    if [ "${with_exemplars}" = TRUE ]; then
+      echo "using exemplars..."
+      pyfn generate \
+        --source "${FN_DATA_DIR}" \
+        --target "${XP_DIR}/${xp}/data" \
+        --with_exemplars
+    fi
+    if [ "${with_exemplars}" = FALSE ]; then
+      echo "without exemplars..."
+      pyfn generate \
+        --source "${FN_DATA_DIR}" \
+        --target "${XP_DIR}/${xp}/data"
+    fi
+    echo "Done"
+  fi
 fi
 
 if [ "${parser}" = "open-sesame" ]; then
