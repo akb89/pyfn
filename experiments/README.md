@@ -2,12 +2,12 @@
 
 - [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
 - [x] XP043: open-sesame on FN 1.5 FT with MXPOST
-- [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
+- [-] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
-- [-] XP047: semafor on FN 1.7 FT with NLP4J + BMST
-- [-] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
+- [x] XP048: open-sesame on FN 1.7 FT with NLP4J
+- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
@@ -17,10 +17,10 @@
 - [x] XP056: semafor on FN 1.7 FT with NLP4J + MST
 - [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [x] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [-] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
+- [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
-- [ ] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
+- [-] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
 - [ ] XP063: semafor on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
 - [ ] XP064: open-sesame on FN 1.7 FT with NLP4J with PRED FRAMES
 - [ ] XP065: open-sesame on FN 1.7 FT with NLP4J + BMST with PRED FRAMES
@@ -29,10 +29,10 @@
 - [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
 - [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
 - [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
-- [x] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [-] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 - [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
 - [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
-- [-] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [x] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
@@ -44,9 +44,9 @@
 - [-] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
 - [x] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
 - [-] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
-- [ ] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
-- [ ] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
-- [ ] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
+- [-] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
+- [-] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
+- [-] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
 
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
@@ -56,7 +56,7 @@
 | 045 | 64.0 | 57.8 | 60.8 | X
 | 046 |  |  |  |
 | 047 | 61.2 | 55.2 | 58.1 | X
-| 048 | 63.5 | 59.2 | 61.3 | X
+| 048 | 64.6 | 59.2 | 61.7 | X
 | 049 | 59.7 | 56.0 | 57.8 | X
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
@@ -67,7 +67,7 @@
 | 056 | 59.1 | 53.4 | 56.1 |
 | 057 | 65.3 | 60.0 | 62.5 | X
 | 058 | 60.6 | 55.7 | 58.1 |
-| 059 | 62.4 | 59.3 | 60.8 | X
+| 059 | 63.7 | 58.3 | 60.9 | X
 | 060 |  |  |  | X
 | 061 |  |  |  |
 | 062 |  |  |  |
@@ -94,6 +94,9 @@
 | 083 |  |  |  |
 | 084 | 61.2 | 55.8 | 58.4 |
 | 085 |  |  |  |
+| 086 |  |  |  |
+| 087 |  |  |  |
+| 088 |  |  |  |
 
 
 Excluded sentences:
