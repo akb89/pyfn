@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 show_help() {
 cat << EOF
 Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
-Preprocess FrameNet train/dev/test splits.
+Prepare misc. data for frame semantic parsing.
 
   -h, --help                                   display this help and exit
   -x, --xp              XP_NUM                 xp number written as 3 digits (e.g. 001)
@@ -66,13 +66,11 @@ while :; do
                 die "ERROR: '--fn' requires a non-empty option argument"
             fi
             ;;
-        -u|--with_hierarchy)
-              with_hierarchy=TRUE
-              shift
-              ;;
         -e|--with_exemplars)
               with_exemplars=TRUE
-              shift
+              ;;
+        -u|--with_hierarchy)
+              with_hierarchy=TRUE
               ;;
         --)
             shift
@@ -138,7 +136,7 @@ if [ "${parser}" = "semafor" ]; then
       edu.unige.clcl.fn.data.prep.training.maps.FEMap \
       "${XP_DIR}/${xp}/data/train.frame.elements" \
       "${XP_DIR}/${xp}/data/framenet.frame.element.map"
-  echo "Done creating framenet.original.map and framenet.frame.element.map"
+  echo "Done creating framenet.frame.element.map"
   echo "Copying frames.xml file to XP data directory"
   cp ${FN_DATA_DIR}/frames.xml ${XP_DIR}/${xp}/data
   echo "Copying frRelations.xml file to XP data directory"

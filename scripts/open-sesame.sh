@@ -56,7 +56,6 @@ while :; do
             ;;
         -d|--with_dep_parses)
             with_dep_parses=TRUE
-            shift
             ;;
         --)
             shift

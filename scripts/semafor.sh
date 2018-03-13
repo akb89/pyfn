@@ -55,7 +55,6 @@ while :; do
             ;;
         -u|--with_hierarchy)
               with_hierarchy=TRUE
-              shift
               ;;
         --)
             shift
