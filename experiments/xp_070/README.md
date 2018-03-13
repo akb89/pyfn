@@ -8,7 +8,6 @@ semafor on FN 1.5 FT with NLP4J + BMST
 | 67.5 | 56.9 | 61.7 |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \

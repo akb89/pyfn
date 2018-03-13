@@ -20,21 +20,6 @@ pyfn convert \
   --excluded_frames 398
 ```
 
-old
-```
-pyfn convert \
-  --from fnxml \
-  --to semafor \
-  --source /path/to/fndata-1.5-with-dev \
-  --target /path/to/experiments/xp_045/data \
-  --splits train \
-  --with_exemplars \
-  --output_sentences \
-  --excluded_frames 398 \
-  --excluded_sentences 1565683 \
-  --filter non_breaking_spaces
-```
-
 ### Data preparation
 ```
 ./prepare.sh -x 045 -p semafor -s test -f /path/to/fndata-1.5-with-dev

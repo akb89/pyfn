@@ -20,7 +20,7 @@
 - [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
-- [-] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
+- [-] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY O
 - [ ] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 - [ ] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
 - [ ] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
@@ -45,16 +45,17 @@
 - [x] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
 - [x] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
 - [x] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
-- [-] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
-- [-] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
-- [ ] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
+- [-] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files) O
+- [-] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST O
+- [-] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
+- [ ] XP090:
 - [ ] XP091: semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
-- [ ] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
-- [ ] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
-- [ ] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
-- [ ] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
+- [-] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
+- [-] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
+- [-] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
+- [-] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
 - [ ] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
-- [ ] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
+- [-] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
 - [ ] XP098:
 - [ ] XP099:
 - [ ] XP170:
