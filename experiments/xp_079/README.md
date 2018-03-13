@@ -42,5 +42,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 079 -p open-sesame -s test
 ```

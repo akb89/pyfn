@@ -3,7 +3,7 @@
 semafor on FN 1.7 FT with NLP4J + BMST + HIERARCHY
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 |  |  |  |
 
@@ -20,7 +20,7 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 061 -p semafor -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 061 -p semafor -s test -f /path/to/fndata-1.7-with-dev -u
 ```
 
 ### Preprocessing

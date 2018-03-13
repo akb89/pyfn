@@ -7,15 +7,15 @@
 - [-] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
 - [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [-] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
-- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [x] XP054: semafor on FN 1.7 FT with MXPOST + MST
-- [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
+- [x] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [-] XP054: semafor on FN 1.7 FT with MXPOST + MST
+- [x] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [x] XP056: semafor on FN 1.7 FT with NLP4J + MST
-- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
+- [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [x] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
@@ -29,43 +29,44 @@
 - [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
 - [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
 - [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
-- [-] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
+- [ ] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 - [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
 - [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
 - [x] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
-- [-] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
+- [x] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP078: open-sesame on FN 1.5 FT with NLP4J
-- [-] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
-- [-] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
+- [x] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
+- [x] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
 - [x] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
-- [-] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
-- [-] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
+- [x] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
+- [x] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
 - [x] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
-- [-] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
-- [-] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
+- [x] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
+- [x] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
 - [-] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
 - [-] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
 
+
 | XP | P | R | F1 |
 | --- | --- | --- | --- |
-| 042 | 65.4 | 53.4 | 58.8 | X
+| 042 | 65.0 | 53.2 | 58.5 | BUGFIX
 | 043 | 64.9 | 58.9 | 61.8 | X
-| 044 | 65.6 | 59.7 | 62.5 | X
+| 044 | 64.8 | 60.9 | 62.8 | X
 | 045 | 64.0 | 57.8 | 60.8 | X
 | 046 |  |  |  |
 | 047 | 61.2 | 55.2 | 58.1 | X
 | 048 | 64.6 | 59.2 | 61.7 | X
-| 049 | 59.7 | 56.0 | 57.8 | X
+| 049 | 64.9 | 57.9 | 61.2 |
 | 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
-| 053 | 62.2 | 59.1 | 60.6 | X
+| 053 | 63.1 | 58.1 | 60.5 | X
 | 054 | 57.5 | 52.6 | 54.9 | X
-| 055 |  |  |  |
+| 055 | 63.6 | 57.9 | 60.6 |
 | 056 | 59.1 | 53.4 | 56.1 |
-| 057 | 65.3 | 60.0 | 62.5 | X
+| 057 | 65.9 | 59.6 | 62.6 | X
 | 058 | 60.6 | 55.7 | 58.1 |
 | 059 | 63.7 | 58.3 | 60.9 | X
 | 060 |  |  |  | X
@@ -84,17 +85,17 @@
 | 073 | 60.7 | 57.6 | 59.1 |
 | 074 | 65.2 | 53.8 | 58.9 |
 | 075 | 64.4 | 59.1 | 61.6 |
-| 076 |  |  |  |
+| 076 | 66.2 | 59.7 | 62.8 |
 | 077 |  |  |  |
 | 078 | 64.8 | 60.2 | 62.4 |
 | 079 |  |  |  |
-| 080 |  |  |  |
+| 080 | 64.2 | 58.9 | 61.4 |
 | 081 | 67.6 | 56.8 | 61.7 |
-| 082 |  |  |  |
-| 083 |  |  |  |
+| 082 | 69.4 | 59.6 | 64.1 |
+| 083 | 66.4 | 61.3 | 63.7 |
 | 084 | 61.2 | 55.8 | 58.4 |
-| 085 |  |  |  |
-| 086 |  |  |  |
+| 085 | 63.6 | 60.3 | 61.9 |
+| 086 | 65.4 | 54.9 | 59.7 |
 | 087 |  |  |  |
 | 088 |  |  |  |
 

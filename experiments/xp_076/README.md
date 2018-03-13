@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 66.2 | 59.7 | 62.8 |
 
 
 ### Splits generation
@@ -43,5 +43,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 076 -s test
+./score.sh -x 076 -p open-sesame -s test
 ```

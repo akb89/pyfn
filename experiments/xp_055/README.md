@@ -5,7 +5,7 @@ open-sesame on FN 1.7 FT with NLP4J + MST
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 63.6 | 57.9 | 60.6 |
 
 ### Splits generation
 ```
@@ -41,5 +41,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 055 -s test
+./score.sh -x 055 -p open-sesame -s test
 ```

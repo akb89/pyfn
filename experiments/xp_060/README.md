@@ -3,7 +3,7 @@
 open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 |  |  | |
 

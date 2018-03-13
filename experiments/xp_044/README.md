@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 65.6 | 59.7 | 62.5 |
+| 64.8 | 60.9 | 62.8 |
 
 ### Splits generation
 ```
@@ -67,7 +67,7 @@ The distance between the first and fourth bump should be 100 meters , and the di
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 044 -p open-sesame -s test
 ```
 
 ### Problems
