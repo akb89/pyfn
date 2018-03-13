@@ -5,7 +5,7 @@ semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 63.5 | 53.7 | 58.2 |
 
 ### Splits generation
 ```

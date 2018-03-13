@@ -1,6 +1,6 @@
-# XP\#062
+# XP\#064
 
-semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
+semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
 
 ### Test scores
 | P | R | F1 |
@@ -13,7 +13,7 @@ pyfn convert \
   --from fnxml \
   --to semafor \
   --source /path/to/fndata-1.7-with-dev \
-  --target /path/to/experiments/xp_062/data \
+  --target /path/to/experiments/xp_064/data \
   --splits train \
   --with_exemplars \
   --output_sentences
@@ -21,25 +21,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 062 -p semafor -s test -f /path/to/fndata-1.7-with-dev -u -e
+./prepare.sh -x 064 -p semafor -s test -f /path/to/fndata-1.7-with-dev -u -e
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 062 -t mxpost -d mst -p semafor
+./preprocess.sh -x 064 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./semafor.sh -m train -x 062 -u
+./semafor.sh -m train -x 064 -u
 ```
 
 ### Decoding
 ```
-./semafor.sh -m decode -x 062 -s test -u
+./semafor.sh -m decode -x 064 -s test -u
 ```
 
 ### Scoring
 ```
-./score.sh -x 062 -p semafor -s test
+./score.sh -x 064 -p semafor -s test
 ```

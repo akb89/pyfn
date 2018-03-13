@@ -12,7 +12,7 @@ semafor on FN 1.5 FT with NLP4J + BMST
 pyfn convert \
   --from fnxml \
   --to semafor \
-  --source /path/to/fndata-1.5 \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_070/data \
   --splits train \
   --output_sentences \
