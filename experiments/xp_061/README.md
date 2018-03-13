@@ -1,6 +1,6 @@
 # XP\#061
 
-semafor on FN 1.7 FT with NLP4J + BMST + HIERARCHY
+semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
 
 ### Test scores
 | P | R | F1 |
@@ -25,7 +25,7 @@ pyfn convert \
 
 ### Preprocessing
 ```
-./preprocess.sh -x 061 -t nlp4j -d bmst -p semafor
+./preprocess.sh -x 061 -t mxpost -d mst -p semafor
 ```
 
 ### Training
