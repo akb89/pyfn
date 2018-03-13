@@ -28,6 +28,7 @@ export BARCH_PARSER_HOME="${LIB_DIR}/bistparser/barchybrid/src"
 export SEMAFOR_HOME="${LIB_DIR}/semafor"
 export OPEN_SESAME_HOME="${LIB_DIR}/open-sesame"
 export SEMEVAL_HOME="${LIB_DIR}/semeval"
+export SIMFRAMEID_HOME="${LIB_DIR}/eacl2017-oodFrameNetSRL"
 
 export nlp4j_config="${RESOURCES_DIR}/config-decode-pos.xml"
 export mst_parser_model="${RESOURCES_DIR}/wsj.model"
