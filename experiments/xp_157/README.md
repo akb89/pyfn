@@ -5,7 +5,7 @@ open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 65.7 | 62.9 | 64.3 |
 
 ### Frame identification
 ```
@@ -19,5 +19,5 @@ open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
 
 ### Scoring
 ```
-./score.sh -x 157 -p open-sesame -s test -p predicted
+./score.sh -x 157 -p open-sesame -s test -f predicted
 ```

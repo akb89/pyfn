@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 64.8 | 60.3 | 62.5 |
 
 ### Splits generation
 ```

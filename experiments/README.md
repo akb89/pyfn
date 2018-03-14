@@ -35,7 +35,7 @@
 - [x] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [x] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
-- [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [x] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP078: open-sesame on FN 1.5 FT with NLP4J
 - [x] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
 - [x] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
@@ -57,7 +57,7 @@
 - [x] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
 - [x] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
 - [x] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
-- [-] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP147: semafor on FN 1.7 FT with NLP4J + BMST with predicted frames
 - [ ] XP148: open-sesame on FN 1.7 FT with NLP4J with predicted frames
 - [ ] XP157: open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
@@ -100,7 +100,7 @@
 | 074 | 65.2 | 53.8 | 58.9 |
 | 075 | 64.4 | 59.1 | 61.6 |
 | 076 | 66.2 | 59.7 | 62.8 |
-| 077 |  |  |  |
+| 077 | 64.8 | 60.3 | 62.5 |
 | 078 | 64.8 | 60.2 | 62.4 |
 | 079 | 66.2 | 60.2 | 63.1 |
 | 080 | 64.2 | 58.9 | 61.4 |
