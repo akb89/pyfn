@@ -200,6 +200,9 @@ fi
 if [ "${parser}" = "open-sesame" ]; then
   if [ "${frames}" = "predicted" ]; then
     echo "Parsing with predicted frames..."
+    #bash ${SCRIPTS_DIR}/frameid.sh -m decode -x ${xp_num}
+    python3 CoNLLizer.py merger -c ${XP_DIR}/${xp}/data/test.bios.semeval -P ${XP_DIR}/${xp}/frameid/test.frames.predicted -n 14 -N 1 > ${XP_DIR}/${xp}/data/test.bios.semeval.merged
+    mv ${XP_DIR}/${xp}/data/test.bios.semeval.merged ${XP_DIR}/${xp}/data/test.bios.semeval
   fi
   if [ "${frames}" = "gold" ]; then
     echo "Parsing with gold frames..."
