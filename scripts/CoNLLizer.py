@@ -320,7 +320,7 @@ def make_parser():
 
     merger = subs.add_parser('merger', help="Merge predicted frames and CoNLL", prog="CoNLLizer")
     merger.add_argument('-c', '--conll', required=True, help='CoNLL file')
-    merger.add_argument('-p', '--predictions', required=True, help='Predicted frames file')
+    merger.add_argument('-P', '--predictions', required=True, help='Predicted frames file')
     merger.add_argument('-C', '--cdelim', default = '\t', help='Delimiter for CoNLL columns (default to tab)')
     merger.add_argument('-F', '--fdelim', default = '\t', help='Delimiter for prediction columns (default to tab)')
     merger.add_argument('-p', '--placeholder', default = '_', help='Placeholder in case the column is empty (default to _)')
