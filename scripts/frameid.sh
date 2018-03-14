@@ -4,17 +4,19 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-p {semafor,open-sesame}]
 Perform frame identification.
 
-  -h, --help                        display this help and exit
-  -m, --mode                        train on all models or decode using a single model
-  -x, --xp          XP_NUM          xp number written as 3 digits (e.g. 001)
+  -h, --help                            display this help and exit
+  -m, --mode                            train on all models or decode using a single model
+  -x, --xp       XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -p, --parser   {semafor,open-sesame}  formalize decoded frames for specified parser
 EOF
 }
 
 is_xp_set=FALSE
 is_mode_set=FALSE
+is_parser_set=FALSE
 
 while :; do
     case $1 in
@@ -40,6 +42,15 @@ while :; do
                 die "ERROR: '--mode' requires a non-empty option argument"
             fi
             ;;
+        -p|--parser)
+            if [ "$2" ]; then
+                is_parser_set=TRUE
+                parser=$2
+                shift
+            else
+                die "ERROR: '--parser' requires a non-empty option argument"
+            fi
+            ;;
         --)
             shift
             break
@@ -61,37 +72,63 @@ if [ "${is_mode_set}" = FALSE ]; then
     die "ERROR: '--mode' parameter is required."
 fi
 
-echo "Preparing files for frame identification..."
+prepare() {
+  echo "Preparing files for frame identification..."
 
-mkdir ${XP_DIR}/${xp}/frameid 2> /dev/null
-mkdir ${XP_DIR}/${xp}/frameid/data 2> /dev/null
-mkdir ${XP_DIR}/${xp}/frameid/data/embeddings 2> /dev/null
-mkdir ${XP_DIR}/${xp}/frameid/data/corpora 2> /dev/null
-mkdir ${XP_DIR}/${xp}/frameid/data/lexicons 2> /dev/null
+  mkdir ${XP_DIR}/${xp}/frameid 2> /dev/null
+  mkdir ${XP_DIR}/${xp}/frameid/data 2> /dev/null
+  mkdir ${XP_DIR}/${xp}/frameid/data/embeddings 2> /dev/null
+  mkdir ${XP_DIR}/${xp}/frameid/data/corpora 2> /dev/null
+  mkdir ${XP_DIR}/${xp}/frameid/data/lexicons 2> /dev/null
 
-cp ${XP_DIR}/${xp}/data/test.frames ${XP_DIR}/${xp}/frameid/data/corpora/
-cp ${XP_DIR}/${xp}/data/test.sentences.conllx ${XP_DIR}/${xp}/frameid/data/corpora/
-cp ${XP_DIR}/${xp}/data/train.frame.elements ${XP_DIR}/${xp}/frameid/data/corpora/
-cp ${XP_DIR}/${xp}/data/train.sentences.conllx.flattened ${XP_DIR}/${xp}/frameid/data/corpora/
+  cp ${XP_DIR}/${xp}/data/test.frames ${XP_DIR}/${xp}/frameid/data/corpora/
+  cp ${XP_DIR}/${xp}/data/test.sentences.conllx ${XP_DIR}/${xp}/frameid/data/corpora/
+  cp ${XP_DIR}/${xp}/data/train.frame.elements ${XP_DIR}/${xp}/frameid/data/corpora/
+  cp ${XP_DIR}/${xp}/data/train.sentences.conllx.flattened ${XP_DIR}/${xp}/frameid/data/corpora/
 
-cp ${RESOURCES_DIR}/deps.words.txt ${XP_DIR}/${xp}/frameid/data/embeddings/
+  cp ${RESOURCES_DIR}/deps.words.txt ${XP_DIR}/${xp}/frameid/data/embeddings/
 
-mv ${XP_DIR}/${xp}/frameid/data/corpora/test.frames ${XP_DIR}/${xp}/frameid/data/corpora/test.frame.elements
+  mv ${XP_DIR}/${xp}/frameid/data/corpora/test.frames ${XP_DIR}/${xp}/frameid/data/corpora/test.frame.elements
 
-bash ${SCRIPTS_DIR}/flatten.sh -f ${XP_DIR}/${xp}/frameid/data/corpora/test.sentences.conllx
+  bash ${SCRIPTS_DIR}/flatten.sh -f ${XP_DIR}/${xp}/frameid/data/corpora/test.sentences.conllx
 
-python3 ${SIMFRAMEID_HOME}/generate.py ${XP_DIR}/${xp}/frameid/data/corpora/train.frame.elements ${XP_DIR}/${xp}/frameid/data/lexicons/fn_lexicon
+  python3 ${SIMFRAMEID_HOME}/generate.py ${XP_DIR}/${xp}/frameid/data/corpora/train.frame.elements ${XP_DIR}/${xp}/frameid/data/lexicons/fn_lexicon
 
-echo "Done"
+  echo "Done"
+}
 
 if [ "${mode}" = train ]; then
-    echo "Training frame identification on all models..."
-    python ${SIMFRAMEID_HOME}/simpleFrameId/main.py train ${XP_DIR}/${xp}/frameid
-    echo "Done"
+  prepare
+  echo "Training frame identification on all models..."
+  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py train ${XP_DIR}/${xp}/frameid
+  echo "Done"
 fi
 
 if [ "${mode}" = decode ]; then
-    echo "Predicting frames..."
-    python ${SIMFRAMEID_HOME}/simpleFrameId/main.py decode ${XP_DIR}/${xp}/frameid
-    echo "Done"
+  if [ "${is_parser_set}" = FALSE ]; then
+      die "ERROR: '--parser' parameter is required."
+  fi
+  case "${parser}" in
+      semafor )
+          ;;   #fallthru
+      open-sesame )
+          ;;   #fallthru
+      * )
+          die "Invalid frame semantic parser '${parser}': Should be 'semafor' or 'open-sesame'"
+  esac
+  prepare
+  echo "Predicting frames..."
+  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py decode ${XP_DIR}/${xp}/frameid
+  echo "Done"
+  if [ "${parser}" = semafor ]; then
+    cut -f 1-3 ${XP_DIR}/${xp}/data/test.frames > ${XP_DIR}/${xp}/data/test.frames.cut.1.txt
+    cut -f 5-8 ${XP_DIR}/${xp}/data/test.frames > ${XP_DIR}/${xp}/data/test.frames.cut.2.txt
+    paste ${XP_DIR}/${xp}/data/test.frames.cut.1.txt ${XP_DIR}/${xp}/frameid/test.frames.predicted ${XP_DIR}/${xp}/data/test.frames.cut.2.txt | perl -pe "s/^\t+$//g" | cat -s > ${XP_DIR}/${xp}/data/test.frames
+    rm ${XP_DIR}/${xp}/data/test.frames.cut.1.txt
+    rm ${XP_DIR}/${xp}/data/test.frames.cut.2.txt
+  fi
+  if [ "${parser}" = open-sesame ]; then
+    python3 CoNLLizer.py merger -c ${XP_DIR}/${xp}/data/test.bios.semeval -P ${XP_DIR}/${xp}/frameid/test.frames.predicted -n 14 -N 1 > ${XP_DIR}/${xp}/data/test.bios.semeval.merged
+    mv ${XP_DIR}/${xp}/data/test.bios.semeval.merged ${XP_DIR}/${xp}/data/test.bios.semeval
+  fi
 fi

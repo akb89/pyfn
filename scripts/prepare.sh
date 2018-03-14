@@ -4,15 +4,14 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -d FN_DATA_DIR -f {gold,predicted} [-u] [-e]
+Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
 Prepare misc. data for frame semantic parsing.
 
   -h, --help                                   display this help and exit
   -x, --xp              XP_NUM                 xp number written as 3 digits (e.g. 001)
   -p, --parser          {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
   -s, --splits          {dev,test}             which splits to score: dev or test
-  -d, --data            FN_DATA_DIR            absolute path to FrameNet data directory
-  -f, --frames          {gold,predicted}       use gold or predicted frames
+  -f, --fn              FN_DATA_DIR            absolute path to FrameNet data directory
   -u, --with_hierarchy                         if specified, will use the hierarchy feature
   -e, --with_exemplars                         if specified, will use the exemplars
 EOF
@@ -22,7 +21,6 @@ is_xp_set=FALSE
 is_parser_set=FALSE
 is_splits_set=FALSE
 is_fndir_set=FALSE
-is_frames_set=FALSE
 with_hierarchy=FALSE
 with_exemplars=FALSE
 
@@ -60,22 +58,13 @@ while :; do
                 die "ERROR: '--splits' requires a non-empty option argument"
             fi
             ;;
-        -d|--data)
+        -f|--fn)
             if [ "$2" ]; then
                 is_fndir_set=TRUE
                 FN_DATA_DIR=$2
                 shift
             else
-                die "ERROR: '--data' requires a non-empty option argument"
-            fi
-            ;;
-        -f|--frames)
-            if [ "$2" ]; then
-                is_frames_set=TRUE
-                frames=$2
-                shift
-            else
-                die "ERROR: '--frames' requires a non-empty option argument"
+                die "ERROR: '--fn' requires a non-empty option argument"
             fi
             ;;
         -e|--with_exemplars)
@@ -113,10 +102,6 @@ if [ "${is_fndir_set}" = FALSE ]; then
     die "ERROR: '--fn' parameter is required."
 fi
 
-if [ "${is_frames_set}" = FALSE ]; then
-    die "ERROR: '--frames' parameter is required."
-fi
-
 case "${splits}" in
     dev )
         ;;
@@ -135,15 +120,6 @@ case "${parser}" in
         die "Invalid frame semantic parser '${parser}': Should be 'semafor' or 'open-sesame'"
 esac
 
-case "${frames}" in
-    gold )
-        ;;
-    predicted )
-        ;;
-    * )
-        die "Invalid frames '${frames}': should be 'gold' or 'predicted'"
-esac
-
 echo "Generating gold SEMEVAL XML file..."
 pyfn convert \
   --from fnxml \
@@ -154,18 +130,6 @@ pyfn convert \
 echo "Done"
 
 if [ "${parser}" = "semafor" ]; then
-  if [ "${frames}" = "predicted" ]; then
-    echo "Parsing with predicted frames..."
-    bash ${SCRIPTS_DIR}/frameid.sh -m decode -x ${xp_num}
-    cut -f 1-3 ${XP_DIR}/${xp}/data/test.frames > ${XP_DIR}/${xp}/data/test.frames.cut.1.txt
-    cut -f 5-8 ${XP_DIR}/${xp}/data/test.frames > ${XP_DIR}/${xp}/data/test.frames.cut.2.txt
-    paste ${XP_DIR}/${xp}/data/test.frames.cut.1.txt ${XP_DIR}/${xp}/frameid/test.frames.predicted ${XP_DIR}/${xp}/data/test.frames.cut.2.txt | perl -pe "s/^\t+$//g" | cat -s > ${XP_DIR}/${xp}/data/test.frames
-    rm ${XP_DIR}/${xp}/data/test.frames.cut.1.txt
-    rm ${XP_DIR}/${xp}/data/test.frames.cut.2.txt
-  fi
-  if [ "${frames}" = "gold" ]; then
-    echo "Parsing with gold frames..."
-  fi
   echo "Creating framenet.frame.element.map from train splits..."
   ${JAVA_HOME_BIN}/java \
       -classpath "${SEMAFOR_HOME}/rofames-1.0.0.jar" \
@@ -198,15 +162,6 @@ if [ "${parser}" = "semafor" ]; then
 fi
 
 if [ "${parser}" = "open-sesame" ]; then
-  if [ "${frames}" = "predicted" ]; then
-    echo "Parsing with predicted frames..."
-    #bash ${SCRIPTS_DIR}/frameid.sh -m decode -x ${xp_num}
-    python3 CoNLLizer.py merger -c ${XP_DIR}/${xp}/data/test.bios.semeval -P ${XP_DIR}/${xp}/frameid/test.frames.predicted -n 14 -N 1 > ${XP_DIR}/${xp}/data/test.bios.semeval.merged
-    mv ${XP_DIR}/${xp}/data/test.bios.semeval.merged ${XP_DIR}/${xp}/data/test.bios.semeval
-  fi
-  if [ "${frames}" = "gold" ]; then
-    echo "Parsing with gold frames..."
-  fi
   echo "Copying glove.6B.100d.txt file to XP data directory"
   cp ${FN_DATA_DIR}/glove.6B.100d.txt ${XP_DIR}/${xp}/data
   echo "Copying frames.xml file to XP data directory"
