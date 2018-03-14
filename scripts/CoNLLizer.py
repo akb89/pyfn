@@ -247,6 +247,30 @@ def bios(conll_files, bios_files, fields):
             i += 1
             print('\t'.join(selection))
 
+def merger(conll_path, predicted_path, cplaceholder, cdelim, fdelim, ccolnum, fcolnum):
+    predictions = []
+    with open(predicted_path) as fstream:
+        for line in fstream:
+            line = line.strip()
+            items = line.split(fdelim)
+            predictions.append(items)
+
+    with open(conll_path) as cstream:
+        anno_set = 0
+        for line in cstream:
+            line = line.strip()
+            if line == '':
+                print("")
+                anno_set += 1
+                continue
+
+            items = line.split(cdelim)
+            cinfo = items[int(ccolnum)-1]
+            finfo = predictions[anno_set][int(fcolnum)-1]
+
+            if cinfo != cplaceholder:
+                items[int(ccolnum)-1] = finfo
+            print(cdelim.join(items))
 
 def make_parser():
     parser = argparse.ArgumentParser(prog='CoNLLizer')
@@ -293,6 +317,15 @@ def make_parser():
     bios.add_argument('-b', '--bios', action='append', required=True, help='BIOS files (may be repeated)')
     bios.add_argument('-f', '--fields', required=True, \
         help='Final fields ordering. You should prefix field (or range) by c for CoNLL et b for Bios (eg c1,b4-6,c2,b7,b7)')
+
+    merger = subs.add_parser('merger', help="Merge predicted frames and CoNLL", prog="CoNLLizer")
+    merger.add_argument('-c', '--conll', required=True, help='CoNLL file')
+    merger.add_argument('-p', '--predictions', required=True, help='Predicted frames file')
+    merger.add_argument('-C', '--cdelim', default = '\t', help='Delimiter for CoNLL columns (default to tab)')
+    merger.add_argument('-F', '--fdelim', default = '\t', help='Delimiter for prediction columns (default to tab)')
+    merger.add_argument('-p', '--placeholder', default = '_', help='Placeholder in case the column is empty (default to _)')
+    merger.add_argument('-n', '--conll-col-num', required=True, help='Frame column number in CoNLL file (1st column should be 1)')
+    merger.add_argument('-N', '--predictions-col-num', required=True, help='Frame column number in prediction file (1st column should be 1)')
 
     return parser
 
@@ -343,7 +376,19 @@ def main():
             print("It should be either a number or a range or a combination of both separated by commas with no spaces and prefixed by 'c' or 'b'", file=sys.stderr)
             sys.exit(1)
         return bios(args.conll, args.bios, args.fields)
+    elif args.commands == 'merger':
+        if not check_fields_description(args.conll_col_num):
+            print("The conll-col-num is not correct", file=sys.stderr)
+            print("It should be a positive number", file=sys.stderr)
+            sys.exit(1)
 
+        if not check_fields_description(args.predictions_col_num):
+            print("The predictions-col-num is not correct", file=sys.stderr)
+            print("It should be a positive number", file=sys.stderr)
+            sys.exit(1)
+
+        return merger(args.conll, args.predictions, args.placeholder, \
+            args.cdelim, args.fdelim, args.conll_col_num, args.predictions_col_num)
 
 if __name__ == "__main__":
     main()
