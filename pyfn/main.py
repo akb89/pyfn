@@ -11,11 +11,14 @@ import logging.config
 
 import pyfn.utils.config as config_utils
 import pyfn.marshalling.marshallers.bios as biosm
-import pyfn.marshalling.marshallers.rofames as rofamesm
+import pyfn.marshalling.marshallers.hierarchy as hierm
+import pyfn.marshalling.marshallers.semafor as semaform
 import pyfn.marshalling.marshallers.semeval as semeval
 import pyfn.marshalling.unmarshallers.bios as biosu
 import pyfn.marshalling.unmarshallers.framenet as fnxml
-import pyfn.marshalling.unmarshallers.rofames as rofamesu
+import pyfn.marshalling.unmarshallers.semafor as semaforu
+
+import pyfn.utils.files as futils
 
 
 from pyfn.exceptions.parameter import InvalidParameterError
@@ -29,6 +32,15 @@ logger = logging.getLogger(__name__)
 
 def _extract_splits_name(source_path):
     return os.path.splitext(os.path.basename(source_path))[0]
+
+
+def _generate(args):
+    train_annosets = fnxml.get_annosets_dict(args.splits_path, 'train',
+                                             args.with_exemplars)['train']
+    fr_relation_xml = futils.get_fr_relation_xml_filepath(args.splits_path)
+    frame_relations, fe_relations = fnxml.extract_relations(fr_relation_xml)
+    hierm.marshall_relations(train_annosets, frame_relations, fe_relations,
+                             args.target_path)
 
 
 def _convert(args):
@@ -52,13 +64,13 @@ def _convert(args):
                 'to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = biosu.unmarshall_annosets(args.source_path, args.sent)
-    if args.source_format == 'rofames':
+    if args.source_format == 'semafor':
         if args.sent == '__undefined__':
             raise InvalidParameterError(
-                'Unspecified sentence file. For rofames unmarshalling you '
+                'Unspecified sentence file. For semafor unmarshalling you '
                 'need to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
-        annosets = rofamesu.unmarshall_annosets(args.source_path, args.sent)
+        annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
     if args.target_format == 'bios':
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
                                      args.filter, args.output_sentences,
@@ -71,14 +83,14 @@ def _convert(args):
             annosets = annosets_dict[splits_name]
             output_filepath = os.path.join(args.target_path,
                                            '{}.gold.xml'.format(splits_name))
-        if args.source_format == 'bios' or args.source_format == 'rofames':
+        if args.source_format == 'bios' or args.source_format == 'semafor':
             output_filepath = args.target_path
         semeval.marshall_annosets(annosets, output_filepath,
                                   args.excluded_frames,
                                   args.excluded_sentences,
                                   args.excluded_annosets)
-    if args.target_format == 'rofames':
-        rofamesm.marshall_annosets_dict(annosets_dict, args.target_path,
+    if args.target_format == 'semafor':
+        semaform.marshall_annosets_dict(annosets_dict, args.target_path,
                                         args.filter, args.output_sentences,
                                         args.excluded_frames,
                                         args.excluded_sentences,
@@ -89,59 +101,74 @@ def main():
     """Launch the pyfn application."""
     parser = argparse.ArgumentParser(prog='pyfn')
     subparsers = parser.add_subparsers()
+    parser_generate = subparsers.add_parser(
+        'generate', formatter_class=argparse.RawTextHelpFormatter,
+        help='generate hierarchy files')
+    parser_generate.set_defaults(func=_generate)
+    parser_generate.add_argument('--source', required=True,
+                                 dest='splits_path',
+                                 help='absolute filepath to source dir')
+    parser_generate.add_argument('--target', required=True,
+                                 dest='target_path',
+                                 help='absolute filepath to target dir')
+    parser_generate.add_argument('--with_exemplars',
+                                 action='store_true', default=False,
+                                 help='whether or not to use exemplars in '
+                                      'splits. Default to false')
+
     parser_convert = subparsers.add_parser(
         'convert', formatter_class=argparse.RawTextHelpFormatter,
-        help='Convert source file from given format to target file in given '
+        help='convert source file from given format to target file in given '
              'format')
     parser_convert.set_defaults(func=_convert)
     parser_convert.add_argument('--source', required=True,
                                 dest='source_path',
-                                help='Absolute filepath to source file')
+                                help='absolute filepath to source dir')
     parser_convert.add_argument('--target', required=True,
                                 dest='target_path',
-                                help='Absolute filepath to target file')
+                                help='absolute filepath to target dir')
     parser_convert.add_argument('--from', required=True,
                                 dest='source_format',
-                                choices=['rofames', 'bios', 'semeval',
+                                choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
-                                help='''Source format. Choose between:
-    - rofames: the format used by the rofames fork of the semafor parser
+                                help='''source format. Choose between:
+    - semafor: the format used by the semafor fork of the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
     ''')
     parser_convert.add_argument('--to', required=True,
                                 dest='target_format',
-                                choices=['rofames', 'bios', 'semeval',
+                                choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
-                                help='''Target format. Choose between:
-    - conll: the CoNLL format used by the rofames fork of the semafor parser
+                                help='''target format. Choose between:
+    - conll: the CoNLL format used by the semafor fork of the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
     ''')
     parser_convert.add_argument('--with_exemplars',
                                 action='store_true', default=False,
-                                help='Whether or not to use exemplars in '
+                                help='whether or not to use exemplars in '
                                      'splits. Default to false')
     parser_convert.add_argument('--output_sentences',
                                 action='store_true', default=False,
-                                help='Whether or not to output the .sentences '
-                                     'files in bios or rofames marshalling')
+                                help='whether or not to output the .sentences '
+                                     'files in bios or semafor marshalling')
     parser_convert.add_argument('--splits',
                                 choices=['train', 'dev', 'test'],
                                 default='test',
-                                help='Names of FrameNet splits to be '
+                                help='names of FrameNet splits to be '
                                      'unmarshalled')
     parser_convert.add_argument('--sent',
                                 default='__undefined__',
-                                help='Absolute path to the '
+                                help='absolute path to the '
                                      '{train,dev,test}.sentences file for '
                                      'BIOS unmarshalling')
     parser_convert.add_argument('--filter',
                                 nargs='+',
                                 default=[],
-                                help='''Filtering options for the training set:
+                                help='''filtering options for the training set:
     - overlap_fes: filters out annosets with overlapping frame elements
     - disc_fes: filters out annosets with discontinuous frame elements
     - disc_targets: filters out annosets with discontinuous targets
@@ -153,19 +180,19 @@ def main():
                                 nargs='+',
                                 type=int,
                                 default=[],
-                                help='List of frame ids to be excluded from '
+                                help='list of frame ids to be excluded from '
                                      'unmarshalled FrameNet XML')
     parser_convert.add_argument('--excluded_sentences',
                                 nargs='+',
                                 type=int,
                                 default=[],
-                                help='List of sentence ids to be excluded '
+                                help='list of sentence ids to be excluded '
                                      'from unmarshalled FrameNet XML')
     parser_convert.add_argument('--excluded_annosets',
                                 nargs='+',
                                 type=int,
                                 default=[],
-                                help='List of annoset ids to be excluded from '
+                                help='list of annoset ids to be excluded from '
                                      'unmarshalled FrameNet XML')
     args = parser.parse_args()
     args.func(args)

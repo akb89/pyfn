@@ -5,10 +5,10 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 show_help() {
 cat << EOF
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-u]
-Train or decode with the ROFAMES parser.
+Train or decode with the SEMAFOR parser.
 
   -h, --help                             display this help and exit
-  -m, --mode            {train,decode}   rofames mode to use: train or decode
+  -m, --mode            {train,decode}   semafor mode to use: train or decode
   -x, --xp              XP_NUM           xp number written as 3 digits (e.g. 001)
   -s, --splits          {dev,test}       which splits to use in decode mode: dev or test
   -u, --with_hierarchy                   if specified, parser will use the hierarchy feature
@@ -55,7 +55,6 @@ while :; do
             ;;
         -u|--with_hierarchy)
               with_hierarchy=TRUE
-              shift
               ;;
         --)
             shift
@@ -90,7 +89,7 @@ esac
 mkdir ${LOGS_DIR} 2> /dev/null
 
 if [ "${mode}" = train ]; then
-  bash ${ROFAMES_HOME}/bin/train.sh \
+  bash ${SEMAFOR_HOME}/bin/train.sh \
     ${JAVA_HOME_BIN} \
     ${XP_DIR}/${xp} \
     ${lambda} \
@@ -117,7 +116,7 @@ if [ "${mode}" = decode ]; then
       * )
           die "Invalid splits '${splits}': should be 'dev' or 'test'"
   esac
-  bash ${ROFAMES_HOME}/bin/decode.sh \
+  bash ${SEMAFOR_HOME}/bin/decode.sh \
     ${JAVA_HOME_BIN} \
     ${XP_DIR}/${xp} \
     ${splits} \

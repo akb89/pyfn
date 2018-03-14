@@ -4,13 +4,13 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM -t {mxpost,nlp4j} -p {rofames,open-sesame} [-d {mst,bmst,barch}] [-v]
+Usage: ${0##*/} [-h] -x XP_NUM -t {mxpost,nlp4j} -p {semafor,open-sesame} [-d {mst,bmst,barch}] [-v]
 Preprocess FrameNet train/dev/test splits.
 
   -h, --help                           display this help and exit
   -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)
   -t, --tagger  {mxpost,nlp4j}         pos tagger to be used: 'mxpost' or 'nlp4j'
-  -p, --parser  {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
+  -p, --parser  {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
   -d, --dep     {mst,bmst,barch}       dependency parser to be used: 'mst', 'bmst' or 'barch'
   -v, --dev                            if set, script will also preprocess dev splits
 EOF
@@ -103,17 +103,17 @@ case "${tagger}" in
 esac
 
 case "${fsparser}" in
-    rofames )
+    semafor )
         ;;   #fallthru
     open-sesame )
         ;;   #fallthru
     * )
-        die "Invalid frame semantic parser '${fsparser}': Should be 'rofames' or 'open-sesame'"
+        die "Invalid frame semantic parser '${fsparser}': Should be 'semafor' or 'open-sesame'"
 esac
 
-if [ "${fsparser}" = "rofames" ]; then
+if [ "${fsparser}" = "semafor" ]; then
   if [ "${is_dep_parser_set}" = FALSE ]; then
-      die "ERROR: '--dep' parameter is required with --parser rofames."
+      die "ERROR: '--dep' parameter is required with --parser semafor."
   fi
   case "${deparser}" in
       mst )
@@ -179,14 +179,17 @@ if [ "${deparser}" = "barch" ]; then
   bash ${SCRIPTS_DIR}/deparse.sh -f ${DATA_DIR}/test.sentences.conllx -p barch
 fi
 
-if [ "${fsparser}" = "rofames" ]; then
+if [ "${fsparser}" = "semafor" ]; then
   bash ${SCRIPTS_DIR}/flatten.sh -f ${DATA_DIR}/train.sentences.conllx
 fi
 
 if [ "${fsparser}" = "open-sesame" ]; then
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios -c ${DATA_DIR}/dev.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/dev.bios.semeval -c ${DATA_DIR}/dev.sentences.conllx
+  rm ${DATA_DIR}/dev.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios -c ${DATA_DIR}/test.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/test.bios.semeval -c ${DATA_DIR}/test.sentences.conllx
+  rm ${DATA_DIR}/test.sentences.conllx
   bash ${SCRIPTS_DIR}/merge.sh -b ${DATA_DIR}/train.bios -c ${DATA_DIR}/train.sentences.conllx
+  rm ${DATA_DIR}/train.sentences.conllx
 fi

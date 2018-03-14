@@ -1,4 +1,4 @@
-"""Marshaller to ROFAMES/SEMAFOR format.
+"""Marshaller to SEMAFOR/SEMAFOR format.
 
 SEMAFOR file format:
 0   1       2               3       4       5                   6
@@ -107,7 +107,7 @@ def _get_target_token_num(target, text):
     return '{}_{}'.format(min_token_num, max_token_num)
 
 
-def _get_rofames_line(annoset, sent_dict, train_mode):
+def _get_semafor_line(annoset, sent_dict, train_mode):
     if not train_mode:
         return '1\t0.0\t1\t{}\t{}\t{}\t{}\t{}'.format(
             annoset.target.lexunit.frame.name,
@@ -125,18 +125,18 @@ def _get_rofames_line(annoset, sent_dict, train_mode):
         _get_fe_chunks(annoset)).strip()
 
 
-def _marshall_rofames(annosets, filtering_options, sent_dict,
-                      rofames_filepath, excluded_frames,
+def _marshall_semafor(annosets, filtering_options, sent_dict,
+                      semafor_filepath, excluded_frames,
                       excluded_sentences, excluded_annosets, train_mode):
-    files_utils.create_parent_dir_if_not_exists(rofames_filepath)
-    with open(rofames_filepath, 'w', encoding='utf-8') as rofames_stream:
+    files_utils.create_parent_dir_if_not_exists(semafor_filepath)
+    with open(semafor_filepath, 'w', encoding='utf-8') as semafor_stream:
         for annoset in filt_utils.filter_and_sort_annosets(annosets,
                                                            filtering_options,
                                                            excluded_frames,
                                                            excluded_sentences,
                                                            excluded_annosets):
-            rofames_line = _get_rofames_line(annoset, sent_dict, train_mode)
-            print(rofames_line, file=rofames_stream)
+            semafor_line = _get_semafor_line(annoset, sent_dict, train_mode)
+            print(semafor_line, file=semafor_stream)
 
 
 def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
@@ -150,9 +150,9 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
     frame labels only.
     """
     for splits_name, annosets in annosets_dict.items():
-        logger.info('Marshalling {} splits to rofames format'
+        logger.info('Marshalling {} splits to semafor format'
                     .format(splits_name))
-        rofames_filepath = files_utils.get_rofames_filepath(target_dirpath,
+        semafor_filepath = files_utils.get_semafor_filepath(target_dirpath,
                                                             splits_name)
         sent_filepath = files_utils.get_sent_filepath(target_dirpath,
                                                       splits_name)
@@ -162,13 +162,13 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
                 splits_name))
         if splits_name == 'dev' or splits_name == 'test':
             # No special filtering on dev/test
-            _marshall_rofames(annosets, [], sent_dict,
-                              rofames_filepath, excluded_frames,
+            _marshall_semafor(annosets, [], sent_dict,
+                              semafor_filepath, excluded_frames,
                               excluded_sentences, excluded_annosets,
                               train_mode=False)
         elif splits_name == 'train':
-            _marshall_rofames(annosets, filtering_options, sent_dict,
-                              rofames_filepath, excluded_frames,
+            _marshall_semafor(annosets, filtering_options, sent_dict,
+                              semafor_filepath, excluded_frames,
                               excluded_sentences, excluded_annosets,
                               train_mode=True)
         # print out sentences file

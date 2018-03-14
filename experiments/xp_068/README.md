@@ -1,52 +1,47 @@
 # XP\#068
 
-ROFAMES on FN 1.7 FT  with MXPOST + MST
+semafor on FN 1.7 FT + EX with NLP4J + BMST
+
+with a batch size of 4,000 instead of 40,000
 
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
+| 57.9 | 56.4 | 57.2 |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
-  --source /path/to/fndata-1.7 \
+  --to semafor \
+  --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_068/data \
   --splits train \
-  --output_sentences \
-  --excluded_sentences 4106364
+  --with_exemplars \
+  --output_sentences
 ```
 
 ### Data preparation
 ```
-./prepare.sh -x 068 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 068 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
-./preprocess.sh -x 068 -t mxpost -d mst -p rofames
+./preprocess.sh -x 068 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 068
+./semafor.sh -m train -x 068
 ```
 
 ### Decoding
 ```
-./
+./semafor.sh -m decode -x 068 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 068 -p semafor -s test
 ```

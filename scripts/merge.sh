@@ -66,3 +66,4 @@ echo "Merging .conllx content to .bios file for the open-sesame parser..."
 echo "Processing .bios file: ${bios}"
 echo "Processing .conllx file: ${conllx}"
 python3 ${SCRIPTS_DIR}/CoNLLizer.py bios -c ${conllx} -b ${bios} -f b1-3,c3,b5,c4,b7-9,c7,b11,c8,b13-16 > ${bios}.tmp
+mv ${bios}.tmp ${bios}

@@ -56,7 +56,6 @@ while :; do
             ;;
         -d|--with_dep_parses)
             with_dep_parses=TRUE
-            shift
             ;;
         --)
             shift
@@ -124,17 +123,17 @@ if [ "${mode}" = train ]; then
   if [ "${with_dep_parses}" = TRUE ]; then
     python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
-      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
-      --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt \
+      --trainf ${XP_DIR}/${xp}/data/train.bios \
+      --devf ${XP_DIR}/${xp}/data/dev.bios \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt \
       --syn dep
   fi
   if [ "${with_dep_parses}" = FALSE ]; then
     python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
-      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
-      --devf ${XP_DIR}/${xp}/data/dev.bios.merged \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+      --trainf ${XP_DIR}/${xp}/data/train.bios \
+      --devf ${XP_DIR}/${xp}/data/dev.bios \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt
   fi
 fi
 
@@ -143,18 +142,18 @@ if [ "${mode}" = decode ]; then
     python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
       --mode test \
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
-      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
-      --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt \
+      --trainf ${XP_DIR}/${xp}/data/train.bios \
+      --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt \
       --syn dep
   fi
   if [ "${with_dep_parses}" = FALSE ]; then
     python ${OPEN_SESAME_HOME}/src/segrnn-argid.py \
       --mode test \
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
-      --trainf ${XP_DIR}/${xp}/data/train.bios.merged \
-      --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.framevocab.txt
+      --trainf ${XP_DIR}/${xp}/data/train.bios \
+      --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval \
+      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt
   fi
-    postprocess_decoded_file ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged ${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged.decoded
+    postprocess_decoded_file ${XP_DIR}/${xp}/data/${splits}.bios.semeval ${XP_DIR}/${xp}/data/${splits}.bios.semeval.decoded
 fi

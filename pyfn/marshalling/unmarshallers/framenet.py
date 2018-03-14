@@ -15,14 +15,18 @@ from pyfn.exceptions.xml import XMLProcessingError
 from pyfn.models.annotationset import AnnotationSet
 from pyfn.models.corpus import Corpus
 from pyfn.models.document import Document
+from pyfn.models.ferelation import FERelation
 from pyfn.models.frame import Frame
 from pyfn.models.frameelement import FrameElement
+from pyfn.models.framerelation import FrameRelation
+from pyfn.models.framerelationtype import FrameRelationType
 from pyfn.models.label import Label
 from pyfn.models.layer import Layer
 from pyfn.models.lexunit import LexUnit
 from pyfn.models.sentence import Sentence
 
-__all__ = ['extract_annosets', 'get_annosets_dict', 'extract_fn_annosets']
+__all__ = ['extract_annosets', 'get_annosets_dict', 'extract_fn_annosets',
+           'extract_relations']
 
 logger = logging.getLogger(__name__)
 
@@ -438,3 +442,62 @@ def get_annosets_dict(source_path, splits, with_exemplars):
     logger.info('Creating pyfn.AnnotationSet dict from {}'.format(source_path))
     return _filter_annosets_dict(
         _get_annosets_dict_from_fn_xml(source_path, splits, with_exemplars))
+
+
+def _extract_fe_relation(fe_relation_tag, frame_relation):
+    return FERelation(
+        _id=int(),
+        sub_fe=FrameElement(_id=int(fe_relation_tag.get('subID')),
+                            name=fe_relation_tag.get('subFEName')),
+        sup_fe=FrameElement(_id=int(fe_relation_tag.get('supID')),
+                            name=fe_relation_tag.get('superFEName')),
+        frame_relation=frame_relation)
+
+
+def _extract_frame_relation(frame_relation_tag, frame_relation_type):
+    return FrameRelation(
+        _id=int(frame_relation_tag.get('ID')),
+        sub_frame=Frame(_id=int(frame_relation_tag.get('subID')),
+                        name=frame_relation_tag.get('subFrameName')),
+        sup_frame=Frame(_id=int(frame_relation_tag.get('supID')),
+                        name=frame_relation_tag.get('superFrameName')),
+        frtype=frame_relation_type)
+
+
+def _extract_frame_relation_type(fr_type_tag):
+    return FrameRelationType(
+        _id=int(fr_type_tag.get('ID')), name=fr_type_tag.get('name'),
+        sub_frame_name=fr_type_tag.get('subFrameName'),
+        sup_frame_name=fr_type_tag.get('superFrameName'))
+
+
+def extract_relations(fr_relation_xml_filepath):
+    """Extract a (List<FrameRelation>, List<FERelation>) tuple.
+
+    Tuple is extracted from a FrameNet frRelation.xml file.
+    """
+    frame_relations = []
+    fe_relations = []
+    tree = etree.parse(fr_relation_xml_filepath)
+    root = tree.getroot()
+    try:
+        fr_types_tags = root.findall('fn:frameRelationType',
+                                     const.FN_XML_NAMESPACE)
+        for fr_type_tag in fr_types_tags:
+            frame_relation_type = _extract_frame_relation_type(fr_type_tag)
+            frame_relation_tags = fr_type_tag.findall('fn:frameRelation',
+                                                      const.FN_XML_NAMESPACE)
+            for frame_relation_tag in frame_relation_tags:
+                frame_relation = _extract_frame_relation(frame_relation_tag,
+                                                         frame_relation_type)
+                frame_relations.append(frame_relation)
+                fe_relation_tags = frame_relation_tag.findall(
+                    'fn:FERelation', const.FN_XML_NAMESPACE)
+                for fe_relation_tag in fe_relation_tags:
+                    fe_relation = _extract_fe_relation(fe_relation_tag,
+                                                       frame_relation)
+                    fe_relations.append(fe_relation)
+    except XMLProcessingError as err:
+        raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
+                                 .format(fr_relation_xml_filepath, str(err)))
+    return frame_relations, fe_relations

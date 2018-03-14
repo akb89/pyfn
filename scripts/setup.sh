@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# ROFAMES options to be changed according to your env
+# SEMAFOR options to be changed according to your env
 export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
 export num_threads=2
 export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
 export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
 
-# ROFAMES/SEMAFOR hyperparameters
+# SEMAFOR/SEMAFOR hyperparameters
 export kbest=1 # keep k-best parse
 export lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
 export batch_size=4000 # number of batches processed at once for argument identification.
@@ -25,9 +25,10 @@ export NLP4J_HOME="${LIB_DIR}/nlp4j"
 export MST_PARSER_HOME="${LIB_DIR}/mstparser"
 export BMST_PARSER_HOME="${LIB_DIR}/bistparser/bmstparser/src"
 export BARCH_PARSER_HOME="${LIB_DIR}/bistparser/barchybrid/src"
-export ROFAMES_HOME="${LIB_DIR}/rofames"
+export SEMAFOR_HOME="${LIB_DIR}/semafor"
 export OPEN_SESAME_HOME="${LIB_DIR}/open-sesame"
 export SEMEVAL_HOME="${LIB_DIR}/semeval"
+export SIMFRAMEID_HOME="${LIB_DIR}/eacl2017-oodFrameNetSRL"
 
 export nlp4j_config="${RESOURCES_DIR}/config-decode-pos.xml"
 export mst_parser_model="${RESOURCES_DIR}/wsj.model"

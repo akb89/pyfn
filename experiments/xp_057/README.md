@@ -3,14 +3,9 @@
 open-sesame on FN 1.7 FT with NLP4J + BMST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  | |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
+| 65.9 | 59.6 | 62.6 |
 
 ### Splits generation
 ```
@@ -41,10 +36,10 @@ pyfn convert \
 
 ### Decoding
 ```
-./open-sesame.sh -m decode
+./open-sesame.sh -m decode -x 057 -s test -d
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 057 -p open-sesame -s test
 ```

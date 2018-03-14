@@ -67,12 +67,12 @@ def _get_start_token(token_indexes):
     return int(token_indexes)
 
 
-def unmarshall_annosets(rofames_filepath, sent_filepath):
-    """Unmarshall a rofames .frame.elements file to pyfn.AnnotationSets."""
+def unmarshall_annosets(semafor_filepath, sent_filepath):
+    """Unmarshall a semafor .frame.elements file to pyfn.AnnotationSets."""
     annosets = []
     sent_dict = marsh_utils.get_sent_dict(sent_filepath)
-    with open(rofames_filepath, 'r') as rofames_stream:
-        for line in rofames_stream:
+    with open(semafor_filepath, 'r') as semafor_stream:
+        for line in semafor_stream:
             line = line.strip()
             line_split = line.split('\t')
             sent_index = int(line_split[7])

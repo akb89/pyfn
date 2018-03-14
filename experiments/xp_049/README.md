@@ -1,19 +1,17 @@
 # XP\#049
 
-on FATERMIND batch 40,000 10 threads
-
-ROFAMES on FN 1.7 FT + EX with NLP4J + BMST
+semafor on FN 1.7 FT + EX with NLP4J + BMST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 64.9 | 57.9 | 61.2 |
 
 ### Splits generation
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_049/data \
   --splits train \
@@ -23,25 +21,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 049 -p rofames -s test -f /path/to/fndata-1.7-with-dev
+./prepare.sh -x 049 -p semafor -s test -f /path/to/fndata-1.7-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 049 -t nlp4j -d bmst -p rofames
+./preprocess.sh -x 049 -t nlp4j -d bmst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 049
+./semafor.sh -m train -x 049
 ```
 
 ### Decoding
 ```
-./
+./semafor.sh -m decode -x 049 -s test
 ```
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 049 -p semafor -s test
 ```

@@ -3,17 +3,24 @@
 open-sesame on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 65.6 | 59.7 | 62.5 |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
+| 64.8 | 60.9 | 62.8 |
 
 ### Splits generation
-Splits are generated with:
+```
+pyfn convert \
+  --from fnxml \
+  --to bios \
+  --source /path/to/fndata-1.5-with-dev \
+  --target /path/to/experiments/xp_044/data \
+  --splits train \
+  --output_sentences \
+  --excluded_frames 398 \
+  --filter overlap_fes
+```
+
+Former:
 ```
 pyfn convert \
   --from fnxml \
@@ -44,7 +51,6 @@ The distance between the first and fourth bump should be 100 meters , and the di
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 044 -t mxpost -p open-sesame -d mst -v
 ```
@@ -61,7 +67,7 @@ Splits are preprocessed with:
 
 ### Scoring
 ```
-./score.sh
+./score.sh -x 044 -p open-sesame -s test
 ```
 
 ### Problems

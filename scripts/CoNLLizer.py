@@ -94,7 +94,7 @@ def transform_fields(fields, prefixes = []):
 def brown_to_conll(bdelim, sdelim, cdelim, filepath, insert_ids=False):
     with open(filepath) as stream:
         for line in stream:
-            line = line.rstrip()
+            line = line.strip()
             items = re.split(sdelim, line)
             for i, it in enumerate(items):
                 columns = it.split(bdelim)
@@ -111,7 +111,7 @@ def conllize(delim, fields, files, cols = [], withs = []):
     with contextlib.ExitStack() as stack:
         files = [stack.enter_context(open(fname)) for fname in files]
         for lines in zip(*files):
-            lines = [line.rstrip() for line in lines]
+            lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
             lines = delim.join(lines)
             if lines == '':
@@ -139,7 +139,7 @@ def flatten(delim, cdelim, fields, files, cols = [], withs = [], count_tokens = 
 
         selection = defaultdict(list)
         for lines in zip(*files):
-            lines = [line.rstrip() for line in lines]
+            lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
             lines = delim.join(lines)
 
@@ -184,7 +184,7 @@ def mask_chars(direction, filepath, chars, masks, is_conll = False, fields = '',
 
     with open(filepath) as stream:
         for line in stream:
-            line = line.rstrip()
+            line = line.strip()
             if is_conll:
                 if line == "":
                     print("")
@@ -211,7 +211,7 @@ def bios(conll_files, bios_files, fields):
         conll_sentences = []
         conll_sentence  = []
         for lines in zip(*conll_files):
-            lines = [line.rstrip() for line in lines]
+            lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
             lines = '\t'.join(lines)
             if lines == "":
@@ -222,7 +222,7 @@ def bios(conll_files, bios_files, fields):
 
         i = 0
         for lines in zip(*bios_files):
-            lines = [line.rstrip() for line in lines]
+            lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
             lines = '\t'.join(lines)
 

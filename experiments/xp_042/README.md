@@ -1,26 +1,18 @@
 # XP\#042
 
-ROFAMES on FN 1.5 FT with MXPOST + MST
-
-Replicating Das baseline used in Kshirsagar et al. (2015)
+semafor on FN 1.5 FT with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 65.2 | 53.8 | 59.0 |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
+| 65.0 | 53.2 | 58.5 |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
-  --source /path/to/fndata-1.5 \
+  --to semafor \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_042/data \
   --splits train \
   --output_sentences \
@@ -29,25 +21,25 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 042 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 042 -p semafor -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 042 -t mxpost -d mst -p rofames
+./preprocess.sh -x 042 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 042
+./semafor.sh -m train -x 042
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 042 -s test
+./semafor.sh -m decode -x 042 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 042 -p rofames -s test
+./score.sh -x 042 -p semafor -s test
 ```

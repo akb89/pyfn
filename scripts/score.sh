@@ -4,12 +4,12 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM -p {rofames,open-sesame} -s {dev,test}
+Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test}
 Score frame semantic parsing with the SEMEVAL scoring scripts modified by Kshirsagar et al. (2015).
 
   -h, --help                display this help and exit
   -x, --xp      XP_NUM      xp number written as 3 digits (e.g. 001)
-  -p, --parser  {rofames,open-sesame}  frame semantic parser to be used: 'rofames' or 'open-sesame'
+  -p, --parser  {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
   -s, --splits  {dev,test}  which splits to score: dev or test
 EOF
 }
@@ -77,12 +77,12 @@ if [ "${is_splits_set}" = FALSE ]; then
 fi
 
 case "${parser}" in
-    rofames )
+    semafor )
         ;;   #fallthru
     open-sesame )
         ;;   #fallthru
     * )
-        die "Invalid frame semantic parser '${parser}': Should be 'rofames' or 'open-sesame'"
+        die "Invalid frame semantic parser '${parser}': Should be 'semafor' or 'open-sesame'"
 esac
 
 case "${splits}" in
@@ -96,10 +96,10 @@ esac
 
 mkdir ${XP_DIR}/${xp}/score 2> /dev/null
 
-if [ "${parser}" = "rofames" ]; then
+if [ "${parser}" = "semafor" ]; then
   echo "Converting decoded .frame.elements file to SEMEVAL XML format..."
   pyfn convert \
-    --from rofames \
+    --from semafor \
     --to semeval \
     --source "${XP_DIR}/${xp}/data/${splits}.frame.elements" \
     --target "${XP_DIR}/${xp}/data/${splits}.predicted.xml" \
@@ -112,7 +112,7 @@ if [ "${parser}" = "open-sesame" ]; then
   pyfn convert \
     --from bios \
     --to semeval \
-    --source "${XP_DIR}/${xp}/data/${splits}.bios.semeval.merged.decoded" \
+    --source "${XP_DIR}/${xp}/data/${splits}.bios.semeval.decoded" \
     --target "${XP_DIR}/${xp}/data/${splits}.predicted.xml" \
     --sent "${XP_DIR}/${xp}/data/${splits}.sentences"
   echo "Done"
@@ -132,4 +132,4 @@ perl ${SEMEVAL_HOME}/score.acl.pl \
     "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
 echo "Done"
 
-cat "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"
+tail -1 "${XP_DIR}/${xp}/score/${splits}.score.acl.semeval"

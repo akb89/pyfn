@@ -78,29 +78,47 @@ if [ "${tagger}" = "mxpost" ]; then
     echo "POS tagging via MXPOST..."
     pushd ${MXPOST_HOME}
     echo "Processing file: ${file}"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_"
-    ./mxpost tagger.project < ${file} > ${file}.mxpost 2> ${LOGS_DIR}/mxpost.log
+    echo "Masking _ chars..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_" ${file} > ${file}.masked
+    echo "Done"
+    echo "POS tagging masked file..."
+    ./mxpost tagger.project < ${file}.masked > ${file}.mxpost 2> ${LOGS_DIR}/mxpost.log
+    rm ${file}.masked
+    echo "Done"
+    echo "Processing file: ${file}.mxpost"
+    echo "Brownifying..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file}.mxpost > ${file}.mxpost.conll.tmp
+    rm ${file}.mxpost
+    echo "Done"
+    echo "Unmasking _ chars..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_" ${file}.mxpost.conll.tmp > ${file}.mxpost.conll.tmp.unmasked
+    rm ${file}.mxpost.conll.tmp
     echo "Done"
     echo "Converting .mxpost file to .conllx format..."
-    echo "Processing file: ${file}.mxpost"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file}.mxpost > ${file}.mxpost.conll.tmp
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,4,3,3,4,4,4,4,4 -r 4 -w _ ${file}.mxpost.conll.tmp ${file}.mxpost.conll.tmp > ${file}.conllx
-    rm ${file}.mxpost.conll.tmp
-    rm ${file}.mxpost
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,4,3,3,4,4,4,4,4 -r 4 -w _ ${file}.mxpost.conll.tmp.unmasked ${file}.mxpost.conll.tmp.unmasked > ${file}.conllx
+    rm ${file}.mxpost.conll.tmp.unmasked
     echo "Done"
 fi
 
 if [ "${tagger}" = "nlp4j" ]; then
-    echo "Converting .sentences to .tsv format..."
-    echo "Processing file: ${file}"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file} > ${file}.tsv.tmp
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_"
-    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,3,3,3,3,3,3,3 -r 3 -w _ ${file}.tsv.tmp ${file}.tsv.tmp > ${file}.tsv
-    rm ${file}.tsv.tmp
-    echo "Done"
     echo "POS tagging via NLP4J..."
+    echo "Processing file: ${file}"
+    echo "Masking _ chars..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py mask -m "ùé$" -s "_" ${file} > ${file}.masked
+    echo "Done"
+    echo "Brownifying..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py brown -i ${file}.masked > ${file}.masked.tsv.tmp
+    rm ${file}.masked
+    echo "Done"
+    echo "Unmasking _ chars..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py unmask -c -f 2 -m "ùé$" -s "_" ${file}.masked.tsv.tmp > ${file}.tsv.unmasked
+    rm ${file}.masked.tsv.tmp
+    echo "Done"
+    echo "Converting .sentences to .tsv format..."
+    python3 ${SCRIPTS_DIR}/CoNLLizer.py conll -f 1,2,3,3,3,3,3,3,3 -r 3 -w _ ${file}.tsv.unmasked ${file}.tsv.unmasked > ${file}.tsv
+    rm ${file}.tsv.unmasked
+    echo "Done"
+    echo "POS tagging tsv file..."
     echo "Processing file: ${file}.tsv"
     sh ${NLP4J_HOME}/bin/nlpdecode \
       -c ${nlp4j_config} \

@@ -109,9 +109,9 @@ model/
 score/
 !lib/
 lib/*
-!lib/rofames
-lib/rofames/*
-!lib/rofames/bin
+!lib/semafor
+lib/semafor/*
+!lib/semafor/bin
 !lib/open-sesame
 lib/open-sesame/*
 !lib/open-sesame/bin
@@ -121,3 +121,5 @@ lib/open-sesame/*
 *.7z
 experiments/xp_002/*
 debug.sh
+experiments/xp_000/*
+frameid/

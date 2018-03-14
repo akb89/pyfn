@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 show_help() {
 cat << EOF
 Usage: ${0##*/} [-h] -f FILE
-Flatten .conllx file to ROFAMES .all.lemma.tags file.
+Flatten .conllx file to SEMAFOR .all.lemma.tags file.
 
   -h, --help          display this help and exit
   -f, --file   FILE   absolute path to input .conllx file
@@ -46,6 +46,6 @@ if [ "${is_input_file_set}" = FALSE ]; then
     die "ERROR: '--file' parameter is required."
 fi
 
-echo "Converting to .flattened format for the ROFAMES parser..."
+echo "Converting to .flattened format for the SEMAFOR parser..."
 echo "Processing file: ${file}"
 python3 CoNLLizer.py flatten -c -f 2,4,8,7,5,3 -r 5 -w O ${file} > ${file}.flattened

@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 68.6 | 57.0 | 62.3 |
 
 ### Splits
 | FrameNet version | Fulltext | Exemplar | Frames
@@ -17,7 +17,7 @@ Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
+  --to semafor \
   --source /path/to/fndata-1.5 \
   --target /path/to/experiments/xp_052/data \
   --splits train \
@@ -30,27 +30,27 @@ pyfn convert \
 
 ### Data preparation
 ```
-./prepare.sh -x 052 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 052 -p semafor -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 052 -t mxpost -d mst -p rofames
+./preprocess.sh -x 052 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 052 -u
+./semafor.sh -m train -x 052 -u
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 052 -s test -u
+./semafor.sh -m decode -x 052 -s test -u
 ```
 
 ### Scoring
 ```
-./score.sh -x 052 -p rofames -s test
+./score.sh -x 052 -p semafor -s test
 ```
 
 Due to the way MXPOST processes non-breaking spaces, we filter them out.

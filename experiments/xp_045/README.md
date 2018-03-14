@@ -1,52 +1,48 @@
 # XP\#045
 
-With a batch size of 40,000 on FATERMIND 10 threads
-
-ROFAMES on FN 1.5 FT + EX with MXPOST + MST and GOLD frames
+semafor on FN 1.5 FT + EX with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 68.4 | 55.1 | 61.0 |
+| 67.9 | 55.8 | 61.3 |
 
 ### Splits generation
 ```
 pyfn convert \
   --from fnxml \
-  --to rofames \
-  --source /path/to/fndata-1.5 \
+  --to semafor \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_045/data \
   --splits train \
   --with_exemplars \
   --output_sentences \
-  --excluded_frames 398 \
-  --excluded_sentences 1565683 \
-  --filter non_breaking_spaces
+  --excluded_frames 398
 ```
 
 ### Data preparation
 ```
-./prepare.sh -x 045 -p rofames -s test -f /path/to/fndata-1.5-with-dev
+./prepare.sh -x 045 -p semafor -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
 ```
-./preprocess.sh -x 045 -t mxpost -d mst -p rofames
+./preprocess.sh -x 045 -t mxpost -d mst -p semafor
 ```
 
 ### Training
 ```
-./rofames.sh -m train -x 045
+./semafor.sh -m train -x 045
 ```
 
 ### Decoding
 ```
-./rofames.sh -m decode -x 045 -s test
+./semafor.sh -m decode -x 045 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 045 -p rofames -s test
+./score.sh -x 045 -p semafor -s test
 ```
 
 

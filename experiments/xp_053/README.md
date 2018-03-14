@@ -3,14 +3,9 @@
 open-sesame on FN 1.7 FT with MXPOST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
+| 63.1 | 58.1 | 60.5 |
 
 ### Splits generation
 ```
@@ -21,7 +16,6 @@ pyfn convert \
   --target /path/to/experiments/xp_053/data \
   --splits train \
   --output_sentences \
-  --excluded_sentences 4106364 \
   --filter overlap_fes
 ```
 
@@ -31,7 +25,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 053 -t mxpost -p open-sesame -v
 ```

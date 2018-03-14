@@ -1,33 +1,14 @@
 # XP\#043
 
+open-sesame on FN 1.5 FT with MXPOST
+
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 65.7 | 58.8 | 62.1 |
+| 64.9 | 58.9 | 61.8 |
 
-## Setup
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | FALSE | GOLD |
-
-### Filtering in training data
-| No FEs | Overlapping FEs | Discontinuous FEs | Discontinuous targets |
-| --- | --- | --- | --- |
-| FALSE | TRUE | FALSE | FALSE |
-
-### Preprocessing
-| POS tagger | Lemmatizer | Dependency parser |
-| --- | --- | --- |
-| MXPOST | NLP4J | - |
-
-### Frame Semantic Parsing
-| Parser | Hierarchy feature |
-| --- | --- |
-| OPEN-SESAME | FALSE |
 
 ### Splits generation
-Splits are generated with:
 ```
 pyfn convert \
   --from fnxml \
@@ -40,13 +21,12 @@ pyfn convert \
   --filter overlap_fes
 ```
 
-### Preparing data
+### Data preparation
 ```
 ./prepare.sh -x 043 -p open-sesame -s test -f /path/to/fndata-1.5-with-dev
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 043 -t mxpost -p open-sesame -v
 ```
@@ -63,5 +43,5 @@ Splits are preprocessed with:
 
 ### Scoring
 ```
-./score.sh -x 043 -s test
+./score.sh -x 043 -p open-sesame -s test
 ```

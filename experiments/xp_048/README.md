@@ -3,21 +3,16 @@
 open-sesame on FN 1.7 FT with NLP4J
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 63.5 | 59.2 | 61.3 |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.7 | TRUE | FALSE | GOLD |
+| 64.6 | 59.2 | 61.7 |
 
 ### Splits generation
 ```
 pyfn convert \
   --from fnxml \
   --to bios \
-  --source /path/to/fndata-1.7-with-dev
+  --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_048/data \
   --splits train \
   --output_sentences \
@@ -30,7 +25,6 @@ pyfn convert \
 ```
 
 ### Preprocessing
-Splits are preprocessed with:
 ```
 ./preprocess.sh -x 048 -t nlp4j -p open-sesame -v
 ```
@@ -47,5 +41,5 @@ Splits are preprocessed with:
 
 ### Scoring
 ```
-./score.sh -x 048 -s test
+./score.sh -x 048 -p open-sesame -s test
 ```
