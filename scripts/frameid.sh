@@ -4,17 +4,17 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-h] -x XP_NUM [-a]
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM
 Perform frame identification.
 
   -h, --help                        display this help and exit
+  -m, --mode                        train on all models or decode using a single model
   -x, --xp          XP_NUM          xp number written as 3 digits (e.g. 001)
-  -a, --all                         perform frame identification using all models
 EOF
 }
 
 is_xp_set=FALSE
-use_all_models=FALSE
+is_mode_set=FALSE
 
 while :; do
     case $1 in
@@ -31,8 +31,14 @@ while :; do
                 die "ERROR: '--xp' requires a non-empty option argument"
             fi
             ;;
-        -a|--all)
-            use_all_models=TRUE
+        -m|--mode)
+            if [ "$2" ]; then
+                is_mode_set=TRUE
+                mode=$2
+                shift
+            else
+                die "ERROR: '--mode' requires a non-empty option argument"
+            fi
             ;;
         --)
             shift
@@ -49,6 +55,10 @@ done
 
 if [ "${is_xp_set}" = FALSE ]; then
     die "ERROR: '--xp' parameter is required."
+fi
+
+if [ "${is_mode_set}" = FALSE ]; then
+    die "ERROR: '--mode' parameter is required."
 fi
 
 echo "Preparing files for frame identification..."
@@ -74,14 +84,14 @@ python3 ${SIMFRAMEID_HOME}/generate.py ${XP_DIR}/${xp}/frameid/data/corpora/trai
 
 echo "Done"
 
-if [ "${use_all_models}" = TRUE ]; then
-    echo "Starting frame identification on all models..."
-    python ${SIMFRAMEID_HOME}/simpleFrameId/main.py ${XP_DIR}/${xp}/frameid
+if [ "${mode}" = train ]; then
+    echo "Training frame identification on all models..."
+    python ${SIMFRAMEID_HOME}/simpleFrameId/main.py train ${XP_DIR}/${xp}/frameid
     echo "Done"
 fi
 
-if [ "${use_all_models}" = FALSE ]; then
-    echo "Starting frame identification on all models..."
-
+if [ "${mode}" = decode ]; then
+    echo "Predicting frames..."
+    python ${SIMFRAMEID_HOME}/simpleFrameId/main.py decode ${XP_DIR}/${xp}/frameid
     echo "Done"
 fi
