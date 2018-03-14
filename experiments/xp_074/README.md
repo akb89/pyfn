@@ -3,9 +3,9 @@
 semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
-| 65.2 | 53.8 | 58.9 |
+| 64.3 | 53.7 | 58.6 |
 
 ### Splits generation
 ```
