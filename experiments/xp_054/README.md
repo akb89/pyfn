@@ -3,7 +3,7 @@
 semafor on FN 1.7 FT with MXPOST + MST
 
 ### Test scores
-| P| R | F1 |
+| P | R | F1 |
 | --- | --- | --- |
 | 57.5 | 52.6 | 54.9 |
 

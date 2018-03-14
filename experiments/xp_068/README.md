@@ -1,47 +1,13 @@
 # XP\#068
 
-semafor on FN 1.7 FT + EX with NLP4J + BMST
+frame identification on FN 1.7 FT + EX with MXPOST + MST
 
-with a batch size of 4,000 instead of 40,000
-
-### Test scores
-| P| R | F1 |
-| --- | --- | --- |
-| 57.9 | 56.4 | 57.2 |
-
-### Splits generation
 ```
-pyfn convert \
-  --from fnxml \
-  --to semafor \
-  --source /path/to/fndata-1.7-with-dev \
-  --target /path/to/experiments/xp_068/data \
-  --splits train \
-  --with_exemplars \
-  --output_sentences
+./frameid.sh -x 068 -a
 ```
 
-### Data preparation
-```
-./prepare.sh -x 068 -p semafor -s test -f /path/to/fndata-1.7-with-dev
-```
-
-### Preprocessing
-```
-./preprocess.sh -x 068 -t nlp4j -d bmst -p semafor
-```
-
-### Training
-```
-./semafor.sh -m train -x 068
-```
-
-### Decoding
-```
-./semafor.sh -m decode -x 068 -s test
-```
-
-### Scoring
-```
-./score.sh -x 068 -p semafor -s test
-```
+| system | total | ambig | no-lex |
+| WSB + SENTBOW |  |  |  |
+| WSB + DEPBOW  |  |  |  |
+| NN + SENTBOW  |  |  |  |
+| NN + DEPBOW   |  |  |  |

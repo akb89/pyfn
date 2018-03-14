@@ -4,11 +4,11 @@
 - [x] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
 - [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
-- [ ] XP046: open-sesame on FN 1.5 FT + EX with MXPOST (_dynet.pyx: Magnitude of gradient is bad)
+- [x] XP046: frame identification on FN 1.5 FT with MXPOST + MST
 - [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
 - [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP050: open-sesame on FN 1.7 FT + EX with NLP4J + BMST (BUG)
+- [x] XP050: frame identification on FN 1.5 FT + EX with MXPOST + MST
 - [x] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [x] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
 - [x] XP053: open-sesame on FN 1.7 FT with MXPOST
@@ -24,15 +24,15 @@
 - [-] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 - [-] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
 - [-] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
-- [-] XP066: frame identification on FN 1.5 FT with NLP4J + BMST
-- [x] XP067: XP045 with a batch size of 4,000 instead of 40,000
-- [x] XP068: XP049 with a batch size of 4,000 instead of 40,000
+- [x] XP066: frame identification on FN 1.5 FT with NLP4J + BMST
+- [x] XP067: frame identification on FN 1.7 FT with MXPOST + MST
+- [-] XP068: frame identification on FN 1.7 FT + EX with MXPOST + MST
 - [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
 - [x] XP070: semafor on FN 1.5 FT with NLP4J + BMST
 - [ ] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 - [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
 - [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
-- [ ] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
+- [-] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 - [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 - [x] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
 - [-] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
@@ -49,16 +49,16 @@
 - [-] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST O
 - [-] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 - [-] XP090: frame identification on FN 1.5 FT + EX with NLP4J + BMST
-- [-] XP091: semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
-- [-] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
-- [-] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
-- [-] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
+- [x] XP091: semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
+- [x] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
+- [x] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
+- [x] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
 - [-] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
-- [ ] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
-- [-] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
-- [-] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
+- [x] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
+- [x] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
+- [x] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
 - [-] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP170:
+- [ ] XP170: semafor on FN 1.5 FT with NLP4J + BMST with predicted frames
 - [ ] XP195:
 - [ ] XP178:
 - [ ] XP182:
@@ -74,11 +74,9 @@
 | 043 | 64.9 | 58.9 | 61.8 |
 | 044 | 64.8 | 60.9 | 62.8 |
 | 045 | 67.9 | 55.8 | 61.3 |
-| 046 |  |  |  |
 | 047 | 61.2 | 55.2 | 58.1 |
 | 048 | 64.6 | 59.2 | 61.7 |
 | 049 | 64.9 | 57.9 | 61.2 |
-| 050 |  |  |  |
 | 051 | 65.3 | 54.9 | 59.7 |
 | 052 | 68.6 | 57.0 | 62.3 |
 | 053 | 63.1 | 58.1 | 60.5 |
@@ -94,8 +92,6 @@
 | 063 |  |  |  |
 | 064 |  |  |  |
 | 065 |  |  |  |
-| 067 | 66.7 | 56.5 | 61.2 |
-| 068 | 57.9 | 56.4 | 57.2 |
 | 069 | 66.2 | 55.5 | 60.3 |
 | 070 | 67.5 | 56.9 | 61.7 |
 | 071 | 59.8 | 55.8 | 57.8 |
@@ -116,10 +112,11 @@
 | 086 | 65.4 | 54.9 | 59.7 |
 | 087 | 69.0 | 57.0 | 62.5 |
 | 088 | 63.7 | 54.2 | 58.6 |
-| 089 |  |  |  |
+| 089 | 62.1 | 48.3 | 54.4 |
+| 091 | 66.3 | 57.5 | 61.6 |
 | 092 |  |  |  |
 | 093 |  |  |  |
-| 094 |  |  |  |
+| 094 | 68.1 | 59.4 | 63.4 |
 | 095 |  |  |  |
 
 
