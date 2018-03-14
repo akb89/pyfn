@@ -1,11 +1,11 @@
 # XP\#178
 
-open-sesame on FN 1.5 FT with NLP4J
+open-sesame on FN 1.5 FT with NLP4J with predicted frames
 
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 63.7 | 64.4 | 64.1 |
 
 ### Splits generation
 ```
