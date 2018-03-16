@@ -6,6 +6,7 @@ semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
 | P | R | F1 |
 | --- | --- | --- |
 | 69.0 | 57.0 | 62.5 |
+| 65.0 | 59.5 | 62.2 |
 
 ### Splits generation
 ```
