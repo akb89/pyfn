@@ -144,8 +144,20 @@ fi
 
 if [ "${frames}" = "gold" ]; then
   echo "Scoring with gold frames..."
-  echo "Scoring with Kshirsagar et al. (2015) ACL perl script..."
-  perl ${SEMEVAL_HOME}/score.acl.pl \
+  # echo "Scoring with Kshirsagar et al. (2015) ACL perl script..."
+  # perl ${SEMEVAL_HOME}/score.acl.pl \
+  #     -c "${XP_DIR}/${xp}/score" \
+  #     -l \
+  #     -n \
+  #     -e \
+  #     -a \
+  #     -v \
+  #     "${XP_DIR}/${xp}/data/frames.xml" \
+  #     "${XP_DIR}/${xp}/data/frRelations.xml" \
+  #     "${XP_DIR}/${xp}/data/${splits}.gold.xml" \
+  #     "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.acl"
+  echo "Scoring with the ARGSONLY perl script..."
+  perl ${SEMEVAL_HOME}/score.argsonly.pl \
       -c "${XP_DIR}/${xp}/score" \
       -l \
       -n \
@@ -155,7 +167,7 @@ if [ "${frames}" = "gold" ]; then
       "${XP_DIR}/${xp}/data/frames.xml" \
       "${XP_DIR}/${xp}/data/frRelations.xml" \
       "${XP_DIR}/${xp}/data/${splits}.gold.xml" \
-      "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.acl"
+      "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.argsonly"
   echo "Done"
 
   tail -1 "${XP_DIR}/${xp}/score/${splits}.score.acl"
