@@ -169,8 +169,7 @@ if [ "${frames}" = "gold" ]; then
       "${XP_DIR}/${xp}/data/${splits}.gold.xml" \
       "${XP_DIR}/${xp}/data/${splits}.predicted.xml" > "${XP_DIR}/${xp}/score/${splits}.score.argsonly"
   echo "Done"
-
-  tail -1 "${XP_DIR}/${xp}/score/${splits}.score.acl"
+  tail -1 "${XP_DIR}/${xp}/score/${splits}.score.argsonly"
   echo "Done"
 fi
 
