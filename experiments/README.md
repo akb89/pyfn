@@ -58,14 +58,14 @@
 - [x] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
 - [x] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
 - [x] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP147: semafor on FN 1.7 FT with NLP4J + BMST with predicted frames
-- [ ] XP148: open-sesame on FN 1.7 FT with NLP4J with predicted frames
-- [ ] XP157: open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
-- [ ] XP165: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
-- [ ] XP170: semafor on FN 1.5 FT with NLP4J + BMST with predicted frames
+- [x] XP147: semafor on FN 1.7 FT with NLP4J + BMST with predicted frames
+- [x] XP148: open-sesame on FN 1.7 FT with NLP4J with predicted frames
+- [x] XP157: open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
+- [x] XP165: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
+- [x] XP170: semafor on FN 1.5 FT with NLP4J + BMST with predicted frames
 - [x] XP178: open-sesame on FN 1.5 FT with NLP4J with predicted frames
 - [x] XP182: open-sesame on FN 1.5 FT with NLP4J + BMST with predicted frames
-- [ ] XP195: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
+- [x] XP195: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
 
 
 | XP | P | R | F1 |

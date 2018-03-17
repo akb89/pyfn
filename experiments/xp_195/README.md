@@ -1,11 +1,11 @@
 # XP\#195
 
-semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
+semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames trained on FT+EX
 
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-|  |  |  |
+| 70.8 | 52.9 | 60.6 |
 
 ### Frame identification
 ```
