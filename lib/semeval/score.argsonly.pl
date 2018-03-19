@@ -488,21 +488,17 @@ MAIN:{
         my $recall = 0;
         my $fscore = 0;
 
-        if($goldSum == 0) {
-          if ($matchSum == 0) {
+        if ($goldSum == 0) {
+          if ($matchSum == 0) {
             $recall = 1;
-          } else {
-            $recall = 0;
           }
-        } elsif($goldSum > 0) {
+        } elsif ($goldSum > 0) {
           $recall = $matchSum / $goldSum;
         }
 
         if ($scoreSum == 0) {
-          if ($matchSum == 0) {
+          if ($matchSum == 0) {
             $precision = 1;
-          } else {
-            $precision = 0;
           }
         } elsif ($scoreSum > 0) {
           $precision = $matchSum / $scoreSum;
@@ -515,8 +511,8 @@ MAIN:{
         }
 
         if ($OUTPUT_PER_SENTENCE || $VERBOSE) {
-            printf("Sentence ID=%d: Recall=%.${PREC}f (%.1f/%.1f) Precision=%.${PREC}f (%.1f/%.1f) Fscore=%.${PREC}f\n",
-                $sent, $recall, $matchSum, $goldSum, $precision, $matchSum, $scoreSum, $fscore);
+            printf("Sentence ID=%d: Precision=%.${PREC}f (%.1f/%.1f) Recall=%.${PREC}f (%.1f/%.1f) Fscore=%.${PREC}f\n",
+                $sent, $precision, $matchSum, $scoreSum, $recall, $matchSum, $goldSum, $fscore);
         }
         $nSent++;
     }
@@ -535,9 +531,9 @@ MAIN:{
 
     print("Command: $PROG ".$CMDOPTIONS."\n");
     print("Input file: $f2\n");
-    printf("%d Sentences Scored: Recall=%.${PREC}f (%.1f/%.1f)  Precision=%.${PREC}f (%.1f/%.1f)  Fscore=%.${PREC}f\n",
-        $nSent,$totalRecall, $totalMatchSum, $totalGoldSum,
-        $totalPrecision, $totalMatchSum, $totalScoreSum, $fScore);
+    printf("%d Sentences Scored: Precision=%.${PREC}f (%.1f/%.1f) Recall=%.${PREC}f (%.1f/%.1f) Fscore=%.${PREC}f\n",
+        $nSent,$totalPrecision, $totalMatchSum, $totalScoreSum,
+        $totalRecall, $totalMatchSum, $totalGoldSum, $fScore);
 
     exit;
 }
