@@ -485,15 +485,35 @@ MAIN:{
         $totalGoldSum += $goldSum;
 
         my $precision = 0;
-        my $recall = $matchSum / $goldSum;
+        my $recall = 0;
         my $fscore = 0;
 
-        if ($scoreSum > 0) {
-            $precision = $matchSum / $scoreSum;
+        if($goldSum == 0) {
+          if ($matchSum == 0) {
+            $recall = 1;
+          } else {
+            $recall = 0;
+          }
+        } elsif($goldSum > 0) {
+          $recall = $matchSum / $goldSum;
         }
-        if ($recall + $precision > 0) {
-            $fscore = (2 * $recall * $precision) / ($recall + $precision);
+
+        if ($scoreSum == 0) {
+          if ($matchSum == 0) {
+            $precision = 1;
+          } else {
+            $precision = 0;
+          }
+        } elsif ($scoreSum > 0) {
+          $precision = $matchSum / $scoreSum;
         }
+
+        if ($recall + $precision == 0) {
+          $fscore = 0;
+        } elsif ($recall + $precision > 0) {
+          $fscore = (2 * $recall * $precision) / ($recall + $precision);
+        }
+
         if ($OUTPUT_PER_SENTENCE || $VERBOSE) {
             printf("Sentence ID=%d: Recall=%.${PREC}f (%.1f/%.1f) Precision=%.${PREC}f (%.1f/%.1f) Fscore=%.${PREC}f\n",
                 $sent, $recall, $matchSum, $goldSum, $precision, $matchSum, $scoreSum, $fscore);
