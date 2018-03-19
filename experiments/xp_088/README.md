@@ -6,6 +6,7 @@ semafor on FN 1.7 FT + EX with MXPOST + MST
 | P | R | F1 |
 | --- | --- | --- |
 | 63.7 | 54.2 | 58.6 |
+| 62.7 | 54.2 | 58.1 |
 
 ### Splits generation
 ```
@@ -41,5 +42,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 088 -p semafor -s test
+./score.sh -x 088 -p semafor -s test -f gold
 ```

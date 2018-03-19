@@ -6,6 +6,7 @@ semafor on FN 1.7 FT with NLP4J + MST
 | P| R | F1 |
 | --- | --- | --- |
 | 59.1 | 53.4 | 56.1 |
+| 58.2 | 53.4 | 55.7 |
 
 ### Splits generation
 ```

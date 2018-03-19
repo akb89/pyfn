@@ -6,6 +6,7 @@ semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
 | P | R | F1 |
 | --- | --- | --- |
 | 63.5 | 53.7 | 58.2 |
+| 62.5 | 53.7 | 57.8 |
 
 ### Splits generation
 ```

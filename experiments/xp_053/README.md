@@ -6,6 +6,7 @@ open-sesame on FN 1.7 FT with MXPOST
 | P | R | F1 |
 | --- | --- | --- |
 | 63.1 | 58.1 | 60.5 |
+| 61.2 | 59.1 | 60.1 |
 
 ### Splits generation
 ```
@@ -41,5 +42,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 053 -p open-sesame -s test
+./score.sh -x 053 -p open-sesame -s test -f gold
 ```

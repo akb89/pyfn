@@ -6,6 +6,7 @@ semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
 | P | R | F1 |
 | --- | --- | --- |
 | 66.3 | 57.5 | 61.6 |
+| 61.3 | 57.5 | 59.4 |
 
 ### Splits generation
 ```

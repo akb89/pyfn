@@ -6,6 +6,7 @@ semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
 | P | R | F1 |
 | --- | --- | --- |
 | 70.8 | 61.7 | 65.9 |
+| 65.6 | 61.7 | 63.6 |
 
 ### Splits generation
 ```
@@ -43,5 +44,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 095 -p semafor -s test
+./score.sh -x 095 -p semafor -s test -f gold
 ```

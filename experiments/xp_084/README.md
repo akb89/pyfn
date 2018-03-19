@@ -6,6 +6,7 @@ semafor on FN 1.7 FT with NLP4J + BARCH
 | P | R | F1 |
 | --- | --- | --- |
 | 61.2 | 55.8 | 58.4 |
+| 60.4 | 55.8 | 58.0 |
 
 ### Splits generation
 ```

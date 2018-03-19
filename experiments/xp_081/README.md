@@ -6,6 +6,7 @@ semafor on FN 1.5 FT with NLP4J + BARCH
 | P | R | F1 |
 | --- | --- | --- |
 | 67.6 | 56.8 | 61.7 |
+| 62.5 | 56.8 | 59.5 |
 
 ### Splits generation
 Splits are generated with:

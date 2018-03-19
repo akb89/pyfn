@@ -6,6 +6,7 @@ semafor on FN 1.5 FT with NLP4J + MST
 | P| R | F1 |
 | --- | --- | --- |
 | 66.2 | 55.5 | 60.3 |
+| 61.2 | 55.5 | 58.2 |
 
 ### Splits generation
 Splits are generated with:
@@ -42,5 +43,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 069 -p semafor -s test
+./score.sh -x 069 -p semafor -s test -f gold
 ```

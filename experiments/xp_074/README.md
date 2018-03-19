@@ -6,6 +6,7 @@ semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
 | P | R | F1 |
 | --- | --- | --- |
 | 64.3 | 53.7 | 58.6 |
+| 59.4 | 53.7 | 56.4 |
 
 ### Splits generation
 ```

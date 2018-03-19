@@ -6,6 +6,7 @@ open-sesame on FN 1.5 FT with MXPOST + MST + HIERARCHY
 | P| R | F1 |
 | --- | --- | --- |
 | 65.3 | 54.9 | 59.7 |
+| 60.3 | 54.9 | 57.5 |
 
 ### Splits generation
 Splits are generated with:
@@ -42,5 +43,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 051 -p semafor -s test
+./score.sh -x 051 -p semafor -s test -f gold
 ```

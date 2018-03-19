@@ -6,6 +6,7 @@ open-sesame on FN 1.7 FT with NLP4J + BARCH
 | P | R | F1 |
 | --- | --- | --- |
 | 63.6 | 60.3 | 61.9 |
+| 62.6 | 60.3 | 61.4 |
 
 ### Splits generation
 ```
@@ -41,5 +42,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 085 -p open-sesame -s test
+./score.sh -x 085 -p open-sesame -s test -f gold
 ```

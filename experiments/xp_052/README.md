@@ -6,11 +6,7 @@ open-sesame on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 | P| R | F1 |
 | --- | --- | --- |
 | 68.6 | 57.0 | 62.3 |
-
-### Splits
-| FrameNet version | Fulltext | Exemplar | Frames
-| --- | --- | --- | --- |
-| 1.5 | TRUE | TRUE | GOLD |
+| 63.6 | 57.0 | 60.1 |
 
 ### Splits generation
 Splits are generated with:
@@ -50,7 +46,7 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 052 -p semafor -s test
+./score.sh -x 052 -p semafor -s test -f gold
 ```
 
 Due to the way MXPOST processes non-breaking spaces, we filter them out.

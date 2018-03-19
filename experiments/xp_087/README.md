@@ -7,6 +7,7 @@ semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with new .csv files)
 | --- | --- | --- |
 | 69.0 | 57.0 | 62.5 |
 | 65.0 | 59.5 | 62.2 |
+| 60.1 | 59.5 | 59.8 |
 
 ### Splits generation
 ```
@@ -43,5 +44,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 087 -p semafor -s test
+./score.sh -x 087 -p semafor -s test -f gold
 ```
