@@ -111,10 +111,10 @@ postprocess_decoded_file() {
   rm -rf $OUTPUT_TMP_DIR 2> /dev/null
   mkdir $OUTPUT_TMP_DIR 2> /dev/null
 
-  cut -f 1-14 ${BIOS_FILE} > ${OUTPUT_TMP_DIR}/cutted.1.txt
-  cut -f 15 ${DECODED_FILE} > ${OUTPUT_TMP_DIR}/cutted.2.txt
+  cut -f 1-14 ${BIOS_FILE} > ${OUTPUT_TMP_DIR}/cut.1.txt
+  cut -f 15 ${DECODED_FILE} > ${OUTPUT_TMP_DIR}/cut.2.txt
 
-  paste ${OUTPUT_TMP_DIR}/cutted.1.txt ${OUTPUT_TMP_DIR}/cutted.2.txt  | perl -pe "s/^\t+$//g" | cat -s > ${DECODED_FILE}
+  paste ${OUTPUT_TMP_DIR}/cut.1.txt ${OUTPUT_TMP_DIR}/cut.2.txt  | perl -pe "s/^\t+$//g" | cat -s > ${DECODED_FILE}
 
   rm -rf $OUTPUT_TMP_DIR;
 }
@@ -125,7 +125,7 @@ if [ "${mode}" = train ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --devf ${XP_DIR}/${xp}/data/dev.bios \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt \
+      --vecf ${RESOURCES_DIR}/glove.6B.100d.txt \
       --syn dep
   fi
   if [ "${with_dep_parses}" = FALSE ]; then
@@ -133,7 +133,7 @@ if [ "${mode}" = train ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --devf ${XP_DIR}/${xp}/data/dev.bios \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt
+      --vecf ${RESOURCES_DIR}/glove.6B.100d.txt
   fi
 fi
 
@@ -144,7 +144,7 @@ if [ "${mode}" = decode ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt \
+      --vecf ${RESOURCES_DIR}/glove.6B.100d.txt \
       --syn dep
   fi
   if [ "${with_dep_parses}" = FALSE ]; then
@@ -153,7 +153,7 @@ if [ "${mode}" = decode ]; then
       --model ${XP_DIR}/${xp}/model/segrnn.argid.model \
       --trainf ${XP_DIR}/${xp}/data/train.bios \
       --testf ${XP_DIR}/${xp}/data/${splits}.bios.semeval \
-      --vecf ${XP_DIR}/${xp}/data/glove.6B.100d.txt
+      --vecf ${RESOURCES_DIR}/glove.6B.100d.txt
   fi
     postprocess_decoded_file ${XP_DIR}/${xp}/data/${splits}.bios.semeval ${XP_DIR}/${xp}/data/${splits}.bios.semeval.decoded
 fi
