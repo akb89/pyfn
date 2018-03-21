@@ -41,5 +41,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 054 -p semafor -s test
+./score.sh -x 054 -p semafor -s test -f gold
 ```

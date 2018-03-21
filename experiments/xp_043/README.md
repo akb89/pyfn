@@ -18,7 +18,6 @@ pyfn convert \
   --target /path/to/experiments/xp_043/data \
   --splits train \
   --output_sentences \
-  --excluded_frames 398 \
   --filter overlap_fes
 ```
 

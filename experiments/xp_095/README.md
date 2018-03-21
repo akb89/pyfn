@@ -18,7 +18,6 @@ pyfn convert \
   --splits train \
   --with_exemplars \
   --output_sentences \
-  --excluded_frames 398 \
   --filter no_fes
 ```
 

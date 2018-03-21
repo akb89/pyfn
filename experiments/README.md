@@ -1,17 +1,17 @@
 # Recap on experiments
 
-- [ ] XP042: semafor on FN 1.5 FT with MXPOST + MST
-- [ ] XP043: open-sesame on FN 1.5 FT with MXPOST
-- [ ] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [ ] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
+- [-] XP042: semafor on FN 1.5 FT with MXPOST + MST
+- [-] XP043: open-sesame on FN 1.5 FT with MXPOST
+- [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
+- [-] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [ ] XP046: frame identification on FN 1.5 FT with MXPOST + MST
 - [ ] XP047: semafor on FN 1.7 FT with NLP4J + BMST
-- [ ] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [ ] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [-] XP048: open-sesame on FN 1.7 FT with NLP4J
+- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP050: frame identification on FN 1.5 FT + EX with MXPOST + MST
 - [ ] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [ ] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
-- [ ] XP053: open-sesame on FN 1.7 FT with MXPOST
+- [-] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [ ] XP054: semafor on FN 1.7 FT with MXPOST + MST
 - [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: semafor on FN 1.7 FT with NLP4J + MST
@@ -20,8 +20,8 @@
 - [ ] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [ ] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
-- [ ] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
-- [ ] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
+- [-] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
+- [-] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 - [ ] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
 - [ ] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
 - [ ] XP066: frame identification on FN 1.5 FT with NLP4J + BMST
@@ -71,20 +71,20 @@ Lambda tests semafor
 Careful: test on dev
 | XP | Lambda | P | R | F1 |
 | --- | --- | --- | --- | --- |
-| 042 | 10^-5 |  |  |
-| 042 | 10^-7 |  |  |
-| 042 | 10^-9 |  |  |
-| 042 | 10^-12 |  |  |
-| 054 | 10^-5 |  |  |
-| 054 | 10^-7 |  |  |
-| 054 | 10^-9 |  |  |
-| 054 | 10^-12 |  |  |
-| 065 | 10^-5 |  |  |
-| 065 | 10^-7 |  |  |
+| 042 | 10^-5 | 59.4 | 49.9 | 54.2 |
+| 042 | 10^-7 | 61.1 | 48.6 | 54.1 |
+| 042 | 10^-9 | 60.8 | 48.8 | 54.1 |
+| 042 | 10^-12 | 60.6 | 48.7 | 54.0 |
+| 054 | 10^-5 | 58.7 | 48.8 | 53.3 |
+| 054 | 10^-7 | 59.1 | 48.2 | 53.1 |
+| 054 | 10^-9 | 59.3 | 48.5 | 53.3 |
+| 054 | 10^-12 | 59.5 | 47.9 | 53.1 |
+| 065 | 10^-5 | 63.8 | 56.6 | 60.0 |
+| 065 | 10^-7 | 63.2 | 56.9 | 59.9 |
 | 065 | 10^-9 |  |  |
 | 065 | 10^-12 |  |  |
-| 095 | 10^-5 |  |  |
-| 095 | 10^-7 |  |  |
+| 095 | 10^-5 | 64.6 | 57.4 | 60.8 |
+| 095 | 10^-7 | 66.8 | 55.8 | 60.8 |
 | 095 | 10^-9 |  |  |
 | 095 | 10^-12 |  |  |
 
