@@ -1,29 +1,29 @@
 # Recap on experiments
 
-- [-] XP042: semafor on FN 1.5 FT with MXPOST + MST
+- [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
 - [-] XP043: open-sesame on FN 1.5 FT with MXPOST
 - [-] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [-] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
+- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [ ] XP046: frame identification on FN 1.5 FT with MXPOST + MST
 - [ ] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [-] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [-] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
+- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP050: frame identification on FN 1.5 FT + EX with MXPOST + MST
 - [ ] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
 - [ ] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
 - [-] XP053: open-sesame on FN 1.7 FT with MXPOST
 - [ ] XP054: semafor on FN 1.7 FT with MXPOST + MST
-- [ ] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
+- [-] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: semafor on FN 1.7 FT with NLP4J + MST
-- [ ] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
+- [-] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [ ] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
 - [ ] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
 - [-] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
 - [-] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
-- [ ] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
-- [ ] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
+- [-] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
+- [-] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
 - [ ] XP066: frame identification on FN 1.5 FT with NLP4J + BMST
 - [ ] XP067: frame identification on FN 1.7 FT with MXPOST + MST
 - [ ] XP068: frame identification on FN 1.7 FT + EX with MXPOST + MST
