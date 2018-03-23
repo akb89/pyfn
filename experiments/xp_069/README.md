@@ -14,11 +14,10 @@ Splits are generated with:
 pyfn convert \
   --from fnxml \
   --to semafor \
-  --source /path/to/fndata-1.5 \
+  --source /path/to/fndata-1.5-with-dev \
   --target /path/to/experiments/xp_069/data \
   --splits train \
-  --output_sentences \
-  --excluded_frames 398
+  --output_sentences
 ```
 
 ### Data preparation
