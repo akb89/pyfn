@@ -5,8 +5,7 @@ semafor on FN 1.5 FT with NLP4J + MST
 ### Test scores
 | P| R | F1 |
 | --- | --- | --- |
-| 66.2 | 55.5 | 60.3 |
-| 61.2 | 55.5 | 58.2 |
+| 60.2 | 55.4 | 57.7 |
 
 ### Splits generation
 Splits are generated with:
