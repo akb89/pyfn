@@ -17,8 +17,7 @@ pyfn convert \
   --target /path/to/experiments/xp_092/data \
   --splits train \
   --with_exemplars \
-  --output_sentences \
-  --excluded_frames 398
+  --output_sentences
 ```
 
 ### Data preparation
