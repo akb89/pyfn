@@ -7,6 +7,7 @@ semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
 | --- | --- | --- |
 | 69.4 | 60.2 | 64.5 |
 | 64.3 | 60.2 | 62.2 |
+| 65.0 | 60.0 | 62.4 |
 
 ### Splits generation
 ```
@@ -18,7 +19,6 @@ pyfn convert \
   --splits train \
   --with_exemplars \
   --output_sentences \
-  --excluded_frames 398 \
   --filter no_fes
 ```
 

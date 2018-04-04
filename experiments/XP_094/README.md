@@ -5,8 +5,7 @@ semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 68.1 | 59.4 | 63.4 |
-| 63.0 | 59.4 | 61.1 |
+| 64.2 | 61.1 | 62.6 |
 
 ### Splits generation
 ```
@@ -17,8 +16,7 @@ pyfn convert \
   --target /path/to/experiments/xp_094/data \
   --splits train \
   --with_exemplars \
-  --output_sentences \
-  --excluded_frames 398
+  --output_sentences
 ```
 
 ### Data preparation

@@ -5,20 +5,20 @@
 - [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
 - [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
 - [ ] XP046: frame identification on FN 1.5 FT with MXPOST + MST
-- [ ] XP047: semafor on FN 1.7 FT with NLP4J + BMST
+- [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
 - [x] XP048: open-sesame on FN 1.7 FT with NLP4J
 - [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP050: frame identification on FN 1.5 FT + EX with MXPOST + MST
-- [ ] XP051: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with old .csv files)
-- [ ] XP052: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY (with old .csv files)
+- [ ] XP051:
+- [ ] XP052:
 - [x] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [ ] XP054: semafor on FN 1.7 FT with MXPOST + MST
+- [x] XP054: semafor on FN 1.7 FT with MXPOST + MST
 - [x] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
 - [ ] XP056: semafor on FN 1.7 FT with NLP4J + MST
 - [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
 - [ ] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [ ] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
-- [ ] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
+- [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
+- [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
 - [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
 - [x] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
 - [x] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
@@ -44,18 +44,18 @@
 - [ ] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
 - [ ] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
 - [ ] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
-- [ ] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY (with new .csv files)
+- [ ] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY
 - [x] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
 - [x] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
-- [-] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
+- [x] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 - [ ] XP090: frame identification on FN 1.5 FT + EX with NLP4J + BMST
 - [ ] XP091: semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
-- [-] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
-- [ ] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
-- [ ] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
-- [ ] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
-- [ ] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
-- [ ] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
+- [x] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
+- [x] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
+- [x] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
+- [-] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
+- [-] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
+- [-] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
 - [ ] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
 - [ ] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
 - [ ] XP147: semafor on FN 1.7 FT with NLP4J + BMST with predicted frames

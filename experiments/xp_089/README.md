@@ -5,8 +5,7 @@ semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 66.1 | 60.2 | 63.0 |
-| 61.2 | 60.2 | 60.7 |
+| 60.1 | 60.6 | 60.4 |
 
 ### Splits generation
 ```
