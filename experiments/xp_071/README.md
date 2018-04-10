@@ -5,7 +5,7 @@ semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 59.8 | 55.8 | 57.8 |
+| 67.0 | 55.7 | 60.8 |
 
 ### Splits generation
 ```
@@ -42,5 +42,5 @@ pyfn convert \
 
 ### Scoring
 ```
-./score.sh -x 071 -p semafor -s test
+./score.sh -x 071 -p semafor -s test -f gold
 ```

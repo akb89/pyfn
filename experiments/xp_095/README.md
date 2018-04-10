@@ -5,8 +5,7 @@ semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 70.8 | 61.7 | 65.9 |
-| 65.6 | 61.7 | 63.6 |
+| 62.7 | 63.5 | 63.1 |
 
 ### Splits generation
 ```

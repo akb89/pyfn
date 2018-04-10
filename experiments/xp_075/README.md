@@ -5,8 +5,7 @@ semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 64.4 | 59.1 | 61.6 |
-| 59.6 | 59.1 | 59.4 |
+| 59.9 | 58.9 | 59.4 |
 
 ### Splits generation
 ```
@@ -18,9 +17,7 @@ pyfn convert \
   --splits train \
   --with_exemplars \
   --output_sentences \
-  --excluded_frames 398 \
-  --excluded_sentences 1565683 \
-  --filter non_breaking_spaces no_fes
+  --filter no_fes
 ```
 
 ### Data preparation
