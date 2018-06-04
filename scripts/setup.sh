@@ -2,18 +2,18 @@
 
 # SEMAFOR options to be changed according to your env
 export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
-export num_threads=2
+export num_threads=2 # number of threads to use 
 export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
 export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
 
-# SEMAFOR/SEMAFOR hyperparameters
+# SEMAFOR hyperparameters
 export kbest=1 # keep k-best parse
 export lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
 export batch_size=4000 # number of batches processed at once for argument identification.
 export save_every_k_batches=400 # for argument identification
 export num_models_to_save=60 # for argument identification
 
-# Do not change the following
+# You should not need to change anything below
 export SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export XP_DIR="${SCRIPTS_DIR}/../experiments"
 export RESOURCES_DIR="${SCRIPTS_DIR}/../resources"

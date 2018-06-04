@@ -10,6 +10,77 @@
 
 Welcome to **pyfn**, a Python modules to process FrameNet XML data.
 
+pyfn provides a set of models and utils to apply custom preprocessing
+pipelines to FrameNet XML data and perform frame semantic parsing using
+SEMAFOR, OPEN-SESAME or SIMPLEFRAMEID.
+
+Currently supported formats include:
+- FrameNet XML
+- SEMEVAL XML
+- BIOS
+- CoNLL-X
+
+Currently supported POS taggers include:
+- MXPOST
+- NLP4J
+
+Currently supported dependency parsers include:
+- MST
+- BIST BARCH
+- BIST BMST
+
+Currently supported frame semantic parsers include:
+- SIMPLEFRAMEID for frame identification
+- SEMAFOR for argument identification
+- OPEN-SESAME for argument identification
+
+## Install
+```
+pip3 install pyfn
+```
+
+If you intend to use the SEMEVAL perl evaluation scripts, make sure
+to have the `App::cpanminus` and `XML::Parser` modules installed:
+```
+cpan App::cpanminus
+cpanm XML::Parser
+```
+
+If you intend to use the [BIST]() or [OPEN-SESAME]() parsers, you need
+to install DyNET 2.0 following:
+```
+https://dynet.readthedocs.io/en/2.0.3/python.html
+```
+
+## Config
+To use NLP4J for POS tagging, modify the `resources/config-decode-pos.xml`
+file by replacing the models.pos absolute path to
+your `resources/nlp4j.plemma.model.all.xz`:
+```xml
+<configuration>
+	...
+	<models>
+		<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+	</models>
+</configuration>
+```
+
+To use the SEMAFOR frame semantic parser, modify the `scripts/setup.sh` file:
+```bash
+# SEMAFOR options to be changed according to your env
+export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
+export num_threads=2 # number of threads to use
+export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
+export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
+
+# SEMAFOR hyperparameters
+export kbest=1 # keep k-best parse
+export lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
+export batch_size=4000 # number of batches processed at once for argument identification.
+export save_every_k_batches=400 # for argument identification
+export num_models_to_save=60 # for argument identification
+```
+
 ## Install
 To run pyfn and all the scripts located under scripts/ you need the following files:
 - [data.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
@@ -46,20 +117,11 @@ Extract the content of all the archives via `7z x archive_name.7z` under the pyf
 |   |-- tests
 ```
 
-Modify the `resources/config-decode-pos.xml` file by replace the models.pos absolute path to your `resources/nlp4j.plemma.model.all.xz`
+Modify the `resources/config-decode-pos.xml` file by replace the
+models.pos absolute path to your `resources/nlp4j.plemma.model.all.xz`
 ```xml
 <configuration>
-	<tsv>
-		<column index="1" field="form"/>
-		<column index="2" field="lemma"/>
-		<column index="3" field="pos"/>
-	</tsv>
-
-	<lexica>
-		<ambiguity_classes field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-ambiguity-classes-simplified-lowercase.xz</ambiguity_classes>
-		<word_clusters field="word_form_simplified_lowercase">edu/emory/mathcs/nlp/lexica/en-brown-clusters-simplified-lowercase.xz</word_clusters>
-	</lexica>
-
+	...
 	<models>
 		<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
 	</models>
