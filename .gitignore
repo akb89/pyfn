@@ -115,3 +115,6 @@ debug.sh
 experiments/xp_000/*
 frameid/
 check.py
+
+PACKAGE.md
+package.py

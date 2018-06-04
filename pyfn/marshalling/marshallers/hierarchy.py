@@ -16,6 +16,7 @@ __all__ = ['marshall_relations']
 logger = logging.getLogger(__name__)
 
 
+# pylint: disable-msg=R0914
 def _get_parents(frame_name, frame_relations_dict):
     parents = []
     if frame_name not in frame_relations_dict:

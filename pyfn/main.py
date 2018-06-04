@@ -9,7 +9,6 @@ import argparse
 import logging
 import logging.config
 
-import pyfn.utils.config as config_utils
 import pyfn.marshalling.marshallers.bios as biosm
 import pyfn.marshalling.marshallers.hierarchy as hierm
 import pyfn.marshalling.marshallers.semafor as semaform
@@ -18,8 +17,8 @@ import pyfn.marshalling.unmarshallers.bios as biosu
 import pyfn.marshalling.unmarshallers.framenet as fnxml
 import pyfn.marshalling.unmarshallers.semafor as semaforu
 
+import pyfn.utils.config as config_utils
 import pyfn.utils.files as futils
-
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
@@ -132,7 +131,7 @@ def main():
                                 choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
                                 help='''source format. Choose between:
-    - semafor: the format used by the semafor fork of the semafor parser
+    - semafor: the format used by the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
@@ -142,7 +141,7 @@ def main():
                                 choices=['semafor', 'bios', 'semeval',
                                          'fnxml'],
                                 help='''target format. Choose between:
-    - conll: the CoNLL format used by the semafor fork of the semafor parser
+    - conll: the CoNLL format used by the semafor parser
     - bios: the BIOS format used by the open-sesame parser
     - semeval: the SEMEVAL 2008 XML format
     - fnxml: the standard FrameNet XML format
@@ -169,11 +168,11 @@ def main():
                                 nargs='+',
                                 default=[],
                                 help='''filtering options for the training set:
-    - overlap_fes: filters out annosets with overlapping frame elements
-    - disc_fes: filters out annosets with discontinuous frame elements
-    - disc_targets: filters out annosets with discontinuous targets
-    - no_fes: filters out annotationsets with no frame element labels
-    - non_breaking_spaces: filters out annotationsets with sentence.text
+    - overlap_fes: filter out annosets with overlapping frame elements
+    - disc_fes: filter out annosets with discontinuous frame elements
+    - disc_targets: filter out annosets with discontinuous targets
+    - no_fes: filter out annotationsets with no frame element labels
+    - non_breaking_spaces: filter out annotationsets with sentence.text
       containing non-breaking spaces
     ''')
     parser_convert.add_argument('--excluded_frames',

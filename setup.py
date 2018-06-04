@@ -6,14 +6,19 @@ This file details modalities for packaging the pyfn application.
 
 from setuptools import setup
 
+with open('README.md', 'r') as fh:
+    long_description = fh.read()
+
 setup(
     name='pyfn',
     description='A python module to process FrameNet XML data',
     author='Alexandre Kabbach',
     author_email='akb@3azouz.net',
-    version='0.1.0',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    version='1.0.0-rc.4',
     url='https://github.com/akb89/pyfn',
-    download_url='https://github.com/akb89/pyfn/archive/0.1.0.tar.gz',
+    download_url='https://github.com/akb89/pyfn/archive/1.0.0-rc.1.tar.gz',
     license='MIT',
     keywords=['framenet', 'xml', 'marshalling', 'unmarshalling'],
     platforms=['any'],
@@ -24,17 +29,17 @@ setup(
               'pyfn.marshalling.unmarshallers',
               'pyfn.models',
               'pyfn.utils'],
+    package_data={'pyfn': ['logging/*.yml']},
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'pyfn = pyfn.main:main'
         ],
     },
-    install_requires=['PyYAML==3.12', 'mmh3==2.5.1', 'lxml==4.1.1',
-                      'nltk==3.2.5', 'pytz'],
-    setup_requires=['pytest-runner==4.0', 'pytest-pylint==0.8.0'],
-    tests_require=['pytest==3.4.1', 'pylint==1.8.2', 'pytest-cov==2.5.1'],
-    classifiers=['Development Status :: 2 - Pre-Alpha',
-                 'Environment :: Web Environment',
+    install_requires=['PyYAML==3.12', 'mmh3==2.5.1', 'lxml==4.2.1',
+                      'pytz==2018.4'],
+    classifiers=['Development Status :: 4 - Beta',
+                 'Environment :: Console',
                  'Intended Audience :: Developers',
                  'Intended Audience :: Education',
                  'Intended Audience :: Science/Research',
