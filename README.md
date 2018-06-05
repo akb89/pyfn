@@ -5,7 +5,6 @@
 [![Requirements Status][req-image]][req-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![FrameNet][framenet-image]][framenet-url]
-[![Python][python-image]][python-url]
 [![MIT License][license-image]][license-url]
 
 Welcome to **pyfn**, a Python modules to process FrameNet annotation.
@@ -96,8 +95,6 @@ pyfn --from conll --to semeval --source /abs/path/to/conll/file --target /abs/pa
 [coverage-url]:https://coveralls.io/github/akb89/pyfn?branch=master
 [framenet-image]:https://img.shields.io/badge/framenet-1.5%E2%87%A1-blue.svg?style=flat-square
 [framenet-url]:https://framenet.icsi.berkeley.edu/fndrupal
-[python-image]:https://img.shields.io/pypi/pyversions/pyfn.svg?style=flat-square
-[python-url]:https://github.com/akb89/pyfn/releases/latest
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE.txt
 [req-url]:https://requires.io/github/akb89/pyfn/requirements/?branch=master
