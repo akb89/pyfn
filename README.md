@@ -19,6 +19,13 @@ To use pyfn to replicate frame semantic parsing results for SEMAFOR,
 OPEN-SESAME and SIMPLEFRAMEID on a common preprocessing pipeline,
 check out [REPLICATION.md](REPLICATION.md).
 
+## Why use pyfn?
+pyfn relies on a common set of python models to convert FrameNet data to
+and from any format. It guarantees:
+- No overlap between train / dev / test splits data
+- No data loss when converting to SEMEVAL XML format
+-
+
 ## Dependencies
 On Linux:
 ```
@@ -46,33 +53,47 @@ When using pyfn, your FrameNet splits directory structure should follow:
 |   |   |-- lu
 ```
 
-### From FN XML to BIOS
+## Formats
+For an exhaustive description of all formats, check out [FORMAT.md](FORMAT.md).
 
+## Conversion HowTo
+The following sections provide examples of commands to convert FN data
+to and from different formats. All commands can make use of the following options:
+1. `--splits`: specify which splits should be converted. Use `--splits dev`
+to only process dev and test splits and guarantee no overlap between
+dev and test. Use `--splits train` to process train dev and test splits and
+guarantee no overlap across splits. Default to `--splits test`.
+2. `--output_sentences`: if specified, will output a `.sentences` file
+in the process, containing all raw annotated sentences, one sentence per line.
+3. `--with_exemplars`: if specified, will process the exemplars (data under
+the `lu` directory) in addition to fulltext.
+4. `--filter`: specify data filtering options (see details below).
+
+### From FN XML to BIOS
+To convert data from FrameNet XML format to BIOS format:
 ```bash
-pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir
+pyfn convert \
+  --from fnxml \
+  --to bios \
+  --source /abs/path/to/fndata-1.x \
+  --target /abs/path/to/output/dir \
+  --splits train \
+  --output_sentences \
+  --filter overlap_fes
 ```
-To add exemplars to fulltext data, do:
-```bash
-pyfn --from fnxml --to bios --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --with_exemplars true
-```
+Using `--filter overlap_fes` will skip all annotationsets with overlapping
+frame elements, as those cases are not supported in the BIOS format.
+
 
 ### From FN XML to CoNLL
 ```bash
-pyfn --from fnxml --to conll --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir
-```
-To add exemplars to fulltext data, do:
-```bash
-pyfn --from fnxml --to conll --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --with_exemplars true
+pyfn --from fnxml --to conll --source /abs/path/to/fndata-1.x --target /abs/path/to/output/dir
 ```
 
 ### From FN XML to SEMEVAL XML
-To generate a `dev.gold.xml` file in SEMEVAL format:
-```bash
-pyfn --from fnxml --to semeval --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --splits dev
-```
 To generate a `test.gold.xml` file in SEMEVAL format:
 ```bash
-pyfn --from fnxml --to semeval --source /abs/path/to/fn/splits/dir --target /abs/path/to/output/dir --splits test
+pyfn --from fnxml --to semeval --source /abs/path/to/fndata-1.x --target /abs/path/to/output/dir --splits test
 ```
 
 ### From BIOS to SEMEVAL XML

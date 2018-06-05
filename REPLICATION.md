@@ -1,4 +1,4 @@
-# pyfn
+# Replication
 
 pyfn provides a set of models and utils to apply custom preprocessing
 pipelines to FrameNet XML data and perform frame semantic parsing using
