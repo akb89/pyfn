@@ -1,6 +1,7 @@
 stages:
  - build
  - test
+ - lint 
 
 build:python3.5:
  image: python:3.5
@@ -15,9 +16,29 @@ build:python3.6:
 test:python3.5:
  image: python:3.5
  stage: test
- script: pip install pytest==3.4.1 pytest-cov==2.5.1 test && python -m pytest --cov=pyfn tests/
+ script: pip install pytest==3.4.1 pytest-cov==2.5.1 && python -m pytest --cov=pyfn tests/
  
 test:python3.6:
  image: python:3.6
  stage: test
  script: pip install pytest==3.4.1 pytest-cov==2.5.1 && python -m pytest --cov=pyfn tests/
+ 
+lint:python3.5:
+ image: python:3.5
+ stage: lint
+ script: pip install pylint==1.8.2 && pylint pyfn
+ 
+lint:python3.6:
+ image: python:3.6
+ stage: lint
+ script: pip install pylint==1.8.2 && pylint pyfn
+ 
+docstyle:python3.5:
+ image: python:3.5
+ stage: lint
+ script: pip install pydocstyle==2.1.1 && pydocstyle pyfn
+ 
+docstyle:python3.6:
+ image: python:3.6
+ stage: lint
+ script: pip install pydocstyle==2.1.1 && pydocstyle pyfn
