@@ -1,0 +1,16 @@
+before_script:
+  - apt-get update -qq
+
+stages:
+  - build
+  - test
+
+build:python3.5:
+  image: python:3.5
+  stage: build
+  script: python setup.py -q install
+  
+build:python3.6:
+  image: python:3.6
+  stage: build
+  script: python setup.py -q install
