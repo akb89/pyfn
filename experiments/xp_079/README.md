@@ -6,7 +6,6 @@ open-sesame on FN 1.5 FT with NLP4J + MST
 | P | R | F1 |
 | --- | --- | --- |
 | 66.2 | 60.2 | 63.1 |
-| 61.2 | 60.2 | 60.7 |
 
 ### Splits generation
 ```

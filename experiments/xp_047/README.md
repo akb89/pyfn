@@ -5,9 +5,7 @@ semafor on FN 1.7 FT with NLP4J + BMST
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 61.2 | 55.2 | 58.1 |
-| 60.4 | 55.2 | 57.7 |
-| 64.8 | 55.7 | 59.9 | Good one (last)
+| 64.8 | 55.7 | 59.9 |
 
 ### Splits generation
 ```

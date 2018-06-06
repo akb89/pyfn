@@ -1,140 +1,65 @@
 # Recap on experiments
 
-- [x] XP042: semafor on FN 1.5 FT with MXPOST + MST
-- [x] XP043: open-sesame on FN 1.5 FT with MXPOST
-- [x] XP044: open-sesame on FN 1.5 FT with MXPOST + MST
-- [x] XP045: semafor on FN 1.5 FT + EX with MXPOST + MST
-- [ ] XP046: frame identification on FN 1.5 FT with MXPOST + MST
-- [x] XP047: semafor on FN 1.7 FT with NLP4J + BMST
-- [x] XP048: open-sesame on FN 1.7 FT with NLP4J
-- [x] XP049: semafor on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP050: frame identification on FN 1.5 FT + EX with MXPOST + MST
-- [ ] XP051:
-- [ ] XP052:
-- [x] XP053: open-sesame on FN 1.7 FT with MXPOST
-- [x] XP054: semafor on FN 1.7 FT with MXPOST + MST
-- [x] XP055: open-sesame on FN 1.7 FT with NLP4J + MST
-- [ ] XP056: semafor on FN 1.7 FT with NLP4J + MST
-- [x] XP057: open-sesame on FN 1.7 FT with NLP4J + BMST
-- [ ] XP058: semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [x] XP059: open-sesame on FN 1.7 FT with NLP4J + filtered no_fes
-- [-] XP060: open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes
-- [ ] XP061: semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY
-- [x] XP062: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY
-- [x] XP063: semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
-- [x] XP064: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY
-- [x] XP065: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
-- [ ] XP066: frame identification on FN 1.5 FT with NLP4J + BMST
-- [ ] XP067: frame identification on FN 1.7 FT with MXPOST + MST
-- [ ] XP068: frame identification on FN 1.7 FT + EX with MXPOST + MST
-- [x] XP069: semafor on FN 1.5 FT with NLP4J + MST
-- [ ] XP070: semafor on FN 1.5 FT with NLP4J + BMST
-- [x] XP071: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets
-- [x] XP072: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences
-- [x] XP073: semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes
-- [ ] XP074: semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [x] XP075: semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes
-- [ ] XP076: open-sesame on FN 1.5 FT with MXPOST + filtered no_fes
-- [ ] XP077: open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes
-- [ ] XP078: open-sesame on FN 1.5 FT with NLP4J
-- [ ] XP079: open-sesame on FN 1.5 FT with NLP4J + MST
-- [ ] XP080: open-sesame on FN 1.7 FT with MXPOST + MST
-- [ ] XP081: semafor on FN 1.5 FT with NLP4J + BARCH
-- [ ] XP082: open-sesame on FN 1.5 FT with NLP4J + BMST
-- [ ] XP083: open-sesame on FN 1.5 FT with NLP4J + BARCH
-- [ ] XP084: semafor on FN 1.7 FT with NLP4J + BARCH
-- [ ] XP085: open-sesame on FN 1.7 FT with NLP4J + BARCH
-- [ ] XP086: semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY
-- [x] XP087: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY
-- [x] XP088: semafor on FN 1.7 FT + EX with MXPOST + MST
-- [x] XP089: semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes
-- [ ] XP090: frame identification on FN 1.5 FT + EX with NLP4J + BMST
-- [ ] XP091: semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes
-- [x] XP092: semafor on FN 1.5 FT + EX with NLP4J + BMST
-- [x] XP093: semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes
-- [x] XP094: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY
-- [x] XP095: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes
-- [-] XP096: semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes
-- [x] XP097: semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes
-- [ ] XP098: frame identification on FN 1.7 FT with NLP4J + BMST
-- [ ] XP099: frame identification on FN 1.7 FT + EX with NLP4J + BMST
-- [ ] XP147: semafor on FN 1.7 FT with NLP4J + BMST with predicted frames
-- [ ] XP148: open-sesame on FN 1.7 FT with NLP4J with predicted frames
-- [ ] XP157: open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames
-- [ ] XP165: semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
-- [ ] XP170: semafor on FN 1.5 FT with NLP4J + BMST with predicted frames
-- [ ] XP178: open-sesame on FN 1.5 FT with NLP4J with predicted frames
-- [ ] XP182: open-sesame on FN 1.5 FT with NLP4J + BMST with predicted frames
-- [ ] XP195: semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames
-
-Lambda tests semafor
-Careful: test on dev
-| XP | Lambda | P | R | F1 |
+| XP | Details | P | R | F1 |
 | --- | --- | --- | --- | --- |
-| 042 | 10^-5 | 59.4 | 49.9 | 54.2 |
-| 042 | 10^-7 | 61.1 | 48.6 | 54.1 |
-| 042 | 10^-9 | 60.8 | 48.8 | 54.1 |
-| 042 | 10^-12 | 60.6 | 48.7 | 54.0 |
-| 054 | 10^-5 | 58.7 | 48.8 | 53.3 |
-| 054 | 10^-7 | 59.1 | 48.2 | 53.1 |
-| 054 | 10^-9 | 59.3 | 48.5 | 53.3 |
-| 054 | 10^-12 | 59.5 | 47.9 | 53.1 |
-| 065 | 10^-5 | 63.8 | 56.6 | 60.0 |
-| 065 | 10^-7 | 63.2 | 56.9 | 59.9 |
-| 065 | 10^-9 |  |  |
-| 065 | 10^-12 |  |  |
-| 095 | 10^-5 | 64.6 | 57.4 | 60.8 |
-| 095 | 10^-7 | 66.8 | 55.8 | 60.8 |
-| 095 | 10^-9 |  |  |
-| 095 | 10^-12 |  |  |
-
-| XP | P | R | F1 |
-| --- | --- | --- | --- |
-| 042 |  |  |  |
-| 043 |  |  |  |
-| 044 |  |  |  |
-| 045 |  |  |  |
-| 047 |  |  |  |
-| 048 |  |  |  |
-| 049 |  |  |  |
-| 051 |  |  |  |
-| 052 |  |  |  |
-| 053 |  |  |  |
-| 054 |  |  |  |
-| 055 |  |  |  |
-| 056 |  |  |  |
-| 057 |  |  |  |
-| 058 |  |  |  |
-| 059 |  |  |  |
-| 060 |  |  |  |
-| 061 |  |  |  |
-| 062 |  |  |  |
-| 063 |  |  |  |
-| 064 |  |  |  |
-| 065 |  |  |  |
-| 069 |  |  |  |
-| 070 |  |  |  |
-| 071 |  |  |  |
-| 072 |  |  |  |
-| 073 |  |  |  |
-| 074 |  |  |  |
-| 075 |  |  |  |
-| 076 |  |  |  |
-| 077 |  |  |  |
-| 078 |  |  |  |
-| 079 |  |  |  |
-| 080 |  |  |  |
-| 081 |  |  |  |
-| 082 |  |  |  |
-| 083 |  |  |  |
-| 084 |  |  |  |
-| 085 |  |  |  |
-| 086 |  |  |  |
-| 087 |  |  |  |
-| 088 |  |  |  |
-| 089 |  |  |  |
-| 091 |  |  |  |
-| 092 |  |  |  |
-| 093 |  |  |  |
-| 094 |  |  |  |
-| 095 |  |  |  |
+| 042 | semafor on FN 1.5 FT with MXPOST + MST | 59.1 | 54.3 | 56.6 |
+| 043 | open-sesame on FN 1.5 FT with MXPOST | 59.7 | 59.4 | 59.5 |
+| 044 | open-sesame on FN 1.5 FT with MXPOST + MST | 59.8 | 59.8 | 59.8 |
+| 045 | semafor on FN 1.5 FT + EX with MXPOST + MST | 63.0 | 55.4 | 59.0 |
+| 047 | semafor on FN 1.7 FT with NLP4J + BMST | 64.8 | 55.7 | 59.9 |
+| 048 | open-sesame on FN 1.7 FT with NLP4J | 63.1 | 58.8 | 60.9 |
+| 049 | semafor on FN 1.7 FT + EX with NLP4J + BMST | 63.9 | 57.5 | 60.6 |
+| 050 | frame identification on FN 1.5 FT + EX with MXPOST + MST |  |  |
+| 053 | open-sesame on FN 1.7 FT with MXPOST | 62.9 | 58.4 | 60.6 |
+| 054 | semafor on FN 1.7 FT with MXPOST + MST | 61.2 | 53.5 | 57.1 |
+| 055 | open-sesame on FN 1.7 FT with NLP4J + MST | 64.4 | 59.6 | 61.9 |
+| 056 | semafor on FN 1.7 FT with NLP4J + MST | 59.1 | 53.4 | 56.1 |
+| 057 | open-sesame on FN 1.7 FT with NLP4J + BMST | 64.6 | 59.3 | 61.8 |
+| 058 | semafor on FN 1.7 FT with NLP4J + BMST + filtered no_fes |  |  |
+| 059 | open-sesame on FN 1.7 FT with NLP4J + filtered no_fes |  |  |
+| 060 | open-sesame on FN 1.7 FT with NLP4J + BMST + filtered no_fes |  |  |
+| 061 | semafor on FN 1.7 FT with MXPOST + MST + HIERARCHY | 62.5 | 53.7 | 57.8 |
+| 062 | semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY | 61.9 | 56.3 | 59.0 |
+| 063 | semafor on FN 1.7 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes | 63.6 | 57.4 | 60.4 |
+| 064 | semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY | 65.8 | 58.6 | 62.0 |
+| 065 | semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes | 67.7 | 59.4 | 63.3 |
+| 066 | frame identification on FN 1.5 FT with NLP4J + BMST | | |
+| 067 | frame identification on FN 1.7 FT with MXPOST + MST | | |
+| 068 | frame identification on FN 1.7 FT + EX with MXPOST + MST | | |
+| 069 | semafor on FN 1.5 FT with NLP4J + MST | 60.2 | 55.4 | 57.7 |
+| 070 | semafor on FN 1.5 FT with NLP4J + BMST | 67.5 | 56.4 | 61.4 |
+| 071 | semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered discontinuous targets |  |  |
+| 072 | semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered sentences |  |  |
+| 073 | semafor on FN 1.7 FT + EX with NLP4J + BMST + filtered no_fes | 64.3 | 59.4 | 61.8 |
+| 074 | semafor on FN 1.5 FT with MXPOST + MST + filtered no_fes |  |  |
+| 075 | semafor on FN 1.5 FT + EX with MXPOST + MST + filtered no_fes | 59.9 | 58.9 | 59.4 |
+| 076 | open-sesame on FN 1.5 FT with MXPOST + filtered no_fes |  |  |
+| 077 | open-sesame on FN 1.5 FT with MXPOST + MST + filtered no_fes |  |  |
+| 078 | open-sesame on FN 1.5 FT with NLP4J | 64.8 | 60.2 | 62.4 |
+| 079 | open-sesame on FN 1.5 FT with NLP4J + MST | 66.2 | 60.2 | 63.1 |
+| 080 | open-sesame on FN 1.7 FT with MXPOST + MST | 63.2 | 58.9 | 61.0 |
+| 081 | semafor on FN 1.5 FT with NLP4J + BARCH | 67.6 | 56.8 | 61.7 |
+| 082 | open-sesame on FN 1.5 FT with NLP4J + BMST | 69.4 | 59.6 | 64.1 |
+| 083 | open-sesame on FN 1.5 FT with NLP4J + BARCH | 66.4 | 61.3 | 63.7 |
+| 084 | semafor on FN 1.7 FT with NLP4J + BARCH | 61.2 | 55.8 | 58.4 |
+| 085 | open-sesame on FN 1.7 FT with NLP4J + BARCH | 63.6 | 60.3 | 61.9 |
+| 086 | semafor on FN 1.5 FT with MXPOST + MST + HIERARCHY | 60.3 | 54.9 | 57.5 |
+| 087 | semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY | 61.7 | 58.2 | 59.9 |
+| 088 | semafor on FN 1.7 FT + EX with MXPOST + MST | 61.0 | 55.1 | 57.9 |
+| 089 | semafor on FN 1.5 FT + EX with MXPOST + MST + HIERARCHY + filtered no_fes | 60.1 | 60.6 | 60.4 |
+| 090 | frame identification on FN 1.5 FT + EX with NLP4J + BMST | | |
+| 091 | semafor on FN 1.5 FT with NLP4J + BMST + filtered no_fes |  |  |
+| 092 | semafor on FN 1.5 FT + EX with NLP4J + BMST | 65.0 | 58.9 | 61.8 |
+| 093 | semafor on FN 1.5 FT + EX with NLP4J + BMST + filtered no_fes |  |  |
+| 094 | semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY | 64.2 | 61.1 | 62.6 |
+| 095 | semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes | 62.7 | 63.5 | 63.1 |
+| 096 | semafor on FN 1.7 FT with MXPOST + MST + filtered no_fes |
+| 097 | semafor on FN 1.7 FT + EX with MXPOST + MST + filtered no_fes | 64.8 | 54.9 | 59.4 |
+| 147 | semafor on FN 1.7 FT with NLP4J + BMST with predicted frames |
+| 148 | open-sesame on FN 1.7 FT with NLP4J with predicted frames |
+| 157 | open-sesame on FN 1.7 FT with NLP4J + BMST with predicted frames |
+| 165 | semafor on FN 1.7 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames |
+| 170 | semafor on FN 1.5 FT with NLP4J + BMST with predicted frames |
+| 178 | open-sesame on FN 1.5 FT with NLP4J with predicted frames |
+| 182 | open-sesame on FN 1.5 FT with NLP4J + BMST with predicted frames |
+| 195 | semafor on FN 1.5 FT + EX with NLP4J + BMST + HIERARCHY + filtered no_fes with predicted frames |

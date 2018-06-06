@@ -5,7 +5,6 @@ open-sesame on FN 1.7 FT with MXPOST + MST
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 64.2 | 58.9 | 61.4 |
 | 63.2 | 58.9 | 61.0 |
 
 ### Splits generation
