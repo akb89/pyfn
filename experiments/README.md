@@ -1,8 +1,7 @@
 # Recap on experiments
 
 Below is a detailed recap table on experiments reported in Kabbach et al. (2018).
-Check out each experiment directory for detailed instructions on how to replicate
-experiments. 
+Check out each experiment's directory for detailed replication instructions.
 
 | XP | Details | P | R | F1 |
 | --- | --- | --- | --- | --- |
