@@ -1,5 +1,9 @@
 # Recap on experiments
 
+Below is a detailed recap table on experiments reported in Kabbach et al. (2018).
+Check out each experiment directory for detailed instructions on how to replicate
+experiments. 
+
 | XP | Details | P | R | F1 |
 | --- | --- | --- | --- | --- |
 | 042 | semafor on FN 1.5 FT with MXPOST + MST | 59.1 | 54.3 | 56.6 |
