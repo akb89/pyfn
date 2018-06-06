@@ -15,19 +15,19 @@ pyfn can be used to convert data to and from:
 - CoNLL: the format used by the SEMAFOR parser
 - BIOS: the format used by the OPEN-SESAME parser
 
+This repository also accompanies the Kabbach et al. (2018) paper
+*Butterfly Effects in Frame Semantic Parsing: impact of data processing on model ranking*
+```tex
+
+```
+
 To use pyfn to replicate frame semantic parsing results for SEMAFOR,
 OPEN-SESAME and SIMPLEFRAMEID on a common preprocessing pipeline,
+or to replicate results reported in Kabbach et al. (2018),
 check out [REPLICATION.md](REPLICATION.md).
 
-## Why use pyfn?
-pyfn relies on a common set of python models to convert FrameNet data to
-and from any format. It guarantees:
-- No overlap between train / dev / test splits data
-- No data loss when converting to SEMEVAL XML format
--
-
 ## Dependencies
-On Linux:
+On Unix, you may need to install the following packages:
 ```
 sudo apt-get install libxml2 libxml2-dev libxslt1-dev
 ```
