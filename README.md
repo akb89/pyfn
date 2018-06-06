@@ -1,7 +1,7 @@
 # pyfn
 [![GitHub release][release-image]][release-url]
 [![PyPI release][pypi-image]][pypi-url]
-[![Build][travis-image]][travis-url]
+[![Build][build-image]][build-url]
 [![Requirements Status][req-image]][req-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![FrameNet][framenet-image]][framenet-url]
@@ -110,8 +110,8 @@ pyfn --from conll --to semeval --source /abs/path/to/conll/file --target /abs/pa
 [release-url]:https://github.com/akb89/pyfn/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyfn.svg?style=flat-square
 [pypi-url]:https://github.com/akb89/pyfn/releases/latest
-[travis-image]:https://img.shields.io/travis/akb89/pyfn.svg?style=flat-square
-[travis-url]:https://travis-ci.org/akb89/pyfn
+[build-image]:https://img.shields.io/travis/akb89/pyfn.svg?style=flat-square
+[build-url]:https://gitlab.unige.ch/akb/pyfn/commits/master
 [coverage-image]:https://img.shields.io/coveralls/akb89/pyfn/master.svg?style=flat-square
 [coverage-url]:https://coveralls.io/github/akb89/pyfn?branch=master
 [framenet-image]:https://img.shields.io/badge/framenet-1.5%E2%87%A1-blue.svg?style=flat-square
