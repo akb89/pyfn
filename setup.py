@@ -16,7 +16,7 @@ setup(
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.0.0-rc.4',
+    version='1.0.0rc5',
     url='https://github.com/akb89/pyfn',
     download_url='https://github.com/akb89/pyfn/archive/1.0.0-rc.1.tar.gz',
     license='MIT',
@@ -36,6 +36,7 @@ setup(
             'pyfn = pyfn.main:main'
         ],
     },
+    tests_require=['pytest==3.4.1', 'pylint==1.8.2', 'pytest-cov==2.5.1'],
     install_requires=['PyYAML==3.12', 'mmh3==2.5.1', 'lxml==4.2.1',
                       'pytz==2018.4'],
     classifiers=['Development Status :: 4 - Beta',
