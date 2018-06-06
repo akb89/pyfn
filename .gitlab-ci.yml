@@ -1,0 +1,23 @@
+stages:
+ - build
+ - test
+
+build:python3.5:
+ image: python:3.5
+ stage: build
+ script: python setup.py -q install
+  
+build:python3.6:
+ image: python:3.6
+ stage: build
+ script: python setup.py -q install
+  
+test:python3.5:
+ image: python:3.5
+ stage: test
+ script: python setup.py test && python -m pytest --cov=pyfn tests/
+ 
+test:python3.6:
+ image: python:3.6
+ stage: test
+ script: python setup.py test && python -m pytest --cov=pyfn tests/
