@@ -16,7 +16,7 @@ setup(
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.0.0rc5',
+    version='1.0.0rc1',
     url='https://github.com/akb89/pyfn',
     download_url='https://github.com/akb89/pyfn/archive/1.0.0-rc.1.tar.gz',
     license='MIT',
