@@ -22,9 +22,9 @@ import pyfn.utils.files as futils
 
 from pyfn.exceptions.parameter import InvalidParameterError
 
-logging.config.dictConfig(
-    config_utils.load(
-        os.path.join(os.path.dirname(__file__), 'logging', 'logging.yml')))
+# logging.config.dictConfig(
+#     config_utils.load(
+#         os.path.join(os.path.dirname(__file__), 'logging', 'logging.yml')))
 
 logger = logging.getLogger(__name__)
 
