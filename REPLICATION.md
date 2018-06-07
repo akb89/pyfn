@@ -80,9 +80,9 @@ your `resources/nlp4j.plemma.model.all.xz`:
 ### Using BIST or OPEN-SESAME
 If you intend to use the [BIST]() for dependency parsing or
 [OPEN-SESAME]() for frame semantic parsing, you need
-to install DyNET 2.0 following:
+to install DyNET 2.0.2 following:
 ```
-https://dynet.readthedocs.io/en/2.0.3/python.html
+https://dynet.readthedocs.io/en/2.0.2/python.html
 ```
 
 ### Using SEMAFOR

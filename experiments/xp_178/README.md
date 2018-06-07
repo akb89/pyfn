@@ -7,7 +7,7 @@ open-sesame on FN 1.5 FT with NLP4J with predicted frames
 | --- | --- | --- |
 | 63.7 | 64.4 | 64.1 |
 
-### Splits generation
+### Splits generation for frame identification
 ```
 pyfn convert \
   --from fnxml \
@@ -19,22 +19,55 @@ pyfn convert \
   --excluded_frames 398
 ```
 
-### Preprocessing
+### Splits generation for argument identification
+```
+pyfn convert \
+  --from fnxml \
+  --to bios \
+  --source /path/to/fndata-1.5-with-dev \
+  --target /path/to/experiments/xp_178/data \
+  --splits train \
+  --output_sentences \
+  --excluded_frames 398
+```
+
+### Preprocessing for argument identification
+```
+./preprocess.sh -x 178 -t nlp4j -p open-sesame -v
+```
+
+### Preprocessing for frame identification
+Needs to be after preprocessing for arg. id. 
 ```
 ./preprocess.sh -x 178 -t nlp4j -d bmst -p semafor
 ```
 
 ### Data preparation
 ```
-./prepare.sh -x 178 -p open-sesame -s test -d /path/to/fndata-1.5-with-dev -f predicted
+./prepare.sh -x 178 -p open-sesame -s test -f /path/to/fndata-1.5-with-dev
 ```
 
-### Decoding
+### Training frame identification
+```
+./frameid.sh -m train -x 178
+```
+
+### Training argument identification
+```
+./open-sesame.sh -m train -x 178
+```
+
+### Decoding frame identification
+```
+./frameid.sh -m decode -x 178 -p open-sesame
+```
+
+### Decoding argument identification
 ```
 ./open-sesame.sh -m decode -x 178 -s test
 ```
 
 ### Scoring
 ```
-./score.sh -x 178 -p open-sesame  -s test -f predicted
+./score.sh -x 178 -p open-sesame -s test -f predicted
 ```
