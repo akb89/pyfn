@@ -18,6 +18,16 @@ pyfn convert \
   --output_sentences
 ```
 
+### Preprocessing for frame identification
+```
+./preprocess.sh -x 148 -t nlp4j -d bmst -p semafor
+```
+
+### Training frame identification
+```
+./frameid.sh -m train -x 148
+```
+
 ### Splits generation for argument identification
 ```
 pyfn convert \
@@ -26,18 +36,8 @@ pyfn convert \
   --source /path/to/fndata-1.7-with-dev \
   --target /path/to/experiments/xp_148/data \
   --splits train \
-  --output_sentences
-```
-
-### Preprocessing for argument identification
-```
-./preprocess.sh -x 148 -t nlp4j -p open-sesame -v
-```
-
-### Preprocessing for frame identification
-Needs to be after preprocessing for arg. id.
-```
-./preprocess.sh -x 148 -t nlp4j -d bmst -p semafor
+  --output_sentences \
+  --filter overlap_fes
 ```
 
 ### Data preparation
@@ -45,9 +45,9 @@ Needs to be after preprocessing for arg. id.
 ./prepare.sh -x 148 -p open-sesame -s test -f /path/to/fndata-1.7-with-dev
 ```
 
-### Training frame identification
+### Preprocessing for argument identification
 ```
-./frameid.sh -m train -x 148
+./preprocess.sh -x 148 -t nlp4j -p open-sesame -v
 ```
 
 ### Training argument identification
