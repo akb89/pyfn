@@ -1,21 +1,24 @@
 # pyfn
+[![GitHub release][release-image]][release-url]
 [![PyPI release][pypi-image]][pypi-url]
 [![Build][build-image]][build-url]
+[![Requirements Status][req-image]][req-url]
+[![Code Coverage][coverage-image]][coverage-url]
 [![FrameNet][framenet-image]][framenet-url]
 [![MIT License][license-image]][license-url]
 
 Welcome to **pyfn**, a Python modules to process FrameNet annotation.
 
 pyfn can be used to convert data to and from:
-- FrameNet XML: the format of the released FrameNet XML data
-- Semeval XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
-- Semafor CoNLL: the format used by the SEMAFOR parser
+- FRAMENET XML: the format of the released FrameNet XML data
+- SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
+- SEMAFOR CoNLL: the format used by the SEMAFOR parser
 - BIOS: the format used by the OPEN-SESAME parser
 
 As well as to generate the `.csv` hierarchy files used by both SEMAFOR and
-OPEN-SESAME parsers to integrate the hierarchy feature (see Kshirsagar et al., 2015 for details).
+OPEN-SESAME parsers to integrate the hierarchy feature (see (Kshirsagar et al., 2015) for details).
 
-This repository also accompanies the Kabbach et al. (2018) paper:
+This repository also accompanies the (Kabbach et al., 2018) paper:
 
 ```tex
 @InProceedings{C18-1267,
@@ -40,7 +43,7 @@ check out [REPLICATION.md](REPLICATION.md).
 ## Dependencies
 On Unix, you may need to install the following packages:
 ```
-sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+libxml2 libxml2-dev libxslt1-dev
 ```
 
 ## Install
@@ -162,14 +165,14 @@ pyfn generate \
   --source /abs/path/to/fndata-1.x \
   --target /abs/path/to/xp/data/output/dir
 ```
-To also process exemplars, add the `--with_exemplars` option 
+To also process exemplars, add the `--with_exemplars` option
 
 [release-image]:https://img.shields.io/github/release/akb89/pyfn.svg?style=flat-square
 [release-url]:https://github.com/akb89/pyfn/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyfn.svg?style=flat-square
 [pypi-url]:https://github.com/akb89/pyfn/releases/latest
 [build-image]:https://img.shields.io/travis/akb89/pyfn.svg?style=flat-square
-[build-url]:https://gitlab.unige.ch/akb/pyfn/commits/master
+[build-url]:https://gitlab.com/akb89/pyfn/commits/master
 [coverage-image]:https://img.shields.io/coveralls/akb89/pyfn/master.svg?style=flat-square
 [coverage-url]:https://coveralls.io/github/akb89/pyfn?branch=master
 [framenet-image]:https://img.shields.io/badge/framenet-1.5%E2%87%A1-blue.svg?style=flat-square

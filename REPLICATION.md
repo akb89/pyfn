@@ -5,27 +5,27 @@ pipelines to FrameNet XML data and perform frame semantic parsing using
 SEMAFOR, OPEN-SESAME or SIMPLEFRAMEID.
 
 Currently supported POS taggers include:
-- MXPOST
-- NLP4J
+- MXPOST (Ratnaparkhi, 1996)
+- NLP4J (Choi, 2016)
 
 Currently supported dependency parsers include:
-- MST
-- BIST BARCH
-- BIST BMST
+- MST (McDonald et al., 2006)
+- BIST BARCH (Kiperwasser and Goldberg, 2016)
+- BIST BMST (Kiperwasser and Goldberg, 2016)
 
 Currently supported frame semantic parsers include:
-- SIMPLEFRAMEID for frame identification
-- SEMAFOR for argument identification
-- OPEN-SESAME for argument identification
+- SIMPLEFRAMEID (Hartmann et al., 2017) for frame identification
+- SEMAFOR (Kshirsagar et al., 2015) for argument identification
+- OPEN-SESAME (Swayamdipta et al., 2017) for argument identification
 
 ## Download
 Download the following:
-- [data.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
-- [lib.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
-- [resources.7z](https://github.com/akb89/pyfn/releases/download/v0.1.0/resources.7z) containing all the required resources
+- [data.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
+- [lib.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
+- [resources.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/resources.7z) containing all the required resources
 - [scripts.7z]() containing the set of bash scripts to call the different parsers and preprocessing toolkits
 
-Extract the content of all the archives via `7z x archive_name.7z` under a
+Extract the content of all the archives under a
 directory named `pyfn`. Your pyfn folder structure should look like:
 ```
 .
@@ -78,8 +78,8 @@ your `resources/nlp4j.plemma.model.all.xz`:
 ```
 
 ### Using BIST or OPEN-SESAME
-If you intend to use the [BIST]() for dependency parsing or
-[OPEN-SESAME]() for frame semantic parsing, you need
+If you intend to use the BIST for dependency parsing or
+OPEN-SESAME for frame semantic parsing, you need
 to install DyNET 2.0.2 following:
 ```
 https://dynet.readthedocs.io/en/2.0.2/python.html
