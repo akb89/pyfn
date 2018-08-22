@@ -23,7 +23,7 @@ Download the following:
 - [data.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
 - [lib.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
 - [resources.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/resources.7z) containing all the required resources
-- [scripts.7z]() containing the set of bash scripts to call the different parsers and preprocessing toolkits
+- [scripts.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/scripts.7z) containing the set of bash scripts to call the different parsers and preprocessing toolkits
 
 Extract the content of all the archives under a
 directory named `pyfn`. Your pyfn folder structure should look like:
@@ -89,7 +89,7 @@ https://dynet.readthedocs.io/en/2.0.2/python.html
 To use the SEMAFOR frame semantic parser, modify the `scripts/setup.sh` file:
 ```bash
 # SEMAFOR options to be changed according to your env
-export JAVA_HOME_BIN="/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin"
+export JAVA_HOME_BIN="/abs/path/to/java/jdk/bin"
 export num_threads=2 # number of threads to use
 export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
 export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
