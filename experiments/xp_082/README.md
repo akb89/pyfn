@@ -5,7 +5,7 @@ open-sesame on FN 1.5 FT with NLP4J + BMST
 ### Test scores
 | P | R | F1 |
 | --- | --- | --- |
-| 69.4 | 59.6 | 64.1 |
+| 64.1 | 59.6 | 61.2 |
 
 ### Splits generation
 ```

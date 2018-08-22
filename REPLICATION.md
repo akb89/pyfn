@@ -112,7 +112,7 @@ cpanm XML::Parser
 
 ## Replication
 The `experiments` directory provides a detailed set of instructions to
-replicate all results reported in Kabbach et al. (2018) on experimental
+replicate all results reported in (Kabbach et al., 2018) on experimental
 butterfly effects in frame semantic parsing. Those instructions can be used
 to compare the performances of different frame semantic parsers in various
 experimental setups.
@@ -120,5 +120,16 @@ experimental setups.
 ## Citation
 If you use pyfn please cite:
 ```tex
-
+@InProceedings{C18-1267,
+  author = 	"Kabbach, Alexandre
+		and Ribeyre, Corentin
+		and Herbelot, Aur{\'e}lie",
+  title = 	"Butterfly Effects in Frame Semantic Parsing: impact of data processing on model ranking",
+  booktitle = 	"Proceedings of the 27th International Conference on Computational Linguistics",
+  year = 	"2018",
+  publisher = 	"Association for Computational Linguistics",
+  pages = 	"3158--3169",
+  location = 	"Santa Fe, New Mexico, USA",
+  url = 	"http://aclweb.org/anthology/C18-1267"
+}
 ```

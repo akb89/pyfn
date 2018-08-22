@@ -3,119 +3,119 @@
 ## FrameNet XML
 ```xml
 <sentence corpID="135" docID="23605" sentNo="5" paragNo="7" aPos="0" ID="4099596">
-        <text>' I think , overall , things went very well , ' said Lawton Davis , head of the South Central Health District .</text>
-        <annotationSet cDate="06/06/2006 02:39:48 PDT Tue" status="UNANN" ID="6534937">
-            <layer rank="1" name="PENN">
-                <label end="0" start="0" name="''"/>
-                <label end="2" start="2" name="PP"/>
-                <label end="8" start="4" name="VVP"/>
-                <label end="10" start="10" name=","/>
-                <label end="18" start="12" name="rb"/>
-                <label end="20" start="20" name=","/>
-                <label end="27" start="22" name="nns"/>
-                <label end="32" start="29" name="VVD"/>
-                <label end="37" start="34" name="rb"/>
-                <label end="42" start="39" name="rb"/>
-                <label end="44" start="44" name=","/>
-                <label end="46" start="46" name="''"/>
-                <label end="51" start="48" name="VVD"/>
-                <label end="58" start="53" name="NP"/>
-                <label end="64" start="60" name="NP"/>
-                <label end="66" start="66" name=","/>
-                <label end="71" start="68" name="nn"/>
-                <label end="74" start="73" name="in"/>
-                <label end="78" start="76" name="dt"/>
-                <label end="84" start="80" name="NP"/>
-                <label end="92" start="86" name="NP"/>
-                <label end="99" start="94" name="NP"/>
-                <label end="108" start="101" name="NP"/>
-                <label end="110" start="110" name="sent"/>
-            </layer>
-            <layer rank="1" name="NER">
-                <label end="64" start="53" name="person"/>
-                <label end="108" start="80" name="organization"/>
-            </layer>
-            <layer rank="1" name="WSL">
-                <label end="0" start="0" name="NT"/>
-                <label end="2" start="2" name="NT"/>
-                <label end="10" start="10" name="NT"/>
-                <label end="18" start="12" name="NT"/>
-                <label end="20" start="20" name="NT"/>
-                <label end="37" start="34" name="NT"/>
-                <label end="42" start="39" name="NT"/>
-                <label end="44" start="44" name="NT"/>
-                <label end="46" start="46" name="NT"/>
-                <label end="58" start="53" name="NT"/>
-                <label end="64" start="60" name="NT"/>
-                <label end="66" start="66" name="NT"/>
-                <label end="74" start="73" name="NT"/>
-                <label end="78" start="76" name="NT"/>
-                <label end="84" start="80" name="NT"/>
-                <label end="92" start="86" name="NT"/>
-                <label end="99" start="94" name="NT"/>
-                <label end="108" start="101" name="NT"/>
-                <label end="110" start="110" name="NT"/>
-            </layer>
-        </annotationSet>
-        <annotationSet cDate="06/12/2006 03:43:02 PDT Mon" luID="169" luName="think.v" frameID="19" frameName="Awareness" status="MANUAL" ID="6535298">
-            <layer rank="1" name="Target">
-                <label cBy="RLG" end="8" start="4" name="Target"/>
-            </layer>
-            <layer rank="1" name="FE">
-                <label cBy="RLG" feID="83" bgColor="FF0000" fgColor="FFFFFF" end="2" start="2" name="Cognizer"/>
-                <label cBy="RLG" feID="84" bgColor="0000FF" fgColor="FFFFFF" end="42" start="12" name="Content"/>
-            </layer>
-            <layer rank="1" name="GF">
-                <label end="2" start="2" name="Ext"/>
-                <label end="42" start="12" name="Dep"/>
-            </layer>
-            <layer rank="1" name="PT">
-                <label end="2" start="2" name="NP"/>
-                <label end="42" start="12" name="Sfin"/>
-            </layer>
-            <layer rank="1" name="Other"/>
-            <layer rank="1" name="Sent"/>
-            <layer rank="1" name="Verb"/>
-        </annotationSet>
-        <annotationSet cDate="06/12/2006 03:43:45 PDT Mon" luID="751" luName="say.v" frameID="43" frameName="Statement" status="MANUAL" ID="6535299">
-            <layer rank="1" name="Target">
-                <label cBy="RLG" end="51" start="48" name="Target"/>
-            </layer>
-            <layer rank="1" name="FE">
-                <label cBy="RLG" feID="185" bgColor="00BFFF" fgColor="FFFFFF" end="46" start="0" name="Message"/>
-                <label cBy="RLG" feID="183" bgColor="FF0000" fgColor="FFFFFF" end="108" start="53" name="Speaker"/>
-            </layer>
-            <layer rank="1" name="GF">
-                <label end="46" start="0" name="Head"/>
-                <label end="108" start="53" name="Ext"/>
-            </layer>
-            <layer rank="1" name="PT">
-                <label end="46" start="0" name="QUO"/>
-                <label end="108" start="53" name="NP"/>
-            </layer>
-            <layer rank="1" name="Other"/>
-            <layer rank="1" name="Sent"/>
-            <layer rank="1" name="Verb"/>
-        </annotationSet>
-        <annotationSet cDate="06/12/2006 03:49:28 PDT Mon" luID="1588" luName="head.n" frameID="73" frameName="Leadership" status="MANUAL" ID="6535300">
-            <layer rank="1" name="Target">
-                <label cBy="RLG" end="71" start="68" name="Target"/>
-            </layer>
-            <layer rank="1" name="FE">
-                <label cBy="RLG" feID="6431" bgColor="0000FF" fgColor="FFFFFF" end="108" start="73" name="Governed"/>
-                <label cBy="KmG" feID="347" bgColor="FF0000" fgColor="FFFFFF" end="71" start="68" name="Leader"/>
-            </layer>
-            <layer rank="1" name="GF">
-                <label end="108" start="73" name="Dep"/>
-            </layer>
-            <layer rank="1" name="PT">
-                <label end="108" start="73" name="PP"/>
-            </layer>
-            <layer rank="1" name="Other"/>
-            <layer rank="1" name="Sent"/>
-            <layer rank="1" name="Noun"/>
-        </annotationSet>
-    </sentence>
+    <text>' I think , overall , things went very well , ' said Lawton Davis , head of the South Central Health District .</text>
+    <annotationSet cDate="06/06/2006 02:39:48 PDT Tue" status="UNANN" ID="6534937">
+        <layer rank="1" name="PENN">
+            <label end="0" start="0" name="''"/>
+            <label end="2" start="2" name="PP"/>
+            <label end="8" start="4" name="VVP"/>
+            <label end="10" start="10" name=","/>
+            <label end="18" start="12" name="rb"/>
+            <label end="20" start="20" name=","/>
+            <label end="27" start="22" name="nns"/>
+            <label end="32" start="29" name="VVD"/>
+            <label end="37" start="34" name="rb"/>
+            <label end="42" start="39" name="rb"/>
+            <label end="44" start="44" name=","/>
+            <label end="46" start="46" name="''"/>
+            <label end="51" start="48" name="VVD"/>
+            <label end="58" start="53" name="NP"/>
+            <label end="64" start="60" name="NP"/>
+            <label end="66" start="66" name=","/>
+            <label end="71" start="68" name="nn"/>
+            <label end="74" start="73" name="in"/>
+            <label end="78" start="76" name="dt"/>
+            <label end="84" start="80" name="NP"/>
+            <label end="92" start="86" name="NP"/>
+            <label end="99" start="94" name="NP"/>
+            <label end="108" start="101" name="NP"/>
+            <label end="110" start="110" name="sent"/>
+        </layer>
+        <layer rank="1" name="NER">
+            <label end="64" start="53" name="person"/>
+            <label end="108" start="80" name="organization"/>
+        </layer>
+        <layer rank="1" name="WSL">
+            <label end="0" start="0" name="NT"/>
+            <label end="2" start="2" name="NT"/>
+            <label end="10" start="10" name="NT"/>
+            <label end="18" start="12" name="NT"/>
+            <label end="20" start="20" name="NT"/>
+            <label end="37" start="34" name="NT"/>
+            <label end="42" start="39" name="NT"/>
+            <label end="44" start="44" name="NT"/>
+            <label end="46" start="46" name="NT"/>
+            <label end="58" start="53" name="NT"/>
+            <label end="64" start="60" name="NT"/>
+            <label end="66" start="66" name="NT"/>
+            <label end="74" start="73" name="NT"/>
+            <label end="78" start="76" name="NT"/>
+            <label end="84" start="80" name="NT"/>
+            <label end="92" start="86" name="NT"/>
+            <label end="99" start="94" name="NT"/>
+            <label end="108" start="101" name="NT"/>
+            <label end="110" start="110" name="NT"/>
+        </layer>
+    </annotationSet>
+    <annotationSet cDate="06/12/2006 03:43:02 PDT Mon" luID="169" luName="think.v" frameID="19" frameName="Awareness" status="MANUAL" ID="6535298">
+        <layer rank="1" name="Target">
+            <label cBy="RLG" end="8" start="4" name="Target"/>
+        </layer>
+        <layer rank="1" name="FE">
+            <label cBy="RLG" feID="83" bgColor="FF0000" fgColor="FFFFFF" end="2" start="2" name="Cognizer"/>
+            <label cBy="RLG" feID="84" bgColor="0000FF" fgColor="FFFFFF" end="42" start="12" name="Content"/>
+        </layer>
+        <layer rank="1" name="GF">
+            <label end="2" start="2" name="Ext"/>
+            <label end="42" start="12" name="Dep"/>
+        </layer>
+        <layer rank="1" name="PT">
+            <label end="2" start="2" name="NP"/>
+            <label end="42" start="12" name="Sfin"/>
+        </layer>
+        <layer rank="1" name="Other"/>
+        <layer rank="1" name="Sent"/>
+        <layer rank="1" name="Verb"/>
+    </annotationSet>
+    <annotationSet cDate="06/12/2006 03:43:45 PDT Mon" luID="751" luName="say.v" frameID="43" frameName="Statement" status="MANUAL" ID="6535299">
+        <layer rank="1" name="Target">
+            <label cBy="RLG" end="51" start="48" name="Target"/>
+        </layer>
+        <layer rank="1" name="FE">
+            <label cBy="RLG" feID="185" bgColor="00BFFF" fgColor="FFFFFF" end="46" start="0" name="Message"/>
+            <label cBy="RLG" feID="183" bgColor="FF0000" fgColor="FFFFFF" end="108" start="53" name="Speaker"/>
+        </layer>
+        <layer rank="1" name="GF">
+            <label end="46" start="0" name="Head"/>
+            <label end="108" start="53" name="Ext"/>
+        </layer>
+        <layer rank="1" name="PT">
+            <label end="46" start="0" name="QUO"/>
+            <label end="108" start="53" name="NP"/>
+        </layer>
+        <layer rank="1" name="Other"/>
+        <layer rank="1" name="Sent"/>
+        <layer rank="1" name="Verb"/>
+    </annotationSet>
+    <annotationSet cDate="06/12/2006 03:49:28 PDT Mon" luID="1588" luName="head.n" frameID="73" frameName="Leadership" status="MANUAL" ID="6535300">
+        <layer rank="1" name="Target">
+            <label cBy="RLG" end="71" start="68" name="Target"/>
+        </layer>
+        <layer rank="1" name="FE">
+            <label cBy="RLG" feID="6431" bgColor="0000FF" fgColor="FFFFFF" end="108" start="73" name="Governed"/>
+            <label cBy="KmG" feID="347" bgColor="FF0000" fgColor="FFFFFF" end="71" start="68" name="Leader"/>
+        </layer>
+        <layer rank="1" name="GF">
+            <label end="108" start="73" name="Dep"/>
+        </layer>
+        <layer rank="1" name="PT">
+            <label end="108" start="73" name="PP"/>
+        </layer>
+        <layer rank="1" name="Other"/>
+        <layer rank="1" name="Sent"/>
+        <layer rank="1" name="Noun"/>
+    </annotationSet>
+</sentence>
 ```
 
 ## BIOS
@@ -146,12 +146,15 @@
 24	.	_	.	_	.	0	_	_	13	_	punct	_	_	O	_
 ```
 
-## CoNLL
+## SEMAFOR CoNLL
+The `.frame.elements` format follows:
 ```
 1	0.0	3	Awareness	think.v	2	think	0	Cognizer	1	Content	4:9
 1	0.0	3	Statement	say.v	12	said	0	Message	0:11	Speaker	13:22
 1	0.0	3	Leadership	head.n	16	head	0	Governed	17:22	Leader	16
 ```
+
+The `.sentences.conllx` format (output of the POS tagger and dependency parser) follows:
 
 ```
 1	'	'	''	''	_	3	punct	_	_
@@ -181,3 +184,68 @@
 ```
 
 ## SEMEVAL XML
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<corpus XMLCreated="Wed Aug 22 15:13:02 UTC 2018">
+  <documents>
+    <document>
+      <paragraphs>
+        <paragraph>
+          <sentences>
+            <sentence ID="109">
+              <text>' I think , overall , things went very well , ' said Lawton Davis , head of the South Central Health District .</text>
+              <annotationSets>
+                <annotationSet ID="285" frameName="Awareness">
+                  <layers>
+                    <layer ID="568" name="Target">
+                      <labels>
+                        <label ID="809" name="Target" start="4" end="8"/>
+                      </labels>
+                    </layer>
+                    <layer ID="569" name="FE">
+                      <labels>
+                        <label ID="810" name="Cognizer" start="2" end="2"/>
+                        <label ID="811" name="Content" start="12" end="42"/>
+                      </labels>
+                    </layer>
+                  </layers>
+                </annotationSet>
+                <annotationSet ID="286" frameName="Statement">
+                  <layers>
+                    <layer ID="570" name="Target">
+                      <labels>
+                        <label ID="812" name="Target" start="48" end="51"/>
+                      </labels>
+                    </layer>
+                    <layer ID="571" name="FE">
+                      <labels>
+                        <label ID="813" name="Message" start="0" end="46"/>
+                        <label ID="814" name="Speaker" start="53" end="108"/>
+                      </labels>
+                    </layer>
+                  </layers>
+                </annotationSet>
+                <annotationSet ID="287" frameName="Leadership">
+                  <layers>
+                    <layer ID="572" name="Target">
+                      <labels>
+                        <label ID="815" name="Target" start="68" end="71"/>
+                      </labels>
+                    </layer>
+                    <layer ID="573" name="FE">
+                      <labels>
+                        <label ID="816" name="Governed" start="73" end="108"/>
+                        <label ID="817" name="Leader" start="68" end="71"/>
+                      </labels>
+                    </layer>
+                  </layers>
+                </annotationSet>
+              </annotationSets>
+            </sentence>
+          </sentences>
+        </paragraph>
+      </paragraphs>
+    </document>
+  </documents>
+</corpus>
+```
