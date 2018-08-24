@@ -160,7 +160,7 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
         if splits_name not in ['train', 'dev', 'test']:
             raise InvalidParameterError('Unsupported splits_name: {}'.format(
                 splits_name))
-        if splits_name == 'dev' or splits_name == 'test':
+        if splits_name in ('dev', 'test'):
             # No special filtering on dev/test
             _marshall_semafor(annosets, [], sent_dict,
                               semafor_filepath, excluded_frames,

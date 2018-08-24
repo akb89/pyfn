@@ -91,8 +91,7 @@ def _has_discontinuous_target(annoset):
     for (start, end) in annoset.target.indexes[1:]:
         if start - prev_end > 2:
             return True
-        else:
-            prev_end = end
+        prev_end = end
     return False
 
 

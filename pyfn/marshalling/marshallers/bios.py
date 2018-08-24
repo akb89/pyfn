@@ -34,7 +34,7 @@ def _get_fe_label(start, end, fe_labels):
             return 'S-{}'.format(label.name)
         if label.start == start:
             return 'B-{}'.format(label.name)
-        if label.start < start and label.end >= start:
+        if label.start < start <= label.end:
             return 'I-{}'.format(label.name)
     return 'O'
 
@@ -166,7 +166,7 @@ def marshall_annosets_dict(annosets_dict, target_dirpath, filtering_options,
         if splits_name not in ['train', 'dev', 'test']:
             raise InvalidParameterError('Invalid splits_name: {}'.format(
                 splits_name))
-        if splits_name == 'dev' or splits_name == 'test':
+        if splits_name in ('dev', 'test'):
             annosets, _annosets = itertools.tee(annosets, 2)
             logger.info('Marshalling splits:pyfn.AnnotationSet dict to '
                         '.bios.semeval for {} splits with [] filtering '

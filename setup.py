@@ -16,7 +16,7 @@ setup(
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.0.0',
+    version='1.0.2',
     url='https://gitlab.unige.ch/akb/pyfn',
     download_url='https://pypi.org/project/pyfn/#files',
     license='MIT',
@@ -37,7 +37,7 @@ setup(
             'pyfn = pyfn.main:main'
         ],
     },
-    tests_require=['pytest==3.4.1', 'pylint==1.8.2', 'pytest-cov==2.5.1',
+    tests_require=['pytest==3.7.2', 'pylint==2.1.1', 'pytest-cov==2.5.1',
                    'pydocstyle==2.1.1'],
     install_requires=['PyYAML==3.13', 'mmh3==2.5.1', 'lxml==4.2.4',
                       'pytz==2018.5'],
