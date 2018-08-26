@@ -175,7 +175,7 @@ Check out [REPLICATION.md](REPLICATION.md) for a detailed HowTo manual.
 [release-image]:https://img.shields.io/github/release/akb89/pyfn.svg?style=flat-square
 [release-url]:https://github.com/akb89/pyfn/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyfn.svg?style=flat-square
-[pypi-url]:https://github.com/akb89/pyfn/releases/latest
+[pypi-url]:https://pypi.org/project/pyfn/
 [build-image]:https://gitlab.com/akb89/pyfn/badges/master/pipeline.svg
 [build-url]:https://gitlab.com/akb89/pyfn/commits/master
 [coverage-image]:https://img.shields.io/coveralls/akb89/pyfn/master.svg?style=flat-square
