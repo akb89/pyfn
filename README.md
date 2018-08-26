@@ -14,6 +14,7 @@ pyfn can be used to convert data to and from:
 - SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
 - SEMAFOR CoNLL: the format used by the SEMAFOR parser
 - BIOS: the format used by the OPEN-SESAME parser
+- CoNLL-X: the format used by various state-of-the-art POS taggers and dependency parsers (see preprocessing considerations for frame semantic parsing in [REPLICATION.md](REPLICATION.md))
 
 As well as to generate the `.csv` hierarchy files used by both SEMAFOR and
 OPEN-SESAME parsers to integrate the hierarchy feature (see (Kshirsagar et al., 2015) for details).
@@ -35,7 +36,7 @@ This repository also accompanies the (Kabbach et al., 2018) paper:
 }
 ```
 
-To use pyfn to replicate frame semantic parsing results for SEMAFOR,
+To use `pyfn` to replicate frame semantic parsing results for SEMAFOR,
 OPEN-SESAME and SIMPLEFRAMEID on a common preprocessing pipeline,
 or to replicate results reported in (Kabbach et al., 2018),
 check out [REPLICATION.md](REPLICATION.md).
@@ -43,7 +44,7 @@ check out [REPLICATION.md](REPLICATION.md).
 ## Dependencies
 On Unix, you may need to install the following packages:
 ```
-libxml2 libxml2-dev libxslt1-dev
+libxml2 libxml2-dev libxslt1-dev python-3.x-dev
 ```
 
 ## Install
@@ -104,12 +105,12 @@ pyfn convert \
   --filter overlap_fes
 ```
 Using `--filter overlap_fes` will skip all annotationsets with overlapping
-frame elements, as those cases are not supported in the BIOS format.
+frame elements, as those cases are not supported by the BIOS format.
 
 
 ### From FN XML to SEMAFOR CoNLL
 To generate the `train.frame.elements` file used to train SEMAFOR, and the
-`{dev,test}.frames` used for decoding, do:
+`{dev,test}.frames` file used for decoding, do:
 
 ```bash
 pyfn convert \
