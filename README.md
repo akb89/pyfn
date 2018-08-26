@@ -168,6 +168,13 @@ pyfn generate \
 ```
 To also process exemplars, add the `--with_exemplars` option
 
+### Using preprocessing and frame semantic parsing scripts
+We created a set of bash scripts to preprocess FrameNet data with various
+POS taggers and dependency parsers as well as to run the `SIMPLEFRAMEID`,
+`SEMAFOR` and `OPEN-SESAME` frame semantic parsers.
+Check out [REPLICATION.md](REPLICATION.md) for a detailed HowTo manual. 
+
+
 [release-image]:https://img.shields.io/github/release/akb89/pyfn.svg?style=flat-square
 [release-url]:https://github.com/akb89/pyfn/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyfn.svg?style=flat-square

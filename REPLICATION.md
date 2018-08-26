@@ -57,6 +57,8 @@ directory named `pyfn`. Your pyfn folder structure should look like:
 |   |   |-- ...
 ```
 
+**Please strictly follow this directory structure to avoid unexpected errors. `pyfn` relies on a lot of relative path resolutions to make scripts calls shorter, and changing this directory structure can brake everything**
+
 ## Install
 ```
 pip3 install pyfn
@@ -116,6 +118,41 @@ replicate all results reported in (Kabbach et al., 2018) on experimental
 butterfly effects in frame semantic parsing. Those instructions can be used
 to compare the performances of different frame semantic parsers in various
 experimental setups.
+
+## Scripts
+Each script comes with a helper: check it out with `--help`!
+
+We have made some opinionated choices on how to use the preprocessing and
+frame semantic parsing bash scripts. Those choices are primarly motivated
+by constraints on running *many* experiences at once, in various experimental
+setups, and on having commands that are easy to *type*.
+
+The main choice lies in the directory structure. Each script in the `scripts`
+directory expects an XP_DIR argument that specifies the experiments ID.
+When you specify:
+
+```
+./prepare.sh -x 042 ...
+```
+
+or
+
+```
+./preprocess.sh -x 042
+```
+
+The scripts expects the data to process to be located under `.../experiments/xp_042/data` where the `experiments` dir is at the same level
+as the `scripts` dir.
+
+### prepare.sh
+
+### preprocess.sh
+
+### semafor.sh
+
+### open-sesame.sh
+
+
 
 ## Citation
 If you use pyfn please cite:
