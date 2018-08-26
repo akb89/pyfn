@@ -74,10 +74,7 @@ For an exhaustive description of all formats, check out [FORMAT.md](FORMAT.md).
 ## Conversion HowTo
 The following sections provide examples of commands to convert FN data
 to and from different formats. All commands can make use of the following options:
-1. `--splits`: specify which splits should be converted. Use `--splits dev`
-to only process dev and test splits and guarantee no overlap between
-dev and test. Use `--splits train` to process train dev and test splits and
-guarantee no overlap across splits. Default to `--splits test`.
+1. `--splits`: specify which splits should be converted. `--splits train` will generate all train/dev/test splits, according to data found under the fndata-1.x/{train/dev/test} directories. `--splits dev` will generate the dev and test splits according to data found under the fndata-1.x/{dev/test} directories. This option will skip the train splits but generate the same dev/test splits that would have been generated with `--splits train`. `--splits test` will generate the test splits according to data found under the fndata-1.x/test directory, and skip the train/dev splits. The test splits generated with `--splits test` will be the same as those generated with the `--splits train` and `--splits dev`. Default to `--splits test`.
 2. `--output_sentences`: if specified, will output a `.sentences` file
 in the process, containing all raw annotated sentences, one sentence per line.
 3. `--with_exemplars`: if specified, will process the exemplars (data under
@@ -172,7 +169,7 @@ To also process exemplars, add the `--with_exemplars` option
 We created a set of bash scripts to preprocess FrameNet data with various
 POS taggers and dependency parsers as well as to run the `SIMPLEFRAMEID`,
 `SEMAFOR` and `OPEN-SESAME` frame semantic parsers.
-Check out [REPLICATION.md](REPLICATION.md) for a detailed HowTo manual. 
+Check out [REPLICATION.md](REPLICATION.md) for a detailed HowTo manual.
 
 
 [release-image]:https://img.shields.io/github/release/akb89/pyfn.svg?style=flat-square

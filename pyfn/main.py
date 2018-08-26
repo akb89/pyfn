@@ -51,7 +51,6 @@ def _convert(args):
         raise InvalidParameterError(
             'Source and Target paths are the same! Please specify different '
             'source/target paths')
-    # TODO: add validation for input directory structure
     if args.source_format == 'fnxml':
         annosets_dict = fnxml.get_annosets_dict(args.source_path,
                                                 args.splits,
@@ -70,6 +69,8 @@ def _convert(args):
                 'need to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
+    ## Starting marshalling
+    os.makedirs(args.target_path, exist_ok=True)
     if args.target_format == 'bios':
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
                                      args.filter, args.output_sentences,

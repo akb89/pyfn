@@ -37,7 +37,7 @@ setup(
             'pyfn = pyfn.main:main'
         ],
     },
-    tests_require=['pytest==3.7.2', 'pylint==2.1.1', 'pytest-cov==2.5.1',
+    tests_require=['pytest==3.7.3', 'pylint==2.1.1', 'pytest-cov==2.5.1',
                    'pydocstyle==2.1.1'],
     install_requires=['PyYAML==3.13', 'mmh3==2.5.1', 'lxml==4.2.4',
                       'pytz==2018.5'],

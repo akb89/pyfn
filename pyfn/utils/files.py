@@ -73,5 +73,5 @@ def get_rolemappings_filepath(target_dirpath):
 
 
 def get_fr_relation_xml_filepath(splits_dirpath):
-    """Return the absolute path to the frRelation.xl file given splits_dirpath."""
+    """Return the absolute path to the frRelation.xml file given splits_dirpath."""
     return os.path.join(splits_dirpath, 'frRelation.xml')
