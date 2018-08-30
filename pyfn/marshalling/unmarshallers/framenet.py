@@ -311,7 +311,7 @@ def _extract_ft_annosets(ft_filepaths, fe_dict, flatten=False):
 
 
 def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
-                     fe_dict={}, flatten=False):
+                     fe_dict=None, flatten=False):
     """Return a list of pyfn.AnnotationSet extracted from splits paths.
 
     The splits directory should contain two subdirectories name 'fulltext'
@@ -322,6 +322,8 @@ def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
     """
     logger.info('Extracting pyfn.AnnotationSet items from {}'
                 .format(splits_dirpath))
+    if fe_dict is None:
+        fe_dict = {}
     ft_annosets = []
     ex_annosets = []
     if with_fulltexts:

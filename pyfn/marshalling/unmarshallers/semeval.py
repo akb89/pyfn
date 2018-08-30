@@ -10,7 +10,7 @@ __all__ = ['unmarshall_annosets']
 logger = logging.getLogger(__name__)
 
 
-def unmarshall_annosets(xml_filepath, fe_dict={}, flatten=False):
+def unmarshall_annosets(xml_filepath, fe_dict=None, flatten=False):
     """Unmarshall a SemEval 2007 FrameNet XML file from file path.
 
     Return a generator of AnnotationSet instances extracted from the
@@ -24,6 +24,8 @@ def unmarshall_annosets(xml_filepath, fe_dict={}, flatten=False):
     """
     logger.info('Unmarshalling SemEval FrameNet XML file: {}'
                 .format(xml_filepath))
+    if fe_dict is None:
+        fe_dict = {}
     # pylint: disable=R1702
     for documents_tag in etree.parse(xml_filepath).getroot().findall(
             'documents'):

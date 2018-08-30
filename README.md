@@ -691,26 +691,25 @@ if __name__ == '__main__':
     print('annoset with #id = {}'.format(annoset._id))
 ```
 
-### Marshalling to FrameNet XML data
+### Marshalling to OPEN-SESAME BIOS
 
-To convert a list of `pyfn.AnnotationSet` objects to a FrameNet-style `.xml` file, use:
+To convert a dict of `splits` to `pyfn.AnnotationSet` objects to OPEN-SESAME-style `.bios`, refer to
+`pyfn.marshalling.marshallers.bios.marshall_annosets_dict`
 
-```python
+### Marshalling to SEMAFOR CONLL
 
-```
+To convert a dict of `splits` to `pyfn.AnnotationSet` objects to SEMAFOR-style `.frame.elements`, refer to
+`pyfn.marshalling.marshallers.semafor.marshall_annosets_dict`
 
+### Marshalling to SEMEVAL XML
 
-### Marshalling to OPEN-SESAME BIOS data
+To convert a list of `pyfn.AnnotationSet` objects to SEMEVAL-style `.xml`,
+refer to `pyfn.marshalling.marshallers.semeval.marshall_annosets`
 
-To convert a list of `pyfn.AnnotationSet` objects to OPEN-SESAME-style `.bios`, use:
+### Marshalling to .csv hierarchy
 
-### Marshalling to SEMAFOR CONLL data
-
-To convert a list of `pyfn.AnnotationSet` objects to SEMAFOR-style `.frame.elements`, use:
-
-### Marshalling to SEMEVAL XML data
-
-To convert a list of `pyfn.AnnotationSet` objects to SEMEVAL-style `.xml`, use:
+To convert a list of relations to a `.csv` file, refer to
+`pyfn.marshalling.marshallers.hierarchy.marshall_relations`
 
 ## Citation
 

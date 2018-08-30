@@ -112,7 +112,14 @@ def _marshall_annosets(annosets, output_filepath, excluded_frames,
 
 def marshall_annosets(annosets, output_filepath, excluded_frames,
                       excluded_sentences, excluded_annosets):
-    """Marshall a list of pyfn.AnnotationSet objects to SEMEVAL XML."""
+    """Marshall a list of pyfn.AnnotationSet objects to SEMEVAL XML.
+
+    annosets: a list of annosets to marshall.
+    output_filepath: the absolute path to the output .xml file
+    excluded_frames: a list of frame #id to exclude from the output
+    excluded_sentences: a list of sentence #id to exclude from the output
+    excluded_annosets: a list of annotationset #id to exclude from the output
+    """
     logger.info('Marshalling pyfn.AnnotationSet objects to SEMEVAL XML...')
     if not annosets:
         raise InvalidParameterError('Input pyfn.AnnotationSet list is empty')
