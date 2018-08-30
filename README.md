@@ -11,11 +11,11 @@ Welcome to `pyfn`, a Python modules to process FrameNet annotation.
 
 `pyfn` can be used to:
 
-1. [convert](#conversion) data to and from FRAMENET XML, SEMEVAL XML, SEMAFOR CoNLL, BIOS and
+1. [convert](##conversion) data to and from FRAMENET XML, SEMEVAL XML, SEMAFOR CoNLL, BIOS and
 CoNLL-X
-2. [preprocess](#preprocessing-and-frame-semantic-parsing) FrameNet data using a standardized state-of-the-art pipeline
-3. [run](#preprocessing-and-frame-semantic-parsing) the SEMAFOR and OPEN-SESAME frame semantic parsers
-4. [build](#marshalling-and-unmarshalling-framenet-xml-data) your own frame semantic parser using a standard set of python models
+2. [preprocess](##preprocessing-and-frame-semantic-parsing) FrameNet data using a standardized state-of-the-art pipeline
+3. [run](##preprocessing-and-frame-semantic-parsing) the SEMAFOR and OPEN-SESAME frame semantic parsers
+4. [build](##marshalling-and-unmarshalling-framenet-xml-data) your own frame semantic parser using a standard set of python models
 to marshall/unmarshall FrameNet XML data
 
 This repository also accompanies the (Kabbach et al., 2018) paper:
