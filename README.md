@@ -9,15 +9,14 @@
 
 Welcome to **pyfn**, a Python modules to process FrameNet annotation.
 
-pyfn can be used to convert data to and from:
-- FRAMENET XML: the format of the released FrameNet XML data
-- SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
-- SEMAFOR CoNLL: the format used by the SEMAFOR parser
-- BIOS: the format used by the OPEN-SESAME parser
-- CoNLL-X: the format used by various state-of-the-art POS taggers and dependency parsers (see preprocessing considerations for frame semantic parsing in [REPLICATION.md](REPLICATION.md))
+pyfn can be used to:
 
-As well as to generate the `.csv` hierarchy files used by both SEMAFOR and
-OPEN-SESAME parsers to integrate the hierarchy feature (see (Kshirsagar et al., 2015) for details).
+1. [convert]() data to and from FRAMENET XML, SEMEVAL XML, SEMAFOR CoNLL, BIOS and
+CoNLL-X
+2. [preprocess]() FrameNet data using a standardized state-of-the-art pipeline
+3. [run]() the SEMAFOR and OPEN-SESAME frame semantic parsers
+4. [build]() your own frame semantic parser using a standard set of python models
+to marshall/unmarshall FrameNet XML data
 
 This repository also accompanies the (Kabbach et al., 2018) paper:
 
@@ -35,11 +34,6 @@ This repository also accompanies the (Kabbach et al., 2018) paper:
   url = 	"http://aclweb.org/anthology/C18-1267"
 }
 ```
-
-To use `pyfn` to replicate frame semantic parsing results for SEMAFOR,
-OPEN-SESAME and SIMPLEFRAMEID on a common preprocessing pipeline,
-or to replicate results reported in (Kabbach et al., 2018),
-check out [REPLICATION.md](REPLICATION.md).
 
 ## Dependencies
 On Unix, you may need to install the following packages:
@@ -68,13 +62,32 @@ When using pyfn, your FrameNet splits directory structure should follow:
 |   |   |-- lu
 ```
 
-## Formats
+## Conversion
+
+pyfn can be used to convert data to and from:
+- FRAMENET XML: the format of the released FrameNet XML data
+- SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
+- SEMAFOR CoNLL: the format used by the SEMAFOR parser
+- BIOS: the format used by the OPEN-SESAME parser
+- CoNLL-X: the format used by various state-of-the-art POS taggers and dependency parsers (see preprocessing considerations for frame semantic parsing in [below](#preprocessing-and-frame-semantic-parsing))
+
+As well as to generate the `.csv` hierarchy files used by both SEMAFOR and
+OPEN-SESAME parsers to integrate the hierarchy feature (see (Kshirsagar et al., 2015) for details).
+
 For an exhaustive description of all formats, check out [FORMAT.md](FORMAT.md).
 
-## Conversion HowTo
+### HowTo
+
 The following sections provide examples of commands to convert FN data
 to and from different formats. All commands can make use of the following options:
-1. `--splits`: specify which splits should be converted. `--splits train` will generate all train/dev/test splits, according to data found under the fndata-1.x/{train/dev/test} directories. `--splits dev` will generate the dev and test splits according to data found under the fndata-1.x/{dev/test} directories. This option will skip the train splits but generate the same dev/test splits that would have been generated with `--splits train`. `--splits test` will generate the test splits according to data found under the fndata-1.x/test directory, and skip the train/dev splits. The test splits generated with `--splits test` will be the same as those generated with the `--splits train` and `--splits dev`. Default to `--splits test`.
+1. `--splits`: specify which splits should be converted. `--splits train` will generate all
+train/dev/test splits, according to data found under the fndata-1.x/{train/dev/test}
+directories. `--splits dev` will generate the dev and test splits according to data found under
+the fndata-1.x/{dev/test} directories. This option will skip the train splits but generate the
+same dev/test splits that would have been generated with `--splits train`. `--splits test` will
+generate the test splits according to data found under the fndata-1.x/test directory, and skip
+the train/dev splits. The test splits generated with `--splits test` will be the same as those
+generated with the `--splits train` and `--splits dev`. Default to `--splits test`.
 2. `--output_sentences`: if specified, will output a `.sentences` file
 in the process, containing all raw annotated sentences, one sentence per line.
 3. `--with_exemplars`: if specified, will process the exemplars (data under
@@ -85,7 +98,7 @@ For details on `pyfn` usage, do:
 ```bash
 pyfn --help
 pyfn generate --help
-pyfn convert --help
+convert --help
 ```
 
 ### From FN XML to BIOS
@@ -165,11 +178,406 @@ pyfn generate \
 ```
 To also process exemplars, add the `--with_exemplars` option
 
-### Using preprocessing and frame semantic parsing scripts
-We created a set of bash scripts to preprocess FrameNet data with various
-POS taggers and dependency parsers as well as to run the `SIMPLEFRAMEID`,
-`SEMAFOR` and `OPEN-SESAME` frame semantic parsers.
-Check out [REPLICATION.md](REPLICATION.md) for a detailed HowTo manual.
+
+## Preprocessing and Frame Semantic Parsing
+pyfn ships in with a set of bash scripts to preprocess FrameNet data with
+various POS taggers and dependency parsers, as well as to perform frame
+semantic parsing with a variety of open-source parsers.
+
+Currently supported POS taggers include:
+- MXPOST (Ratnaparkhi, 1996)
+- NLP4J (Choi, 2016)
+
+Currently supported dependency parsers include:
+- MST (McDonald et al., 2006)
+- BIST BARCH (Kiperwasser and Goldberg, 2016)
+- BIST BMST (Kiperwasser and Goldberg, 2016)
+
+Currently supported frame semantic parsers include:
+- SIMPLEFRAMEID (Hartmann et al., 2017) for frame identification
+- SEMAFOR (Kshirsagar et al., 2015) for argument identification
+- OPEN-SESAME (Swayamdipta et al., 2017) for argument identification
+
+To request support for a POS tagger, a dependency parser or a frame semantic
+parser, please create an [issue](https://github.com/akb89/pyfn/issues).
+
+### Download
+To run the preprocessing and frame semantic parsing scripts, first download:
+- [data.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/data.7z) containing all the FrameNet splits for FN 1.5 and FN 1.7
+- [lib.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/lib.7z) containing all the different external softwares (taggers, parsers, etc.)
+- [resources.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/resources.7z) containing all the required resources
+- [scripts.7z](https://github.com/akb89/pyfn/releases/download/v1.0.0/scripts.7z) containing the set of bash scripts to call the different parsers and preprocessing toolkits
+
+Extract the content of all the archives under a
+directory named `pyfn`. Your pyfn folder structure should look like:
+```
+.
+|-- pyfn
+|   |-- data
+|   |   |-- fndata-1.5-with-dev
+|   |   |-- fndata-1.7-with-dev
+|   |-- lib
+|   |   |-- bistparser
+|   |   |-- jmx
+|   |   |-- mstparser
+|   |   |-- nlp4j
+|   |   |-- open-sesame
+|   |   |-- semafor
+|   |   |-- semeval
+|   |-- resources
+|   |   |-- bestarchybrid.model
+|   |   |-- bestarchybrid.params
+|   |   |-- bestfirstorder.model
+|   |   |-- bestfirstorder.params
+|   |   |-- config-decode-pos.xml
+|   |   |-- nlp4j.plemma.model.all.xz
+|   |   |-- sskip.100.vectors
+|   |   |-- wsj.model
+|   |-- scripts
+|   |   |-- CoNLLizer.py
+|   |   |-- deparse.sh
+|   |   |-- flatten.sh
+|   |   |-- ...
+```
+
+**Please strictly follow this directory structure to avoid unexpected errors. `pyfn` relies on a lot of relative path resolutions to make scripts calls shorter, and changing this directory structure can brake everything**
+
+### Setup NLP4J for POS tagging
+
+To use NLP4J for POS tagging, modify the `resources/config-decode-pos.xml`
+file by replacing the models.pos absolute path to
+your `resources/nlp4j.plemma.model.all.xz`:
+```xml
+<configuration>
+	...
+	<models>
+		<pos>/absolute/path/to/pyfn/resources/nlp4j.plemma.model.all.xz</pos>
+	</models>
+</configuration>
+```
+
+### Setup DyNET for BIST or OPEN-SESAME
+
+If you intend to use the BIST parser for dependency parsing or
+OPEN-SESAME for frame semantic parsing, you will need
+to install DyNET 2.0.2 following:
+```
+https://dynet.readthedocs.io/en/2.0.2/python.html
+```
+
+### Setup SEMAFOR
+To use the SEMAFOR frame semantic parser, modify the `scripts/setup.sh` file:
+```bash
+# SEMAFOR options to be changed according to your env
+export JAVA_HOME_BIN="/abs/path/to/java/jdk/bin"
+export num_threads=2 # number of threads to use
+export min_ram=4g # min RAM allocated to the JVM in GB. Corresponds to the -Xms argument
+export max_ram=8g # max RAM allocated to the JVM in GB. Corresponds to the -Xmx argument
+
+# SEMAFOR hyperparameters
+export kbest=1 # keep k-best parse
+export lambda=0.000001 # hyperparameter for argument identification. Refer to Kshirsagar et al. (2015) for details.
+export batch_size=4000 # number of batches processed at once for argument identification.
+export save_every_k_batches=400 # for argument identification
+export num_models_to_save=60 # for argument identification
+```
+
+### Using the SEMEVAL PERL evaluation scripts
+
+If you intend to use the SEMEVAL perl evaluation scripts, make sure
+to have the `App::cpanminus` and `XML::Parser` modules installed:
+```
+cpan App::cpanminus
+cpanm XML::Parser
+```
+
+### Using bash scripts
+
+Each script comes with a helper: check it out with `--help`!
+
+**Careful!** most scripts expect data output by `pyfn convert ...`
+to be located under `pyfn/experiments/xp_XYZ/data` where `XYZ` stands for
+the experiments number and is specified using the `-x XYZ` argument, and where
+the `experiments` directory is located at the same level as the `scripts`
+directory. This opinionated choice has proven extremely useful in launching
+scripts by batch on a large set of experiments as it avoid having to input
+the full path each time.
+
+**Make sure to use**
+
+```bash
+pyfn convert \
+  --from ... \
+  --to ... \
+  --source ... \
+  --target /abs/path/to/pyfn/experiments/xp_XYZ/data \
+  --splits ...
+```
+
+**BEFORE** calling `preprocess.sh`, `prepare.sh`, `semafor.sh` or
+`open-sesame.sh`
+
+### preprocess.sh
+
+Use `preprocess.sh` to POS-tag and dependency-parse FrameNet splits generated
+with `pyfn convert ...`. The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -x XP_NUM -t {mxpost,nlp4j} -p {semafor,open-sesame} [-d {mst,bmst,barch}] [-v]
+Preprocess FrameNet train/dev/test splits.
+
+  -h, --help                           display this help and exit
+  -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -t, --tagger  {mxpost,nlp4j}         pos tagger to be used: 'mxpost' or 'nlp4j'
+  -p, --parser  {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
+  -d, --dep     {mst,bmst,barch}       dependency parser to be used: 'mst', 'bmst' or 'barch'
+  -v, --dev                            if set, script will also preprocess dev splits
+```
+
+Suppose you generated FrameNet splits for SEMAFOR using:
+
+```bash
+pyfn convert \
+  --from fnxml \
+  --to semafor \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_001/data \
+  --splits train \
+  --output_sentences
+```
+
+You can preprocess those splits with NLP4J and BMST using
+
+```bash
+./preprocess.sh -x 001 -t nlp4j -d bmst -p semafor
+```
+
+### prepare.sh
+
+Use `prepare.sh` to automatically generate misc. data required by the
+frame semantic parsing pipeline, such as gold SEMEVAL XML files for scoring,
+the `framenet.frame.element.map` and the hierarchy `.csv` files
+used by SEMAFOR, or the `frames.xml` and `frRelations.xml` files used by
+both SEMAFOR and OPEN-SESAME. The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
+Prepare misc. data for frame semantic parsing.
+
+  -h, --help                                   display this help and exit
+  -x, --xp              XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -p, --parser          {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
+  -s, --splits          {dev,test}             which splits to score: dev or test
+  -f, --fn              FN_DATA_DIR            absolute path to FrameNet data directory
+  -u, --with_hierarchy                         if specified, will use the hierarchy feature
+  -e, --with_exemplars                         if specified, will use the exemplars
+```
+
+Suppose you generated FrameNet splits for SEMAFOR using:
+
+```bash
+pyfn convert \
+  --from fnxml \
+  --to semafor \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_001/data \
+  --splits train \
+  --output_sentences
+```
+
+You can prepare SEMAFOR data using:
+
+```bash
+./prepare.sh -x 001 -p semafor -s test -f /path/to/fndata-1.7-with-dev
+```
+
+### frameid.sh
+
+Use `frameid.sh` to perform frame identification using SIMPLEFRAMEID.
+The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-p {semafor,open-sesame}]
+Perform frame identification.
+
+  -h, --help                            display this help and exit
+  -m, --mode                            train on all models or decode using a single model
+  -x, --xp       XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -p, --parser   {semafor,open-sesame}  formalize decoded frames for specified parser
+```
+
+Suppose you generated FrameNet splits for SEMAFOR using:
+
+```bash
+pyfn convert \
+  --from fnxml \
+  --to semafor \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_101/data \
+  --splits train \
+  --output_sentences
+```
+
+*After preprocessing*, you can train the SIMPLEFRAMEID parser using:
+
+```bash
+./frameid.sh -m train -x 101
+```
+
+and decode (**before decoding argument identification**) using:
+
+```bash
+./frameid.sh -m decode -x 101 -p semafor
+```
+
+### semafor.sh
+
+Use `semafor.sh` to train the SEMAFOR parser or decode the test/dev splits.
+The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-u]
+Train or decode with the SEMAFOR parser.
+
+  -h, --help                             display this help and exit
+  -m, --mode            {train,decode}   semafor mode to use: train or decode
+  -x, --xp              XP_NUM           xp number written as 3 digits (e.g. 001)
+  -s, --splits          {dev,test}       which splits to use in decode mode: dev or test
+  -u, --with_hierarchy                   if specified, parser will use the hierarchy feature
+```
+
+Suppose you generated FrameNet splits for SEMAFOR using:
+
+```bash
+pyfn convert \
+  --from fnxml \
+  --to semafor \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_001/data \
+  --splits train \
+  --output_sentences
+```
+
+*After preprocessing and preparation*, you can train the SEMAFOR parser using:
+
+```bash
+./semafor.sh -m train -x 001
+```
+
+and decode the test splits using:
+
+```
+./semafor.sh -m decode -x 001 -s test
+```
+
+### open-sesame.sh
+
+Use `open-sesame.sh` to train the OPEN-SESMAE parser or decode the test/dev splits.
+The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-d] [-u]
+Train or decode with the OPEN-SESAME parser.
+
+  -h, --help                              display this help and exit
+  -m, --mode              {train,decode}  open-sesame mode to use: train or decode
+  -x, --xp                XP_NUM          xp number written as 3 digits (e.g. 001)
+  -s, --splits            {dev,test}      which splits to use in decode mode: dev or test
+  -d, --with_dep_parses                   if specified, parser will use dependency parses
+  -u, --with_hierarchy                    if specified, parser will use the hierarchy feature
+```
+
+Suppose you generated FrameNet splits for OPEN-SESAME using:
+
+```bash
+pyfn convert \
+  --from fnxml \
+  --to bios \
+  --source /path/to/fndata-1.7-with-dev \
+  --target /path/to/experiments/xp_002/data \
+  --splits train \
+  --output_sentences \
+  --filter overlap_fes
+```
+
+*After preprocessing and preparation*, you can train the SEMAFOR parser using:
+
+```bash
+./open-sesame.sh -m train -x 002
+```
+
+and decode the test splits using:
+
+```
+./open-sesame.sh -m decode -x 002 -s test
+```
+
+### score.sh
+
+Use `score.sh` to obtain P/R/F1 scores for frame semantic parsing on
+dev/test splits with the SEMEVAL scoring script, using gold of predicted frames.
+The helper should display:
+
+```shell
+Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f {gold,predicted}
+Score frame semantic parsing with a modified version of the SEMEVAL scoring script.
+
+  -h, --help                           display this help and exit
+  -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)
+  -p, --parser  {semafor,open-sesame}  frame semantic parser to be used: 'semafor' or 'open-sesame'
+  -s, --splits  {dev,test}             which splits to score: dev or test
+  -f, --frames  {gold,predicted}       score with gold or predicted frames
+```
+
+Note that scoring is done with an updated version of the SEMEVAL perl script,
+in order to obtain more robust scores across setups. For a full account
+of the modifications, refer to (Kabbach et al., 2018) and to the perl scripts
+located under `lib/semeval/`.
+
+To obtain scores for SEMAFOR using gold frames on test splits, use:
+
+```
+./score.sh -x XYZ -p semafor -s test -f gold
+```
+
+To obtain scores for SEMAFOR using predicted frames on test splits, use:
+
+```
+./score.sh -x XYZ -p semafor -s test -f predicted
+```
+
+## Replication
+
+The `experiments` directory provides a detailed set of instructions to
+replicate all results reported in (Kabbach et al., 2018) on experimental
+butterfly effects in frame semantic parsing. Those instructions can be used
+to compare the performances of different frame semantic parsers in various
+experimental setups.
+
+
+## Marshalling and Unmarshalling of FrameNet XML data
+
+`pyfn` provides a set of Python models to process FrameNet XML data.
+Those can be used to help you build you own frame semantic parser.
+
+
+## Citation
+
+If you use pyfn please cite:
+```tex
+@InProceedings{C18-1267,
+  author = 	"Kabbach, Alexandre
+		and Ribeyre, Corentin
+		and Herbelot, Aur{\'e}lie",
+  title = 	"Butterfly Effects in Frame Semantic Parsing: impact of data processing on model ranking",
+  booktitle = 	"Proceedings of the 27th International Conference on Computational Linguistics",
+  year = 	"2018",
+  publisher = 	"Association for Computational Linguistics",
+  pages = 	"3158--3169",
+  location = 	"Santa Fe, New Mexico, USA",
+  url = 	"http://aclweb.org/anthology/C18-1267"
+}
+```
 
 
 [release-image]:https://img.shields.io/github/release/akb89/pyfn.svg?style=flat-square
