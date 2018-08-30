@@ -11,12 +11,12 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='pyfn',
-    description='A python module to process FrameNet XML data',
+    description='A python module to process data for Frame Semantic Parsing',
     author='Alexandre Kabbach',
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.1.2',
+    version='1.2.0',
     url='https://gitlab.com/akb89/pyfn',
     download_url='https://pypi.org/project/pyfn/#files',
     license='MIT',
