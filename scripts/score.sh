@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup.sh"
 show_help() {
 cat << EOF
 Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f {gold,predicted}
-Score frame semantic parsing with the SEMEVAL scoring scripts modified by Kshirsagar et al. (2015).
+Score frame semantic parsing with a modified version of the SEMEVAL scoring script.
 
   -h, --help                           display this help and exit
   -x, --xp      XP_NUM                 xp number written as 3 digits (e.g. 001)

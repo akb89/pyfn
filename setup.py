@@ -11,13 +11,13 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='pyfn',
-    description='A python module to process FrameNet XML data',
+    description='A python module to process data for Frame Semantic Parsing',
     author='Alexandre Kabbach',
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.1.1',
-    url='https://gitlab.unige.ch/akb/pyfn',
+    version='1.2.0',
+    url='https://gitlab.com/akb89/pyfn',
     download_url='https://pypi.org/project/pyfn/#files',
     license='MIT',
     keywords=['framenet', 'xml', 'marshalling', 'unmarshalling'],
@@ -37,7 +37,7 @@ setup(
             'pyfn = pyfn.main:main'
         ],
     },
-    tests_require=['pytest==3.7.2', 'pylint==2.1.1', 'pytest-cov==2.5.1',
+    tests_require=['pytest==3.7.4', 'pylint==2.1.1', 'pytest-cov==2.5.1',
                    'pydocstyle==2.1.1'],
     install_requires=['PyYAML==3.13', 'mmh3==2.5.1', 'lxml==4.2.4',
                       'pytz==2018.5'],

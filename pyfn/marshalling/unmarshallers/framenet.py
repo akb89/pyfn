@@ -10,6 +10,7 @@ import pyfn.utils.constants as const
 import pyfn.utils.filter as f_utils
 import pyfn.utils.xml as xml_utils
 
+from pyfn.exceptions.parameter import InvalidParameterError
 from pyfn.exceptions.xml import XMLProcessingError
 
 from pyfn.models.annotationset import AnnotationSet
@@ -310,7 +311,7 @@ def _extract_ft_annosets(ft_filepaths, fe_dict, flatten=False):
 
 
 def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
-                     fe_dict, flatten=False):
+                     fe_dict=None, flatten=False):
     """Return a list of pyfn.AnnotationSet extracted from splits paths.
 
     The splits directory should contain two subdirectories name 'fulltext'
@@ -321,6 +322,8 @@ def extract_annosets(splits_dirpath, with_fulltexts, with_exemplars,
     """
     logger.info('Extracting pyfn.AnnotationSet items from {}'
                 .format(splits_dirpath))
+    if fe_dict is None:
+        fe_dict = {}
     ft_annosets = []
     ex_annosets = []
     if with_fulltexts:
@@ -387,6 +390,10 @@ def _get_fe_dict(frame_xml_filepaths):
 
 
 def _get_annosets_dict_from_fn_xml(fn_splits_dirpath, splits, with_exemplars):
+    if splits not in ('train', 'dev', 'test'):
+        raise InvalidParameterError(
+            'Invalid splits name `{}`. Should be `train`, `dev` or `test`'
+            .format(splits))
     fe_dict = _get_fe_dict(xml_utils.get_xml_filepaths(fn_splits_dirpath,
                                                        'frame'))
     if splits == 'test':
