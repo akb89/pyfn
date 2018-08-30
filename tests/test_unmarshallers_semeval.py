@@ -7,7 +7,7 @@ import pyfn.marshalling.unmarshallers.semeval as semeval_unmarshaller
 
 SEMEVAL_XML_FILE = os.path.join(os.path.dirname(__file__), 'resources', 'semeval.xml')
 
-semeval_annosets_list = list(semeval_unmarshaller.unmarshall_semeval07_xml(SEMEVAL_XML_FILE, {}))
+semeval_annosets_list = list(semeval_unmarshaller.unmarshall_annosets(SEMEVAL_XML_FILE, {}))
 
 
 def test_semeval_annoset():
