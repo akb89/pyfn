@@ -7,15 +7,15 @@
 [![FrameNet][framenet-image]][framenet-url]
 [![MIT License][license-image]][license-url]
 
-Welcome to **pyfn**, a Python modules to process FrameNet annotation.
+Welcome to `pyfn`, a Python modules to process FrameNet annotation.
 
-pyfn can be used to:
+`pyfn` can be used to:
 
-1. [convert]() data to and from FRAMENET XML, SEMEVAL XML, SEMAFOR CoNLL, BIOS and
+1. [convert](#conversion) data to and from FRAMENET XML, SEMEVAL XML, SEMAFOR CoNLL, BIOS and
 CoNLL-X
-2. [preprocess]() FrameNet data using a standardized state-of-the-art pipeline
-3. [run]() the SEMAFOR and OPEN-SESAME frame semantic parsers
-4. [build]() your own frame semantic parser using a standard set of python models
+2. [preprocess](#preprocessing-and-frame-semantic-parsing) FrameNet data using a standardized state-of-the-art pipeline
+3. [run](#preprocessing-and-frame-semantic-parsing) the SEMAFOR and OPEN-SESAME frame semantic parsers
+4. [build](#marshalling-and-unmarshalling-framenet-xml-data) your own frame semantic parser using a standard set of python models
 to marshall/unmarshall FrameNet XML data
 
 This repository also accompanies the (Kabbach et al., 2018) paper:
@@ -47,10 +47,10 @@ pip3 install pyfn
 ```
 
 ## Use
-When using pyfn, your FrameNet splits directory structure should follow:
+When using `pyfn`, your FrameNet splits directory structure should follow:
 ```
 .
-|-- fndata-1.x
+|-- fndata-1.x-with-dev
 |   |-- train
 |   |   |-- fulltext
 |   |   |-- lu
@@ -60,11 +60,14 @@ When using pyfn, your FrameNet splits directory structure should follow:
 |   |-- test
 |   |   |-- fulltext
 |   |   |-- lu
+|   |-- frame
+|   |-- frRelation.xml
+|   |-- semTypes.xml
 ```
 
 ## Conversion
 
-pyfn can be used to convert data to and from:
+`pyfn` can be used to convert data to and from:
 - FRAMENET XML: the format of the released FrameNet XML data
 - SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
 - SEMAFOR CoNLL: the format used by the SEMAFOR parser
@@ -98,7 +101,7 @@ For details on `pyfn` usage, do:
 ```bash
 pyfn --help
 pyfn generate --help
-convert --help
+pyfn convert --help
 ```
 
 ### From FN XML to BIOS
@@ -180,7 +183,7 @@ To also process exemplars, add the `--with_exemplars` option
 
 
 ## Preprocessing and Frame Semantic Parsing
-pyfn ships in with a set of bash scripts to preprocess FrameNet data with
+`pyfn` ships in with a set of bash scripts to preprocess FrameNet data with
 various POS taggers and dependency parsers, as well as to perform frame
 semantic parsing with a variety of open-source parsers.
 
@@ -199,7 +202,7 @@ Currently supported frame semantic parsers include:
 - OPEN-SESAME (Swayamdipta et al., 2017) for argument identification
 
 To request support for a POS tagger, a dependency parser or a frame semantic
-parser, please create an [issue](https://github.com/akb89/pyfn/issues).
+parser, please create an [issue](https://github.com/akb89/pyfn/issues) on Github/Gitlab.
 
 ### Download
 To run the preprocessing and frame semantic parsing scripts, first download:
@@ -322,7 +325,7 @@ pyfn convert \
 Use `preprocess.sh` to POS-tag and dependency-parse FrameNet splits generated
 with `pyfn convert ...`. The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -x XP_NUM -t {mxpost,nlp4j} -p {semafor,open-sesame} [-d {mst,bmst,barch}] [-v]
 Preprocess FrameNet train/dev/test splits.
 
@@ -360,7 +363,7 @@ the `framenet.frame.element.map` and the hierarchy `.csv` files
 used by SEMAFOR, or the `frames.xml` and `frRelations.xml` files used by
 both SEMAFOR and OPEN-SESAME. The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f FN_DATA_DIR [-u] [-e]
 Prepare misc. data for frame semantic parsing.
 
@@ -396,7 +399,7 @@ You can prepare SEMAFOR data using:
 Use `frameid.sh` to perform frame identification using SIMPLEFRAMEID.
 The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-p {semafor,open-sesame}]
 Perform frame identification.
 
@@ -435,7 +438,7 @@ and decode (**before decoding argument identification**) using:
 Use `semafor.sh` to train the SEMAFOR parser or decode the test/dev splits.
 The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-u]
 Train or decode with the SEMAFOR parser.
 
@@ -475,7 +478,7 @@ and decode the test splits using:
 Use `open-sesame.sh` to train the OPEN-SESMAE parser or decode the test/dev splits.
 The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -m {train,decode} -x XP_NUM [-s {dev,test}] [-d] [-u]
 Train or decode with the OPEN-SESAME parser.
 
@@ -518,7 +521,7 @@ Use `score.sh` to obtain P/R/F1 scores for frame semantic parsing on
 dev/test splits with the SEMEVAL scoring script, using gold of predicted frames.
 The helper should display:
 
-```shell
+```
 Usage: ${0##*/} [-h] -x XP_NUM -p {semafor,open-sesame} -s {dev,test} -f {gold,predicted}
 Score frame semantic parsing with a modified version of the SEMEVAL scoring script.
 
@@ -555,15 +558,163 @@ to compare the performances of different frame semantic parsers in various
 experimental setups.
 
 
-## Marshalling and Unmarshalling of FrameNet XML data
+## Marshalling and Unmarshalling FrameNet XML data
 
 `pyfn` provides a set of Python models to process FrameNet XML data.
 Those can be used to help you build you own frame semantic parser.
 
+The core of the `pyfn` models is the `AnnotationSet` corresponding to an
+XML `<annotationSet>` tag. It stores various information
+regarding a given set of FrameNet annotation for a given target in a given sentence.
+The notable innovations are the `labelstore` and the `valenceunitstore`, which
+store FrameNet labels (FE/PT/GF) in their original formats, and in custom
+formats which may prove useful for frame semantic parsing.
+
+Explore the various models under the `pyfn.models` directory of the `pyfn`
+package.
+
+### Unmarshalling FrameNet XML data
+
+To convert a list of fulltext.xml files and/or lu.xml files to a generator
+over `pyfn.AnnotationSet` objects, with no overlap between train/dev/test splits, use:
+
+```python
+import pyfn.marshalling.unmarshallers.framenet as fn_unmarshaller
+
+if __name__ == '__main__':
+  splits_dirpath = '/abs/path/to/framenet-1.x-with-dev/'
+  splits = 'train'
+  with_exemplars = False
+  annosets_dict = fn_unmarshaller.get_annosets_dict(splits_dirpath,
+                                                    splits, with_exemplars)
+```
+`splits_dirpath` should point at the directory containing train/dev/test
+splits directories (see detailed structure [above](#use)).
+
+`get_annosets_dict` will return a string to AnnotationSet generator dict.
+It will ensure no overlap between train/dev/test splits.
+
+Calling `get_annosets_dict` on `splits='test'` will return a dictionary
+with a single `'test'` key. Calling `get_annosets_dict` on `splits='dev'`
+will return a dictionary with two keys: `'dev'` and `'test'`.
+Calling `get_annosets_dict` on `splits='train'` will return a dictionary
+with three keys: `'train'`, `'dev'` and `'test'`.
+
+To iterate over the list of AnnotationSet objects of each key, you can
+then do:
+
+```python
+for (splits, annosets) in annosets_dict.items():
+  print('Iterating over annotationsets for splits: {}'.format(splits))
+  for annoset in annosets:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+Or simply, to iterate over a specific key values (such as train annosets):
+
+```python
+for annoset in annosets_dict['train']:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+Note that for performance, annosets is not a list but a generator.
+
+
+### Unmarshalling OPEN-SESAME BIOS data
+
+To convert a `.bios` file with its corresponding `.sentences` file to
+a generator over `pyfn.AnnotationSet` objects, use:
+
+```python
+import pyfn.marshalling.unmarshallers.bios as bios_unmarshaller
+
+if __name__ == '__main__':
+  bios_filepath = '/abs/path/to/.bios'
+  sent_filepath = '/abs/path/to/.sentences'
+  annosets = bios_unmarshaller.unmarshall_annosets(bios_filepath,
+                                                   sent_filepath)
+  for annoset in annosets:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+**Important** the `.bios` and `.sentences` files must have been generated
+with `pyfn convert ... --to bios ...` with the `--filter overlap_fes`
+parameter.
+
+### Unmarshalling SEMAFOR CONLL data
+
+To convert a `.frame.elements` file with its corresponding `.sentences`
+file to a generator over `pyfn.AnnotationSet` objects, use:
+
+```python
+import pyfn.marshalling.unmarshallers.semafor as semafor_unmarshaller
+
+if __name__ == '__main__':
+  semafor_filepath = '/abs/path/to/.frame.elements'
+  sent_filepath = '/abs/path/to/.sentences'
+  annosets = semafor_unmarshaller.unmarshall_annosets(semafor_filepath,
+                                                      sent_filepath)
+  for annoset in annosets:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+### Unmarshalling SEMEVAL XML data
+
+To convert a SEMEVAL `.xml` file with its corresponding `.sentences`
+file to a generator over `pyfn.AnnotationSet` objects, use:
+
+```python
+import pyfn.marshalling.unmarshallers.semeval as semeval_unmarshaller
+
+if __name__ == '__main__':
+  xml_filepath = '/abs/path/to/semeval/.xml'
+  annosetss = semeval_unmarshaller.unmarshall_annosets(xml_filepath)
+```
+
+By default `unmarshall_annosets` for SEMEVAL will return a generator over embedded annotationsets. To iterate over a single annotationset, use:
+
+```python
+for annosets in annosetss:
+  for annoset in annosets:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+To return a 'flat' list of annosets, pass in the `flatten=True` parameter:
+
+```python
+import pyfn.marshalling.unmarshallers.semeval as semeval_unmarshaller
+
+if __name__ == '__main__':
+  xml_filepath = '/abs/path/to/semeval/.xml'
+  annosets = semeval_unmarshaller.unmarshall_annosets(xml_filepath, flatten=True)
+  for annoset in annosets:
+    print('annoset with #id = {}'.format(annoset._id))
+```
+
+### Marshalling to FrameNet XML data
+
+To convert a list of `pyfn.AnnotationSet` objects to a FrameNet-style `.xml` file, use:
+
+```python
+
+```
+
+
+### Marshalling to OPEN-SESAME BIOS data
+
+To convert a list of `pyfn.AnnotationSet` objects to OPEN-SESAME-style `.bios`, use:
+
+### Marshalling to SEMAFOR CONLL data
+
+To convert a list of `pyfn.AnnotationSet` objects to SEMAFOR-style `.frame.elements`, use:
+
+### Marshalling to SEMEVAL XML data
+
+To convert a list of `pyfn.AnnotationSet` objects to SEMEVAL-style `.xml`, use:
 
 ## Citation
 
-If you use pyfn please cite:
+If you use `pyfn` please cite:
 ```tex
 @InProceedings{C18-1267,
   author = 	"Kabbach, Alexandre
