@@ -469,7 +469,7 @@ pyfn convert \
 
 and decode the test splits using:
 
-```
+```bash
 ./semafor.sh -m decode -x 001 -s test
 ```
 
@@ -511,7 +511,7 @@ pyfn convert \
 
 and decode the test splits using:
 
-```
+```bash
 ./open-sesame.sh -m decode -x 002 -s test
 ```
 
@@ -539,13 +539,13 @@ located under `lib/semeval/`.
 
 To obtain scores for SEMAFOR using gold frames on test splits, use:
 
-```
+```bash
 ./score.sh -x XYZ -p semafor -s test -f gold
 ```
 
 To obtain scores for SEMAFOR using predicted frames on test splits, use:
 
-```
+```bash
 ./score.sh -x XYZ -p semafor -s test -f predicted
 ```
 
