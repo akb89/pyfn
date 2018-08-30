@@ -243,7 +243,7 @@ directory named `pyfn`. Your pyfn folder structure should look like:
 |   |   |-- ...
 ```
 
-**Please strictly follow this directory structure to avoid unexpected errors. `pyfn` relies on a lot of relative path resolutions to make scripts calls shorter, and changing this directory structure can brake everything**
+**Please strictly follow this directory structure to avoid unexpected errors. `pyfn` relies on a lot of relative path resolutions to make scripts calls shorter, and changing this directory structure can break everything**
 
 ### Setup NLP4J for POS tagging
 
@@ -637,7 +637,7 @@ if __name__ == '__main__':
     print('annoset with #id = {}'.format(annoset._id))
 ```
 
-**Important** the `.bios` and `.sentences` files must have been generated
+**Important!** the `.bios` and `.sentences` files must have been generated
 with `pyfn convert ... --to bios ...` with the `--filter overlap_fes`
 parameter.
 
