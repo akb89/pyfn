@@ -21,17 +21,17 @@ build:python3.7:
 test:python3.5:
  image: python:3.5
  stage: test
- script: pip install pytest==3.7.2 pytest-cov==2.5.1 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
 
 test:python3.6:
  image: python:3.6
  stage: test
- script: pip install pytest==3.7.2 pytest-cov==2.5.1 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
 
 test:python3.7:
  image: python:3.7
  stage: test
- script: pip install pytest==3.7.2 pytest-cov==2.5.1 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
 
 lint:python3.5:
  image: python:3.5
