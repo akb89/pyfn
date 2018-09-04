@@ -72,7 +72,9 @@ When using `pyfn`, your FrameNet splits directory structure should follow:
 - SEMEVAL XML: the format of the SEMEVAL 2007 shared task 19 on frame semantic structure extraction
 - SEMAFOR CoNLL: the format used by the SEMAFOR parser
 - BIOS: the format used by the OPEN-SESAME parser
-- CoNLL-X: the format used by various state-of-the-art POS taggers and dependency parsers (see preprocessing considerations for frame semantic parsing in [below](#preprocessing-and-frame-semantic-parsing))
+- CoNLL-X: the format used by various state-of-the-art POS taggers and dependency
+parsers (see preprocessing considerations for frame semantic parsing
+[below](#preprocessing-and-frame-semantic-parsing))
 
 As well as to generate the `.csv` hierarchy files used by both SEMAFOR and
 OPEN-SESAME parsers to integrate the hierarchy feature (see (Kshirsagar et al., 2015) for details).
@@ -303,7 +305,7 @@ to be located under `pyfn/experiments/xp_XYZ/data` where `XYZ` stands for
 the experiments number and is specified using the `-x XYZ` argument, and where
 the `experiments` directory is located at the same level as the `scripts`
 directory. This opinionated choice has proven extremely useful in launching
-scripts by batch on a large set of experiments as it avoid having to input
+scripts by batch on a large set of experiments as it avoids having to input
 the full path each time.
 
 **Make sure to use**
