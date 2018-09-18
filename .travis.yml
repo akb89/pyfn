@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+
+# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
+install:
+  - python setup.py -q install
+  - pip install pylint pydocstyle pytest pytest-cov coveralls
+
+script:
+  - python -m pytest --cov=pyfn tests/
+  - pylint pyfn
+  - pydocstyle pyfn
+
+after_success:
+  - coveralls
