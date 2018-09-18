@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+install:
+  - python setup.py -q install
+  - pip install pylint pydocstyle pytest pytest-cov coveralls
+
+script:
+  - python -m pytest --cov=pyfn tests/
+  - pylint pyfn
+  - pydocstyle pyfn
+
+after_success:
+  - coveralls
