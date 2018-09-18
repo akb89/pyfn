@@ -21,44 +21,44 @@ build:python3.7:
 test:python3.5:
  image: python:3.5
  stage: test
- script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest pytest-cov && python -m pytest --cov=pyfn tests/
 
 test:python3.6:
  image: python:3.6
  stage: test
- script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest pytest-cov && python -m pytest --cov=pyfn tests/
 
 test:python3.7:
  image: python:3.7
  stage: test
- script: pip install pytest==3.7.4 pytest-cov==2.6.0 && python -m pytest --cov=pyfn tests/
+ script: pip install pytest pytest-cov && python -m pytest --cov=pyfn tests/
 
 lint:python3.5:
  image: python:3.5
  stage: lint
- script: pip install pylint==2.1.1 && pylint pyfn
+ script: pip install pylint && pylint pyfn
 
 lint:python3.6:
  image: python:3.6
  stage: lint
- script: pip install pylint==2.1.1 && pylint pyfn
+ script: pip install pylint && pylint pyfn
 
 lint:python3.7:
  image: python:3.7
  stage: lint
- script: pip install pylint==2.1.1 && pylint pyfn
+ script: pip install pylint && pylint pyfn
 
 docstyle:python3.5:
  image: python:3.5
  stage: lint
- script: pip install pydocstyle==2.1.1 && pydocstyle pyfn
+ script: pip install pydocstyle && pydocstyle pyfn
 
 docstyle:python3.6:
  image: python:3.6
  stage: lint
- script: pip install pydocstyle==2.1.1 && pydocstyle pyfn
+ script: pip install pydocstyle && pydocstyle pyfn
 
 docstyle:python3.7:
  image: python:3.7
  stage: lint
- script: pip install pydocstyle==2.1.1 && pydocstyle pyfn
+ script: pip install pydocstyle && pydocstyle pyfn
