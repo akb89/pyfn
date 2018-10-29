@@ -6,7 +6,7 @@
 [![FrameNet][framenet-image]][framenet-url]
 [![MIT License][license-image]][license-url]
 
-Welcome to `pyfn`, a Python modules to process FrameNet annotation.
+Welcome to `pyfn`, a Python module to process FrameNet annotation.
 
 `pyfn` can be used to:
 
