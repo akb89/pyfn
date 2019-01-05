@@ -2,6 +2,7 @@
 [![GitHub release][release-image]][release-url]
 [![PyPI release][pypi-image]][pypi-url]
 [![Build][travis-image]][travis-url]
+[![Requirements][req-image]][req-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![FrameNet][framenet-image]][framenet-url]
 [![MIT License][license-image]][license-url]
