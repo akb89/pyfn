@@ -12,7 +12,7 @@ matrix:
 
 install:
   - python setup.py -q install
-  - pip install pylint pydocstyle pytest pytest-cov coveralls
+  - pip install pylint pydocstyle pytest pytest-cov==2.5.0 coveralls
 
 script:
   - python -m pytest --cov=pyfn tests/
