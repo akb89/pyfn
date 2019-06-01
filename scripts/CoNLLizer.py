@@ -92,7 +92,7 @@ def transform_fields(fields, prefixes = []):
     return final_fields
 
 def brown_to_conll(bdelim, sdelim, cdelim, filepath, insert_ids=False):
-    with open(filepath) as stream:
+    with open(filepath, 'r', encoding='utf-8') as stream:
         for line in stream:
             line = line.strip()
             items = re.split(sdelim, line)
@@ -109,7 +109,7 @@ def conllize(delim, fields, files, cols = [], withs = []):
     replacements = dict(zip([int(c) for c in cols], withs))
 
     with contextlib.ExitStack() as stack:
-        files = [stack.enter_context(open(fname)) for fname in files]
+        files = [stack.enter_context(open(fname, 'r', encoding='utf-8')) for fname in files]
         for lines in zip(*files):
             lines = [line.strip() for line in lines]
             lines = filter(lambda l: l != '', lines)
@@ -135,7 +135,7 @@ def flatten(delim, cdelim, fields, files, cols = [], withs = [], count_tokens = 
     replacements = dict(zip([int(c) for c in cols], withs))
 
     with contextlib.ExitStack() as stack:
-        files = [stack.enter_context(open(fname)) for fname in files]
+        files = [stack.enter_context(open(fname, 'r', encoding='utf-8')) for fname in files]
 
         selection = defaultdict(list)
         for lines in zip(*files):
@@ -182,7 +182,7 @@ def mask_chars(direction, filepath, chars, masks, is_conll = False, fields = '',
     if is_conll:
         final_fields = transform_fields(fields)
 
-    with open(filepath) as stream:
+    with open(filepath, 'r', encoding='utf-8') as stream:
         for line in stream:
             line = line.strip()
             if is_conll:
@@ -205,8 +205,8 @@ def bios(conll_files, bios_files, fields):
     final_fields = transform_fields(fields, prefixes = ['b', 'c'])
 
     with contextlib.ExitStack() as stack:
-        conll_files = [stack.enter_context(open(fname)) for fname in conll_files]
-        bios_files = [stack.enter_context(open(fname)) for fname in bios_files]
+        conll_files = [stack.enter_context(open(fname, 'r', encoding='utf-8')) for fname in conll_files]
+        bios_files = [stack.enter_context(open(fname, 'r', encoding='utf-8')) for fname in bios_files]
 
         conll_sentences = []
         conll_sentence  = []
@@ -249,13 +249,13 @@ def bios(conll_files, bios_files, fields):
 
 def merger(conll_path, predicted_path, cplaceholder, cdelim, fdelim, ccolnum, fcolnum):
     predictions = []
-    with open(predicted_path) as fstream:
+    with open(predicted_path, 'r', encoding='utf-8') as fstream:
         for line in fstream:
             line = line.strip()
             items = line.split(fdelim)
             predictions.append(items)
 
-    with open(conll_path) as cstream:
+    with open(conll_path, 'r', encoding='utf-8') as cstream:
         anno_set = 0
         for line in cstream:
             line = line.strip()
