@@ -299,6 +299,12 @@ export save_every_k_batches=400 # for argument identification
 export num_models_to_save=60 # for argument identification
 ```
 
+### Setup SIMPLEFRAMEID
+If you intend to use SIMPLEFRAMEID for frame identification, you will need to install the following packages (on python 2.7):
+```
+pip install keras==2.0.6 lightfm==1.13 sklearn numpy==1.13.1 networkx==1.11 tensorflow==1.3.0
+```
+
 ### Using the SEMEVAL PERL evaluation scripts
 
 If you intend to use the SEMEVAL perl evaluation scripts, make sure

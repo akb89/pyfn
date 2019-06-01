@@ -6,7 +6,7 @@ This file details modalities for packaging the pyfn application.
 
 from setuptools import setup
 
-with open('README.md', 'r') as fh:
+with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setup(
@@ -16,7 +16,7 @@ setup(
     author_email='akb@3azouz.net',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.3.0',
+    version='1.3.3',
     url='https://gitlab.com/akb89/pyfn',
     download_url='https://pypi.org/project/pyfn/#files',
     license='MIT',

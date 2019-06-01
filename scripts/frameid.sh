@@ -100,7 +100,7 @@ prepare() {
 if [ "${mode}" = train ]; then
   prepare
   echo "Training frame identification on all models..."
-  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py train ${XP_DIR}/${xp}/frameid
+  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py train ${XP_DIR}/${xp}/frameid deps.words.txt
   echo "Done"
 fi
 
@@ -118,7 +118,7 @@ if [ "${mode}" = decode ]; then
   esac
   prepare
   echo "Predicting frames..."
-  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py decode ${XP_DIR}/${xp}/frameid
+  python ${SIMFRAMEID_HOME}/simpleFrameId/main.py decode ${XP_DIR}/${xp}/frameid deps.words.txt
   echo "Done"
   if [ "${parser}" = semafor ]; then
     cut -f 1-3 ${XP_DIR}/${xp}/data/test.frames > ${XP_DIR}/${xp}/data/test.frames.cut.1.txt
