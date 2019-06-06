@@ -69,9 +69,9 @@ def _convert(args):
                 'need to specify the --sent parameter pointing at the '
                 '.sentences file absolute filepath')
         annosets = semaforu.unmarshall_annosets(args.source_path, args.sent)
-    ## Starting marshalling
-    os.makedirs(args.target_path, exist_ok=True)
+    # Starting marshalling
     if args.target_format == 'bios':
+        os.makedirs(args.target_path, exist_ok=True)
         biosm.marshall_annosets_dict(annosets_dict, args.target_path,
                                      args.filter, args.output_sentences,
                                      args.excluded_frames,
@@ -90,6 +90,7 @@ def _convert(args):
                                   args.excluded_sentences,
                                   args.excluded_annosets)
     if args.target_format == 'semafor':
+        os.makedirs(args.target_path, exist_ok=True)
         semaform.marshall_annosets_dict(annosets_dict, args.target_path,
                                         args.filter, args.output_sentences,
                                         args.excluded_frames,
@@ -126,7 +127,9 @@ def main():
                                 help='absolute filepath to source dir')
     parser_convert.add_argument('--target', required=True,
                                 dest='target_path',
-                                help='absolute filepath to target dir')
+                                help='absolute path to target dir or file.'
+                                     'is dirpath if --to is semafor or bios. '
+                                     'is filepath if --to is semeval')
     parser_convert.add_argument('--from', required=True,
                                 dest='source_format',
                                 choices=['semafor', 'bios', 'semeval',
