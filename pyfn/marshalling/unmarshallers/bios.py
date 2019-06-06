@@ -115,7 +115,7 @@ def _create_annoset(lines, sentence, annoset_id):
 
 def _create_sent_dict(bios_filepath):
     sent_dict = {}
-    with open(bios_filepath, 'r') as bios_stream:
+    with open(bios_filepath, 'r', encoding='utf-8') as bios_stream:
         tokens = []
         sent_index = -1
         for line in bios_stream:
@@ -141,7 +141,7 @@ def unmarshall_annosets(bios_filepath, sent_filepath=None):
         sent_dict = marsh_utils.get_sent_dict(sent_filepath)
     else:
         sent_dict = _create_sent_dict(bios_filepath)
-    with open(bios_filepath, 'r') as bios_stream:
+    with open(bios_filepath, 'r', encoding='utf-8') as bios_stream:
         index = -1
         annoset_id = 0
         lines = []
