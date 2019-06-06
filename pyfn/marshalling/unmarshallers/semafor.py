@@ -71,7 +71,7 @@ def unmarshall_annosets(semafor_filepath, sent_filepath):
     """Unmarshall a semafor .frame.elements file to pyfn.AnnotationSets."""
     annosets = []
     sent_dict = marsh_utils.get_sent_dict(sent_filepath)
-    with open(semafor_filepath, 'r') as semafor_stream:
+    with open(semafor_filepath, 'r', encoding='utf-8') as semafor_stream:
         for line in semafor_stream:
             line = line.strip()
             line_split = line.split('\t')

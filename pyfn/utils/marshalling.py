@@ -33,7 +33,7 @@ def get_sent_dict(sent_filepath):
     """
     sent_dict = {}
     sent_iter = 0
-    with open(sent_filepath, 'r') as sent_stream:
+    with open(sent_filepath, 'r', encoding='utf-8') as sent_stream:
         for line in sent_stream:
             line = line.rstrip()
             sent_dict[sent_iter] = line
