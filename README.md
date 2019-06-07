@@ -275,7 +275,11 @@ your `resources/nlp4j.plemma.model.all.xz`:
 
 If you intend to use the BIST parser for dependency parsing or
 OPEN-SESAME for frame semantic parsing, you will need
-to install DyNET 2.0.2 following:
+to install DyNET 2.0.2 via:
+```
+pip install dynet=2.0.2
+```
+If you experience problems installing DyNET via pip, follow:
 ```
 https://dynet.readthedocs.io/en/2.0.2/python.html
 ```
