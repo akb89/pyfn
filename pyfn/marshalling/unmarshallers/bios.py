@@ -53,9 +53,8 @@ def _get_labelstore(lines, tokens, text, labelstore):
                     label.end = marsh_utils.get_end_index(
                         int(iline_split[0])-1, tokens, text)
                     continue
-                else:
-                    labelstore.labels.append(label)
-                    return _get_labelstore(lines[lines.index(iline):],
+                labelstore.labels.append(label)
+                return _get_labelstore(lines[lines.index(iline):],
                                            tokens, text, labelstore)
             labelstore.labels.append(label)
             return labelstore

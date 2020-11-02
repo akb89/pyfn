@@ -3,11 +3,6 @@ stages:
  - test
  - lint
 
-build:python3.5:
- image: python:3.5
- stage: build
- script: python setup.py -q install
-
 build:python3.6:
  image: python:3.6
  stage: build
@@ -17,11 +12,6 @@ build:python3.7:
  image: python:3.7
  stage: build
  script: python setup.py -q install
-
-test:python3.5:
- image: python:3.5
- stage: test
- script: pip install pytest pytest-cov && python -m pytest --cov=pyfn tests/
 
 test:python3.6:
  image: python:3.6
@@ -33,11 +23,6 @@ test:python3.7:
  stage: test
  script: pip install pytest pytest-cov && python -m pytest --cov=pyfn tests/
 
-lint:python3.5:
- image: python:3.5
- stage: lint
- script: pip install pylint && pylint pyfn
-
 lint:python3.6:
  image: python:3.6
  stage: lint
@@ -48,17 +33,3 @@ lint:python3.7:
  stage: lint
  script: pip install pylint && pylint pyfn
 
-docstyle:python3.5:
- image: python:3.5
- stage: lint
- script: pip install pydocstyle && pydocstyle pyfn
-
-docstyle:python3.6:
- image: python:3.6
- stage: lint
- script: pip install pydocstyle && pydocstyle pyfn
-
-docstyle:python3.7:
- image: python:3.7
- stage: lint
- script: pip install pydocstyle && pydocstyle pyfn
