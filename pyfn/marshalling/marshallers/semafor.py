@@ -32,10 +32,9 @@ def _get_token_num(index, text):
         if char.isspace():
             prev_char_is_whitespace = True
             continue
-        else:
-            if prev_char_is_whitespace:
-                token_num += 1
-            prev_char_is_whitespace = False
+        if prev_char_is_whitespace:
+            token_num += 1
+        prev_char_is_whitespace = False
         if char_index == index:
             return token_num
     raise Exception('Could not determine token number for char index '

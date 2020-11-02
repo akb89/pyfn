@@ -208,19 +208,19 @@ parser, please create an [issue](https://github.com/akb89/pyfn/issues) on Github
 To run the preprocessing and frame semantic parsing scripts, first download:
 - `data.7z` containing all the FrameNet splits for FN 1.5 and FN 1.7
 ```shell
-wget http://129.194.21.122/~kabbach/pyfn/data.7z
+wget backup.3azouz.net/pyfn/data.7z
 ```
 - `lib.7z` containing all the different external softwares (taggers, parsers, etc.)
 ```shell
-wget http://129.194.21.122/~kabbach/pyfn/lib.7z
+wget backup.3azouz.net/pyfn/lib.7z
 ```
 - `resources.7z` containing all the required resources
 ```shell
-wget http://129.194.21.122/~kabbach/pyfn/resources.7z
+wget backup.3azouz.net/pyfn/resources.7z
 ```
 - `scripts.7z` containing the set of bash scripts to call the different parsers and preprocessing toolkits
 ```shell
-wget http://129.194.21.122/~kabbach/pyfn/scripts.7z
+wget backup.3azouz.net/pyfn/scripts.7z
 ```
 
 Extract the content of all the archives under a

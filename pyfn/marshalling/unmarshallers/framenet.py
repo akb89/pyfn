@@ -280,7 +280,7 @@ def _unmarshall_fulltext_xml(xml_file_path, fe_dict, flatten=False):
                                                const.FN_XML_NAMESPACE))
     except XMLProcessingError as err:
         raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
-                                 .format(xml_file_path, str(err)))
+                                 .format(xml_file_path, str(err))) from err
     sentence_tags = root.findall('fn:sentence', const.FN_XML_NAMESPACE)
     for sentence_tag in sentence_tags:
         annosets = extract_fn_annosets(
@@ -385,7 +385,7 @@ def _get_fe_dict(frame_xml_filepaths):
                 fe_dict[frame_element._id] = frame_element
         except XMLProcessingError as err:
             raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
-                                     .format(frame_xml_filepath, str(err)))
+                                     .format(frame_xml_filepath, str(err)))from err
     return fe_dict
 
 
@@ -506,5 +506,5 @@ def extract_relations(fr_relation_xml_filepath):
                     fe_relations.append(fe_relation)
     except XMLProcessingError as err:
         raise XMLProcessingError('Could not process XML file: {}. Cause: {}'
-                                 .format(fr_relation_xml_filepath, str(err)))
+                                 .format(fr_relation_xml_filepath, str(err))) from err
     return frame_relations, fe_relations
