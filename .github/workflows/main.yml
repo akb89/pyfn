@@ -39,6 +39,8 @@ jobs:
         pip install pylint pytest coveralls 
     # Runs a set of commands using the runners shell
     - name: Run unit tests 
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
           coverage run --source=pyfn -m pytest tests/
           coveralls
