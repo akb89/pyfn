@@ -1,7 +1,7 @@
 # pyfn
 [![GitHub release][release-image]][release-url]
 [![PyPI release][pypi-image]][pypi-url]
-[![Build][travis-image]][travis-url]
+[![Build][build-image]][build-url]
 [![Requirements][req-image]][req-url]
 [![FrameNet][framenet-image]][framenet-url]
 [![MIT License][license-image]][license-url]
@@ -755,8 +755,8 @@ If you use `pyfn` please cite:
 [release-url]:https://github.com/akb89/pyfn/releases/latest
 [pypi-image]:https://img.shields.io/pypi/v/pyfn.svg?style=flat-square
 [pypi-url]:https://pypi.org/project/pyfn/
-[travis-image]:https://img.shields.io/travis/akb89/pyfn.svg?style=flat-square
-[travis-url]:https://travis-ci.org/akb89/pyfn
+[build-image]:https://img.shields.io/github/workflow/status/akb89/pyfn/CI?style=flat-square
+[build-url]:https://github.com/akb89/pyfn/actions?query=workflow%3ACI
 [coverage-image]:https://img.shields.io/coveralls/akb89/pyfn/master.svg?style=flat-square
 [coverage-url]:https://coveralls.io/github/akb89/pyfn?branch=master
 [framenet-image]:https://img.shields.io/badge/framenet-1.5%E2%87%A1-blue.svg?style=flat-square
