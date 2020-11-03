@@ -42,6 +42,7 @@ jobs:
       run: |
           coverage run --source=pyfn -m pytest tests/
           coveralls
+      env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Lint with pylint
       run: |
         pylint pyfn 
